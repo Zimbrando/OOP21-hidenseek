@@ -1,4 +1,4 @@
-package hidenseek;
+package hidenseek.model;
 
 import javafx.geometry.Rectangle2D;
 

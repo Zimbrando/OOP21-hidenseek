@@ -1,5 +1,6 @@
 package hidenseek;
 
+import hidenseek.model.Launcher;
 import javafx.application.Application;
 
 /** Main application entry-point. */
