@@ -6,17 +6,27 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.canvas.*;
 
 public class Launcher extends Application {
 
     @Override
     public final void start(final Stage primaryStage) throws Exception {
-        final Scene root = FXMLLoader.load(ClassLoader.getSystemResource("layouts/MainMenuGui.fxml"));
+        final Scene root = FXMLLoader.load(ClassLoader.getSystemResource("layouts/GameGui.fxml"));
+        
+        EntityController e = new EntityController();
+        Color color = new Color(0.3, 0.3, 0.5, 1);
+        e.attach(new EntityViewConsoleImpl(color));
+        e.attach(new EntityViewCanvasImpl((Canvas)root.lookup("#mainCanvas"), color));
+        
         primaryStage.setTitle("Hide'n Seek");
         primaryStage.setHeight(800);
         primaryStage.setWidth(600);
         primaryStage.setScene(root);
         primaryStage.show();
+        
+        e.draw();
     }
 }
