@@ -1,10 +1,5 @@
 package hidenseek.model;
 
-import hidenseek.controller.GameWorldController;
-import hidenseek.controller.GameWorldControllerImpl;
-import hidenseek.view.EntityViewCanvasImpl;
-import hidenseek.view.EntityViewConsoleImpl;
-import hidenseek.view.GameWorldViewImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,8 +17,7 @@ public class Launcher extends Application {
         final Scene root = FXMLLoader.load(ClassLoader.getSystemResource("layouts/GameGui.fxml"));
         
         Canvas gameCanvas = (Canvas)root.lookup("#mainCanvas");
-
-        GameWorldController controller = new GameWorldControllerImpl(new GameWorldViewImpl(gameCanvas.getGraphicsContext2D()));
+        
         
         primaryStage.setTitle("Hide'n Seek");
         primaryStage.setHeight(800);
