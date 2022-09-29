@@ -31,8 +31,8 @@ public class EntityImpl implements Entity {
 
     @Override
     public <C extends Component> Optional<C> getComponent(Class<C> component) {
-        Optional<Component> comp = this.components.stream().filter(c -> component.isInstance(c)).findFirst();
-        return comp.isPresent() ? Optional.of((C)comp.get()) : Optional.empty();
+        Optional<C> comp = this.components.stream().filter(c -> component.isInstance(c)).map(c -> component.cast(c)).findFirst();
+        return comp.isPresent() ? comp : Optional.empty();
     }
     
 }

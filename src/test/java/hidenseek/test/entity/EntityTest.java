@@ -23,10 +23,9 @@ public class EntityTest {
         
         assertFalse(e.getComponent(LifeComponent.class).isEmpty());
         
-        LifeComponent life = e.getComponent(LifeComponent.class).get();
-        life.hurt(10);
+        e.detach(LifeComponent.class);
         
-        assertTrue(life.getHealth() == 90);
+        assertTrue(e.getComponents().isEmpty());
     }
     
     @Test public void testLifeComponent() {
