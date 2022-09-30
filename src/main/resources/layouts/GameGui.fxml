@@ -7,6 +7,6 @@
 <Scene xmlns="http://javafx.com/javafx/11.0.1"  xmlns:fx="http://javafx.com/fxml/1">
     <AnchorPane prefHeight="200" prefWidth="200">
       <children>
-         <Canvas id="mainCanvas" height="600.0" width="800.0" />
+         <Canvas id="mainCanvas" height="860" width="1024" />
       </children></AnchorPane>
 </Scene>

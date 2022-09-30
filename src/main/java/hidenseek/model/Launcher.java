@@ -2,6 +2,7 @@ package hidenseek.model;
 
 import hidenseek.controller.GameWorldController;
 import hidenseek.controller.GameWorldControllerImpl;
+import hidenseek.controller.RendererCanvasImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,11 +17,12 @@ public class Launcher extends Application {
         
         Canvas gameCanvas = (Canvas)root.lookup("#mainCanvas");
         
-        GameWorldController gameController = new GameWorldControllerImpl();
+        GameWorldController gameController = new GameWorldControllerImpl(new RendererCanvasImpl(gameCanvas.getGraphicsContext2D()));
         
+       
         primaryStage.setTitle("Hide'n Seek");
-        primaryStage.setHeight(800);
-        primaryStage.setWidth(600);
+        primaryStage.setHeight(860);
+        primaryStage.setWidth(1024);
         primaryStage.setScene(root);
         primaryStage.show();
     }
