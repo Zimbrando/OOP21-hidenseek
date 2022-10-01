@@ -6,7 +6,8 @@ import java.util.Set;
 import hidenseek.model.Entity;
 import hidenseek.model.EntityImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
-import hidenseek.view.EntityView;
+import hidenseek.view.PlayerViewImpl;
+import hidenseek.view.PlayerView;
 import javafx.geometry.Point2D;
 
 public final class GameWorldControllerImpl implements GameWorldController {
@@ -25,7 +26,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
 
             @Override
             public void tick() {
-                System.out.println("Start game loop");
+                //System.out.println("Start game loop");
                 
                 //Gestione degli input da tastiera e mouse
                 //      Per ogni entity che ha InputComponent, aggiorniamo la lista di keys, pulsanti del mouse premuti e posizione del cursore
@@ -45,12 +46,12 @@ public final class GameWorldControllerImpl implements GameWorldController {
                 //      Trova tutti gli oggetti che si stanno intersecando e manda l'evento intersectionWith(entity) ad entrambi
                 
                 //Draw game
+                view.refresh();
                 for (EntityController ec : entities) {
-                    ec.move();
-                    view.draw(ec.getView(), ec.getPosition());
+                    view.update(ec);
                 }
                 
-                System.out.println("End game loop");
+                //System.out.println("End game loop");
             }
         };
         this.loop.start();
@@ -59,7 +60,12 @@ public final class GameWorldControllerImpl implements GameWorldController {
     public void addEntities() {
         Entity e1 = new EntityImpl();
         e1.attach(new LinearMovementComponentImpl(new Point2D(20, 20)));
+      
+        this.entities.add(new EntityControllerImpl<PlayerView>(e1, new PlayerViewImpl()));
+    }
+
+    @Override
+    public void attachInputHandler() {
         
-        this.entities.add(new EntityControllerImpl(e1, new EntityView() {}));
     }
 }

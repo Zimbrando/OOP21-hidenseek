@@ -1,10 +1,32 @@
 package hidenseek.controller;
 
-import hidenseek.view.EntityView;
-import javafx.geometry.Point2D;
+import hidenseek.view.GraphicsDevice;
 
-interface Renderer {
+/**
+ * 
+ * Components that handles the general game graphics
+ */
+public interface Renderer {
 
-    <V extends EntityView> void draw(V view, Point2D position);
-
+    /**
+     * Tells the @link{GraphicsDevice} to draw the entity
+     * @param ec, the controller of the Entity that has to be drawn
+     */
+    void update(EntityController ec);
+    
+    /**
+     * Refresh the current @link{GraphicsDevice}, called each frame to correctly render the game
+     */
+    void refresh();
+    
+    /**
+     * Creates the fog of the game. Black screen where light sources can see through
+     */
+    void createFog();
+    
+    /**
+     * 
+     * @return the current @link{GraphicsDevice} in use
+     */
+    GraphicsDevice getGraphicsDevice();
 }

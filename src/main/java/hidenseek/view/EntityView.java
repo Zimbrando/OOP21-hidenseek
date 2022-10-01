@@ -1,8 +1,8 @@
 package hidenseek.view;
 
-import javafx.scene.canvas.GraphicsContext;
+import javafx.geometry.Point2D;
 
 public interface EntityView {
 
-
+    void draw(GraphicsDevice device, Point2D position);
 };

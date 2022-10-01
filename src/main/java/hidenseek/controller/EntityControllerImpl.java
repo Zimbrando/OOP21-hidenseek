@@ -6,11 +6,11 @@ import hidenseek.model.components.PositionComponent;
 import hidenseek.view.EntityView;
 import javafx.geometry.Point2D;
 
-public class EntityControllerImpl implements EntityController {
+public class EntityControllerImpl<V extends EntityView> implements EntityController {
     private final Entity model;
-    private final EntityView view;
+    private final V view;
     
-    public EntityControllerImpl(Entity model, EntityView view) {
+    public EntityControllerImpl(Entity model, V view) {
         this.model = model;
         this.view = view;
     }
@@ -21,7 +21,7 @@ public class EntityControllerImpl implements EntityController {
     }
 
     @Override
-    public EntityView getView() {
+    public V getView() {
         return this.view;
     }
 
