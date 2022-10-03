@@ -17,5 +17,16 @@ public class ComponentImpl implements Component {
     public Optional<Entity> getOwner() {
         return this.owner;
     }
+
+    @Override
+    public void attach(Entity e) {
+        e.attach(this);
+    }
+
+    @Override
+    public void setOwner(Entity e) {
+        if (this.owner.isPresent()) throw new IllegalStateException("Owner already set");
+        this.owner = Optional.ofNullable(e);
+    }
     
 }

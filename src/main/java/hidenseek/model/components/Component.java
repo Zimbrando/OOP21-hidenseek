@@ -6,7 +6,11 @@ import hidenseek.model.Entity;
 
 public interface Component {
     
+    void attach(Entity e);
+    
     void detach();
     
     Optional<Entity> getOwner();
+    
+    void setOwner(Entity e);
 }

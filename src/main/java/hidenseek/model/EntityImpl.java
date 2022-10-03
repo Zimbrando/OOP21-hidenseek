@@ -17,6 +17,7 @@ public class EntityImpl implements Entity {
     @Override
     public void attach(Component comp) {
         this.components.add(comp);
+        comp.setOwner(this);
     }
 
     @Override

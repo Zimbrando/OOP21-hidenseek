@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import hidenseek.model.Entity;
 import hidenseek.model.EntityImpl;
 import hidenseek.model.components.Component;
+import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
@@ -22,39 +23,33 @@ import javafx.geometry.Point2D;
 public class EntityTest {
     @Test public void testEntityComponents() {
         Entity e = new EntityImpl();
-        
         assertTrue(e.getComponent(LifeComponent.class).isEmpty());
-        
         e.attach(new LifeComponentImpl(100));
-        
         assertFalse(e.getComponent(LifeComponent.class).isEmpty());
-        
         e.detach(LifeComponent.class);
-        
         assertTrue(e.getComponents().isEmpty());
         
         e.attach(new LifeComponentImpl(100));
-        e.attach(new LinearMovementComponentImpl(new Point2D(0, 0)));
-        
+        e.attach(new LinearMovementComponentImpl(new Point2D(0, 0)));  
         e.detach(LifeComponent.class);
-        
         Set<Component> components = e.getComponents();
         assertTrue(components.size() == 1);
         assertTrue(MoveComponent.class.isInstance(components.stream().findFirst().get()));
+        assertTrue(e == e.getComponent(MoveComponent.class).get().getOwner().get());
     }
     
     @Test public void testLifeComponent() {
         LifeComponent l = new LifeComponentImpl(100);
-        
         assertTrue(l.getMaxHealth() == 100);
-        
         l.hurt(10);
-        
         assertTrue(l.getHealth() == 90);
-        
         l.hurt(100);
-        
         assertTrue(l.getHealth() == 0);
         
+    }
+    
+    @Test public void testInputHandlerComponent() {
+        InputHandlerComponent input;
+        //input.mapKeyToAction(KeyCode.A, (entity) -> entity.getComponent(MoveComponent.class).ifPresent(c -> c.move()));
     }
 }
