@@ -26,13 +26,15 @@ public class EntityImpl implements Entity {
 
     @Override
     public <C extends Component> void detach(Class<C> component) {
-        this.components.remove(this.components.stream().filter(c -> component.isInstance(c)).findFirst().get());
+        this.components.removeIf(c -> component.isInstance(c));
     }
 
     @Override
     public <C extends Component> Optional<C> getComponent(Class<C> component) {
-        Optional<C> comp = this.components.stream().filter(c -> component.isInstance(c)).map(c -> component.cast(c)).findFirst();
-        return comp.isPresent() ? comp : Optional.empty();
+        return this.components.stream()
+                .filter(c -> component.isInstance(c))
+                .map(c -> component.cast(c))
+                .findFirst();
     }
     
 }

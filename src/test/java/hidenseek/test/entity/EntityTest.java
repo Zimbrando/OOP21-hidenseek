@@ -6,12 +6,18 @@ package hidenseek.test.entity;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import hidenseek.model.Entity;
 import hidenseek.model.EntityImpl;
+import hidenseek.model.components.Component;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.LifeComponentImpl;
+import hidenseek.model.components.LinearMovementComponentImpl;
+import hidenseek.model.components.MoveComponent;
+import javafx.geometry.Point2D;
 
 public class EntityTest {
     @Test public void testEntityComponents() {
@@ -26,6 +32,15 @@ public class EntityTest {
         e.detach(LifeComponent.class);
         
         assertTrue(e.getComponents().isEmpty());
+        
+        e.attach(new LifeComponentImpl(100));
+        e.attach(new LinearMovementComponentImpl(new Point2D(0, 0)));
+        
+        e.detach(LifeComponent.class);
+        
+        Set<Component> components = e.getComponents();
+        assertTrue(components.size() == 1);
+        assertTrue(MoveComponent.class.isInstance(components.stream().findFirst().get()));
     }
     
     @Test public void testLifeComponent() {
