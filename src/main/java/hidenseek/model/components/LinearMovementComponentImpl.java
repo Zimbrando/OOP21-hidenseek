@@ -5,9 +5,11 @@ import javafx.geometry.Point2D;
 public class LinearMovementComponentImpl extends ComponentImpl implements MoveComponent {
 
     private Point2D position;
+    private int speed;
     
-    public LinearMovementComponentImpl(final Point2D initPos) {
+    public LinearMovementComponentImpl(final Point2D initPos, final int speed) {
         this.position = initPos;
+        this.speed = speed;
     }
     
     @Override
@@ -21,8 +23,9 @@ public class LinearMovementComponentImpl extends ComponentImpl implements MoveCo
     }
 
     @Override
-    public void move() {
-        this.setPosition(position.add(new Point2D(0, 10)));
+    public void move(Direction dir) {
+        Point2D delta = dir.point.multiply(speed);
+        this.position = this.position.add(delta);
     }
 
 }

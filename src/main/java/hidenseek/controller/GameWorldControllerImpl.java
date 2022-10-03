@@ -2,25 +2,27 @@ package hidenseek.controller;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import hidenseek.model.Entity;
-import hidenseek.model.EntityImpl;
-import hidenseek.model.components.LinearMovementComponentImpl;
+import hidenseek.model.EntityFactory;
+import hidenseek.model.EntityFactoryImpl;
 import hidenseek.view.PlayerViewImpl;
 import hidenseek.view.PlayerView;
 import javafx.geometry.Point2D;
 
 public final class GameWorldControllerImpl implements GameWorldController {
 
-    private Gameloop loop;
-    private Set<EntityController> entities;
+    private final Gameloop loop;
+    private final Set<EntityController> entities;
     private final Renderer view;
+    private final InputScheme input;
     
-    public GameWorldControllerImpl(final Renderer view) {
+    
+    public GameWorldControllerImpl(final Renderer view, final InputScheme input) {
         this.view = view;
         this.entities = new LinkedHashSet<EntityController>();
+        this.input = input;
         
-        addEntities();
+        EntityFactory factory = new EntityFactoryImpl();
+        this.entities.add(new EntityControllerImpl<PlayerView>(factory.createPlayer(new Point2D(250, 30), 2), new PlayerViewImpl()));
         
         this.loop = new GameloopFXImpl() {
 
@@ -47,7 +49,8 @@ public final class GameWorldControllerImpl implements GameWorldController {
                 
                 //Draw game
                 view.refresh();
-                for (EntityController ec : entities) {
+                for (final EntityController ec : entities) {
+                    ec.handleInput(input.getCurrentPressedKeys());
                     view.update(ec);
                 }
                 
@@ -56,16 +59,5 @@ public final class GameWorldControllerImpl implements GameWorldController {
         };
         this.loop.start();
     }
-    
-    public void addEntities() {
-        Entity e1 = new EntityImpl();
-        e1.attach(new LinearMovementComponentImpl(new Point2D(20, 20)));
-      
-        this.entities.add(new EntityControllerImpl<PlayerView>(e1, new PlayerViewImpl()));
-    }
 
-    @Override
-    public void attachInputHandler() {
-        
-    }
 }

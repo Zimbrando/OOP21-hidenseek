@@ -13,5 +13,7 @@ public abstract class GameloopThreadImpl implements Gameloop {
         // TODO Auto-generated method stub
 
     }
+    
+    public abstract void tick();
 
 }

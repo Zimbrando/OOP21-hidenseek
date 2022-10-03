@@ -2,5 +2,5 @@ package hidenseek.model.components;
 
 public interface MoveComponent extends PositionComponent{
 
-    void move();
+    void move(Direction dir);
 }

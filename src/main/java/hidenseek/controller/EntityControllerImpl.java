@@ -1,10 +1,13 @@
 package hidenseek.controller;
 
+import java.util.Set;
+
 import hidenseek.model.Entity;
-import hidenseek.model.components.MoveComponent;
+import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.PositionComponent;
 import hidenseek.view.EntityView;
 import javafx.geometry.Point2D;
+import javafx.scene.input.KeyCode;
 
 public class EntityControllerImpl<V extends EntityView> implements EntityController {
     private final Entity model;
@@ -31,8 +34,8 @@ public class EntityControllerImpl<V extends EntityView> implements EntityControl
     }
 
     @Override
-    public void move() {
-        this.model.getComponent(MoveComponent.class).get().move();
+    public void handleInput(Set<KeyCode> keysPressed) {
+        this.model.getComponent(InputHandlerComponent.class).ifPresent(c -> c.computeScheme(keysPressed));
     }
 
 }

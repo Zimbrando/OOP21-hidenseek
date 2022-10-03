@@ -2,6 +2,8 @@ package hidenseek.model;
 
 import hidenseek.controller.GameWorldController;
 import hidenseek.controller.GameWorldControllerImpl;
+import hidenseek.controller.InputScheme;
+import hidenseek.controller.InputSchemeImpl;
 import hidenseek.controller.RendererImpl;
 import hidenseek.controller.Renderer;
 import hidenseek.view.CanvasDeviceImpl;
@@ -18,11 +20,14 @@ public class Launcher extends Application {
         final Scene root = FXMLLoader.load(ClassLoader.getSystemResource("layouts/GameGui.fxml"));
         
         Canvas gameCanvas = (Canvas)root.lookup("#mainCanvas");
+        gameCanvas.setFocusTraversable(true);
+        
+        InputScheme input = new InputSchemeImpl();
+        input.assignInputNode(gameCanvas);
         
         Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
-        GameWorldController gameController = new GameWorldControllerImpl(renderer);
+        GameWorldController gameController = new GameWorldControllerImpl(renderer, input);
         
-       
         primaryStage.setTitle("Hide'n Seek");
         primaryStage.setHeight(860);
         primaryStage.setWidth(1024);

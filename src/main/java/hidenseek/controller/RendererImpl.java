@@ -11,6 +11,9 @@ public class RendererImpl implements Renderer {
         this.gd = gd;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(EntityController ec) {
         ec.getView().draw(gd,  ec.getPosition());
