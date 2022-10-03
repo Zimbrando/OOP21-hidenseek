@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.canvas.*;
+import javafx.scene.input.KeyCode;
 
 public class Launcher extends Application {
 
@@ -27,6 +28,16 @@ public class Launcher extends Application {
         
         Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
         GameWorldController gameController = new GameWorldControllerImpl(renderer, input);
+        
+        root.setOnKeyPressed(e -> {
+          if (e.getCode() == KeyCode.ESCAPE) {
+              gameController.pause();
+          }
+          
+          if (e.getCode() == KeyCode.R) {
+              gameController.resume();
+          }
+         });
         
         primaryStage.setTitle("Hide'n Seek");
         primaryStage.setHeight(860);

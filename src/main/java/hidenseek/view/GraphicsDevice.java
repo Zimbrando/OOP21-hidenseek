@@ -26,6 +26,8 @@ public interface GraphicsDevice {
      */
     void drawRect(int w, int h, Point2D position, Color color);
     
+    void drawCircle(int radius, Point2D position, Color color);
+    
     /**
      * Repaints the entire 'canvas'
      */
