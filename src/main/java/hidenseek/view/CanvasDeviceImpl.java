@@ -8,25 +8,28 @@ import javafx.scene.paint.Color;
 public final class CanvasDeviceImpl implements GraphicsDevice {
 
     private final GraphicsContext graphics;
+    private final double width, height;
     
     public CanvasDeviceImpl(GraphicsContext graphics) {
         this.graphics = graphics;
+        this.width = graphics.getCanvas().getWidth();
+        this.height = graphics.getCanvas().getHeight();
     }
 
     @Override
     public void repaint() {
-        this.fill(Color.WHITE);
+        this.graphics.clearRect(0, 0, this.width, this.height);
     }
 
     @Override
     public void fill(Color c) {
         graphics.setFill(c);
-        graphics.fillRect(0, 0, 1024, 860);
+        graphics.fillRect(0, 0, this.width, this.height);
     }
 
     @Override
     public void drawImage(Image sprite, Point2D position) {
-        graphics.drawImage(sprite, 0, 0);
+        graphics.drawImage(sprite, position.getX(), position.getY());
     }
 
     @Override
