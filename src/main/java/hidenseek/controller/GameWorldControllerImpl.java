@@ -31,6 +31,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
             public void tick() {
                 update();
             }
+
         };
         this.loop.start();
     }
@@ -56,7 +57,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
         
         //Draw game
         view.refresh();
-        
+
         this.entities.forEach(entity -> {
             entity.handleInput(this.input.getCurrentPressedKeys());
             this.view.update(entity);

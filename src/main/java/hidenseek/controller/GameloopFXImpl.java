@@ -4,6 +4,9 @@ import javafx.animation.AnimationTimer;
 
 public abstract class GameloopFXImpl extends AnimationTimer implements Gameloop {
 
+    private long pastTick;
+    private double currentFrameRate;
+    
     @Override
     public void start() {
         super.start();
@@ -16,6 +19,15 @@ public abstract class GameloopFXImpl extends AnimationTimer implements Gameloop 
     
     @Override
     public void handle(long now) {
+        double delta =  (now - this.pastTick) / 1e9;
+        this.currentFrameRate = 1 / delta;
         this.tick();
+        this.pastTick = now;
+    }
+    
+    public abstract void tick();
+    
+    public int getCurrentFramerate() {
+        return (int)this.currentFrameRate;
     }
 }

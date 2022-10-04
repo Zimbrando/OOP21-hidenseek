@@ -2,9 +2,9 @@ package hidenseek.controller;
 
 public interface Gameloop {
 
-    public void start();
+    void start();
     
-    public void stop();
+    void stop();
     
-    abstract void tick();
+    int getCurrentFramerate();
 }
