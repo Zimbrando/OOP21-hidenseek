@@ -56,11 +56,11 @@ public final class GameWorldControllerImpl implements GameWorldController {
         
         //Draw game
         view.refresh();
-        for (final EntityController ec : entities) {
-            ec.handleInput(input.getCurrentPressedKeys());
-            view.update(ec);
-        }
-    
+        
+        this.entities.forEach(entity -> {
+            entity.handleInput(this.input.getCurrentPressedKeys());
+            this.view.update(entity);
+        });
     }
 
 

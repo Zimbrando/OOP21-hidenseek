@@ -13,9 +13,9 @@ public class EntityFactoryImpl implements EntityFactory {
 
     @Override
     public Entity createPlayer(final Point2D position, final int playerSpeed) {
-        Entity e = new EntityImpl();
-        e.attach(new LifeComponentImpl(1));
-        e.attach(new LinearMovementComponentImpl(position, playerSpeed));
+        Entity player = new EntityImpl();
+        player.attach(new LifeComponentImpl(1));
+        player.attach(new LinearMovementComponentImpl(position, playerSpeed));
         
         //Input
         InputHandlerComponent input = new InputHandlerComponentImpl();
@@ -28,27 +28,27 @@ public class EntityFactoryImpl implements EntityFactory {
         input.mapKeyToAction(KeyCode.S, entity -> entity.getComponent(MoveComponent.class)
                 .ifPresent(c -> c.move(Direction.DOWN)));
         
-        e.attach(input);
+        player.attach(input);
         
-        return e;
+        return player;
     }
 
     @Override
     public Entity createWall(Point2D position) {
-        // TODO Auto-generated method stub
-        return null;
+        Entity wall = new EntityImpl();
+        return wall;
     }
 
     @Override
     public Entity createEnemy(Point2D position) {
-        // TODO Auto-generated method stub
-        return null;
+        Entity enemy = new EntityImpl();
+        return enemy;
     }
 
     @Override
     public Entity createPowerup(Point2D position) {
-        // TODO Auto-generated method stub
-        return null;
+        Entity powerup = new EntityImpl();
+        return powerup;
     }
 
 }
