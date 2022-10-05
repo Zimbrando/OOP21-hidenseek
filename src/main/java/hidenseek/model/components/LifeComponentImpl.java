@@ -1,10 +1,11 @@
 package hidenseek.model.components;
 
-final public class LifeComponentImpl extends ComponentImpl implements LifeComponent {
+import hidenseek.model.events.DamageEvent;
+
+final public class LifeComponentImpl extends AbstractObservableComponent implements LifeComponent {
 
     private final int maxHealth;
     private int health;
-    
     
     public LifeComponentImpl(final int maxHealth) {
         this.maxHealth = maxHealth;
@@ -25,6 +26,7 @@ final public class LifeComponentImpl extends ComponentImpl implements LifeCompon
     public void hurt(int damage) {
         this.health -= damage;
         this.health = this.health < 0 ? 0 : this.health;
+        this.notifyListener(new DamageEvent(this.getOwner().get(), damage));
     }
-
+    
 }

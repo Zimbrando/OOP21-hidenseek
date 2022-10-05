@@ -13,11 +13,14 @@ import org.junit.jupiter.api.Test;
 import hidenseek.model.Entity;
 import hidenseek.model.EntityImpl;
 import hidenseek.model.components.Component;
-import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
 import hidenseek.model.components.MoveComponent;
+import hidenseek.model.components.ObservableComponent;
+import hidenseek.model.components.TriggerComponent;
+import hidenseek.model.components.TriggerComponentImpl;
+import hidenseek.model.events.DamageEvent;
 import javafx.geometry.Point2D;
 
 public class EntityTest {
@@ -38,8 +41,11 @@ public class EntityTest {
         assertTrue(e == e.getComponent(MoveComponent.class).get().getOwner().get());
     }
     
+    //NOTE: do further testing, if a component does not have an owner the test fails
     @Test public void testLifeComponent() {
+        Entity e = new EntityImpl();
         LifeComponent l = new LifeComponentImpl(100);
+        e.attach(l);
         assertTrue(l.getMaxHealth() == 100);
         l.hurt(10);
         assertTrue(l.getHealth() == 90);
@@ -48,8 +54,14 @@ public class EntityTest {
         
     }
     
-    @Test public void testInputHandlerComponent() {
-        InputHandlerComponent input;
-        //input.mapKeyToAction(KeyCode.A, (entity) -> entity.getComponent(MoveComponent.class).ifPresent(c -> c.move()));
+    @Test public void testTriggerComponent() {
+        Entity e = new EntityImpl();
+        TriggerComponent listener = new TriggerComponentImpl();
+        listener.mapEvent(DamageEvent.class, (event, entity) -> System.out.println("Damage event occured: " + event.getDamage() + ";"));
+        ObservableComponent life = new LifeComponentImpl(100);
+        life.attachListener(listener);
+        e.attach(life);
+        LifeComponent compLife = (LifeComponent) life;
+        compLife.hurt(10);
     }
 }

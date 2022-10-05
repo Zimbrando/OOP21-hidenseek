@@ -9,7 +9,7 @@ public interface Entity {
 
     void attach(Component comp);
     
-    public <C extends Component> void detach(Class<C> component);
+    <C extends Component> void detach(Class<C> component);
     
     Set<Component> getComponents();
     

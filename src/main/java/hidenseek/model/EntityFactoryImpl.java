@@ -14,6 +14,7 @@ public class EntityFactoryImpl implements EntityFactory {
     @Override
     public Entity createPlayer(final Point2D position, final int playerSpeed) {
         Entity player = new EntityImpl();
+        
         player.attach(new LifeComponentImpl(1));
         player.attach(new LinearMovementComponentImpl(position, playerSpeed));
         
