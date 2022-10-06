@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import hidenseek.model.events.Event;
 
-public abstract class AbstractObservableComponent extends ComponentImpl implements ObservableComponent {
+public abstract class AbstractObservableComponent extends AbstractComponent implements ObservableComponent {
 
     Optional<TriggerComponent> listener = Optional.empty();
     

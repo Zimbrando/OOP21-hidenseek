@@ -2,7 +2,7 @@ package hidenseek.model.components;
 
 import javafx.geometry.Point2D;
 
-public class LinearMovementComponentImpl extends ComponentImpl implements MoveComponent {
+public class LinearMovementComponentImpl extends AbstractComponent implements MoveComponent {
 
     private Point2D position;
     private int speed;

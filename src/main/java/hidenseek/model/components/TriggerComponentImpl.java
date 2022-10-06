@@ -7,7 +7,7 @@ import hidenseek.model.Entity;
 import hidenseek.model.events.DamageEvent;
 import hidenseek.model.events.Event;
 
-public class TriggerComponentImpl extends ComponentImpl implements TriggerComponent {
+public class TriggerComponentImpl extends AbstractComponent implements TriggerComponent {
 
     private final Map<Class<? extends Event>, BiConsumer<? extends Event, Entity>> slots = 
             new LinkedHashMap<Class<? extends Event>, BiConsumer<? extends Event, Entity>>();
