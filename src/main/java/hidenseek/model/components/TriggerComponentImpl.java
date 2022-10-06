@@ -1,29 +1,52 @@
 package hidenseek.model.components;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 import hidenseek.model.Entity;
-import hidenseek.model.events.DamageEvent;
 import hidenseek.model.events.Event;
 
-public class TriggerComponentImpl extends AbstractComponent implements TriggerComponent {
+public class TriggerComponentImpl<E extends Event> extends AbstractComponent implements TriggerComponent<E> {
 
-    private final Map<Class<? extends Event>, BiConsumer<? extends Event, Entity>> slots = 
-            new LinkedHashMap<Class<? extends Event>, BiConsumer<? extends Event, Entity>>();
-
-    @Override
-    public <E extends Event> void mapEvent(Class<E> event, BiConsumer<E, Entity> action) {
-        this.slots.put(event, action);
+    private Optional<Class<E>> eventType = Optional.empty();
+    private Optional<BiConsumer<E, Entity>> action = Optional.empty();
+    
+    public TriggerComponentImpl(Class<E> eventType) {
+        this.eventType = Optional.of(eventType);
     }
     
     @Override
-    public <E extends Event> void removeEvent(Class<E> event) {
-        this.slots.remove(event);
+    public void notifyEvent(E event) {
+        this.action.ifPresent(action -> action.accept(event, event.getSender()));
     }
 
     @Override
-    public void notifyEvent(Event event) {
-        System.out.println(DamageEvent.class.cast(event).getDamage());
+    public void mapEvent(BiConsumer<E, Entity> action) {
+        this.action = Optional.ofNullable(action);
+    }
+
+    @Override
+    public void removeEvent() {
+        this.action = Optional.empty();
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + Objects.hash(action, this.eventType);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (!(obj instanceof TriggerComponentImpl))
+            return false;
+        TriggerComponentImpl<?> other = (TriggerComponentImpl<?>) obj;
+        return Objects.equals(action, other.action);
     }
 }

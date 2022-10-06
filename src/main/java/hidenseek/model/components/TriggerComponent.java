@@ -4,11 +4,11 @@ import java.util.function.BiConsumer;
 import hidenseek.model.Entity;
 import hidenseek.model.events.Event;
 
-public interface TriggerComponent extends Component {
+public interface TriggerComponent<E extends Event> extends Component {
 
-    <E extends Event> void mapEvent(Class<E> event, BiConsumer<E, Entity> action);
+    void mapEvent(BiConsumer<E, Entity> action);
     
-    <E extends Event> void removeEvent(Class<E> event);
+    void removeEvent();
     
-    void notifyEvent(Event event);
+    void notifyEvent(E event);
 }

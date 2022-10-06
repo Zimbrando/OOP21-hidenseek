@@ -3,6 +3,7 @@
  */
 package hidenseek.test.entity;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,11 +21,13 @@ import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.ObservableComponent;
 import hidenseek.model.components.TriggerComponent;
 import hidenseek.model.components.TriggerComponentImpl;
+import hidenseek.model.events.CollisionEvent;
 import hidenseek.model.events.DamageEvent;
 import javafx.geometry.Point2D;
 
 public class EntityTest {
     @Test public void testEntityComponents() {
+        //Detach and Attach test
         Entity e = new EntityImpl();
         assertTrue(e.getComponent(LifeComponent.class).isEmpty());
         e.attach(new LifeComponentImpl(100));
@@ -39,6 +42,14 @@ public class EntityTest {
         assertTrue(components.size() == 1);
         assertTrue(MoveComponent.class.isInstance(components.stream().findFirst().get()));
         assertTrue(e == e.getComponent(MoveComponent.class).get().getOwner().get());
+    
+        //One component type per entity test
+        Entity e2 = new EntityImpl();
+        e2.attach(new LifeComponentImpl(100));
+        e2.attach(new LinearMovementComponentImpl(new Point2D(0, 0), 2));
+        e2.attach(new LifeComponentImpl(50));
+        //The new life component should replace the old one
+        assertEquals(e2.getComponents().size(), 2);
     }
     
     //NOTE: do further testing, if a component does not have an owner the test fails
@@ -56,12 +67,19 @@ public class EntityTest {
     
     @Test public void testTriggerComponent() {
         Entity e = new EntityImpl();
-        TriggerComponent listener = new TriggerComponentImpl();
-        listener.mapEvent(DamageEvent.class, (event, entity) -> System.out.println("Damage event occured: " + event.getDamage() + ";"));
+        final int damage = 10;
+        TriggerComponent<DamageEvent> listener = new TriggerComponentImpl<DamageEvent>(DamageEvent.class);
+        listener.mapEvent((event, entity) -> assertTrue(event.getDamage() == damage));
         ObservableComponent life = new LifeComponentImpl(100);
         life.attachListener(listener);
         e.attach(life);
         LifeComponent compLife = (LifeComponent) life;
-        compLife.hurt(10);
+        compLife.hurt(damage);
+        
+        Entity e2 = new EntityImpl();
+        e2.attach(new TriggerComponentImpl<DamageEvent>(DamageEvent.class));
+        e2.attach(new TriggerComponentImpl<DamageEvent>(DamageEvent.class));
+        e2.attach(new TriggerComponentImpl<CollisionEvent>(CollisionEvent.class));
+        assertTrue(e2.getComponents().size() == 2);
     }
 }

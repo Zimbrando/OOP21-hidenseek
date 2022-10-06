@@ -1,5 +1,6 @@
 package hidenseek.model.components;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import hidenseek.model.Entity;
@@ -27,6 +28,21 @@ public abstract class AbstractComponent implements Component {
     public void setOwner(Entity e) {
         if (this.owner.isPresent()) throw new IllegalStateException("Owner already set");
         this.owner = Optional.ofNullable(e);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getClass());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof AbstractComponent))
+            return false;
+        AbstractComponent other = (AbstractComponent) obj;
+        return Objects.equals(owner, other.owner);
     }
     
 }
