@@ -1,6 +1,6 @@
 package hidenseek.model.components;
 
-final public class LifeComponentImpl extends ComponentImpl implements LifeComponent {
+final public class LifeComponentImpl extends AbstractComponent implements LifeComponent {
 
     private final int maxHealth;
     private int health;

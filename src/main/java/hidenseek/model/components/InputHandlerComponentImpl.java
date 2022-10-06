@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 import hidenseek.model.Entity;
 import javafx.scene.input.KeyCode;
 
-public class InputHandlerComponentImpl extends ComponentImpl implements InputHandlerComponent {
+public class InputHandlerComponentImpl extends AbstractComponent implements InputHandlerComponent {
 
     Map<KeyCode, Consumer<Entity>> actions;
     

@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import hidenseek.model.Entity;
 
-public class ComponentImpl implements Component {
+public abstract class AbstractComponent implements Component {
 
     private Optional<Entity> owner = Optional.empty();
     
