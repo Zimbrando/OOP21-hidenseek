@@ -16,7 +16,9 @@ public class RendererImpl implements Renderer {
      */
     @Override
     public void update(EntityController ec) {
-        ec.getView().draw(gd,  ec.getPosition());
+        if (ec.getPosition().isPresent()) {
+            ec.getView().draw(gd,  ec.getPosition().get());        
+        }
     }
 
     @Override

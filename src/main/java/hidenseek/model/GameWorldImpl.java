@@ -9,7 +9,6 @@ import javafx.scene.input.KeyCode;
 
 public class GameWorldImpl implements GameWorld {
 
-
     private final Set<Entity> entities;
     
     public GameWorldImpl() {
@@ -32,9 +31,8 @@ public class GameWorldImpl implements GameWorld {
     
     @Override
     public void addEntity(Entity entity) {
-        
+        this.entities.add(entity);
     }
     
-    
-
+   
 }

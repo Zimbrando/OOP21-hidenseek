@@ -5,11 +5,6 @@ import java.util.Set;
 
 import hidenseek.model.GameWorld;
 import hidenseek.model.GameWorldImpl;
-import hidenseek.model.entities.EntityFactory;
-import hidenseek.model.entities.EntityFactoryImpl;
-import hidenseek.view.PlayerViewImpl;
-import hidenseek.view.PlayerView;
-import javafx.geometry.Point2D;
 
 public final class GameWorldControllerImpl implements GameWorldController {
     

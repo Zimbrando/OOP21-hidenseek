@@ -13,7 +13,6 @@ import hidenseek.view.PlayerView;
 import hidenseek.view.PlayerViewImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.canvas.*;
@@ -28,11 +27,11 @@ public class Launcher extends Application {
         Canvas gameCanvas = (Canvas)root.lookup("#mainCanvas");
         gameCanvas.setFocusTraversable(true);
         
-        InputScheme input = new InputSchemeImpl();
+        final InputScheme input = new InputSchemeImpl();
         input.assignInputNode(gameCanvas);
         
-        Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
-        GameWorldController gameController = new GameWorldControllerImpl(renderer, input);
+        final Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
+        final GameWorldController gameController = new GameWorldControllerImpl(renderer, input);
         
         root.setOnKeyPressed(e -> {
           if (e.getCode() == KeyCode.ESCAPE) {
@@ -47,9 +46,7 @@ public class Launcher extends Application {
         gameController.addEntity(new EntityControllerImpl<PlayerView>(new Player(), new PlayerViewImpl()));
 //        gameController.addLevel(1,map);
         
-        
-        
-        
+
         primaryStage.setTitle("Hide'n Seek");
         primaryStage.setHeight(860);
         primaryStage.setWidth(1024);

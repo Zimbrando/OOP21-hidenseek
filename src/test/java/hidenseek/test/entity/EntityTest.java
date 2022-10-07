@@ -30,7 +30,7 @@ public class EntityTest {
         assertTrue(e.getComponents().isEmpty());
         
         e.attach(new LifeComponentImpl(100));
-        e.attach(new LinearMovementComponentImpl(new Point2D(0, 0), 2));  
+        e.attach(new LinearMovementComponentImpl());  
         e.detach(LifeComponent.class);
         Set<Component> components = e.getComponents();
         assertTrue(components.size() == 1);
