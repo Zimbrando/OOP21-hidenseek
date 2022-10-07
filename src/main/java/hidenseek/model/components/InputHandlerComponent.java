@@ -2,7 +2,8 @@ package hidenseek.model.components;
 
 import java.util.Set;
 import java.util.function.Consumer;
-import hidenseek.model.Entity;
+
+import hidenseek.model.entities.Entity;
 import javafx.scene.input.KeyCode;
 
 public interface InputHandlerComponent extends Component {

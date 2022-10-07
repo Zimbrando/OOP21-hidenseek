@@ -1,4 +1,4 @@
-package hidenseek.model;
+package hidenseek.model.entities;
 
 import hidenseek.model.components.Direction;
 import hidenseek.model.components.InputHandlerComponent;
@@ -15,7 +15,7 @@ public class EntityFactoryImpl implements EntityFactory {
     public Entity createPlayer(final Point2D position, final int playerSpeed) {
         Entity player = new EntityImpl();
         player.attach(new LifeComponentImpl(1));
-        player.attach(new LinearMovementComponentImpl(position, playerSpeed));
+//        player.attach(new LinearMovementComponentImpl(position, playerSpeed));
         
         //Input
         InputHandlerComponent input = new InputHandlerComponentImpl();

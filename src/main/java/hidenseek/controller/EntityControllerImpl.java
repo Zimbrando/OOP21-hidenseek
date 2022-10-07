@@ -2,9 +2,9 @@ package hidenseek.controller;
 
 import java.util.Set;
 
-import hidenseek.model.Entity;
 import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.PositionComponent;
+import hidenseek.model.entities.Entity;
 import hidenseek.view.EntityView;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;

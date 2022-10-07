@@ -1,4 +1,4 @@
-package hidenseek.model;
+package hidenseek.model.entities;
 
 import java.util.Optional;
 import java.util.Set;

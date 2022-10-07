@@ -7,4 +7,6 @@ public interface GameWorldController {
     void pause();
     
     void resume();
+    
+    void addEntity(EntityController entityController);
 }

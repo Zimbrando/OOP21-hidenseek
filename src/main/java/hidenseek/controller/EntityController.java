@@ -2,7 +2,7 @@ package hidenseek.controller;
 
 import java.util.Set;
 
-import hidenseek.model.Entity;
+import hidenseek.model.entities.Entity;
 import hidenseek.view.EntityView;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;

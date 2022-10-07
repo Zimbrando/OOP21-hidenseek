@@ -7,11 +7,6 @@ public class LinearMovementComponentImpl extends AbstractComponent implements Mo
     private Point2D position;
     private int speed;
     
-    public LinearMovementComponentImpl(final Point2D initPos, final int speed) {
-        this.position = initPos;
-        this.speed = speed;
-    }
-    
     @Override
     public Point2D getPosition() {
         return this.position;
@@ -20,6 +15,16 @@ public class LinearMovementComponentImpl extends AbstractComponent implements Mo
     @Override
     public void setPosition(Point2D pos) {
         this.position = pos;
+    }
+
+    @Override
+    public int getSpeed() {
+        return this.speed;
+    }
+
+    @Override
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     @Override

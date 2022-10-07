@@ -1,4 +1,4 @@
-package hidenseek.model;
+package hidenseek.model.entities;
 
 import javafx.geometry.Point2D;
 

@@ -3,27 +3,29 @@ package hidenseek.controller;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import hidenseek.model.EntityFactory;
-import hidenseek.model.EntityFactoryImpl;
+import hidenseek.model.GameWorld;
+import hidenseek.model.GameWorldImpl;
+import hidenseek.model.entities.EntityFactory;
+import hidenseek.model.entities.EntityFactoryImpl;
 import hidenseek.view.PlayerViewImpl;
 import hidenseek.view.PlayerView;
 import javafx.geometry.Point2D;
 
 public final class GameWorldControllerImpl implements GameWorldController {
-
+    
     private final Gameloop loop;
     private final Set<EntityController> entities;
     private final Renderer view;
     private final InputScheme input;
+    private final GameWorld model;
+//TODO    private final LevelHandler level;
     
     
     public GameWorldControllerImpl(final Renderer view, final InputScheme input) {
         this.view = view;
         this.entities = new LinkedHashSet<EntityController>();
         this.input = input;
-        
-        EntityFactory factory = new EntityFactoryImpl();
-        this.entities.add(new EntityControllerImpl<PlayerView>(factory.createPlayer(new Point2D(250, 30), 2), new PlayerViewImpl()));
+        this.model = new GameWorldImpl();
         
         this.loop = new GameloopFXImpl() {
 
@@ -55,13 +57,24 @@ public final class GameWorldControllerImpl implements GameWorldController {
         //Questa parte è effettuata logicamente nella sezione precedente, poichè viene eseguita solo per gli oggetti che si sono mossi.
         //      Trova tutti gli oggetti che si stanno intersecando e manda l'evento intersectionWith(entity) ad entrambi
         
+        // handle inputs
+        model.handleInput(this.input.getCurrentPressedKeys());
+        // update logic
+        model.update();
+
         //Draw game
         view.refresh();
-
+        // update view
         this.entities.forEach(entity -> {
-            entity.handleInput(this.input.getCurrentPressedKeys());
             this.view.update(entity);
         });
+    }
+    
+
+    @Override
+    public void addEntity(EntityController entityController) {
+        this.entities.add(entityController);
+        this.model.addEntity(entityController.getModel());
     }
 
 

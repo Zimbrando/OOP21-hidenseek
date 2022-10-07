@@ -10,14 +10,14 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import hidenseek.model.Entity;
-import hidenseek.model.EntityImpl;
 import hidenseek.model.components.Component;
 import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
 import hidenseek.model.components.MoveComponent;
+import hidenseek.model.entities.Entity;
+import hidenseek.model.entities.EntityImpl;
 import javafx.geometry.Point2D;
 
 public class EntityTest {
