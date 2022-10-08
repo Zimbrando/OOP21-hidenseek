@@ -11,20 +11,19 @@ public class TriggerImpl<E extends Event> implements Trigger<E> {
     private final Class<E> eventType;
     private Optional<BiConsumer<E, Entity>> action = Optional.empty();
     
-    public TriggerImpl(Class<E> eventType) {
+    public TriggerImpl(final Class<E> eventType) {
         this.eventType = eventType;
     }
     
     @Override
-    public void notifyEvent(Event event) throws IllegalArgumentException {
+    public void notifyEvent(final Event event) {
         if (eventType.isInstance(event)) {
             this.action.ifPresent(action -> action.accept(eventType.cast(event), event.getSender()));        
-        } else throw new IllegalArgumentException("The event is of type " + event.getClass() + ", "
-                                            + "" + eventType + " expected");
+        }
     }
 
     @Override
-    public void mapEvent(BiConsumer<E, Entity> action) {
+    public void mapEvent(final BiConsumer<E, Entity> action) {
         this.action = Optional.ofNullable(action);
     }
 
@@ -42,7 +41,7 @@ public class TriggerImpl<E extends Event> implements Trigger<E> {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (!super.equals(obj))
@@ -51,5 +50,10 @@ public class TriggerImpl<E extends Event> implements Trigger<E> {
             return false;
         TriggerImpl<?> other = (TriggerImpl<?>) obj;
         return Objects.equals(action, other.action);
+    }
+
+    @Override
+    public Class<E> getEventType() {
+        return this.eventType;
     }
 }

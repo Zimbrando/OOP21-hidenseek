@@ -6,5 +6,5 @@ public interface ObservableComponent extends Component {
      
     <E extends Event> void attachListener(Trigger<E> tc);
     
-    void detachListener();
+    <E extends Event> void detachListener(Class<E> eventType);
 }

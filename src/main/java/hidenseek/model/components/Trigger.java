@@ -12,4 +12,6 @@ public interface Trigger<E extends Event> {
     
     void notifyEvent(Event event);
     
+    Class<E> getEventType();
+    
 }

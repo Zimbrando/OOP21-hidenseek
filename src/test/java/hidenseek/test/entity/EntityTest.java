@@ -76,11 +76,6 @@ public class EntityTest {
         e.attach(life);
         LifeComponent compLife = (LifeComponent) life;
         compLife.hurt(damage);
-        
-        Trigger<CollisionEvent> collisionListener = new TriggerImpl<CollisionEvent>(CollisionEvent.class);
-        collisionListener.mapEvent((event, entity) -> System.out.println(event.getSender()));
-        life.detachListener();
-        life.attachListener(collisionListener);
-        assertThrows(IllegalArgumentException.class, () -> collisionListener.notifyEvent(new DamageEvent(e, damage)));
-   }
+        life.detachListener(DamageEvent.class);
+    }
 }

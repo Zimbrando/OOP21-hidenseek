@@ -1,28 +1,37 @@
 package hidenseek.model.components;
 
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
 
 import hidenseek.model.events.Event;
 
 public abstract class AbstractObservableComponent extends AbstractComponent implements ObservableComponent {
 
-    Optional<Trigger<? extends Event>> listener = Optional.empty();
-   
-    public <E extends Event> void attachListener(Trigger<E> tc) {
-        this.listener = Optional.ofNullable(tc);
+    private final Set<Trigger<? extends Event>> listeners = new HashSet<>();
+    private final Set<Class<? extends Event>> currentAttachedListeners = new HashSet<>();
+    
+    public <E extends Event> void attachListener(final Trigger<E> trigger) {
+        this.listeners.add(trigger);
+        this.currentAttachedListeners.add(trigger.getEventType());
     }
     
-    @Override
-    public void detachListener() {
-        this.listener = Optional.empty();
+    public <E extends Event> void detachListener(final Class<E> eventType) {
+        this.listeners.removeIf(trigger -> trigger.getEventType().equals(eventType));
+        this.currentAttachedListeners.remove(eventType);
     }
     
-    public void notifyListener(Event event) {
-        try {
-            this.listener.ifPresent(tg -> tg.notifyEvent(event));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+    protected void notifyListener(final Event event, final Class<? extends Event> eventType) throws IllegalArgumentException {
+        if (!this.hasListener(eventType)) {
+            return;
         }
+        if (!eventType.isInstance(event)) {
+            throw new IllegalArgumentException("Parameter 1 should be an instance of parameter 2");
+        }
+        this.listeners.forEach(trigger -> trigger.notifyEvent(event));
+    }
+    
+    private <E extends Event> boolean hasListener(final Class<E> eventType) {
+        return this.currentAttachedListeners.contains(eventType);
     }
     
 }
