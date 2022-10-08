@@ -1,6 +1,5 @@
 package hidenseek.model.components;
 
-import hidenseek.model.events.CollisionEvent;
 import hidenseek.model.events.DamageEvent;
 
 final public class LifeComponentImpl extends AbstractObservableComponent implements LifeComponent {
@@ -15,8 +14,6 @@ final public class LifeComponentImpl extends AbstractObservableComponent impleme
     
     @Override
     public int getHealth() {
-        //TODO remove
-        this.notifyListener(new CollisionEvent(this.getOwner().get()), CollisionEvent.class);
         return this.health;
     }
 
