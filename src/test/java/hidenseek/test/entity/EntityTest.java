@@ -5,6 +5,7 @@ package hidenseek.test.entity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
@@ -19,8 +20,8 @@ import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
 import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.ObservableComponent;
-import hidenseek.model.components.TriggerComponent;
-import hidenseek.model.components.TriggerComponentImpl;
+import hidenseek.model.components.Trigger;
+import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.events.CollisionEvent;
 import hidenseek.model.events.DamageEvent;
 import javafx.geometry.Point2D;
@@ -68,7 +69,7 @@ public class EntityTest {
     @Test public void testTriggerComponent() {
         Entity e = new EntityImpl();
         final int damage = 10;
-        TriggerComponent<DamageEvent> listener = new TriggerComponentImpl<DamageEvent>(DamageEvent.class);
+        Trigger<DamageEvent> listener = new TriggerImpl<DamageEvent>(DamageEvent.class);
         listener.mapEvent((event, entity) -> assertTrue(event.getDamage() == damage));
         ObservableComponent life = new LifeComponentImpl(100);
         life.attachListener(listener);
@@ -76,10 +77,10 @@ public class EntityTest {
         LifeComponent compLife = (LifeComponent) life;
         compLife.hurt(damage);
         
-        Entity e2 = new EntityImpl();
-        e2.attach(new TriggerComponentImpl<DamageEvent>(DamageEvent.class));
-        e2.attach(new TriggerComponentImpl<DamageEvent>(DamageEvent.class));
-        e2.attach(new TriggerComponentImpl<CollisionEvent>(CollisionEvent.class));
-        assertTrue(e2.getComponents().size() == 2);
-    }
+        Trigger<CollisionEvent> collisionListener = new TriggerImpl<CollisionEvent>(CollisionEvent.class);
+        collisionListener.mapEvent((event, entity) -> System.out.println(event.getSender()));
+        life.detachListener();
+        life.attachListener(collisionListener);
+        assertThrows(IllegalArgumentException.class, () -> collisionListener.notifyEvent(new DamageEvent(e, damage)));
+   }
 }

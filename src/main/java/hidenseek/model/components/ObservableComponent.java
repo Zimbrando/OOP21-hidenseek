@@ -1,8 +1,10 @@
 package hidenseek.model.components;
 
-public interface ObservableComponent extends Component {
+import hidenseek.model.events.Event;
 
-    void attachListener(TriggerComponent tc);
+public interface ObservableComponent extends Component {
+     
+    <E extends Event> void attachListener(Trigger<E> tc);
     
     void detachListener();
 }

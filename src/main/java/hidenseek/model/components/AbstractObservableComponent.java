@@ -6,20 +6,23 @@ import hidenseek.model.events.Event;
 
 public abstract class AbstractObservableComponent extends AbstractComponent implements ObservableComponent {
 
-    Optional<TriggerComponent> listener = Optional.empty();
-    
-    @Override
-    public void attachListener(TriggerComponent tc) {
+    Optional<Trigger<? extends Event>> listener = Optional.empty();
+   
+    public <E extends Event> void attachListener(Trigger<E> tc) {
         this.listener = Optional.ofNullable(tc);
     }
-
+    
     @Override
     public void detachListener() {
         this.listener = Optional.empty();
     }
     
-    public void notifyListener(Event e) {
-        this.listener.ifPresent(tg -> tg.notifyEvent(e));
+    public void notifyListener(Event event) {
+        try {
+            this.listener.ifPresent(tg -> tg.notifyEvent(event));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
     
 }

@@ -6,18 +6,21 @@ import java.util.function.BiConsumer;
 import hidenseek.model.Entity;
 import hidenseek.model.events.Event;
 
-public class TriggerComponentImpl<E extends Event> extends AbstractComponent implements TriggerComponent<E> {
+public class TriggerImpl<E extends Event> implements Trigger<E> {
 
-    private Optional<Class<E>> eventType = Optional.empty();
+    private final Class<E> eventType;
     private Optional<BiConsumer<E, Entity>> action = Optional.empty();
     
-    public TriggerComponentImpl(Class<E> eventType) {
-        this.eventType = Optional.of(eventType);
+    public TriggerImpl(Class<E> eventType) {
+        this.eventType = eventType;
     }
     
     @Override
-    public void notifyEvent(E event) {
-        this.action.ifPresent(action -> action.accept(event, event.getSender()));
+    public void notifyEvent(Event event) throws IllegalArgumentException {
+        if (eventType.isInstance(event)) {
+            this.action.ifPresent(action -> action.accept(eventType.cast(event), event.getSender()));        
+        } else throw new IllegalArgumentException("The event is of type " + event.getClass() + ", "
+                                            + "" + eventType + " expected");
     }
 
     @Override
@@ -44,9 +47,9 @@ public class TriggerComponentImpl<E extends Event> extends AbstractComponent imp
             return true;
         if (!super.equals(obj))
             return false;
-        if (!(obj instanceof TriggerComponentImpl))
+        if (!(obj instanceof TriggerImpl))
             return false;
-        TriggerComponentImpl<?> other = (TriggerComponentImpl<?>) obj;
+        TriggerImpl<?> other = (TriggerImpl<?>) obj;
         return Objects.equals(action, other.action);
     }
 }
