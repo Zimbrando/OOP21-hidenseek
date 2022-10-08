@@ -22,7 +22,7 @@ final public class LifeComponentImpl extends AbstractComponent implements LifeCo
     }
 
     @Override
-    public void hurt(int damage) {
+    public void hurt(final int damage) {
         this.health -= damage;
         this.health = this.health < 0 ? 0 : this.health;
     }

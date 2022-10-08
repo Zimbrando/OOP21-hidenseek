@@ -11,7 +11,7 @@ public class EntityControllerImpl<V extends EntityView> implements EntityControl
     private final Entity model;
     private final V view;
     
-    public EntityControllerImpl(Entity model, V view) {
+    public EntityControllerImpl(final Entity model, final V view) {
         this.model = model;
         this.view = view;
     }

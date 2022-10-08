@@ -15,7 +15,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.canvas.*;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 
 public class Launcher extends Application {
@@ -24,7 +24,7 @@ public class Launcher extends Application {
     public final void start(final Stage primaryStage) throws Exception {
         final Scene root = FXMLLoader.load(ClassLoader.getSystemResource("layouts/GameGui.fxml"));
         
-        Canvas gameCanvas = (Canvas)root.lookup("#mainCanvas");
+        final Canvas gameCanvas = (Canvas)root.lookup("#mainCanvas");
         gameCanvas.setFocusTraversable(true);
         
         final InputScheme input = new InputSchemeImpl();

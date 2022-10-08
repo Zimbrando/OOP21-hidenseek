@@ -15,14 +15,14 @@ public class Player extends AbstractEntity {
         super();
         
         this.attach(new LifeComponentImpl(1));
-        MoveComponent m = new LinearMovementComponentImpl();
+        final MoveComponent m = new LinearMovementComponentImpl();
         m.setPosition(new Point2D(0, 0));
         m.setSpeed(2);
         this.attach(m);
         
         
         //Input
-        InputHandlerComponent input = new InputHandlerComponentImpl();
+        final InputHandlerComponent input = new InputHandlerComponentImpl();
         input.mapKeyToAction(KeyCode.A, entity -> entity.getComponent(MoveComponent.class)
                 .ifPresent(c -> c.move(Direction.LEFT)));
         input.mapKeyToAction(KeyCode.D, entity -> entity.getComponent(MoveComponent.class)

@@ -2,9 +2,9 @@ package hidenseek.model.components;
 
 public interface MoveComponent extends PositionComponent{
 
-    public int getSpeed();
+    int getSpeed();
     
-    public void setSpeed(int speed);
+    void setSpeed(int speed);
 
     void move(Direction dir);
 }

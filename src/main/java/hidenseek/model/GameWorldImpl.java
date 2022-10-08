@@ -22,7 +22,7 @@ public class GameWorldImpl implements GameWorld {
     }
 
     @Override
-    public void handleInput(Set<KeyCode> keysPressed) {
+    public void handleInput(final Set<KeyCode> keysPressed) {
         this.entities.forEach(entity -> {
             entity.getComponent(InputHandlerComponent.class)
             .ifPresent(c -> c.computeScheme(keysPressed));
@@ -30,7 +30,7 @@ public class GameWorldImpl implements GameWorld {
     }
     
     @Override
-    public void addEntity(Entity entity) {
+    public void addEntity(final Entity entity) {
         this.entities.add(entity);
     }
     

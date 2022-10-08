@@ -13,7 +13,7 @@ public class LinearMovementComponentImpl extends AbstractComponent implements Mo
     }
 
     @Override
-    public void setPosition(Point2D pos) {
+    public void setPosition(final Point2D pos) {
         this.position = pos;
     }
 
@@ -23,13 +23,13 @@ public class LinearMovementComponentImpl extends AbstractComponent implements Mo
     }
 
     @Override
-    public void setSpeed(int speed) {
+    public void setSpeed(final int speed) {
         this.speed = speed;
     }
 
     @Override
-    public void move(Direction dir) {
-        Point2D delta = dir.point.multiply(speed);
+    public void move(final Direction dir) {
+        final Point2D delta = dir.point.multiply(speed);
         this.position = this.position.add(delta);
     }
 

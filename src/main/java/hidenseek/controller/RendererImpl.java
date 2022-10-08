@@ -6,9 +6,9 @@ import hidenseek.view.GraphicsDevice;
 
 public class RendererImpl implements Renderer {
 
-    private GraphicsDevice gd;
+    final private GraphicsDevice gd;
     
-    public RendererImpl(GraphicsDevice gd) {
+    public RendererImpl(final GraphicsDevice gd) {
         this.gd = gd;
     }
     
@@ -16,7 +16,7 @@ public class RendererImpl implements Renderer {
      * {@inheritDoc}
      */
     @Override
-    public void update(EntityController ec) {
+    public void update(final EntityController ec) {
         if (ec.getPosition().isPresent()) {
             ec.getView().draw(gd,  ec.getPosition().get());        
         }

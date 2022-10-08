@@ -19,7 +19,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
     
     public GameWorldControllerImpl(final Renderer view, final InputScheme input) {
         this.view = view;
-        this.entities = new LinkedHashSet<EntityController>();
+        this.entities = new LinkedHashSet<>();
         this.input = input;
         this.model = new GameWorldImpl();
         
@@ -68,7 +68,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
     
 
     @Override
-    public void addEntity(EntityController entityController) {
+    public void addEntity(final EntityController entityController) {
         this.entities.add(entityController);
         this.model.addEntity(entityController.getModel());
     }

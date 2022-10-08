@@ -19,13 +19,15 @@ public abstract class AbstractComponent implements Component {
     }
 
     @Override
-    public void attach(Entity e) {
+    public void attach(final Entity e) {
         e.attach(this);
     }
 
     @Override
-    public void setOwner(Entity e) {
-        if (this.owner.isPresent()) throw new IllegalStateException("Owner already set");
+    public void setOwner(final Entity e) {
+        if (this.owner.isPresent()) {
+            throw new IllegalStateException("Owner already set");
+        }
         this.owner = Optional.ofNullable(e);
     }
     

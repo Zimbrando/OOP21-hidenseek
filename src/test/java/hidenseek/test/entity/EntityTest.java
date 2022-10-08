@@ -3,6 +3,7 @@
  */
 package hidenseek.test.entity;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,7 +12,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import hidenseek.model.components.Component;
-import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
@@ -19,9 +19,9 @@ import hidenseek.model.components.MoveComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.AbstractEntity;
 
-public class EntityTest {
-    @Test public void testEntityComponents() {
-        Entity e = new AbstractEntity() {};
+class EntityTest {
+    @Test void testEntityComponents() {
+        final Entity e = new AbstractEntity() {};
         assertTrue(e.getComponent(LifeComponent.class).isEmpty());
         e.attach(new LifeComponentImpl(100));
         assertFalse(e.getComponent(LifeComponent.class).isEmpty());
@@ -31,24 +31,23 @@ public class EntityTest {
         e.attach(new LifeComponentImpl(100));
         e.attach(new LinearMovementComponentImpl());  
         e.detach(LifeComponent.class);
-        Set<Component> components = e.getComponents();
-        assertTrue(components.size() == 1);
+        final Set<Component> components = e.getComponents();
+        assertEquals(1, components.size());
         assertTrue(MoveComponent.class.isInstance(components.stream().findFirst().get()));
-        assertTrue(e == e.getComponent(MoveComponent.class).get().getOwner().get());
+        assertEquals(e, e.getComponent(MoveComponent.class).get().getOwner().get());
     }
     
-    @Test public void testLifeComponent() {
-        LifeComponent l = new LifeComponentImpl(100);
-        assertTrue(l.getMaxHealth() == 100);
+    @Test void testLifeComponent() {
+        final LifeComponent l = new LifeComponentImpl(100);
+        assertEquals(100, l.getMaxHealth());
         l.hurt(10);
-        assertTrue(l.getHealth() == 90);
+        assertEquals(90, l.getHealth());
         l.hurt(100);
-        assertTrue(l.getHealth() == 0);
-        
+        assertEquals(0, l.getHealth());
     }
     
-    @Test public void testInputHandlerComponent() {
-        InputHandlerComponent input;
+    @Test void testInputHandlerComponent() {
+//        final InputHandlerComponent input;
         //input.mapKeyToAction(KeyCode.A, (entity) -> entity.getComponent(MoveComponent.class).ifPresent(c -> c.move()));
     }
 }

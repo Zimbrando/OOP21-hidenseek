@@ -10,7 +10,7 @@ public enum Direction {
 
     Point2D point;
     
-    Direction(Point2D point) {
+    Direction(final Point2D point) {
         this.point = point;
     }
-};
+}

@@ -11,11 +11,11 @@ public abstract class AbstractEntity implements Entity {
     Set<Component> components;
     
     public AbstractEntity() {
-        this.components = new HashSet<Component>();
+        this.components = new HashSet<>();
     }
     
     @Override
-    public void attach(Component comp) {
+    public void attach(final Component comp) {
         this.components.add(comp);
         comp.setOwner(this);
     }
@@ -26,12 +26,12 @@ public abstract class AbstractEntity implements Entity {
     }
 
     @Override
-    public <C extends Component> void detach(Class<C> component) {
+    public <C extends Component> void detach(final Class<C> component) {
         this.components.removeIf(c -> component.isInstance(c));
     }
 
     @Override
-    public <C extends Component> Optional<C> getComponent(Class<C> component) {
+    public <C extends Component> Optional<C> getComponent(final Class<C> component) {
         return this.components.stream()
                 .filter(c -> component.isInstance(c))
                 .map(c -> component.cast(c))
