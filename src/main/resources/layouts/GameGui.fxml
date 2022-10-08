@@ -8,5 +8,6 @@
     <AnchorPane prefHeight="200" prefWidth="200">
       <children>
          <Canvas id="mainCanvas" height="860" width="1024" />
-      </children></AnchorPane>
+      </children>
+    </AnchorPane>
 </Scene>

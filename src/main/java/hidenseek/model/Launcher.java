@@ -1,6 +1,6 @@
 package hidenseek.model;
 
-import hidenseek.controller.EntityControllerImpl;
+import hidenseek.controller.entities.EntityControllerImpl;
 import hidenseek.controller.GameWorldController;
 import hidenseek.controller.GameWorldControllerImpl;
 import hidenseek.controller.InputScheme;

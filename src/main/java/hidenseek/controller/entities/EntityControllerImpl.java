@@ -1,4 +1,4 @@
-package hidenseek.controller;
+package hidenseek.controller.entities;
 
 import java.util.Optional;
 

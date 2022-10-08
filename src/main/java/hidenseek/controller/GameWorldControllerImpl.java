@@ -3,6 +3,7 @@ package hidenseek.controller;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import hidenseek.controller.entities.EntityController;
 import hidenseek.model.GameWorld;
 import hidenseek.model.GameWorldImpl;
 

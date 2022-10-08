@@ -1,6 +1,7 @@
 package hidenseek.controller;
 
 import javafx.scene.paint.Color;
+import hidenseek.controller.entities.EntityController;
 import hidenseek.view.GraphicsDevice;
 
 public class RendererImpl implements Renderer {

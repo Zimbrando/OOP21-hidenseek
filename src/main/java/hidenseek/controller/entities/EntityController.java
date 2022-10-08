@@ -1,11 +1,11 @@
-package hidenseek.controller;
+package hidenseek.controller.entities;
 
 import java.util.Optional;
 import hidenseek.model.entities.Entity;
 import hidenseek.view.EntityView;
 import javafx.geometry.Point2D;
 
-interface EntityController {
+public interface EntityController {
 
     Optional<Point2D> getPosition();
     
