@@ -6,11 +6,11 @@ import java.util.Optional;
 
 import hidenseek.model.components.Component;
 
-public class EntityImpl implements Entity {
+public abstract class AbstractEntity implements Entity {
 
     Set<Component> components;
     
-    public EntityImpl() {
+    public AbstractEntity() {
         this.components = new HashSet<Component>();
     }
     

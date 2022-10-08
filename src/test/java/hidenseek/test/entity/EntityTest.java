@@ -17,12 +17,11 @@ import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
 import hidenseek.model.components.MoveComponent;
 import hidenseek.model.entities.Entity;
-import hidenseek.model.entities.EntityImpl;
-import javafx.geometry.Point2D;
+import hidenseek.model.entities.AbstractEntity;
 
 public class EntityTest {
     @Test public void testEntityComponents() {
-        Entity e = new EntityImpl();
+        Entity e = new AbstractEntity() {};
         assertTrue(e.getComponent(LifeComponent.class).isEmpty());
         e.attach(new LifeComponentImpl(100));
         assertFalse(e.getComponent(LifeComponent.class).isEmpty());
