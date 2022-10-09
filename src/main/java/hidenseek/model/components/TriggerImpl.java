@@ -15,6 +15,11 @@ public class TriggerImpl<E extends Event> implements Trigger<E> {
         this.eventType = eventType;
     }
     
+    public TriggerImpl(final Class<E> eventType, final BiConsumer<E, Entity> action) {
+        this.eventType = eventType;
+        this.action = Optional.ofNullable(action);
+    }
+    
     @Override
     public void notifyEvent(final Event event) {
         if (eventType.isInstance(event)) {
@@ -23,15 +28,20 @@ public class TriggerImpl<E extends Event> implements Trigger<E> {
     }
 
     @Override
-    public void mapEvent(final BiConsumer<E, Entity> action) {
+    public void assignCallback(final BiConsumer<E, Entity> action) {
         this.action = Optional.ofNullable(action);
     }
 
     @Override
-    public void removeEvent() {
+    public void removeCallback() {
         this.action = Optional.empty();
     }
 
+    @Override
+    public Class<E> getEventType() {
+        return this.eventType;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -50,10 +60,5 @@ public class TriggerImpl<E extends Event> implements Trigger<E> {
             return false;
         TriggerImpl<?> other = (TriggerImpl<?>) obj;
         return Objects.equals(action, other.action);
-    }
-
-    @Override
-    public Class<E> getEventType() {
-        return this.eventType;
     }
 }

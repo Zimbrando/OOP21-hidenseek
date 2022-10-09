@@ -20,6 +20,12 @@ public abstract class AbstractObservableComponent extends AbstractComponent impl
         this.currentAttachedListeners.remove(eventType);
     }
     
+    /**
+     * Notify the listeners attached that an event occured
+     * @param event
+     * @param eventType
+     * @throws IllegalArgumentException, if the event thrown is not an instance of the event type given
+     */
     protected void notifyListener(final Event event, final Class<? extends Event> eventType) throws IllegalArgumentException {
         if (!this.hasListener(eventType)) {
             return;

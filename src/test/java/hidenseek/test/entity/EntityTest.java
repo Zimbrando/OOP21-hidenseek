@@ -62,20 +62,7 @@ public class EntityTest {
         l.hurt(10);
         assertTrue(l.getHealth() == 90);
         l.hurt(100);
-        assertTrue(l.getHealth() == 0);
-        
+        assertTrue(l.getHealth() == 0);  
     }
     
-    @Test public void testTriggerComponent() {
-        Entity e = new EntityImpl();
-        final int damage = 10;
-        Trigger<DamageEvent> listener = new TriggerImpl<DamageEvent>(DamageEvent.class);
-        listener.mapEvent((event, entity) -> assertTrue(event.getDamage() == damage));
-        ObservableComponent life = new LifeComponentImpl(100);
-        life.attachListener(listener);
-        e.attach(life);
-        LifeComponent compLife = (LifeComponent) life;
-        compLife.hurt(damage);
-        life.detachListener(DamageEvent.class);
-    }
 }

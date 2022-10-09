@@ -26,7 +26,9 @@ final public class LifeComponentImpl extends AbstractObservableComponent impleme
     public void hurt(int damage) {
         this.health -= damage;
         this.health = this.health < 0 ? 0 : this.health;
-        this.notifyListener(new DamageEvent(this.getOwner().get(), damage), DamageEvent.class);            
+        this.getOwner().ifPresent(owner -> this.notifyListener(
+                new DamageEvent(this.getOwner().get(), damage),
+                DamageEvent.class));
     }
     
 }
