@@ -19,8 +19,7 @@ public class Player extends AbstractEntity {
         m.setPosition(new Point2D(0, 0));
         m.setSpeed(2);
         this.attach(m);
-        
-        
+       
         //Input
         final InputHandlerComponent input = new InputHandlerComponentImpl();
         input.mapKeyToAction(KeyCode.A, entity -> entity.getComponent(MoveComponent.class)
@@ -33,6 +32,5 @@ public class Player extends AbstractEntity {
                 .ifPresent(c -> c.move(Direction.DOWN)));
         
         this.attach(input);
-        
     }
 }

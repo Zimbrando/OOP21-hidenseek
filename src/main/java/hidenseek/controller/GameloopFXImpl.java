@@ -17,6 +17,7 @@ public abstract class GameloopFXImpl extends AnimationTimer implements Gameloop 
     
     public abstract void tick();
     
+    @Override
     public int getCurrentFramerate() {
         return (int)this.currentFrameRate;
     }

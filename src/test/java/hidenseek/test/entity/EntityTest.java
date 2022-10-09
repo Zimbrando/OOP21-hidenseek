@@ -19,9 +19,11 @@ import hidenseek.model.components.MoveComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.AbstractEntity;
 
-class EntityTest {
-    @Test void testEntityComponents() {
-        final Entity e = new AbstractEntity() {};
+public class EntityTest {
+    
+    @Test public void testEntityComponents() {
+        //Detach and Attach test
+        Entity e = new AbstractEntity(){};
         assertTrue(e.getComponent(LifeComponent.class).isEmpty());
         e.attach(new LifeComponentImpl(100));
         assertFalse(e.getComponent(LifeComponent.class).isEmpty());
@@ -37,17 +39,15 @@ class EntityTest {
         assertEquals(e, e.getComponent(MoveComponent.class).get().getOwner().get());
     }
     
-    @Test void testLifeComponent() {
-        final LifeComponent l = new LifeComponentImpl(100);
-        assertEquals(100, l.getMaxHealth());
+    @Test public void testLifeComponent() {
+        Entity e = new AbstractEntity() {};
+        LifeComponent l = new LifeComponentImpl(100);
+        e.attach(l);
+        assertTrue(l.getMaxHealth() == 100);
         l.hurt(10);
         assertEquals(90, l.getHealth());
         l.hurt(100);
         assertEquals(0, l.getHealth());
     }
     
-    @Test void testInputHandlerComponent() {
-//        final InputHandlerComponent input;
-        //input.mapKeyToAction(KeyCode.A, (entity) -> entity.getComponent(MoveComponent.class).ifPresent(c -> c.move()));
-    }
 }
