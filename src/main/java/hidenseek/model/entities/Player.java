@@ -9,7 +9,7 @@ import hidenseek.model.components.MoveComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
-public class Player extends AbstractEntity {
+public final class Player extends AbstractEntity {
     
     public Player() {
         super();
