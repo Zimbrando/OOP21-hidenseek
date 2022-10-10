@@ -1,5 +1,6 @@
 package hidenseek.model.components;
 
+import hidenseek.model.enums.Direction;
 import javafx.geometry.Point2D;
 
 public class LinearMovementComponentImpl extends AbstractComponent implements MoveComponent {
