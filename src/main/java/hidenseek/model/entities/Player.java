@@ -1,10 +1,13 @@
 package hidenseek.model.entities;
 
+import hidenseek.model.components.HeartComponent;
 import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.InputHandlerComponentImpl;
 import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
 import hidenseek.model.components.MoveComponent;
+import hidenseek.model.components.hearts.AbstractHeartComponent;
+import hidenseek.model.components.hearts.GoodHeartComponentImpl;
 import hidenseek.model.enums.Direction;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
@@ -32,5 +35,10 @@ public class Player extends AbstractEntity {
                 .ifPresent(c -> c.move(Direction.DOWN)));
         
         this.attach(input);
+        
+        // heart
+        HeartComponent heart = new GoodHeartComponentImpl();
+        this.attach(heart);
+        
     }
 }
