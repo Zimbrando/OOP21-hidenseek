@@ -1,11 +1,11 @@
 package hidenseek.model.entities;
 
-import hidenseek.model.components.Direction;
 import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.InputHandlerComponentImpl;
 import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
 import hidenseek.model.components.MoveComponent;
+import hidenseek.model.enums.Direction;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 

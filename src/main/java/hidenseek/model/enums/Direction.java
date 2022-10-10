@@ -1,4 +1,4 @@
-package hidenseek.model.components;
+package hidenseek.model.enums;
 
 import javafx.geometry.Point2D;
 
@@ -8,7 +8,7 @@ public enum Direction {
     UP(new Point2D(0, -1)), 
     DOWN(new Point2D(0, 1));
 
-    Point2D point;
+    public Point2D point;
     
     Direction(final Point2D point) {
         this.point = point;
