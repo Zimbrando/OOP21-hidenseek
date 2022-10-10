@@ -7,10 +7,14 @@ import hidenseek.controller.InputScheme;
 import hidenseek.controller.InputSchemeImpl;
 import hidenseek.controller.RendererImpl;
 import hidenseek.model.entities.Player;
+import hidenseek.model.entities.PowerUp;
+import hidenseek.model.entities.PowerUpType;
 import hidenseek.controller.Renderer;
 import hidenseek.view.CanvasDeviceImpl;
 import hidenseek.view.PlayerView;
 import hidenseek.view.PlayerViewImpl;
+import hidenseek.view.PowerUpView;
+import hidenseek.view.PowerUpViewImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -44,6 +48,8 @@ public class Launcher extends Application {
          });
         
         gameController.addEntity(new EntityControllerImpl<PlayerView>(new Player(), new PlayerViewImpl()));
+        PowerUpType type = PowerUpType.generateRandomType();
+        gameController.addEntity(new EntityControllerImpl<PowerUpView>(new PowerUp(type), new PowerUpViewImpl(type)));
 //        gameController.addLevel(1,map);
         
 
