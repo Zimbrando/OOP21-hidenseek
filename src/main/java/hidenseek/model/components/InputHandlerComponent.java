@@ -17,11 +17,15 @@ public interface InputHandlerComponent extends Component {
     
     /**
      * Maps a keyboard key to a callback following a 'onTyped' type of behaviour.
-     * The callback is executed once, even if the key has not been released yet.
-     * 
+     * The action callback is executed once, even if the key has not been released yet.
+     * The releaseAction is executed after key is released
      * @param key
      * @param action
+     * @param releaseAction
      */
+    void mapKeyToOneTimeAction(KeyCode key, Consumer<Entity> action, Consumer<Entity> releaseAction);
+    
+    
     void mapKeyToOneTimeAction(KeyCode key, Consumer<Entity> action);
    
     /**

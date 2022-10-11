@@ -13,11 +13,13 @@ public class InputHandlerComponentImpl extends AbstractComponent implements Inpu
 
     private final Map<KeyCode, Consumer<Entity>> actions;
     private final Map<KeyCode, Consumer<Entity>> oneTimeActions;
+    private final Map<KeyCode, Consumer<Entity>> releaseActions;
     private final Set<KeyCode> disabledKeys;
     
     public InputHandlerComponentImpl() {
         this.actions = new LinkedHashMap<>();
         this.oneTimeActions = new LinkedHashMap<>();
+        this.releaseActions = new LinkedHashMap<>();
         this.disabledKeys = new HashSet<>();
     }
     
@@ -27,12 +29,21 @@ public class InputHandlerComponentImpl extends AbstractComponent implements Inpu
     }
     
     @Override
+    public void mapKeyToOneTimeAction(final KeyCode key, final Consumer<Entity> action, final Consumer<Entity> releaseAction) {
+        this.oneTimeActions.put(key, action);
+        this.releaseActions.put(key, releaseAction);
+    }
+    
+    @Override
     public void mapKeyToOneTimeAction(final KeyCode key, final Consumer<Entity> action) {
         this.oneTimeActions.put(key, action);
     }
 
     @Override
-    public void computeScheme(final Set<KeyCode> keysPressed) {  
+    public void computeScheme(final Set<KeyCode> keysPressed) {
+        this.disabledKeys.stream()
+                    .filter(key -> !keysPressed.contains(key) && this.releaseActions.containsKey(key))
+                    .forEach(key -> this.releaseActions.get(key).accept(this.getOwner().get()));
         this.disabledKeys.removeIf(key -> !keysPressed.contains(key));
       
         keysPressed.forEach(key -> {
