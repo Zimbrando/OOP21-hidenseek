@@ -4,6 +4,8 @@ import java.util.Set;
 
 import hidenseek.model.components.CollisionComponent;
 import hidenseek.model.components.CollisionComponentImpl;
+import hidenseek.model.components.MaterialComponent;
+import hidenseek.model.components.MaterialComponentImpl;
 import hidenseek.model.components.PositionComponent;
 import hidenseek.model.components.PositionComponentImpl;
 import javafx.geometry.Point2D;
@@ -17,6 +19,10 @@ public class Wall extends AbstractEntity {
         final PositionComponent positionComponent = new PositionComponentImpl();
         positionComponent.setPosition(position);
         this.attach(positionComponent);
+        
+        //Material component
+        final MaterialComponent materialComponent = new MaterialComponentImpl();
+        this.attach(materialComponent);
         
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();

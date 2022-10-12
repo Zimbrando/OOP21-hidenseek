@@ -5,6 +5,8 @@ import hidenseek.model.components.CollisionComponentImpl;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
+import hidenseek.model.components.MaterialComponent;
+import hidenseek.model.components.MaterialComponentImpl;
 import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.PositionComponent;
 import hidenseek.model.components.PositionComponentImpl;
@@ -27,6 +29,10 @@ public class Enemy extends AbstractEntity {
         //Move component
         final MoveComponent moveComponent = new LinearMovementComponentImpl();
         this.attach(moveComponent);
+        
+        //Material component
+        final MaterialComponent materialComponent = new MaterialComponentImpl();
+        this.attach(materialComponent);
         
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();

@@ -12,6 +12,8 @@ import hidenseek.model.components.InputHandlerComponentImpl;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
+import hidenseek.model.components.MaterialComponent;
+import hidenseek.model.components.MaterialComponentImpl;
 import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.hearts.GoodHeartComponentImpl;
 import hidenseek.model.enums.Direction;
@@ -39,6 +41,10 @@ public class Player extends AbstractEntity {
         //Move component
         final MoveComponent moveComponent = new LinearMovementComponentImpl();
         this.attach(moveComponent);
+        
+        //Material component
+        final MaterialComponent materialComponent = new MaterialComponentImpl();
+        this.attach(materialComponent);
         
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();

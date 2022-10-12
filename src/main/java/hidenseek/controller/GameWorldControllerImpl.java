@@ -10,6 +10,7 @@ import hidenseek.model.GameWorld;
 import hidenseek.model.GameWorldImpl;
 import hidenseek.model.components.CollisionComponent;
 import hidenseek.model.components.Force;
+import hidenseek.model.components.MaterialComponent;
 import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.PositionComponent;
 import javafx.geometry.Point2D;
@@ -97,18 +98,18 @@ public final class GameWorldControllerImpl implements GameWorldController {
             final double SPEED_CONST = 1.2;
             Point2D resultantOffset = new Point2D(0, 0);
             for(Force force : moveComponent.get().getForces().toArray(new Force[0])) {
-                
+
                 Optional<CollisionComponent> collisionComponent = entity.getModel().getComponent(CollisionComponent.class);
                 
                 if(!collisionComponent.isPresent()) {
                     return;
                 }
                 
-                if(!this.entities.stream().anyMatch(entity1 -> collisionComponent.get().willCollisionWith(entity1.getModel(), new Point2D(force.getXComponent() * SPEED_CONST, 0)))) {
+                if(!this.entities.stream().anyMatch(entity1 -> entity1.getModel().getComponent(MaterialComponent.class).isPresent() && collisionComponent.get().willCollisionWith(entity1.getModel(), new Point2D(force.getXComponent() * SPEED_CONST, 0)))) {
                     resultantOffset = resultantOffset.add(new Point2D(force.getXComponent() * SPEED_CONST, 0));
                 }
                 
-                if(!this.entities.stream().anyMatch(entity1 -> collisionComponent.get().willCollisionWith(entity1.getModel(), new Point2D(0, force.getYComponent() * SPEED_CONST)))) {
+                if(!this.entities.stream().anyMatch(entity1 -> entity1.getModel().getComponent(MaterialComponent.class).isPresent() && collisionComponent.get().willCollisionWith(entity1.getModel(), new Point2D(0, force.getYComponent() * SPEED_CONST)))) {
                     resultantOffset = resultantOffset.add(new Point2D(0, force.getYComponent() * SPEED_CONST));
                 }
             }
