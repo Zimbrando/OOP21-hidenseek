@@ -6,13 +6,21 @@ import hidenseek.controller.GameWorldControllerImpl;
 import hidenseek.controller.InputScheme;
 import hidenseek.controller.InputSchemeImpl;
 import hidenseek.controller.RendererImpl;
+import hidenseek.model.components.PositionComponent;
+import hidenseek.model.entities.Enemy;
 import hidenseek.model.entities.Player;
+import hidenseek.model.entities.Wall;
 import hidenseek.controller.Renderer;
 import hidenseek.view.CanvasDeviceImpl;
+import hidenseek.view.EnemyView;
+import hidenseek.view.EnemyViewImpl;
 import hidenseek.view.PlayerView;
 import hidenseek.view.PlayerViewImpl;
+import hidenseek.view.WallView;
+import hidenseek.view.WallViewImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
@@ -34,17 +42,33 @@ public class Launcher extends Application {
         final GameWorldController gameController = new GameWorldControllerImpl(renderer, input);
         
         root.setOnKeyPressed(e -> {
-          if (e.getCode() == KeyCode.ESCAPE) {
-              gameController.pause();
-          }
+            if (e.getCode() == KeyCode.ESCAPE) {
+                gameController.pause();
+            }
           
-          if (e.getCode() == KeyCode.R) {
-              gameController.resume();
-          }
-         });
+            if (e.getCode() == KeyCode.R) {
+                gameController.resume();
+            }
+        });
         
-        gameController.addEntity(new EntityControllerImpl<PlayerView>(new Player(), new PlayerViewImpl()));
-//        gameController.addLevel(1,map);
+        final GameLevel gameLevel = new GameLevelImpl();
+        gameLevel.getWalls().forEach(wall -> {
+            gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl((Wall)wall)));
+        });
+
+        
+        //NOTE: we are passing Model to PlayerViewImpl and EnemyViewImpl, but only for debug.
+        //It's used to draw collision hitbox. It'll be removed.
+        
+        Player player = new Player();
+        player.getComponent(PositionComponent.class).get().setPosition(new Point2D(200, 150));
+        gameController.addEntity(new EntityControllerImpl<PlayerView>(player, new PlayerViewImpl(player)));
+
+        Enemy enemy = new Enemy();
+        enemy.getComponent(PositionComponent.class).get().setPosition(new Point2D(700, 400));
+        gameController.addEntity(new EntityControllerImpl<EnemyView>(enemy, new EnemyViewImpl(enemy)));
+
+        //gameController.addLevel(1, map);
         
 
         primaryStage.setTitle("Hide'n Seek");

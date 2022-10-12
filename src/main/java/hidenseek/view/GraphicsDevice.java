@@ -38,4 +38,7 @@ public interface GraphicsDevice {
      * @param c, the color
      */
     void fill(Color c);
+
+    //TODO: remove this, only used for test
+    void drawLine(Point2D positionStart, Point2D positionEnd, Color color);
 }

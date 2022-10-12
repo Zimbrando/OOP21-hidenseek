@@ -31,4 +31,10 @@ public class ConsoleDeviceImpl implements GraphicsDevice{
         System.out.println("Fill");
     }
 
+    @Override
+    public void drawLine(Point2D positionStart, Point2D positionEnd, Color color) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

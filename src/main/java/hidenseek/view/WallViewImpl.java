@@ -3,17 +3,15 @@ package hidenseek.view;
 import hidenseek.model.components.CollisionComponent;
 import hidenseek.model.entities.Enemy;
 import hidenseek.model.entities.Player;
+import hidenseek.model.entities.Wall;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
-public class PlayerViewImpl implements PlayerView{
+public class WallViewImpl implements WallView{
 
     @Override
     public void draw(final GraphicsDevice device, final Point2D position) {
-        device.drawCircle(100, position.add(50, 50), Color.GRAY);
-        device.drawRect(50, 50, position.add(25, 25), Color.BLACK);
-        device.drawRect(40, 40, position.add(30, 30), Color.GREEN);
-
+        
         //TODO: remove this, only used for test
         //Draw Hitbox
         Point2D[] hitbox = model.getComponent(CollisionComponent.class).get().getHitbox().toArray(new Point2D[0]);       
@@ -29,9 +27,9 @@ public class PlayerViewImpl implements PlayerView{
     }
 
     //TODO: remove this, only used for test
-    private final Player model;
-    public PlayerViewImpl(Player enemy) {
-        this.model = enemy;
+    private final Wall model;
+    public WallViewImpl(Wall wall) {
+        this.model = wall;
     }
 
 }
