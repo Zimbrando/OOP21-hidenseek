@@ -43,4 +43,10 @@ public final class CanvasDeviceImpl implements GraphicsDevice {
         graphics.setFill(color);
         graphics.fillOval(position.getX() - radius / 2, position.getY() - radius / 2, radius, radius);
     }
+
+    @Override
+    public void drawLine(final Point2D positionStart, final Point2D positionEnd, final Color color) {
+        graphics.setStroke(color);
+        graphics.strokeLine(positionStart.getX(), positionStart.getY(), positionEnd.getX(), positionEnd.getY());
+    }
 }

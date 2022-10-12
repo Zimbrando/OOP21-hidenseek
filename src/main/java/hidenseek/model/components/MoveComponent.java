@@ -1,12 +1,15 @@
 package hidenseek.model.components;
 
-import hidenseek.model.enums.Direction;
+import java.util.Set;
+import java.util.function.Predicate;
 
-public interface MoveComponent extends PositionComponent{
+public interface MoveComponent extends Component {
 
-    int getSpeed();
+    void addForce(Force force);
+    void removeForce(Force force);
+    void removeForce(Predicate<Force> removeCondition);
+    Set<Force> getForces();
+
+    Force getResultantForce();
     
-    void setSpeed(int speed);
-
-    void move(Direction dir);
 }

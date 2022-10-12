@@ -1,37 +1,64 @@
 package hidenseek.model.components;
 
-import hidenseek.model.enums.Direction;
-import javafx.geometry.Point2D;
 
-public class LinearMovementComponentImpl extends AbstractComponent implements MoveComponent {
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.function.Predicate;
 
-    private Point2D position;
-    private int speed;
+final public class LinearMovementComponentImpl extends AbstractObservableComponent implements MoveComponent {
+
+    private Set<Force> forces = new HashSet<Force>();
     
     @Override
-    public Point2D getPosition() {
-        return this.position;
+    public void addForce(Force force) {
+        forces.add(force);
     }
 
     @Override
-    public void setPosition(final Point2D pos) {
-        this.position = pos;
+    public void removeForce(Force force) {
+        forces.remove(force);
     }
 
     @Override
-    public int getSpeed() {
-        return this.speed;
+    public void removeForce(Predicate<Force> removeCondition) {
+        Iterator<Force> itr = forces.iterator();
+        while (itr.hasNext()) {
+            Force t = itr.next();
+            if (removeCondition.test(t)) {
+                itr.remove();
+            }
+        }
     }
 
     @Override
-    public void setSpeed(final int speed) {
-        this.speed = speed;
+    public Set<Force> getForces(){
+        return forces;
     }
 
     @Override
-    public void move(final Direction dir) {
-        final Point2D delta = dir.point.multiply(speed);
-        this.position = this.position.add(delta);
+    public Force getResultantForce() {
+        double resultantX = 0;
+        double resultantY = 0;
+        
+        for(Force force : forces) {
+            resultantX += force.getXComponent();
+            resultantY += force.getYComponent();
+        }
+        
+        if(resultantX == 0 && resultantY == 0) {
+            return new Force("resultant", 0, 0);
+        }
+        
+        double resultantIntensity = Math.sqrt(Math.pow(resultantX, 2) + Math.pow(resultantY, 2));
+        double resultantDirection = Math.toDegrees(Math.atan(resultantY/resultantX));       
+        
+        if(resultantX < 0) {
+            resultantDirection += 180;
+        }
+        
+        return new Force("resultant", resultantIntensity, resultantDirection);
     }
+
 
 }
