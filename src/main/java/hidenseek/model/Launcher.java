@@ -1,6 +1,8 @@
 package hidenseek.model;
 
 import hidenseek.controller.EntityControllerImpl;
+import hidenseek.controller.GameSceneController;
+import hidenseek.controller.GameSceneControllerImpl;
 import hidenseek.controller.GameWorldController;
 import hidenseek.controller.GameWorldControllerImpl;
 import hidenseek.controller.InputScheme;
@@ -16,41 +18,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.canvas.*;
+import javafx.stage.Screen;
 import javafx.scene.input.KeyCode;
 
 public class Launcher extends Application {
 
     @Override
     public final void start(final Stage primaryStage) throws Exception {
-        final Scene root = FXMLLoader.load(ClassLoader.getSystemResource("layouts/GameGui.fxml"));
         
-        Canvas gameCanvas = (Canvas)root.lookup("#mainCanvas");
-        gameCanvas.setFocusTraversable(true);
+        final GameSceneController gameSceneController = new GameSceneControllerImpl(primaryStage);
+       
+        //gameController.addLevel(1,map);
         
-        final InputScheme input = new InputSchemeImpl();
-        input.assignInputNode(gameCanvas);
-        
-        final Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
-        final GameWorldController gameController = new GameWorldControllerImpl(renderer, input);
-        
-        root.setOnKeyPressed(e -> {
-          if (e.getCode() == KeyCode.ESCAPE) {
-              gameController.pause();
-          }
-          
-          if (e.getCode() == KeyCode.R) {
-              gameController.resume();
-          }
-         });
-        
-        gameController.addEntity(new EntityControllerImpl<PlayerView>(new Player(), new PlayerViewImpl()));
-//        gameController.addLevel(1,map);
-        
-
-        primaryStage.setTitle("Hide'n Seek");
-        primaryStage.setHeight(860);
-        primaryStage.setWidth(1024);
-        primaryStage.setScene(root);
-        primaryStage.show();
     }
 }

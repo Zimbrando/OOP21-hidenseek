@@ -57,6 +57,8 @@ public final class GameWorldControllerImpl implements GameWorldController {
         // update logic
         model.update();
 
+        System.out.println(this.input.getCurrentPressedKeys());
+        
         //Draw game
         view.refresh();
         // update view

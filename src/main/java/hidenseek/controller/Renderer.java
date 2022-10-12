@@ -20,7 +20,7 @@ public interface Renderer {
     void refresh();
     
     /**
-     * Creates the fog of the game. Black screen where light sources can see through
+     * Creates the game's fog. Black screen where light sources can see through
      */
     void createFog();
     

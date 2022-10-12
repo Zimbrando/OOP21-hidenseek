@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Scene?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<Scene xmlns="http://javafx.com/javafx/11.0.1"  xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="gameMain" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hidenseek.controller.GameGuiController">
     <AnchorPane prefHeight="200" prefWidth="200">
       <children>
          <Canvas id="mainCanvas" height="860" width="1024" />
-      </children></AnchorPane>
-</Scene>
+         <VBox alignment="CENTER" layoutX="50.0" prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <Button fx:id="backButton" visible="false" mnemonicParsing="false" text="Back" onAction="#handleBackClicked">
+               </Button> 
+            </children>
+         </VBox>
+      </children>
+    </AnchorPane>
+</Pane>
