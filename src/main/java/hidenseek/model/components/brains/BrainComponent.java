@@ -1,4 +1,6 @@
-package hidenseek.model.components;
+package hidenseek.model.components.brains;
+
+import hidenseek.model.components.Component;
 
 public interface BrainComponent extends Component{
     

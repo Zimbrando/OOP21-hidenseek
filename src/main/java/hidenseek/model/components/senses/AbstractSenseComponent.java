@@ -1,13 +1,10 @@
 package hidenseek.model.components.senses;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import hidenseek.model.components.AbstractComponent;
-import hidenseek.model.components.SenseComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.SenseConfidence;
 
@@ -27,6 +24,9 @@ public abstract class AbstractSenseComponent extends AbstractComponent implement
         if(conf != SenseConfidence.NONE) {
             // add it to set
             entityMap.put(e, conf);
+        } else {
+            // remove from set, if present
+            entityMap.remove(e);
         }
         return conf;
     }

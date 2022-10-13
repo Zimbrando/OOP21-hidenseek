@@ -1,7 +1,5 @@
 package hidenseek.model.components.senses;
 
-import hidenseek.model.components.LinearMovementComponentImpl;
-import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.PositionComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.SenseConfidence;

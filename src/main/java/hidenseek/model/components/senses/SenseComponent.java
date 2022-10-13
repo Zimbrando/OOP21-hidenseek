@@ -1,7 +1,8 @@
-package hidenseek.model.components;
+package hidenseek.model.components.senses;
 
 import java.util.Set;
 
+import hidenseek.model.components.Component;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.SenseConfidence;
 
