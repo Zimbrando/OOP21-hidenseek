@@ -6,9 +6,11 @@ import hidenseek.controller.GameWorldControllerImpl;
 import hidenseek.controller.InputScheme;
 import hidenseek.controller.InputSchemeImpl;
 import hidenseek.controller.RendererImpl;
+import hidenseek.model.entities.Monster;
 import hidenseek.model.entities.Player;
 import hidenseek.controller.Renderer;
 import hidenseek.view.CanvasDeviceImpl;
+import hidenseek.view.MonsterViewImpl;
 import hidenseek.view.PlayerView;
 import hidenseek.view.PlayerViewImpl;
 import javafx.application.Application;
@@ -42,8 +44,9 @@ public class Launcher extends Application {
               gameController.resume();
           }
          });
-        
+
         gameController.addEntity(new EntityControllerImpl<PlayerView>(new Player(), new PlayerViewImpl()));
+        gameController.addEntity(new EntityControllerImpl<PlayerView>(new Monster(), new MonsterViewImpl()));
 //        gameController.addLevel(1,map);
         
 
