@@ -4,8 +4,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import hidenseek.controller.entities.EntityController;
-import hidenseek.model.GameWorld;
-import hidenseek.model.GameWorldImpl;
+import hidenseek.model.worlds.GameWorld;
+import hidenseek.model.worlds.GameWorldImpl;
 
 public final class GameWorldControllerImpl implements GameWorldController {
     
