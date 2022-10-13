@@ -1,12 +1,4 @@
 .rootStyle {
-    -fx-background-color: "#2E2E2E";
-    -fx-maxHeight:1080;
-    -fx-maxWidth:1920;
-    -fx-minHeight:768;
-    -fx-minWidth:1024;
-}
-
-.pausePane {
     -fx-background-color: rgba(46, 46, 46, 0.5);
     -fx-maxHeight:1080;
     -fx-maxWidth:1920;

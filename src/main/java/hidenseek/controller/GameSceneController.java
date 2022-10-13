@@ -1,53 +1,56 @@
 package hidenseek.controller;
 
-import java.io.IOException;
-
-import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 public interface GameSceneController {
     
     
-    /***
-     * Goes to general game menu.
-     * @throws IOException 
+    /**
+     * Goes to general game menu. 
      */
   
     void goToMenu();
     
-    /****
+    /**
      * Enters the game. 
      */
     
     void goToGame();
     
-    /***
+    /**
      * Goes to pause menu.
      */
     
-    void goToResume();
+    void goToPause();
     
-    /***
+    /**
      * Goes to the statistics page.
      */
     
     void goToSettings();
     
-    /***
+    /**
      * Goes to the statistics page.
      */
     
     void goToStats();
     
-    /****
+    /**
      * Exits the program. 
      */
     
     void goToExit(); 
     
-    
+    /**
+     * 
+     * @param name 
+     * @return the current scene's root object
+     */
     Pane getSceneRoot(final String name);
+    
+    
+    void resumeGame(final GameGuiController controller);
+    
+    void pauseGame(final GameGuiController controller);
     
 }

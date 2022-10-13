@@ -1,11 +1,8 @@
 package hidenseek.model;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-
 import hidenseek.controller.MenuController;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
@@ -60,7 +57,7 @@ public class SceneManagerImpl implements SceneManager {
     }
 
     @Override
-    public void setMainScene(Scene mainScene) {
+    public void setMainScene(final Scene mainScene) {
         this.main = mainScene;
     }
 

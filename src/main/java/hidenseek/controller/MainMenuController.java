@@ -22,14 +22,17 @@ public class MainMenuController implements MenuController{
     @FXML
     private final double interfaceWidth;
     
-    //@FXML
-    //private Pane main;
+    @FXML
+    private Pane mainMenuRoot;
 
     @FXML
     private AnchorPane mainPane;
     
     @FXML
     private Button startButton;
+    
+    @FXML
+    private Button goToSettingsButton;
     
     @FXML
     private Button exitButton;
@@ -46,6 +49,11 @@ public class MainMenuController implements MenuController{
     @FXML
     public void handleStartClicked() {
         this.gameController.goToGame();  
+    }
+    
+    @FXML
+    public void handleGoToSettingsClicked() {
+        this.gameController.goToSettings();  
     }
     
     @FXML

@@ -16,6 +16,7 @@ public abstract class GameloopFXImpl extends AnimationTimer implements Gameloop 
     public void stop() {
         super.stop();
     }
+       
     
     @Override
     public void handle(long now) {

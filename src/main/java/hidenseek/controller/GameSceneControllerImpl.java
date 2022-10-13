@@ -5,7 +5,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,44 +29,40 @@ public class GameSceneControllerImpl implements GameSceneController {
     private final Stage mainStage;
     private Optional<Scene> currentScene = Optional.empty(); 
     private final SceneManagerImpl sceneManager = new SceneManagerImpl();
-    //FXMLLoader loader = new FXMLLoader();
-    private final String resourceLocation = "./layouts/"; 
-    private final List<String> interfacesPaths;//= new ArrayList<>();
-    
-    //List.of("MainMenuGui.fxml", "GameGui.fxml", "GameSettingsGui.fxml", "MainMenuGui.fxml", "MainMenuGui.fxml", "MainMenuGui.fxml");
+    private final static String RESOURCE_LOCATION = "./layouts/";
+    private final static String STYLING_LOCATION = "./stylesheets/";
+    private final List<String> interfacesPaths;
 
     public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {
         
         final URL url = getClass().getResource("/layouts/");
         final Path path = Paths.get(url.toURI());
-        //path.forEach(p -> System.out.printf("- %s%n", p.toString()));
-        this.interfacesPaths = Files.walk(path, 1).skip(1).map(e -> e.toString()).collect(Collectors.toList());
         
-        //this.interfacesPaths.stream().map(e -> e.split("\\\\").);
-        
-        //System.out.println(this.interfacesPaths);
-        
+        this.interfacesPaths = Files.walk(path, 1)
+        .skip(1)
+        .map(e -> e.toString())
+        .collect(Collectors.toList())
+        .stream()
+        .map(e -> e.substring(e.lastIndexOf("\\")).substring(1))
+        .collect(Collectors.toList());
+                
         this.mainStage = stage;
         
-        this.loadInterface("./layouts/MainMenuGui.fxml", "./stylesheets/MainMenuStyle.css");
+        this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(3), STYLING_LOCATION + "MainMenuStyle.css");
        
+        this.init();
+        
         mainStage.setTitle("Hide'n Seek");
-        mainStage.setHeight(768);
-        mainStage.setWidth(1024);
+        mainStage.setHeight(Screen.getPrimary().getBounds().getHeight());
+        mainStage.setWidth(Screen.getPrimary().getBounds().getWidth());
         //mainStage.setFullScreen(true);
         mainStage.setScene(currentScene.get());
         mainStage.show();
         
-        this.init();
-        
     }
     
     private void init() {        
-        //this.loadInterface("./layouts/MainMenuGui.fxml", "./stylesheets/MainMenuStyle.css"); 
-        this.loadInterface("./layouts/GameGui.fxml" ,"./stylesheets/MainMenuStyle.css");
-        this.loadInterface("./layouts/ResumeMenuGui.fxml","./stylesheets/MainMenuStyle.css");
-        this.loadInterface("./layouts/GameSettingsGui.fxml","./stylesheets/MainMenuStyle.css");
-        this.loadInterface("./layouts/GameStatsGui.fxml","./stylesheets/MainMenuStyle.css");
+        this.interfacesPaths.stream().forEach(e-> this.loadInterface(RESOURCE_LOCATION+e, STYLING_LOCATION + "MainMenuStyle.css"));
     }
     
     private void loadInterface(final String pathToInterface, final String cssStyle) {
@@ -105,22 +100,32 @@ public class GameSceneControllerImpl implements GameSceneController {
     public Pane getSceneRoot(final String name) {
         return this.sceneManager.getSceneRootByScreen(name);
     }
+    
+    public void resumeGame(final GameGuiController controller) {
+        controller.setPauseMode();
+    }
+    
+    public void pauseGame(final GameGuiController controller) {
+        if(!controller.isPaused()) {
+            controller.setPauseMode();
+        }
+    }
         
     @Override
     public void goToMenu() {
-                
-        sceneManager.activate("./layouts/MainMenuGui.fxml");
-        //this.currentScene.ifPresent(c-> c.getStylesheets().add(ClassLoader.getSystemResource("./stylesheets/MainMenuStyle.css").toExternalForm()));
+        sceneManager.activate(RESOURCE_LOCATION+this.interfacesPaths.get(3));
     }
 
     @Override
     public void goToGame() {
         
-        sceneManager.activate("./layouts/GameGui.fxml");
+        final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(0);
         
-        final Pane gamePane = (Pane)getSceneRoot("./layouts/GameGui.fxml").lookup("#gameMain");
+        sceneManager.activate(gameGuiPath);
         
-        final Canvas gameCanvas = (Canvas)getSceneRoot("./layouts/GameGui.fxml").lookup("#mainCanvas");
+        final Pane gamePane = (Pane)getSceneRoot(gameGuiPath).lookup("#gameRoot");
+        
+        final Canvas gameCanvas = (Canvas)getSceneRoot(gameGuiPath).lookup("#gameMainCanvas");
         gameCanvas.setFocusTraversable(true);
         
         final InputScheme input = new InputSchemeImpl();
@@ -130,16 +135,17 @@ public class GameSceneControllerImpl implements GameSceneController {
         final GameWorldController gameController = new GameWorldControllerImpl(renderer, input);       
       
         gameCanvas.setOnKeyPressed(e -> {
-          if (e.getCode() == KeyCode.ESCAPE) {
-              final GameGuiController temp = (GameGuiController) sceneManager.getSceneControllerByName("./layouts/GameGui.fxml");
-              temp.setPauseMode();
-              gameController.pause();
-          }
-          
-          if (e.getCode() == KeyCode.R) {
-              gameController.resume();
-          }
-         });
+              final GameGuiController temp = (GameGuiController) sceneManager.getSceneControllerByName(gameGuiPath);
+              if (e.getCode() == KeyCode.ESCAPE) {
+                  gameController.pause();
+                  this.pauseGame(temp);
+              }
+              
+              if (e.getCode() == KeyCode.R) {
+                  gameController.resume();
+                  this.resumeGame(temp);
+              }
+             });
         
         gameController.addEntity(new EntityControllerImpl<PlayerView>(new Player(), new PlayerViewImpl()));
         
@@ -148,21 +154,24 @@ public class GameSceneControllerImpl implements GameSceneController {
     }
 
     @Override
-    public void goToResume() {
-        // TODO Auto-generated method stub
-       
+    public void goToPause() {
+        final String pauseGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(4);
+        
+        sceneManager.activate(pauseGuiPath);       
     }
 
     @Override
     public void goToSettings() {
-        // TODO Auto-generated method stub
+        final String settingsGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(1);
         
+        sceneManager.activate(settingsGuiPath);        
     }
     
     @Override
     public void goToStats() {
-        // TODO Auto-generated method stub
+        final String statsGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(2);
         
+        sceneManager.activate(statsGuiPath);    
     }
 
     @Override
