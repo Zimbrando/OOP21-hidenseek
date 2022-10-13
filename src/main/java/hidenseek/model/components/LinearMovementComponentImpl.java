@@ -1,6 +1,5 @@
 package hidenseek.model.components;
 
-
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;

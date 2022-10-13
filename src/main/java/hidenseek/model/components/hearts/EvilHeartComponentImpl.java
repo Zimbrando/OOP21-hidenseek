@@ -1,11 +1,8 @@
 package hidenseek.model.components.hearts;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import hidenseek.model.components.HeartComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.Heart;
 

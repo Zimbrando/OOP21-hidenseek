@@ -1,6 +1,5 @@
 package hidenseek.model.entities;
 
-import hidenseek.model.components.HeartComponent;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -16,11 +15,10 @@ import hidenseek.model.components.MaterialComponent;
 import hidenseek.model.components.MaterialComponentImpl;
 import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.hearts.GoodHeartComponentImpl;
+import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.enums.Direction;
-
 import hidenseek.model.components.PositionComponent;
 import hidenseek.model.components.PositionComponentImpl;
-
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 

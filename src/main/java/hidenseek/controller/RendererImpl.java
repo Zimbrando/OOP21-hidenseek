@@ -1,7 +1,5 @@
 package hidenseek.controller;
 
-import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import hidenseek.controller.entities.EntityController;
 import hidenseek.view.GraphicsDevice;

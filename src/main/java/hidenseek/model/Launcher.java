@@ -8,12 +8,14 @@ import hidenseek.controller.InputSchemeImpl;
 import hidenseek.controller.RendererImpl;
 import hidenseek.model.components.PositionComponent;
 import hidenseek.model.entities.Enemy;
+import hidenseek.model.entities.Monster;
 import hidenseek.model.entities.Player;
 import hidenseek.model.entities.Wall;
 import hidenseek.controller.Renderer;
 import hidenseek.view.CanvasDeviceImpl;
 import hidenseek.view.EnemyView;
 import hidenseek.view.EnemyViewImpl;
+import hidenseek.view.MonsterViewImpl;
 import hidenseek.view.PlayerView;
 import hidenseek.view.PlayerViewImpl;
 import hidenseek.view.WallView;
@@ -64,9 +66,9 @@ public class Launcher extends Application {
         player.getComponent(PositionComponent.class).get().setPosition(new Point2D(30, 30));
         gameController.addEntity(new EntityControllerImpl<PlayerView>(player, new PlayerViewImpl(player)));
 
-        Enemy enemy = new Enemy();
-        enemy.getComponent(PositionComponent.class).get().setPosition(new Point2D(700, 400));
-        gameController.addEntity(new EntityControllerImpl<EnemyView>(enemy, new EnemyViewImpl(enemy)));
+        Monster monster = new Monster();
+        monster.getComponent(PositionComponent.class).get().setPosition(new Point2D(700, 400));
+        gameController.addEntity(new EntityControllerImpl<PlayerView>(monster, new MonsterViewImpl(monster)));
 
         //gameController.addLevel(1, map);
         

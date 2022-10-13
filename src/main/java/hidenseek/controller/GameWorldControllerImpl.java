@@ -3,16 +3,15 @@ package hidenseek.controller;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import hidenseek.controller.entities.EntityController;
-import hidenseek.model.GameWorld;
-import hidenseek.model.GameWorldImpl;
 import hidenseek.model.components.CollisionComponent;
 import hidenseek.model.components.Force;
 import hidenseek.model.components.MaterialComponent;
 import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.PositionComponent;
+import hidenseek.model.worlds.GameWorld;
+import hidenseek.model.worlds.GameWorldImpl;
 import javafx.geometry.Point2D;
 
 public final class GameWorldControllerImpl implements GameWorldController {

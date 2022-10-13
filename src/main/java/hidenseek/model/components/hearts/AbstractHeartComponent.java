@@ -1,9 +1,6 @@
 package hidenseek.model.components.hearts;
 
-import java.util.function.Predicate;
-
 import hidenseek.model.components.AbstractComponent;
-import hidenseek.model.components.HeartComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.Heart;
 

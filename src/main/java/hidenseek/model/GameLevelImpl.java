@@ -1,14 +1,11 @@
 package hidenseek.model;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.Wall;
 import javafx.geometry.Point2D;
-import javafx.scene.input.KeyCode;
 
 public class GameLevelImpl implements GameLevel {
 
