@@ -140,6 +140,8 @@ public final class GameWorldControllerImpl implements GameWorldController {
             //});
         });
 
+        System.out.println(this.input.getCurrentPressedKeys());
+        
         //Draw game
         view.refresh();
         

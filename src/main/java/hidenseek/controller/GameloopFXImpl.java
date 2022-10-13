@@ -8,8 +8,19 @@ public abstract class GameloopFXImpl extends AnimationTimer implements Gameloop 
     private double currentFrameRate;
     
     @Override
-    public void handle(final long now) {
-        final double delta =  (now - this.pastTick) / 1e9;
+    public void start() {
+        super.start();
+    }
+
+    @Override
+    public void stop() {
+        super.stop();
+    }
+       
+    
+    @Override
+    public void handle(long now) {
+        double delta =  (now - this.pastTick) / 1e9;
         this.currentFrameRate = 1 / delta;
         this.tick();
         this.pastTick = now;
@@ -17,7 +28,6 @@ public abstract class GameloopFXImpl extends AnimationTimer implements Gameloop 
     
     public abstract void tick();
     
-    @Override
     public int getCurrentFramerate() {
         return (int)this.currentFrameRate;
     }

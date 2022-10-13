@@ -1,0 +1,16 @@
+.rootStyle {
+    -fx-background-color: rgba(46, 46, 46, 0.5);
+    -fx-maxHeight:1080;
+    -fx-maxWidth:1920;
+    -fx-minHeight:768;
+    -fx-minWidth:1024;
+}
+
+.buttonStyle{
+    -fx-contentDisplay:"CENTER";
+    -fx-maxHeight:100.0;
+    -fx-maxWidth:500.0;
+    -fx-mnemonicParsing:false;
+    -fx-textAlignment:"CENTER";
+    -fx-textFill:"#2c2c2c";
+}
