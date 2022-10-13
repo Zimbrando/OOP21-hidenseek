@@ -1,17 +1,36 @@
 package hidenseek.view;
 
 import hidenseek.model.components.CollisionComponent;
+import hidenseek.model.components.MoveComponent;
 import hidenseek.model.entities.Enemy;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class EnemyViewImpl implements EnemyView{
 
+    String spriteUrl = "sprites/player-top.png";
+    
     @Override
     public void draw(final GraphicsDevice device, final Point2D position) {
-        device.drawCircle(100, position.add(50, 50), Color.YELLOW);
-        device.drawRect(50, 50, position.add(25, 25), Color.BLACK);
-        device.drawRect(40, 40, position.add(30, 30), Color.RED);
+
+        double spriteDirection = model.getComponent(MoveComponent.class).get().getResultantForce().getDirection();
+        double spriteIntensity = model.getComponent(MoveComponent.class).get().getResultantForce().getIntensity();
+
+        if(spriteIntensity > 0) {
+            spriteUrl = "sprites/player-top.png";
+        }
+        if(spriteIntensity > 0 && spriteDirection < 270) {
+            spriteUrl = "sprites/player-left.png";
+        }
+        if(spriteIntensity > 0 && spriteDirection < 180) {
+            spriteUrl = "sprites/player-bottom.png";
+        }
+        if(spriteIntensity > 0 && spriteDirection < 90) {
+            spriteUrl = "sprites/player-right.png";
+        }
+        
+        device.drawImage(new Image(spriteUrl), 40, 40, position.add(new Point2D(-5, 0)));
         
 
         //TODO: remove this, only used for test

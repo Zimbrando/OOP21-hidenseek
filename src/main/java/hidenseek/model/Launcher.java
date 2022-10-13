@@ -61,7 +61,7 @@ public class Launcher extends Application {
         //It's used to draw collision hitbox. It'll be removed.
         
         Player player = new Player();
-        player.getComponent(PositionComponent.class).get().setPosition(new Point2D(200, 150));
+        player.getComponent(PositionComponent.class).get().setPosition(new Point2D(30, 30));
         gameController.addEntity(new EntityControllerImpl<PlayerView>(player, new PlayerViewImpl(player)));
 
         Enemy enemy = new Enemy();
@@ -72,8 +72,8 @@ public class Launcher extends Application {
         
 
         primaryStage.setTitle("Hide'n Seek");
-        primaryStage.setHeight(860);
-        primaryStage.setWidth(1024);
+        primaryStage.setWidth(1600);
+        primaryStage.setHeight(900);
         primaryStage.setScene(root);
         primaryStage.show();
     }

@@ -14,4 +14,6 @@ public interface CollisionComponent extends Component {
 
     Boolean collisionWith(Entity entity);
     Boolean willCollisionWith(Entity entity, Point2D offset);
+    
+    Point2D getBounds();
 }

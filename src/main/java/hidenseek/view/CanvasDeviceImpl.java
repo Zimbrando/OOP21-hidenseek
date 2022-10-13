@@ -28,8 +28,8 @@ public final class CanvasDeviceImpl implements GraphicsDevice {
     }
 
     @Override
-    public void drawImage(final Image sprite, final Point2D position) {
-        graphics.drawImage(sprite, position.getX(), position.getY());
+    public void drawImage(final Image sprite, final int w, final int h, final Point2D position) {
+        graphics.drawImage(sprite, position.getX(), position.getY(), w, h);
     }
 
     @Override
@@ -48,5 +48,15 @@ public final class CanvasDeviceImpl implements GraphicsDevice {
     public void drawLine(final Point2D positionStart, final Point2D positionEnd, final Color color) {
         graphics.setStroke(color);
         graphics.strokeLine(positionStart.getX(), positionStart.getY(), positionEnd.getX(), positionEnd.getY());
+    }
+
+    @Override
+    public double getWidth() {
+        return graphics.getCanvas().getWidth();
+    }
+
+    @Override
+    public double getHeight() {
+        return graphics.getCanvas().getHeight();
     }
 }

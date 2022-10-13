@@ -9,6 +9,8 @@ import javafx.geometry.Point2D;
 final public class CollisionComponentImpl extends AbstractObservableComponent implements CollisionComponent {
     
     private final Set<Point2D> hitbox;
+    private double boundsX = 0;
+    private double boundsY = 0;
     
     public CollisionComponentImpl() {
         this.hitbox = new LinkedHashSet<Point2D>();
@@ -20,11 +22,31 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
     }
 
     @Override
+    public Point2D getBounds() {
+        return new Point2D(boundsX, boundsY);
+    }
+
+    @Override
     public void addHitboxPoint(Point2D point) {
         if(hitbox.contains(point)) {
             return;
         }
         hitbox.add(point);
+        
+        boundsX = hitbox.stream().max((x, y) -> {
+            if(x.getX() == y.getX()) {
+                return 0;
+            }
+            return x.getX() > y.getX() ? 1 : -1;
+        }).get().getX();
+        
+        boundsY = hitbox.stream().max((x, y) -> {
+            if(x.getY() == y.getY()) {
+                return 0;
+            }
+            return x.getY() > y.getY() ? 1 : -1;
+        }).get().getY();
+        
     }
 
     @Override
@@ -69,7 +91,15 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
                 Point2D prevOwnPoint = (j == 0 ? ownHitbox[ownHitbox.length-1] : ownHitbox[j-1]).add(ownPosition).add(offset);
                 Point2D currOwnPoint = ownHitbox[j].add(ownPosition).add(offset);
                 
-                if(getIntersectionPoint(prevEntityPoint, currEntityPoint, prevOwnPoint, currOwnPoint) != null) {
+                if(prevEntityPoint.getX() == currEntityPoint.getX() && prevOwnPoint.getX() == currOwnPoint.getX() && prevEntityPoint.getX() == prevOwnPoint.getX()) {
+                    System.out.println("");
+                }
+                
+                if(prevEntityPoint.getY() == currEntityPoint.getY() && prevOwnPoint.getY() == currOwnPoint.getY() && prevEntityPoint.getY() == prevOwnPoint.getY()) {
+                    System.out.println("");
+                }
+                
+                if(getIntersectionPoint(prevEntityPoint, currEntityPoint, prevOwnPoint, currOwnPoint)) {
                     return true;
                 }
             }
@@ -78,24 +108,25 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
         return false;
     }
     
-    private Point2D getIntersectionPoint(Point2D l1p1, Point2D l1p2, Point2D l2p1, Point2D l2p2)
+    private Boolean getIntersectionPoint(Point2D l1p1, Point2D l1p2, Point2D l2p1, Point2D l2p2)
     {
-        double A1 = l1p2.getY() - l1p1.getY();
-        double B1 = l1p1.getX() - l1p2.getX();
-        double C1 = A1 * l1p1.getX() + B1 * l1p1.getY();
-        double A2 = l2p2.getY() - l2p1.getY();
-        double B2 = l2p1.getX() - l2p2.getX();
-        double C2 = A2 * l2p1.getX() + B2 * l2p1.getY();
+        
+        int DY1 = (int)l1p2.getY() - (int)l1p1.getY();
+        int DX1 = (int)l1p1.getX() - (int)l1p2.getX();
+        int C1 = DY1 * (int)l1p1.getX() + DX1 * (int)l1p1.getY();
+        int DY2 = (int)l2p2.getY() - (int)l2p1.getY();
+        int DX2 = (int)l2p1.getX() - (int)l2p2.getX();
+        int C2 = DY2 * (int)l2p1.getX() + DX2 * (int)l2p1.getY();
         
         //lines are parallel
-        double det = A1 * B2 - A2 * B1;
+        double det = DY1 * DX2 - DY2 * DX1;
         if (det == 0d)
         {
-            return null; //parallel lines
+            return false; //parallel lines
         }
         
-        double x = (B2 * C1 - B1 * C2) / det;
-        double y = (A1 * C2 - A2 * C1) / det;
+        double x = (DX2 * C1 - DX1 * C2) / det;
+        double y = (DY1 * C2 - DY2 * C1) / det;
         Boolean online1 = 
             (Math.min(l1p1.getX(), l1p2.getX()) < x || Math.min(l1p1.getX(), l1p2.getX()) == x) &&
             (Math.max(l1p1.getX(), l1p2.getX()) > x || Math.max(l1p1.getX(), l1p2.getX()) == x) &&
@@ -109,9 +140,9 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
             (Math.max(l2p1.getY(), l2p2.getY()) > y || Math.max(l2p1.getY(), l2p2.getY()) == y);
         
         if (online1 && online2)
-            return new Point2D(x, y);
+            return true;
     
-        return null; 
+        return false; 
     }
 
 

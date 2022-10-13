@@ -1,5 +1,6 @@
 package hidenseek.view;
 
+import javafx.css.Size;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -7,7 +8,7 @@ import javafx.scene.paint.Color;
 public class ConsoleDeviceImpl implements GraphicsDevice{
      
     @Override
-    public void drawImage(final Image sprite, final Point2D position) {
+    public void drawImage(final Image sprite, final int w, final int h, final Point2D position) {
         System.out.println("Disegno sprite at " + position);
     }
 
@@ -35,6 +36,18 @@ public class ConsoleDeviceImpl implements GraphicsDevice{
     public void drawLine(Point2D positionStart, Point2D positionEnd, Color color) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public double getWidth() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public double getHeight() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }

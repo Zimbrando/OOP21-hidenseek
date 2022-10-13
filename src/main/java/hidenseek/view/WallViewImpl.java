@@ -22,7 +22,7 @@ public class WallViewImpl implements WallView{
             Point2D prevEntityPoint = (i == 0 ? hitbox[hitbox.length-1] : hitbox[i-1]).add(position);
             Point2D currEntityPoint = hitbox[i].add(position);
             
-            device.drawLine(prevEntityPoint, currEntityPoint, Color.MAGENTA);
+            //device.drawLine(prevEntityPoint, currEntityPoint, Color.MAGENTA);
         }
     }
 

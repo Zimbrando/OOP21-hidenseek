@@ -48,17 +48,10 @@ public class Player extends AbstractEntity {
         
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
-        collisionComponent.addHitboxPoint(new Point2D(100, 50));
-        collisionComponent.addHitboxPoint(new Point2D(92, 77));
-        collisionComponent.addHitboxPoint(new Point2D(71, 96));
-        collisionComponent.addHitboxPoint(new Point2D(43, 100));
-        collisionComponent.addHitboxPoint(new Point2D(17, 90));
-        collisionComponent.addHitboxPoint(new Point2D(2, 64));
-        collisionComponent.addHitboxPoint(new Point2D(2, 36));
-        collisionComponent.addHitboxPoint(new Point2D(17, 12));
-        collisionComponent.addHitboxPoint(new Point2D(43, 1));
-        collisionComponent.addHitboxPoint(new Point2D(71, 5));
-        collisionComponent.addHitboxPoint(new Point2D(92, 23));
+        collisionComponent.addHitboxPoint(new Point2D(0, 0));
+        collisionComponent.addHitboxPoint(new Point2D(0, 30));
+        collisionComponent.addHitboxPoint(new Point2D(30, 30));
+        collisionComponent.addHitboxPoint(new Point2D(30, 0));
         this.attach(collisionComponent);
        
         //InputHandler component
@@ -83,7 +76,7 @@ public class Player extends AbstractEntity {
                 return;
             }
             moveComponent.get().removeForce(force -> force.getDirection() == direction.getValue() && force.getIdentifier() == "key");
-            moveComponent.get().addForce(new Force("key", 1, direction.getValue()));
+            moveComponent.get().addForce(new Force("key", 5, direction.getValue()));
         };
         
         Consumer<Entity> releaseAction = (Entity entity) -> {

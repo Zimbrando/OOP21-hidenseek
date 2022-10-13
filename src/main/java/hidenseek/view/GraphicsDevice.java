@@ -1,5 +1,6 @@
 package hidenseek.view;
 
+import javafx.css.Size;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -15,7 +16,7 @@ public interface GraphicsDevice {
      * @param sprite, the image that has to be drawn
      * @param position, the position in the 'canvas'
      */
-    void drawImage(Image sprite, Point2D position);
+    void drawImage(Image sprite, int w, int h, Point2D position);
     
     /**
      * Draws a filled rect in the 'canvas'
@@ -41,4 +42,8 @@ public interface GraphicsDevice {
 
     //TODO: remove this, only used for test
     void drawLine(Point2D positionStart, Point2D positionEnd, Color color);
+    
+    double getWidth();
+    
+    double getHeight();
 }

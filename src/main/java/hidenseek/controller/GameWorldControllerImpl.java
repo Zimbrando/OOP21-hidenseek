@@ -69,57 +69,77 @@ public final class GameWorldControllerImpl implements GameWorldController {
         
         // phisics
         this.entities.stream().forEach(entity -> {
+
             Optional<PositionComponent> positionComponent = entity.getModel().getComponent(PositionComponent.class);
+            Optional<MoveComponent> moveComponent = entity.getModel().getComponent(MoveComponent.class);
+            Optional<CollisionComponent> collisionComponent = entity.getModel().getComponent(CollisionComponent.class);
+            Optional<MaterialComponent> materialComponent = entity.getModel().getComponent(MaterialComponent.class);
+
             if(!positionComponent.isPresent()) {
                 return;
             }
             
-            Optional<MoveComponent> moveComponent = entity.getModel().getComponent(MoveComponent.class);
             if(!moveComponent.isPresent()) {
                 return;
             }
-            
-            
-            //COLLISION DETECT METHOD 1
-            /*
-            Force entityForce = moveComponent.get().getResultantForce();
-            Point2D entityDesiredOffset = new Point2D(entityForce.getXComponent(), entityForce.getYComponent());
-            
-            Optional<CollisionComponent> collisionComponent = entity.getModel().getComponent(CollisionComponent.class);
-            if(collisionComponent.isPresent() && this.entities.stream().anyMatch(entity1 -> collisionComponent.get().willCollisionWith(entity1.getModel(), entityDesiredOffset))) {
-                return;
-            }
-            positionComponent.get().setPosition(positionComponent.get().getPosition().add(entityDesiredOffset));
-            */
-            
 
             //COLLISION DETECT METHOD 2
             //TODO: write it better with no code repetition
-            final double SPEED_CONST = 1.2;
+
             Point2D resultantOffset = new Point2D(0, 0);
             for(Force force : moveComponent.get().getForces().toArray(new Force[0])) {
-
-                Optional<CollisionComponent> collisionComponent = entity.getModel().getComponent(CollisionComponent.class);
-                
                 if(!collisionComponent.isPresent()) {
                     return;
                 }
+
+                int forceX = (int)Math.abs(force.getXComponent());
+                int forceXSign = force.getXComponent() < 0 ? -1 : 1;
+                Boolean forceXAccepted = false;
+                int forceY = (int)Math.abs(force.getYComponent());
+                int forceYSign = force.getYComponent() < 0 ? -1 : 1;
+                Boolean forceYAccepted = false;
                 
-                if(!this.entities.stream().anyMatch(entity1 -> entity1.getModel().getComponent(MaterialComponent.class).isPresent() && collisionComponent.get().willCollisionWith(entity1.getModel(), new Point2D(force.getXComponent() * SPEED_CONST, 0)))) {
-                    resultantOffset = resultantOffset.add(new Point2D(force.getXComponent() * SPEED_CONST, 0));
+                if(!materialComponent.isPresent()) {
+                    resultantOffset = resultantOffset.add(new Point2D(forceX * forceXSign, forceY * forceYSign));
+                    continue;
                 }
                 
-                if(!this.entities.stream().anyMatch(entity1 -> entity1.getModel().getComponent(MaterialComponent.class).isPresent() && collisionComponent.get().willCollisionWith(entity1.getModel(), new Point2D(0, force.getYComponent() * SPEED_CONST)))) {
-                    resultantOffset = resultantOffset.add(new Point2D(0, force.getYComponent() * SPEED_CONST));
+                while(forceX > 0 && !forceXAccepted) {
+                    final int finalForceX = forceX * forceXSign;
+                    if(!this.entities.stream().anyMatch(entity1 -> 
+                                            entity1.getModel().getComponent(MaterialComponent.class).isPresent() && 
+                                            collisionComponent.get().willCollisionWith(entity1.getModel(), new Point2D(finalForceX + forceXSign, 0)))) {
+                        
+                        resultantOffset = resultantOffset.add(new Point2D(finalForceX, 0));
+                        forceXAccepted = true;
+                        break;
+                    }
+                    forceX--;
+                }
+
+                while(forceY > 0 && !forceYAccepted) {
+                    final int finalForceY = forceY * forceYSign;
+                    if(!this.entities.stream().anyMatch(entity1 -> 
+                                            entity1.getModel().getComponent(MaterialComponent.class).isPresent() && 
+                                            collisionComponent.get().willCollisionWith(entity1.getModel(), new Point2D(0, finalForceY + forceXSign)))) {
+                        
+                        resultantOffset = resultantOffset.add(new Point2D(0, finalForceY));
+                        forceYAccepted = true;
+                        break;
+                    }
+                    forceY--;
                 }
             }
            
             
             positionComponent.get().setPosition(positionComponent.get().getPosition().add(resultantOffset));
+            
+            
+            //this.entities.stream().filter(entity1 -> collisionComponent.get().collisionWith(entity1.getModel())).forEach(entity1 -> {
+        
+                //System.out.println("COLLISION BETWEEN " + entity.toString() + " AND " + entity1.toString());
+            //});
         });
-        
-        
-        
 
         //Draw game
         view.refresh();

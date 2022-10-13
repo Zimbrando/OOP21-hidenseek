@@ -37,9 +37,9 @@ public class Enemy extends AbstractEntity {
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
         collisionComponent.addHitboxPoint(new Point2D(0, 0));
-        collisionComponent.addHitboxPoint(new Point2D(100, 0));
-        collisionComponent.addHitboxPoint(new Point2D(100, 100));
-        collisionComponent.addHitboxPoint(new Point2D(0, 100));
+        collisionComponent.addHitboxPoint(new Point2D(0, 40));
+        collisionComponent.addHitboxPoint(new Point2D(30, 40));
+        collisionComponent.addHitboxPoint(new Point2D(30, 0));
         this.attach(collisionComponent);
     }
 }
