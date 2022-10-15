@@ -22,7 +22,7 @@ import hidenseek.model.components.PositionComponentImpl;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
-public class Player extends AbstractEntity {
+public final class Player extends AbstractEntity {
     
     public Player() {
         super();
@@ -85,7 +85,6 @@ public class Player extends AbstractEntity {
             moveComponent.get().removeForce(force -> force.getDirection() == direction.getValue() && force.getIdentifier() == "key");
         };
         
-        inputHandlerComponent.mapKeyToOneTimeAction(keyCode, pressAction, releaseAction);
-        
+        inputHandlerComponent.mapKeyToOneTimeAction(keyCode, pressAction, releaseAction);        
     }
 }

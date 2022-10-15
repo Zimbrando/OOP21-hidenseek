@@ -15,7 +15,5 @@ final public class PositionComponentImpl extends AbstractObservableComponent imp
     public void setPosition(Point2D position) {
         this.position = position;
     }
-
-
     
 }
