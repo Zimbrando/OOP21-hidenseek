@@ -1,4 +1,5 @@
-package hidenseek.test.entity;
+package hidenseek.components;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,15 +18,21 @@ import hidenseek.model.events.DamageEvent;
 
 public class TriggerTest {
     
+    private int count = 0;
+    
     @Test public void testTriggerComponent() {
         final Entity e = new AbstractEntity(){};
         final int damage = 10;
         final ObservableComponent life = new LifeComponentImpl(100);
         life.attachListener(new TriggerImpl<DamageEvent>(DamageEvent.class, 
-                (event, entity) -> assertEquals(damage, event.getDamage())));
+                (event, entity) -> {
+                    assertEquals(damage, event.getDamage());   
+                    count++;
+                }));
         e.attach(life);
         final LifeComponent compLife = (LifeComponent) life;
         compLife.hurt(damage);
+        assertEquals(1, count);
     }
     
     //TODO fix multiple triggers test (needs a component that can throw different events)
