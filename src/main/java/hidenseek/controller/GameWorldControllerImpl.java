@@ -39,7 +39,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
     @Override
     public void update() {
         // handle inputs
-        model.handleInput(this.input.getCurrentPressedKeys());
+        model.updateInput(this.input.getCurrentPressedKeys());
         
         // update logic
         model.update();
