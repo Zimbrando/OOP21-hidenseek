@@ -1,21 +1,35 @@
 package hidenseek.model.entities;
 
-import java.util.function.BiConsumer;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 import hidenseek.model.components.MoveComponent;
-import hidenseek.model.events.Event;
+import hidenseek.model.components.UpgradableComponent;
+import javafx.application.Platform;
 
 public enum PowerUpType {
-    INCREASE_SPEED((event, entity) -> entity.getComponent(MoveComponent.class).ifPresent(c -> c.setSpeed(c.getSpeed() + 5))),
-    INCREASE_VISIBILITY((event, entity) -> System.out.println("LightComponent missing"));
+    INCREASE_SPEED(entity -> {
+        //entity.getComponent(MoveComponent.class).ifPresent(c -> { c.setSpeed(c.getSpeed() + 5); resetAfter(c, 10); });
+    }),
+    INCREASE_VISIBILITY(entity -> System.out.println("LightComponent missing"));
         
-    BiConsumer<Event, Entity> effect;
+    Consumer<Entity> effect;
     
-    PowerUpType(BiConsumer<Event, Entity> effect) {
+    PowerUpType(Consumer<Entity> effect) {
         this.effect = effect;
     }
     
     public static PowerUpType generateRandomType() {
         return values()[(int)(Math.random() * values().length)];
+    }
+    
+    private static void resetAfter(final UpgradableComponent component, final int seconds) {
+        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+        service.schedule(() -> {
+            Platform.runLater(() -> component.reset());
+        }, seconds, TimeUnit.SECONDS);
     }
 }

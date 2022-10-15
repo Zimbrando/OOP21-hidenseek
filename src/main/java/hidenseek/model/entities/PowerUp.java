@@ -20,7 +20,7 @@ public final class PowerUp extends AbstractEntity {
             if (Player.class.isInstance(entity)) {
                 event.getSender().getComponent(LifeComponent.class).get().hurt(1);
                 //Effect on player
-                type.effect.accept(event, entity);
+                type.effect.accept(entity);
             }
         });
         //Attach the trigger to the collision component
