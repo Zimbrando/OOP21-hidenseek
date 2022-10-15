@@ -7,4 +7,6 @@ public interface LifeComponent extends Component {
     int getMaxHealth();
     
     void hurt(int damage);
+    
+    boolean isAlive();
 }

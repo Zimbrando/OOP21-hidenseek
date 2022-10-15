@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import hidenseek.controller.entities.EntityController;
+import hidenseek.model.entities.Entity;
 import hidenseek.model.worlds.GameWorld;
 import hidenseek.model.worlds.GameWorldImpl;
 
@@ -16,7 +17,6 @@ public final class GameWorldControllerImpl implements GameWorldController {
     private final InputScheme input;
     private final GameWorld model;
 //TODO    private final LevelHandler level;
-    
     
     public GameWorldControllerImpl(final Renderer view, final InputScheme input) {
         this.view = view;
@@ -43,6 +43,8 @@ public final class GameWorldControllerImpl implements GameWorldController {
         
         // update logic
         model.update();
+        
+        this.removeDeadEntities(model.getDeadEntities());
         
         //Draw game
         view.refresh();
@@ -72,5 +74,9 @@ public final class GameWorldControllerImpl implements GameWorldController {
     public void resume() {
         this.loop.start();
     }
-
+    
+    private void removeDeadEntities(Set<Entity> entities) {
+        this.entities.removeIf(controller -> entities.contains(controller.getModel()));
+        entities.forEach(entity -> model.removeEntity(entity));
+    }
 }

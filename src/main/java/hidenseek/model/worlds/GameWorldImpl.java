@@ -2,10 +2,12 @@ package hidenseek.model.worlds;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import hidenseek.model.components.CollisionComponent;
 import hidenseek.model.components.Force;
 import hidenseek.model.components.InputHandlerComponent;
+import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.MaterialComponent;
 import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.PositionComponent;
@@ -35,18 +37,7 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
         this.senseWorld.update();
         
         // TODO create dynamicsWorld to handle movements and collisions
-        // ----- handle DynamicsWorld:
-        
-        // - Gestione della posizione degli oggetti
-        //      Calcolare la posizione al frame n+1 delle entity che hanno MovementComponent, in base alla loro direction e speed
-        //      Controlla che la posizione calcolata sia possibile (ovvero non collide con nessun entity che non ha TriggerableComponent)
-        //              Aggiornamento delle eventuale posizione di ogni entity con MovementComponent
-        
-        // - Gestione di tutte le collisione eccetto i muri
-        //      Questa parte è effettuata logicamente nella sezione precedente, poichè viene eseguita solo per gli oggetti che si sono mossi.
-        //      Trova tutti gli oggetti che si stanno intersecando e manda l'evento intersectionWith(entity) ad entrambi
-        
-        
+        // ----- handle DynamicsWorld:    
     }
 
     @Override
@@ -69,6 +60,14 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
         senseWorld.removeEntity(e);
     }
     
+    @Override
+    public Set<Entity> getDeadEntities() {
+        return this.world().stream()
+                .filter(entity -> entity.getComponent(LifeComponent.class).isPresent())
+                .filter(entity -> !entity.getComponent(LifeComponent.class).get().isAlive())
+                .collect(Collectors.toSet());
+    }
+      
     private void handleCollisions() {
         // phisics
         this.world().stream().forEach(entity -> {
