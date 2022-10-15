@@ -1,4 +1,5 @@
 package hidenseek.controller;
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -53,7 +54,7 @@ public class GameSceneControllerImpl implements GameSceneController {
         .map(e -> e.toString())
         .collect(Collectors.toList())
         .stream()
-        .map(e -> e.substring(e.lastIndexOf("\\")).substring(1))
+        .map(e -> e.substring(e.lastIndexOf(File.separator)).substring(1))
         .collect(Collectors.toList());
                 
         this.mainStage = stage;
