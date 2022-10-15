@@ -1,6 +1,6 @@
 package hidenseek.view;
 
-import hidenseek.model.entities.PowerUpType;
+import hidenseek.model.enums.PowerUpType;
 
 public interface PowerUpView extends EntityView{
 

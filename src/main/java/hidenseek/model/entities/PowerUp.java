@@ -6,6 +6,7 @@ import hidenseek.model.components.PositionComponent;
 import hidenseek.model.components.PositionComponentImpl;
 import hidenseek.model.components.Trigger;
 import hidenseek.model.components.TriggerImpl;
+import hidenseek.model.enums.PowerUpType;
 import hidenseek.model.events.CollisionEvent;
 import javafx.geometry.Point2D;
 

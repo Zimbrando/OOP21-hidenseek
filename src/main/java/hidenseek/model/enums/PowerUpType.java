@@ -1,4 +1,4 @@
-package hidenseek.model.entities;
+package hidenseek.model.enums;
 
 
 import java.util.concurrent.Executors;
@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 
 import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.UpgradableComponent;
+import hidenseek.model.entities.Entity;
 import javafx.application.Platform;
 
 public enum PowerUpType {
@@ -16,7 +17,7 @@ public enum PowerUpType {
     }),
     INCREASE_VISIBILITY(entity -> System.out.println("LightComponent missing"));
         
-    Consumer<Entity> effect;
+    public Consumer<Entity> effect;
     
     PowerUpType(Consumer<Entity> effect) {
         this.effect = effect;
