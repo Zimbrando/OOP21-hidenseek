@@ -30,5 +30,10 @@ final public class LifeComponentImpl extends AbstractObservableComponent impleme
                 new DamageEvent(this.getOwner().get(), damage),
                 DamageEvent.class));
     }
+
+    @Override
+    public boolean isAlive() {
+        return this.health > 0;
+    }
     
 }

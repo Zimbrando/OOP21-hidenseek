@@ -25,4 +25,9 @@ public class OneTimeLifeComponentImpl extends AbstractObservableComponent implem
                 DamageEvent.class));
     }
 
+    @Override
+    public boolean isAlive() {
+        return this.alive;
+    }
+
 }
