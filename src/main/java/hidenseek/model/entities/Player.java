@@ -14,11 +14,14 @@ import hidenseek.model.components.LinearMovementComponentImpl;
 import hidenseek.model.components.MaterialComponent;
 import hidenseek.model.components.MaterialComponentImpl;
 import hidenseek.model.components.MoveComponent;
+import hidenseek.model.components.ObservableComponent;
 import hidenseek.model.components.hearts.GoodHeartComponentImpl;
 import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.enums.Direction;
+import hidenseek.model.events.CollisionEvent;
 import hidenseek.model.components.PositionComponent;
 import hidenseek.model.components.PositionComponentImpl;
+import hidenseek.model.components.TriggerImpl;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
@@ -51,7 +54,7 @@ public final class Player extends AbstractEntity {
         collisionComponent.addHitboxPoint(new Point2D(30, 30));
         collisionComponent.addHitboxPoint(new Point2D(30, 0));
         this.attach(collisionComponent);
-       
+        
         //InputHandler component
         final InputHandlerComponent inputHandlerComponent = new InputHandlerComponentImpl();
         mapKeyToAction(inputHandlerComponent, KeyCode.A, Direction.LEFT);

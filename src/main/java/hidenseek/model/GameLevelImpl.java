@@ -1,10 +1,13 @@
 package hidenseek.model;
 
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import hidenseek.model.entities.Entity;
+import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
+import hidenseek.model.enums.PowerUpType;
 import javafx.geometry.Point2D;
 
 public class GameLevelImpl implements GameLevel {
@@ -106,6 +109,12 @@ public class GameLevelImpl implements GameLevel {
                     }}
             ));
         }};
+    }
+
+    @Override
+    public Map<PowerUpType, Entity> getPowerUps() {
+        PowerUpType type = PowerUpType.generateRandomType();
+        return Map.of(type, new PowerUp(type, new Point2D(200, 600)));
     }
    
 }

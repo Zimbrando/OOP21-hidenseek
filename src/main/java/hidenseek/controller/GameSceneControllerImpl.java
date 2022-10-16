@@ -21,12 +21,15 @@ import hidenseek.model.components.PositionComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.Monster;
 import hidenseek.model.entities.Player;
+import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
 import hidenseek.view.CanvasDeviceImpl;
 import hidenseek.view.entities.MonsterView;
 import hidenseek.view.entities.MonsterViewImpl;
 import hidenseek.view.entities.PlayerView;
 import hidenseek.view.entities.PlayerViewImpl;
+import hidenseek.view.entities.PowerUpView;
+import hidenseek.view.entities.PowerUpViewImpl;
 import hidenseek.view.entities.WallView;
 import hidenseek.view.entities.WallViewImpl;
 import javafx.fxml.FXMLLoader;
@@ -164,6 +167,10 @@ public class GameSceneControllerImpl implements GameSceneController {
         gameLevel.getWalls().forEach(wall -> {
             gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl((Wall)wall)));
         });
+        
+        gameLevel.getPowerUps().forEach((type, powerup) -> {
+            gameController.addEntity(new EntityControllerImpl<PowerUpView>(powerup, new PowerUpViewImpl(type)));
+        });
 
         
         //NOTE: we are passing Model to PlayerViewImpl and EnemyViewImpl, but only for debug.
@@ -186,9 +193,6 @@ public class GameSceneControllerImpl implements GameSceneController {
         //primaryStage.setHeight(900);
         //primaryStage.setScene(root);
         //primaryStage.show();
-        
-        
-        
         
         //this.currentScene.ifPresent(c-> c.getStylesheets().add(ClassLoader.getSystemResource("./stylesheets/MainMenuStyle.css").toExternalForm()));
        

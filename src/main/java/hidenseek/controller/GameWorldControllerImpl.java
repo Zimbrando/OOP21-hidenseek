@@ -78,7 +78,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
         this.loop.start();
     }
     
-    private void removeDeadEntities(Set<Entity> entities) {
+    private void removeDeadEntities(final Set<Entity> entities) {
         this.entities.removeIf(controller -> entities.contains(controller.getModel()));
         entities.forEach(entity -> model.removeEntity(entity));
     }

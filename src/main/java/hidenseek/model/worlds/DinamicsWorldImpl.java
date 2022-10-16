@@ -27,11 +27,11 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
             Optional<CollisionComponent> collisionComponent = entity.getComponent(CollisionComponent.class);
             Optional<MaterialComponent> materialComponent = entity.getComponent(MaterialComponent.class);
 
-            if(!positionComponent.isPresent()) {
+            if (!positionComponent.isPresent()) {
                 return;
             }
             
-            if(!moveComponent.isPresent()) {
+            if (!moveComponent.isPresent()) {
                 return;
             }
 
@@ -39,8 +39,8 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
             //TODO: write it better with no code repetition
 
             Point2D resultantOffset = new Point2D(0, 0);
-            for(Force force : moveComponent.get().getForces().toArray(new Force[0])) {
-                if(!collisionComponent.isPresent()) {
+            for (Force force : moveComponent.get().getForces().toArray(new Force[0])) {
+                if (!collisionComponent.isPresent()) {
                     return;
                 }
 
@@ -51,14 +51,14 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
                 int forceYSign = force.getYComponent() < 0 ? -1 : 1;
                 Boolean forceYAccepted = false;
                 
-                if(!materialComponent.isPresent()) {
+                if (!materialComponent.isPresent()) {
                     resultantOffset = resultantOffset.add(new Point2D(forceX * forceXSign, forceY * forceYSign));
                     continue;
                 }
                 
-                while(forceX > 0 && !forceXAccepted) {
+                while (forceX > 0 && !forceXAccepted) {
                     final int finalForceX = forceX * forceXSign;
-                    if(!this.world().stream().anyMatch(entity1 -> 
+                    if (!this.world().stream().anyMatch(entity1 -> 
                                             entity1.getComponent(MaterialComponent.class).isPresent() && 
                                             collisionComponent.get().willCollisionWith(entity1, new Point2D(finalForceX + forceXSign, 0)))) {
                         
@@ -69,9 +69,9 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
                     forceX--;
                 }
 
-                while(forceY > 0 && !forceYAccepted) {
+                while (forceY > 0 && !forceYAccepted) {
                     final int finalForceY = forceY * forceYSign;
-                    if(!this.world().stream().anyMatch(entity1 -> 
+                    if (!this.world().stream().anyMatch(entity1 -> 
                                             entity1.getComponent(MaterialComponent.class).isPresent() && 
                                             collisionComponent.get().willCollisionWith(entity1, new Point2D(0, finalForceY + forceXSign)))) {
                         
@@ -83,8 +83,13 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
                 }
             }
            
-            
             positionComponent.get().setPosition(positionComponent.get().getPosition().add(resultantOffset));
+            
+            //Calls 'collisionWith' and so it throws the CollisionEvent
+            // A --> B
+            // B --> A
+            this.world().stream().forEach(entity1 -> collisionComponent.get().collisionWith(entity1));
+            this.world().stream().forEach(entity1 -> entity1.getComponent(CollisionComponent.class).get().collisionWith(entity));
             
         });
     }

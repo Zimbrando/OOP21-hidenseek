@@ -4,9 +4,6 @@ import hidenseek.model.entities.Entity;
 
 final public class Utils {
     
-    private Utils() {
-    }
-    
     static public double distanceBetween(final Entity e1, final Entity e2) {
         // check position component
         if(e1.getComponent(PositionComponent.class).isEmpty()
