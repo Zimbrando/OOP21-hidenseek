@@ -1,9 +1,11 @@
 package hidenseek.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
@@ -112,9 +114,21 @@ public class GameLevelImpl implements GameLevel {
     }
 
     @Override
-    public Map<PowerUpType, Entity> getPowerUps() {
-        PowerUpType type = PowerUpType.generateRandomType();
-        return Map.of(type, new PowerUp(type, new Point2D(200, 600)));
+    public Map<PowerUpType, List<Entity>> getPowerUps() {
+        List<Point2D> positions = List.of(new Point2D(200, 600), new Point2D(300, 600), new Point2D(500, 600), new Point2D(800, 200));
+        Map<PowerUpType, List<Entity>> powerups = new HashMap<>();
+        positions.forEach(pos -> {
+            PowerUpType type = PowerUpType.generateRandomType();
+            if (powerups.containsKey(type)) {
+                List<Entity> typeEntity = powerups.get(type);
+                typeEntity.add(new PowerUp(type, pos));
+                powerups.put(type, typeEntity);
+            } else {
+                List<Entity> typeEntity = new ArrayList<>(List.of(new PowerUp(type, pos)));
+                powerups.put(type, typeEntity);    
+            }
+        });
+        return powerups;
     }
    
 }

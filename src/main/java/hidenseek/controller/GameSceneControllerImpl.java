@@ -168,8 +168,10 @@ public class GameSceneControllerImpl implements GameSceneController {
             gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl((Wall)wall)));
         });
         
-        gameLevel.getPowerUps().forEach((type, powerup) -> {
-            gameController.addEntity(new EntityControllerImpl<PowerUpView>(powerup, new PowerUpViewImpl(type)));
+        gameLevel.getPowerUps().forEach((type, powerups) -> {
+            powerups.forEach(powerup -> {
+                gameController.addEntity(new EntityControllerImpl<PowerUpView>(powerup, new PowerUpViewImpl(type)));        
+            });
         });
 
         

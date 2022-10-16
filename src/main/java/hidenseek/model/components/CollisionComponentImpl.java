@@ -150,7 +150,5 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
     
         return false; 
     }
-
-
     
 }

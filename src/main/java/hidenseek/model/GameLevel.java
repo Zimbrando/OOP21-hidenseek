@@ -1,5 +1,6 @@
 package hidenseek.model;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,5 +11,5 @@ public interface GameLevel {
 
     Set<Entity> getWalls();
     
-    Map<PowerUpType, Entity> getPowerUps();
+    Map<PowerUpType, List<Entity>> getPowerUps();
 }

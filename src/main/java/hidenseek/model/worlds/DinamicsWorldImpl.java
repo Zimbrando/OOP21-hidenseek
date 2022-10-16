@@ -13,7 +13,7 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
     @Override
     public void update() {
         //TODO move entities - apply Forces
-        
+
         // check collisions
         this.handleCollisions();
     }
@@ -73,7 +73,7 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
                     final int finalForceY = forceY * forceYSign;
                     if (!this.world().stream().anyMatch(entity1 -> 
                                             entity1.getComponent(MaterialComponent.class).isPresent() && 
-                                            collisionComponent.get().willCollisionWith(entity1, new Point2D(0, finalForceY + forceXSign)))) {
+                                            collisionComponent.get().willCollisionWith(entity1, new Point2D(0, finalForceY + forceYSign)))) {
                         
                         resultantOffset = resultantOffset.add(new Point2D(0, finalForceY));
                         forceYAccepted = true;

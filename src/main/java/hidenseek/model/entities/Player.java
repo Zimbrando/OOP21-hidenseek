@@ -77,7 +77,7 @@ public final class Player extends AbstractEntity {
                 return;
             }
             moveComponent.get().removeForce(force -> force.getDirection() == direction.getValue() && force.getIdentifier() == "key");
-            moveComponent.get().addForce(new Force("key", 5, direction.getValue()));
+            moveComponent.get().addForce(new Force("key", 3, direction.getValue()));
         };
         
         Consumer<Entity> releaseAction = (Entity entity) -> {
