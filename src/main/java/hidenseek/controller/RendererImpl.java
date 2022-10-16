@@ -1,8 +1,10 @@
 package hidenseek.controller;
 
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import hidenseek.controller.entities.EntityController;
 import hidenseek.view.GraphicsDevice;
+import hidenseek.view.entities.EntityView;
 
 public class RendererImpl implements Renderer {
 
@@ -16,10 +18,8 @@ public class RendererImpl implements Renderer {
      * {@inheritDoc}
      */
     @Override
-    public void update(final EntityController ec) {
-        if (ec.getPosition().isPresent()) {
-            ec.getView().draw(gd,  ec.getPosition().get());        
-        }
+    public void draw(final EntityView view, final Point2D position) {
+        view.draw(gd,  position);
     }
 
     @Override

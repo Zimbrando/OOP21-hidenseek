@@ -2,8 +2,8 @@ package hidenseek.controller;
 
 import hidenseek.model.entities.Player;
 import hidenseek.view.CanvasDeviceImpl;
-import hidenseek.view.PlayerView;
-import hidenseek.view.PlayerViewImpl;
+import hidenseek.view.entities.PlayerView;
+import hidenseek.view.entities.PlayerViewImpl;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;

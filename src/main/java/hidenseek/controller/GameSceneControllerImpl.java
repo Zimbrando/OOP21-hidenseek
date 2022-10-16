@@ -10,20 +10,26 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import hidenseek.controller.entities.EntityController;
 import hidenseek.controller.entities.EntityControllerImpl;
+import hidenseek.controller.entities.MovableEntityControllerImpl;
+import hidenseek.controller.entities.PlayerController;
+import hidenseek.controller.entities.PlayerControllerImpl;
 import hidenseek.model.GameLevel;
 import hidenseek.model.GameLevelImpl;
 import hidenseek.model.SceneManagerImpl;
 import hidenseek.model.components.PositionComponent;
+import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.Monster;
 import hidenseek.model.entities.Player;
 import hidenseek.model.entities.Wall;
 import hidenseek.view.CanvasDeviceImpl;
-import hidenseek.view.MonsterViewImpl;
-import hidenseek.view.PlayerView;
-import hidenseek.view.PlayerViewImpl;
-import hidenseek.view.WallView;
-import hidenseek.view.WallViewImpl;
+import hidenseek.view.entities.MonsterView;
+import hidenseek.view.entities.MonsterViewImpl;
+import hidenseek.view.entities.PlayerView;
+import hidenseek.view.entities.PlayerViewImpl;
+import hidenseek.view.entities.WallView;
+import hidenseek.view.entities.WallViewImpl;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
@@ -163,14 +169,15 @@ public class GameSceneControllerImpl implements GameSceneController {
         
         //NOTE: we are passing Model to PlayerViewImpl and EnemyViewImpl, but only for debug.
         //It's used to draw collision hitbox. It'll be removed.
-        
-        Player player = new Player();
-        player.getComponent(PositionComponent.class).get().setPosition(new Point2D(30, 30));
-        gameController.addEntity(new EntityControllerImpl<PlayerView>(player, new PlayerViewImpl(player)));
 
-        Monster monster = new Monster();
-        monster.getComponent(PositionComponent.class).get().setPosition(new Point2D(700, 400));
-        gameController.addEntity(new EntityControllerImpl<PlayerView>(monster, new MonsterViewImpl(monster)));
+        
+        final EntityController player = new PlayerControllerImpl();
+        player.setPosition(new Point2D(30, 30));
+        gameController.addEntity(player);
+
+        final EntityController monster = new MovableEntityControllerImpl<>(new Monster(), new MonsterViewImpl());
+        monster.setPosition(new Point2D(700, 400));
+        gameController.addEntity(monster);
 
         //gameController.addLevel(1, map);
         

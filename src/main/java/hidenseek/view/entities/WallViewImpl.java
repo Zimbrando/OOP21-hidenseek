@@ -1,9 +1,10 @@
-package hidenseek.view;
+package hidenseek.view.entities;
 
 import hidenseek.model.components.CollisionComponent;
 import hidenseek.model.entities.Enemy;
 import hidenseek.model.entities.Player;
 import hidenseek.model.entities.Wall;
+import hidenseek.view.GraphicsDevice;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 

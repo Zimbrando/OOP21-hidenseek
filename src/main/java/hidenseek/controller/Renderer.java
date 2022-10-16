@@ -2,6 +2,8 @@ package hidenseek.controller;
 
 import hidenseek.controller.entities.EntityController;
 import hidenseek.view.GraphicsDevice;
+import hidenseek.view.entities.EntityView;
+import javafx.geometry.Point2D;
 
 /**
  * 
@@ -11,9 +13,10 @@ public interface Renderer {
 
     /**
      * Tells the @link{GraphicsDevice} to draw the entity
-     * @param ec, the controller of the Entity that has to be drawn
+     * @param view, the controller of the Entity that has to be drawn
+     * @param position, the position of the Entity that has to be drawn
      */
-    void update(EntityController ec);
+    void draw(EntityView view, Point2D position);
     
     /**
      * Refresh the current @link{GraphicsDevice}, called each frame to correctly render the game

@@ -1,4 +1,4 @@
-package hidenseek.view;
+package hidenseek.view.entities;
 
 import hidenseek.model.enums.PowerUpType;
 
