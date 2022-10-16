@@ -1,6 +1,7 @@
-package hidenseek.view;
+package hidenseek.view.entities;
 
 import hidenseek.model.enums.PowerUpType;
+import hidenseek.view.GraphicsDevice;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
