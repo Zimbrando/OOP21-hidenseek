@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import hidenseek.controller.entities.EntityController;
 import hidenseek.controller.entities.EntityControllerImpl;
 import hidenseek.controller.entities.MovableEntityControllerImpl;
-import hidenseek.controller.entities.PlayerController;
 import hidenseek.controller.entities.PlayerControllerImpl;
 import hidenseek.model.GameLevel;
 import hidenseek.model.GameLevelImpl;
