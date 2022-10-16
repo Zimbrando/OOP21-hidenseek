@@ -7,6 +7,9 @@ import hidenseek.controller.entities.EntityController;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.worlds.GameWorld;
 import hidenseek.model.worlds.GameWorldImpl;
+import hidenseek.view.KeyHudView;
+import hidenseek.view.KeyHudViewImpl;
+import javafx.geometry.Point2D;
 
 
 public final class GameWorldControllerImpl implements GameWorldController {
@@ -23,6 +26,11 @@ public final class GameWorldControllerImpl implements GameWorldController {
         this.entities = new LinkedHashSet<>();
         this.input = input;
         this.model = new GameWorldImpl();
+        
+        KeyHudView keyView = new KeyHudViewImpl(new Point2D(1400, 0));
+        keyView.setMaxKeys(3);
+        keyView.updateKeys(1);
+        this.view.attachHudView(keyView);
         
         this.loop = new GameloopFXImpl() {
 
@@ -56,6 +64,8 @@ public final class GameWorldControllerImpl implements GameWorldController {
             // draw entity
             entity.getPosition().ifPresent(pos -> this.view.draw(entity.getView(), pos));
         });
+        
+        view.drawHud();
     }
     
 

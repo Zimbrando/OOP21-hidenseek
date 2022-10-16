@@ -59,4 +59,5 @@ public final class CanvasDeviceImpl implements GraphicsDevice {
     public double getHeight() {
         return graphics.getCanvas().getHeight();
     }
+
 }

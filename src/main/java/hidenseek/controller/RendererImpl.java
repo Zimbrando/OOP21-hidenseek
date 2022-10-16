@@ -1,17 +1,22 @@
 package hidenseek.controller;
 
 import javafx.geometry.Point2D;
-import javafx.scene.paint.Color;
-import hidenseek.controller.entities.EntityController;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import hidenseek.view.GraphicsDevice;
+import hidenseek.view.HudView;
 import hidenseek.view.entities.EntityView;
 
 public class RendererImpl implements Renderer {
 
     final private GraphicsDevice gd;
+    final private Set<HudView> huds;
     
     public RendererImpl(final GraphicsDevice gd) {
         this.gd = gd;
+        this.huds = new HashSet<>();
     }
     
     /**
@@ -25,17 +30,21 @@ public class RendererImpl implements Renderer {
     @Override
     public void refresh() {
         gd.repaint();
-        //gd.drawImage(new Image("level1.jpg"), new Point2D(0,0));
-    }
-
-    @Override
-    public void createFog() {
-        gd.fill(Color.BLACK);
     }
 
     @Override
     public GraphicsDevice getGraphicsDevice() {
         return this.gd;
+    }
+
+    @Override
+    public <H extends HudView> void attachHudView(H hud) {
+        this.huds.add(hud);
+    }
+
+    @Override
+    public void drawHud() {
+        this.huds.forEach(hud -> hud.draw(gd));
     }
 
 }

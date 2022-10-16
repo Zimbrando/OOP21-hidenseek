@@ -1,7 +1,7 @@
 package hidenseek.controller;
 
-import hidenseek.controller.entities.EntityController;
 import hidenseek.view.GraphicsDevice;
+import hidenseek.view.HudView;
 import hidenseek.view.entities.EntityView;
 import javafx.geometry.Point2D;
 
@@ -23,10 +23,11 @@ public interface Renderer {
      */
     void refresh();
     
-    /**
-     * Creates the game's fog. Black screen where light sources can see through
-     */
-    void createFog();
+    
+    void drawHud();
+    
+    
+    <H extends HudView> void attachHudView(H hud);
     
     /**
      * 
