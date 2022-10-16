@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.entities.Entity;
+
 import javafx.scene.input.KeyCode;
 
 public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld {

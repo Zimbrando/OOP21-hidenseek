@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import hidenseek.model.entities.Entity;
+import hidenseek.model.entities.Key;
 import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
 import hidenseek.model.enums.PowerUpType;
@@ -129,6 +130,11 @@ public class GameLevelImpl implements GameLevel {
             }
         });
         return powerups;
+    }
+
+    @Override
+    public Set<Entity> getKeys() {
+        return Set.of(new Key(new Point2D(500, 500)), new Key(new Point2D(350, 750)));
     }
    
 }

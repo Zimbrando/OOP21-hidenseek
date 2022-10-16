@@ -24,6 +24,8 @@ import hidenseek.model.entities.Player;
 import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
 import hidenseek.view.CanvasDeviceImpl;
+import hidenseek.view.entities.KeyView;
+import hidenseek.view.entities.KeyViewImpl;
 import hidenseek.view.entities.MonsterView;
 import hidenseek.view.entities.MonsterViewImpl;
 import hidenseek.view.entities.PlayerView;
@@ -44,7 +46,6 @@ import javafx.stage.Stage;
 
 public class GameSceneControllerImpl implements GameSceneController {
 
-    
     private final Stage mainStage;
     private Optional<Scene> currentScene = Optional.empty(); 
     private final SceneManagerImpl sceneManager = new SceneManagerImpl();
@@ -74,7 +75,6 @@ public class GameSceneControllerImpl implements GameSceneController {
         mainStage.setTitle("Hide'n Seek");
         mainStage.setWidth(1600); //Screen.getPrimary().getBounds().getWidth()
         mainStage.setHeight(900); //Screen.getPrimary().getBounds().getHeight()
-        //mainStage.setFullScreen(true);
         mainStage.setScene(currentScene.get());
         mainStage.show();
         
@@ -172,6 +172,10 @@ public class GameSceneControllerImpl implements GameSceneController {
             powerups.forEach(powerup -> {
                 gameController.addEntity(new EntityControllerImpl<PowerUpView>(powerup, new PowerUpViewImpl(type)));        
             });
+        });
+        
+        gameLevel.getKeys().forEach(key -> {
+            gameController.addEntity(new EntityControllerImpl<KeyView>(key, new KeyViewImpl()));
         });
 
         

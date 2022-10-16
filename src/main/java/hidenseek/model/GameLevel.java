@@ -12,4 +12,6 @@ public interface GameLevel {
     Set<Entity> getWalls();
     
     Map<PowerUpType, List<Entity>> getPowerUps();
+    
+    Set<Entity> getKeys();
 }

@@ -8,20 +8,19 @@ import hidenseek.model.components.CollisionComponentImpl;
 import hidenseek.model.components.Force;
 import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.InputHandlerComponentImpl;
+import hidenseek.model.components.InventoryComponent;
+import hidenseek.model.components.InventoryComponentImpl;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
 import hidenseek.model.components.MaterialComponent;
 import hidenseek.model.components.MaterialComponentImpl;
 import hidenseek.model.components.MoveComponent;
-import hidenseek.model.components.ObservableComponent;
 import hidenseek.model.components.hearts.GoodHeartComponentImpl;
 import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.enums.Direction;
-import hidenseek.model.events.CollisionEvent;
 import hidenseek.model.components.PositionComponent;
 import hidenseek.model.components.PositionComponentImpl;
-import hidenseek.model.components.TriggerImpl;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
@@ -63,10 +62,13 @@ public final class Player extends AbstractEntity {
         mapKeyToAction(inputHandlerComponent, KeyCode.D, Direction.RIGHT);
         this.attach(inputHandlerComponent);
         
-        // heart
+        //Heart
         HeartComponent heart = new GoodHeartComponentImpl();
         this.attach(heart);
-
+        
+        //Inventory
+        InventoryComponent inventory = new InventoryComponentImpl();
+        this.attach(inventory);
     }
     
     private void mapKeyToAction(InputHandlerComponent inputHandlerComponent, KeyCode keyCode, Direction direction) {
