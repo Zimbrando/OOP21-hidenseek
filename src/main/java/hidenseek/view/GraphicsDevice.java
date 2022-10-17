@@ -1,5 +1,7 @@
 package hidenseek.view;
 
+import java.util.List;
+
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -59,6 +61,9 @@ public interface GraphicsDevice {
      * @param color
      */
     void drawLine(Point2D positionStart, Point2D positionEnd, Color color);
+
+    
+    void drawPolygon(List<Point2D> points, Color color, Image texture);
     
     /**
      * @return The area width

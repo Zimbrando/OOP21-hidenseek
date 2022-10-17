@@ -110,7 +110,6 @@ public class GameSceneControllerImpl implements GameSceneController {
             sceneController.ifPresent(s-> s.setSceneController(this));
             sceneController.ifPresent(s -> sceneManager.addScreenController(pathToInterface, s));
             
-            
         } catch (IOException e) {
             System.out.println("[ERROR] - Error while trying to open file"+pathToInterface);
             e.printStackTrace();
@@ -167,7 +166,7 @@ public class GameSceneControllerImpl implements GameSceneController {
         
         final GameLevel gameLevel = new GameLevelImpl();
         gameLevel.getWalls().forEach(wall -> {
-            gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl()));
+            gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl((Wall)wall)));
         });
         
         gameLevel.getPowerUps().forEach((type, powerups) -> {
