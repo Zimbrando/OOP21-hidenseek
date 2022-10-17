@@ -1,10 +1,9 @@
 package hidenseek.view.entities;
 
 import hidenseek.view.GraphicsDevice;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
-public class KeyViewImpl implements KeyView {
+public class KeyViewImpl extends AbstractEntityView implements KeyView {
 
     private static final String KEY_SPRITE = "sprites/key_01.png";
     private static final int WIDTH = 40;
@@ -12,8 +11,8 @@ public class KeyViewImpl implements KeyView {
     
     
     @Override
-    public void draw(GraphicsDevice device, Point2D position) {
-        device.drawImage(new Image(KEY_SPRITE), WIDTH, HEIGHT, position);
+    public void draw(GraphicsDevice device) {
+        device.drawImage(new Image(KEY_SPRITE), WIDTH, HEIGHT, this.getPosition());
     }
 
 }

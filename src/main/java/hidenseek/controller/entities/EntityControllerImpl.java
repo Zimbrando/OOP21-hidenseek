@@ -1,5 +1,6 @@
 package hidenseek.controller.entities;
 
+import hidenseek.model.components.PositionComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.view.entities.EntityView;
 
@@ -11,7 +12,8 @@ public class EntityControllerImpl<V extends EntityView> extends AbstractEntityCo
     
     @Override
     public void update() {
-    
+        this.getModel().getComponent(PositionComponent.class)
+                .ifPresent(component -> this.getView().setPosition(component.getPosition()));
     }
     
 }

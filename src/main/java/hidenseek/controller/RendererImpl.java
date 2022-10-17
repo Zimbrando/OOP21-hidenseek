@@ -1,7 +1,5 @@
 package hidenseek.controller;
 
-import javafx.geometry.Point2D;
-
 import hidenseek.view.GraphicsDevice;
 import hidenseek.view.HudView;
 import hidenseek.view.entities.EntityView;
@@ -18,8 +16,8 @@ public class RendererImpl implements Renderer {
     }
     
     @Override
-    public void drawEntity(final EntityView view, final Point2D position) {
-        view.draw(gd,  position);
+    public void drawEntity(final EntityView view) {
+        view.draw(gd);
     }
     
     @Override

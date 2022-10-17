@@ -2,11 +2,9 @@ package hidenseek.view.entities;
 
 import hidenseek.model.enums.PowerUpType;
 import hidenseek.view.GraphicsDevice;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
-public class PowerUpViewImpl implements PowerUpView {
+public class PowerUpViewImpl extends AbstractEntityView implements PowerUpView {
     
     private static final String DECREASE_SPEED_SPRITE = "sprites/potion_01.png";
     private static final String INCREASE_SPEED_SPRITE = "sprites/potion_02.png";
@@ -20,13 +18,13 @@ public class PowerUpViewImpl implements PowerUpView {
     }
     
     @Override
-    public void draw(GraphicsDevice device, Point2D position) {
+    public void draw(GraphicsDevice device) {
         if (this.type.equals(PowerUpType.INCREASE_SPEED)) {
-            device.drawImage(new Image(INCREASE_SPEED_SPRITE), WIDTH, HEIGHT, position);        
+            device.drawImage(new Image(INCREASE_SPEED_SPRITE), WIDTH, HEIGHT, this.getPosition());        
         } else if (this.type.equals(PowerUpType.INCREASE_VISIBILITY)) {
-            device.drawImage(new Image(INCREASE_VISIBILITY_SPRITE), WIDTH, HEIGHT, position);   
+            device.drawImage(new Image(INCREASE_VISIBILITY_SPRITE), WIDTH, HEIGHT, this.getPosition());   
         } else if (this.type.equals(PowerUpType.DECREASE_SPEED)) {
-            device.drawImage(new Image(DECREASE_SPEED_SPRITE), WIDTH, HEIGHT, position);   
+            device.drawImage(new Image(DECREASE_SPEED_SPRITE), WIDTH, HEIGHT, this.getPosition());   
         }
     }
 

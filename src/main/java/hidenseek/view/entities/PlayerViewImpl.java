@@ -12,10 +12,9 @@ public class PlayerViewImpl extends AbstractEntityMovableView implements  Player
     public PlayerViewImpl() {
         this.spriteUrl = "sprites/player-right.png";
     }
-
     
     @Override
-    public void draw(final GraphicsDevice device, final Point2D position) {
+    public void draw(final GraphicsDevice device) {
 
         switch (this.getDirection()) {
         case UP:
@@ -32,7 +31,7 @@ public class PlayerViewImpl extends AbstractEntityMovableView implements  Player
             break;
         }
         
-        device.drawImage(new Image(spriteUrl), 40, 40, position.add(new Point2D(-5, -5)));
+        device.drawImage(new Image(spriteUrl), 40, 40, this.getPosition().add(new Point2D(-5, -5)));
     }
     
 }

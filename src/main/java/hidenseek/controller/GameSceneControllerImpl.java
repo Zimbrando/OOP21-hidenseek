@@ -167,7 +167,7 @@ public class GameSceneControllerImpl implements GameSceneController {
         
         final GameLevel gameLevel = new GameLevelImpl();
         gameLevel.getWalls().forEach(wall -> {
-            gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl((Wall)wall)));
+            gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl()));
         });
         
         gameLevel.getPowerUps().forEach((type, powerups) -> {

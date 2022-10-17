@@ -5,5 +5,7 @@ import javafx.geometry.Point2D;
 
 public interface EntityView {
 
-    void draw(GraphicsDevice device, Point2D position);
+    void draw(GraphicsDevice device);
+    
+    void setPosition(Point2D position);
 }

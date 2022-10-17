@@ -1,13 +1,9 @@
 package hidenseek.view.entities;
 
-import hidenseek.model.components.CollisionComponent;
-import hidenseek.model.components.MoveComponent;
-import hidenseek.model.entities.Monster;
-import hidenseek.model.enums.Direction;
 import hidenseek.view.GraphicsDevice;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
+
 
 public class MonsterViewImpl extends AbstractEntityMovableView implements MonsterView {
 
@@ -19,7 +15,7 @@ public class MonsterViewImpl extends AbstractEntityMovableView implements Monste
     
 
     @Override
-    public void draw(final GraphicsDevice device, final Point2D position) {
+    public void draw(final GraphicsDevice device) {
 
         switch (this.getDirection()) {
         case UP:
@@ -36,23 +32,7 @@ public class MonsterViewImpl extends AbstractEntityMovableView implements Monste
             break;
         }
         
-        device.drawImage(new Image(spriteUrl), 40, 40, position.add(new Point2D(-5, -5)));
-        //device.drawCircle(100, new Point2D(positionX+50, positionY+50), Color.GRAY);
-        //device.drawRect(50, 50, new Point2D(positionX+25, positionY+25), Color.BLACK);
-        //device.drawRect(40, 40, new Point2D(positionX+30, positionY+30), Color.GREEN);
-
-        //TODO: remove this, only used for test
-        //Draw Hitbox
-        //Point2D[] hitbox = model.getComponent(CollisionComponent.class).get().getHitbox().toArray(new Point2D[0]);       
-
-        //Point2D position = model.getComponent(PositionComponent.class).get().getPosition();
-        
-//        for(int i=0; i<hitbox.length; i++) {
-//            Point2D prevEntityPoint = (i == 0 ? hitbox[hitbox.length-1] : hitbox[i-1]).add(position);
-//            Point2D currEntityPoint = hitbox[i].add(position);
-//            
-//            //device.drawLine(prevEntityPoint, currEntityPoint, Color.MAGENTA);
-//        }
+        device.drawImage(new Image(spriteUrl), 40, 40, this.getPosition().add(new Point2D(-5, -5)));
     }
 
 }

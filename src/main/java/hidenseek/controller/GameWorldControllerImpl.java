@@ -57,11 +57,13 @@ public final class GameWorldControllerImpl implements GameWorldController {
             // update view
             entity.update();
             // draw entity
-            entity.getPosition().ifPresent(pos -> this.view.drawEntity(entity.getView(), pos));
+            this.view.drawEntity(entity.getView());
         });
         
         this.huds.forEach(hud -> {
+            // update view
             hud.update();
+            // draw hud
             this.view.drawHud(hud.getView());
         });
     }

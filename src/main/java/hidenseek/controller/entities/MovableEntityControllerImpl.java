@@ -13,6 +13,8 @@ public class MovableEntityControllerImpl<V extends EntityMovableView>  extends E
 
     @Override
     public void update() {
+        super.update();      
+        
         // update direction
         this.getModel().getComponent(MoveComponent.class).ifPresent(c -> {
             // get intensity
