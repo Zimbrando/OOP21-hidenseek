@@ -11,4 +11,6 @@ public interface GameWorldController {
     void resume();
     
     void addEntity(EntityController entityController);
+    
+    void addHud(HudController hudController);
 }

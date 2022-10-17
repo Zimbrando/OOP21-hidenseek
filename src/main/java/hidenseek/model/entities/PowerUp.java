@@ -1,6 +1,9 @@
 package hidenseek.model.entities;
 
+import hidenseek.model.components.CollisionComponent;
+import hidenseek.model.components.CollisionComponentImpl;
 import hidenseek.model.components.LifeComponent;
+import hidenseek.model.components.ObservableComponent;
 import hidenseek.model.components.OneTimeLifeComponentImpl;
 import hidenseek.model.components.PositionComponent;
 import hidenseek.model.components.PositionComponentImpl;
@@ -12,22 +15,32 @@ import javafx.geometry.Point2D;
 
 public final class PowerUp extends AbstractEntity {
     
-    public PowerUp(final PowerUpType type) {
+    public PowerUp(final PowerUpType type, final Point2D pos) {
         super();
         this.attach(new OneTimeLifeComponentImpl());
         PositionComponent position = new PositionComponentImpl();
-        position.setPosition(new Point2D(0, 0));
+        position.setPosition(pos);
         this.attach(position);
-        
-        
-        //Attach a component that handles collision
-        final Trigger<CollisionEvent> collisionListener = new TriggerImpl<>(CollisionEvent.class, (event, entity) -> {
-            if (Player.class.isInstance(entity)) {
-                event.getSender().getComponent(LifeComponent.class).get().hurt(1);
+
+        //Trigger for collisions
+        final Trigger<CollisionEvent> collisionListener = new TriggerImpl<>(CollisionEvent.class, (event, powerup) -> {
+            if (Player.class.isInstance(event.getCollider())) {
+                powerup.getComponent(LifeComponent.class).get().hurt(1);
                 //Effect on player
-                type.effect.accept(entity);
+                type.effect.accept(event.getCollider());
             }
         });
-        //Attach the trigger to the collision component
+        
+        //HitBox
+        final CollisionComponent collisionComponent = new CollisionComponentImpl();
+        collisionComponent.addHitboxPoint(new Point2D(0, 0));
+        collisionComponent.addHitboxPoint(new Point2D(0, 30));
+        collisionComponent.addHitboxPoint(new Point2D(30, 30));
+        collisionComponent.addHitboxPoint(new Point2D(30, 0));
+        
+        //Attach listener
+        ObservableComponent collisionObserver = (ObservableComponent) collisionComponent;
+        collisionObserver.attachListener(collisionListener);
+        this.attach(collisionComponent);
     }
 }

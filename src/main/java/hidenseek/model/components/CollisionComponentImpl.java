@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import hidenseek.model.entities.Entity;
+import hidenseek.model.events.CollisionEvent;
 import javafx.geometry.Point2D;
 
 final public class CollisionComponentImpl extends AbstractObservableComponent implements CollisionComponent {
@@ -50,17 +51,21 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
     }
 
     @Override
-    public void removeHitboxPoint(Point2D point) {
+    public void removeHitboxPoint(final Point2D point) {
         hitbox.remove(point);
     }
 
     @Override
-    public Boolean collisionWith(Entity entity) {
-        return willCollisionWith(entity, new Point2D(0,0));
+    public Boolean collisionWith(final Entity entity) {
+        if (willCollisionWith(entity, new Point2D(0,0))) {
+            this.notifyListener(new CollisionEvent(this.getOwner().get(), entity),  CollisionEvent.class);
+            return true;    
+        }
+        return false;
     }
 
     @Override
-    public Boolean willCollisionWith(Entity entity, Point2D offset) {
+    public Boolean willCollisionWith(final Entity entity, final Point2D offset) {
         if(getOwner().isPresent() && getOwner().get() == entity) {
             return false;
         }
@@ -92,14 +97,16 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
                 Point2D currOwnPoint = ownHitbox[j].add(ownPosition).add(offset);
                 
                 if(prevEntityPoint.getX() == currEntityPoint.getX() && prevOwnPoint.getX() == currOwnPoint.getX() && prevEntityPoint.getX() == prevOwnPoint.getX()) {
-                    System.out.println("");
+//                    System.out.println("");
                 }
                 
                 if(prevEntityPoint.getY() == currEntityPoint.getY() && prevOwnPoint.getY() == currOwnPoint.getY() && prevEntityPoint.getY() == prevOwnPoint.getY()) {
-                    System.out.println("");
+//                    System.out.println("");
                 }
                 
                 if(getIntersectionPoint(prevEntityPoint, currEntityPoint, prevOwnPoint, currOwnPoint)) {
+                    //Notify listener here notifies two times powerUps
+                    //TODO maybe introduce MATERIAL collisions and NON MATERIAL collisions
                     return true;
                 }
             }
@@ -108,8 +115,7 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
         return false;
     }
     
-    private Boolean getIntersectionPoint(Point2D l1p1, Point2D l1p2, Point2D l2p1, Point2D l2p2)
-    {
+    private Boolean getIntersectionPoint(final Point2D l1p1, final Point2D l1p2, final Point2D l2p1, final Point2D l2p2) {
         
         int DY1 = (int)l1p2.getY() - (int)l1p1.getY();
         int DX1 = (int)l1p1.getX() - (int)l1p2.getX();
@@ -144,7 +150,5 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
     
         return false; 
     }
-
-
     
 }

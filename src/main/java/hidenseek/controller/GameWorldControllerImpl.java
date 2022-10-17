@@ -8,19 +8,22 @@ import hidenseek.model.entities.Entity;
 import hidenseek.model.worlds.GameWorld;
 import hidenseek.model.worlds.GameWorldImpl;
 
-
 public final class GameWorldControllerImpl implements GameWorldController {
     
+    private final GameSceneController mainController;
     private final Gameloop loop;
     private final Set<EntityController> entities;
+    private final Set<HudController> huds;
     private final Renderer view;
     private final InputScheme input;
     private final GameWorld model;
 //TODO    private final LevelHandler level;
     
-    public GameWorldControllerImpl(final Renderer view, final InputScheme input) {
+    public GameWorldControllerImpl(final GameSceneController mainController, final Renderer view, final InputScheme input) {
         this.view = view;
+        this.mainController = mainController;
         this.entities = new LinkedHashSet<>();
+        this.huds = new LinkedHashSet<>();
         this.input = input;
         this.model = new GameWorldImpl();
         
@@ -54,17 +57,25 @@ public final class GameWorldControllerImpl implements GameWorldController {
             // update view
             entity.update();
             // draw entity
-            entity.getPosition().ifPresent(pos -> this.view.draw(entity.getView(), pos));
+            entity.getPosition().ifPresent(pos -> this.view.drawEntity(entity.getView(), pos));
+        });
+        
+        this.huds.forEach(hud -> {
+            hud.update();
+            this.view.drawHud(hud.getView());
         });
     }
     
-
     @Override
     public void addEntity(final EntityController entityController) {
         this.entities.add(entityController);
         this.model.addEntity(entityController.getModel());
     }
 
+    @Override
+    public void addHud(HudController hudController) {
+        this.huds.add(hudController);
+    }
 
     @Override
     public void pause() {
@@ -72,13 +83,12 @@ public final class GameWorldControllerImpl implements GameWorldController {
         this.loop.stop();
     }
 
-
     @Override
     public void resume() {
         this.loop.start();
     }
     
-    private void removeDeadEntities(Set<Entity> entities) {
+    private void removeDeadEntities(final Set<Entity> entities) {
         this.entities.removeIf(controller -> entities.contains(controller.getModel()));
         entities.forEach(entity -> model.removeEntity(entity));
     }

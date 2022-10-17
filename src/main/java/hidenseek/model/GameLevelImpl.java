@@ -1,10 +1,16 @@
 package hidenseek.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
-
 import hidenseek.model.entities.Entity;
+import hidenseek.model.entities.Key;
+import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
+import hidenseek.model.enums.PowerUpType;
 import javafx.geometry.Point2D;
 
 public class GameLevelImpl implements GameLevel {
@@ -106,6 +112,29 @@ public class GameLevelImpl implements GameLevel {
                     }}
             ));
         }};
+    }
+
+    @Override
+    public Map<PowerUpType, List<Entity>> getPowerUps() {
+        List<Point2D> positions = List.of(new Point2D(200, 600), new Point2D(300, 600), new Point2D(500, 600), new Point2D(800, 200));
+        Map<PowerUpType, List<Entity>> powerups = new HashMap<>();
+        positions.forEach(pos -> {
+            PowerUpType type = PowerUpType.generateRandomType();
+            if (powerups.containsKey(type)) {
+                List<Entity> typeEntity = powerups.get(type);
+                typeEntity.add(new PowerUp(type, pos));
+                powerups.put(type, typeEntity);
+            } else {
+                List<Entity> typeEntity = new ArrayList<>(List.of(new PowerUp(type, pos)));
+                powerups.put(type, typeEntity);    
+            }
+        });
+        return powerups;
+    }
+
+    @Override
+    public Set<Entity> getKeys() {
+        return Set.of(new Key(new Point2D(500, 500)), new Key(new Point2D(350, 750)));
     }
    
 }

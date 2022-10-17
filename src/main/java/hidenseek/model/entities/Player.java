@@ -8,6 +8,8 @@ import hidenseek.model.components.CollisionComponentImpl;
 import hidenseek.model.components.Force;
 import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.InputHandlerComponentImpl;
+import hidenseek.model.components.InventoryComponent;
+import hidenseek.model.components.InventoryComponentImpl;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
@@ -51,7 +53,7 @@ public final class Player extends AbstractEntity {
         collisionComponent.addHitboxPoint(new Point2D(30, 30));
         collisionComponent.addHitboxPoint(new Point2D(30, 0));
         this.attach(collisionComponent);
-       
+        
         //InputHandler component
         final InputHandlerComponent inputHandlerComponent = new InputHandlerComponentImpl();
         mapKeyToAction(inputHandlerComponent, KeyCode.A, Direction.LEFT);
@@ -60,10 +62,13 @@ public final class Player extends AbstractEntity {
         mapKeyToAction(inputHandlerComponent, KeyCode.D, Direction.RIGHT);
         this.attach(inputHandlerComponent);
         
-        // heart
+        //Heart
         HeartComponent heart = new GoodHeartComponentImpl();
         this.attach(heart);
-
+        
+        //Inventory
+        InventoryComponent inventory = new InventoryComponentImpl();
+        this.attach(inventory);
     }
     
     private void mapKeyToAction(InputHandlerComponent inputHandlerComponent, KeyCode keyCode, Direction direction) {
@@ -74,7 +79,7 @@ public final class Player extends AbstractEntity {
                 return;
             }
             moveComponent.get().removeForce(force -> force.getDirection() == direction.getValue() && force.getIdentifier() == "key");
-            moveComponent.get().addForce(new Force("key", 5, direction.getValue()));
+            moveComponent.get().addForce(new Force("key", 3, direction.getValue()));
         };
         
         Consumer<Entity> releaseAction = (Entity entity) -> {

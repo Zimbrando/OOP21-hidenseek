@@ -55,8 +55,7 @@ final public class LinearMovementComponentImpl extends AbstractObservableCompone
         if(resultantX < 0) {
             resultantDirection += 180;
         }
-        
-        return new Force("resultant", resultantIntensity, resultantDirection);
+        return new Force("resultant", resultantIntensity , resultantDirection);
     }
 
 
