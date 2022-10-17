@@ -4,10 +4,16 @@ import java.util.function.BiConsumer;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.events.Event;
 
+/**
+ * Subscriber to {@link ObservableComponent}
+ * @param <E>
+ *              The Event that this trigger listens to
+ */
 public interface Trigger<E extends Event> {
 
     /**
-     * @param action, callback executed when notified
+     * @param action
+     *          Callback executed when notified
      */
     void assignCallback(BiConsumer<E, Entity> action);
     
@@ -19,13 +25,14 @@ public interface Trigger<E extends Event> {
     /**
      * Executes the callback currently assigned
      * 
-     * @param event, the event notified by the publisher
+     * @param event 
+     *          The event notified by the publisher
      */
     void notifyEvent(Event event);
     
     /**
      * 
-     * @return the trigger event class
+     * @return The trigger event class
      */
     Class<E> getEventType();
     

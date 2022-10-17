@@ -2,6 +2,9 @@ package hidenseek.model.events;
 
 import hidenseek.model.entities.Entity;
 
+/**
+ * Event thrown when an Entity collides with another Entity
+ */
 public class CollisionEvent extends AbstractEvent {
 
     final private Entity collider;

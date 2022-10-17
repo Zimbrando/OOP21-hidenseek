@@ -52,12 +52,12 @@ public final class CanvasDeviceImpl implements GraphicsDevice {
 
     @Override
     public double getWidth() {
-        return graphics.getCanvas().getWidth();
+        return this.width;
     }
 
     @Override
     public double getHeight() {
-        return graphics.getCanvas().getHeight();
+        return this.height;
     }
 
 }

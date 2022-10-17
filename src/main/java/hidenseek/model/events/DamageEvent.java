@@ -2,6 +2,9 @@ package hidenseek.model.events;
 
 import hidenseek.model.entities.Entity;
 
+/**
+ * Event thrown by entities that get damaged
+ */
 public class DamageEvent extends AbstractEvent {
 
     private final int damage;

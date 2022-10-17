@@ -16,8 +16,8 @@ public abstract class AbstractEntity implements Entity {
     
     @Override
     public void attach(final Component comp) {
-        this.components.add(comp);
         comp.setOwner(this);
+        this.components.add(comp);
     }
 
     @Override

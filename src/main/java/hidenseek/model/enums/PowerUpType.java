@@ -10,17 +10,26 @@ import hidenseek.model.components.UpgradableComponent;
 import hidenseek.model.entities.Entity;
 import javafx.application.Platform;
 
+/**
+ * Types of PowerUps
+ */
 public enum PowerUpType {
     INCREASE_SPEED(entity -> System.out.println("INCREASE SPEED")),
     INCREASE_VISIBILITY(entity -> System.out.println("INCREASE LIGHT RANGE")),
     DECREASE_SPEED(entity -> System.out.println("DECREASE SPEED"));
-        
+    
+    /**
+     * The effect applied to the Entity using the PowerUp
+     */
     public Consumer<Entity> effect;
     
     private PowerUpType(Consumer<Entity> effect) {
         this.effect = effect;
     }
     
+    /**
+     * @return A random type
+     */
     public static PowerUpType generateRandomType() {
         return values()[(int)(Math.random() * values().length)];
     }

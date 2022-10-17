@@ -2,9 +2,12 @@ package hidenseek.model.components;
 
 import hidenseek.model.events.DamageEvent;
 
+/**
+ * Life for Collectibles and Powerups
+ */
 public class OneTimeLifeComponentImpl extends AbstractObservableComponent implements LifeComponent {
 
-    static final int MAX_HEALTH = 1;
+    private static final int MAX_HEALTH = 1;
     private boolean alive = true;
     
     @Override

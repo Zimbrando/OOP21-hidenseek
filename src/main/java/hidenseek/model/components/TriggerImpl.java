@@ -6,6 +6,10 @@ import java.util.function.BiConsumer;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.events.Event;
 
+/**
+ * 
+ * Basic trigger
+ */
 public class TriggerImpl<E extends Event> implements Trigger<E> {
 
     private final Class<E> eventType;
