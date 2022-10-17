@@ -7,6 +7,9 @@ import java.util.Set;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 
+/**
+ * Basic implementation 
+ */
 public class InputSchemeImpl implements InputScheme {
 
     private Optional<Node> inputNode;

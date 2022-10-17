@@ -2,13 +2,13 @@ package hidenseek.controller;
 
 import javafx.geometry.Point2D;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import hidenseek.view.GraphicsDevice;
 import hidenseek.view.HudView;
 import hidenseek.view.entities.EntityView;
 
+/**
+ * Basic Renderer
+ */
 public class RendererImpl implements Renderer {
 
     final private GraphicsDevice gd;
@@ -17,9 +17,6 @@ public class RendererImpl implements Renderer {
         this.gd = gd;
     }
     
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void drawEntity(final EntityView view, final Point2D position) {
         view.draw(gd,  position);
@@ -33,11 +30,6 @@ public class RendererImpl implements Renderer {
     @Override
     public void refresh() {
         gd.repaint();
-    }
-
-    @Override
-    public GraphicsDevice getGraphicsDevice() {
-        return this.gd;
     }
 
 }

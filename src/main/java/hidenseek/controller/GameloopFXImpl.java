@@ -2,7 +2,10 @@ package hidenseek.controller;
 
 import javafx.animation.AnimationTimer;
 
-public abstract class GameloopFXImpl extends AnimationTimer implements Gameloop {
+/**
+ * Implementation with JavaFX {@link AnimationTimer}
+ */
+abstract class GameloopFXImpl extends AnimationTimer implements Gameloop {
 
     private long pastTick;
     private double currentFrameRate;
@@ -26,7 +29,10 @@ public abstract class GameloopFXImpl extends AnimationTimer implements Gameloop 
         this.pastTick = now;
     }
     
-    public abstract void tick();
+    /**
+     * Method executed at a fixed rate
+     */
+    protected abstract void tick();
     
     public int getCurrentFramerate() {
         return (int)this.currentFrameRate;

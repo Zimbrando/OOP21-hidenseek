@@ -4,7 +4,6 @@ import hidenseek.model.components.MoveComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.Direction;
 import hidenseek.view.entities.EntityMovableView;
-import hidenseek.view.entities.EntityView;
 
 public class MovableEntityControllerImpl<V extends EntityMovableView>  extends EntityControllerImpl<V>{
     

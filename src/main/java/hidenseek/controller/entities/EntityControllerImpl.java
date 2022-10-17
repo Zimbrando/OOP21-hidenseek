@@ -11,7 +11,7 @@ public class EntityControllerImpl<V extends EntityView> extends AbstractEntityCo
     
     @Override
     public void update() {
-    }
     
+    }
     
 }

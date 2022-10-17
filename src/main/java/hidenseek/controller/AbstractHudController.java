@@ -3,10 +3,17 @@ package hidenseek.controller;
 import hidenseek.model.entities.Entity;
 import hidenseek.view.HudView;
 
+/**
+ * 
+ * Base class for all {@link HudController}
+ * 
+ * @param <V>
+ *       Type of {@link HudView} attached
+ */
 abstract class AbstractHudController<V extends HudView> implements HudController {
-
-    final Entity model;
-    final V view;
+    
+    final private Entity model;
+    final private V view;
 
     AbstractHudController(final Entity model, final V view) {
        this.model = model;
@@ -16,13 +23,15 @@ abstract class AbstractHudController<V extends HudView> implements HudController
     @Override
     public abstract void update();
 
-    @Override
+
     public V getView() {
         return this.view;
-    }
-
-    @Override
-    public Entity getModel() {
+    }   
+    
+    /**
+     * @return The relative Entity model
+     */
+    protected Entity getModel() {
         return this.model;
     }
 
