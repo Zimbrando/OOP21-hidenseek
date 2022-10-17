@@ -78,4 +78,9 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
                 .filter(entity -> !entity.getComponent(LifeComponent.class).get().isAlive())
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    public boolean hasWin() {
+        return false;
+    }
 }

@@ -16,18 +16,15 @@ public interface Renderer {
      * @param view, the controller of the Entity that has to be drawn
      * @param position, the position of the Entity that has to be drawn
      */
-    void draw(EntityView view, Point2D position);
+    void drawEntity(EntityView view, Point2D position);
+    
+    
+    void drawHud(HudView view);
     
     /**
      * Refresh the current @link{GraphicsDevice}, called each frame to correctly render the game
      */
     void refresh();
-    
-    
-    void drawHud();
-    
-    
-    <H extends HudView> void attachHudView(H hud);
     
     /**
      * 

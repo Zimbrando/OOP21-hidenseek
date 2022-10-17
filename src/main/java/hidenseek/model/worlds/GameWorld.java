@@ -10,4 +10,6 @@ public interface GameWorld extends EntityWorld{
     void updateInput(final Set<KeyCode> keysPressed);
     
     Set<Entity> getDeadEntities();
+    
+    boolean hasWin();
 }

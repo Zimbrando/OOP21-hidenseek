@@ -12,19 +12,22 @@ import hidenseek.view.entities.EntityView;
 public class RendererImpl implements Renderer {
 
     final private GraphicsDevice gd;
-    final private Set<HudView> huds;
     
     public RendererImpl(final GraphicsDevice gd) {
         this.gd = gd;
-        this.huds = new HashSet<>();
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void draw(final EntityView view, final Point2D position) {
+    public void drawEntity(final EntityView view, final Point2D position) {
         view.draw(gd,  position);
+    }
+    
+    @Override
+    public void drawHud(final HudView view) {
+        view.draw(gd);
     }
 
     @Override
@@ -35,16 +38,6 @@ public class RendererImpl implements Renderer {
     @Override
     public GraphicsDevice getGraphicsDevice() {
         return this.gd;
-    }
-
-    @Override
-    public <H extends HudView> void attachHudView(H hud) {
-        this.huds.add(hud);
-    }
-
-    @Override
-    public void drawHud() {
-        this.huds.forEach(hud -> hud.draw(gd));
     }
 
 }

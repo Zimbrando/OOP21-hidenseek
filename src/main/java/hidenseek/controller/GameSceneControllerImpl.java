@@ -24,6 +24,8 @@ import hidenseek.model.entities.Player;
 import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
 import hidenseek.view.CanvasDeviceImpl;
+import hidenseek.view.KeyHudView;
+import hidenseek.view.KeyHudViewImpl;
 import hidenseek.view.entities.KeyView;
 import hidenseek.view.entities.KeyViewImpl;
 import hidenseek.view.entities.MonsterView;
@@ -54,7 +56,6 @@ public class GameSceneControllerImpl implements GameSceneController {
     private final List<String> interfacesPaths;
 
     public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {
-        
         final URL url = getClass().getResource("/layouts/");
         final Path path = Paths.get(url.toURI());
         
@@ -68,8 +69,10 @@ public class GameSceneControllerImpl implements GameSceneController {
                 
         this.mainStage = stage;
         
-        this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(3), STYLING_LOCATION + "MainMenuStyle.css");
+        this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(0), STYLING_LOCATION + "MainMenuStyle.css");
        
+        System.out.println(this.interfacesPaths);
+        
         this.init();
         
         mainStage.setTitle("Hide'n Seek");
@@ -138,7 +141,7 @@ public class GameSceneControllerImpl implements GameSceneController {
     @Override
     public void goToGame() {
         
-        final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(0);
+        final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(4);
         
         sceneManager.activate(gameGuiPath);
         
@@ -151,7 +154,7 @@ public class GameSceneControllerImpl implements GameSceneController {
         input.assignInputNode(gameCanvas);
         
         final Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
-        final GameWorldController gameController = new GameWorldControllerImpl(renderer, input);
+        final GameWorldController gameController = new GameWorldControllerImpl(this, renderer, input);
         
         gamePane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ESCAPE) {
@@ -185,7 +188,12 @@ public class GameSceneControllerImpl implements GameSceneController {
         
         final EntityController player = new PlayerControllerImpl();
         player.setPosition(new Point2D(30, 30));
+        KeyHudView keyHudView = new KeyHudViewImpl(new Point2D(1400, 40));
+        //KEY HUD, set the max keys depending on the level number of keys
+        keyHudView.setMaxKeys(3);
+        final HudController keyHud = new KeyHudControllerImpl(player.getModel(), keyHudView);
         gameController.addEntity(player);
+        gameController.addHud(keyHud);
 
         final EntityController monster = new MovableEntityControllerImpl<>(new Monster(), new MonsterViewImpl());
         monster.setPosition(new Point2D(700, 400));
@@ -193,7 +201,6 @@ public class GameSceneControllerImpl implements GameSceneController {
 
         //gameController.addLevel(1, map);
         
-
         //primaryStage.setTitle("Hide'n Seek");
         //primaryStage.setWidth(1600);
         //primaryStage.setHeight(900);
@@ -201,7 +208,6 @@ public class GameSceneControllerImpl implements GameSceneController {
         //primaryStage.show();
         
         //this.currentScene.ifPresent(c-> c.getStylesheets().add(ClassLoader.getSystemResource("./stylesheets/MainMenuStyle.css").toExternalForm()));
-       
     }
 
     @Override
