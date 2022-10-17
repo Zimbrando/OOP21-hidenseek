@@ -65,14 +65,13 @@ public class GameSceneControllerImpl implements GameSceneController {
         .collect(Collectors.toList())
         .stream()
         .map(e -> e.substring(e.lastIndexOf(File.separator)).substring(1))
+        .sorted()
         .collect(Collectors.toList());
-                
+        
         this.mainStage = stage;
         
-        this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(0), STYLING_LOCATION + "MainMenuStyle.css");
+        this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(3), STYLING_LOCATION + "MainMenuStyle.css");
        
-        System.out.println(this.interfacesPaths);
-        
         this.init();
         
         mainStage.setTitle("Hide'n Seek");
@@ -141,7 +140,7 @@ public class GameSceneControllerImpl implements GameSceneController {
     @Override
     public void goToGame() {
         
-        final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(4);
+        final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(0);
         
         sceneManager.activate(gameGuiPath);
         
