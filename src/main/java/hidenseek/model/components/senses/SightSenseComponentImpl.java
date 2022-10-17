@@ -38,4 +38,10 @@ public class SightSenseComponentImpl extends AbstractSenseComponent{
         // TODO calibrate senseconfidence based on distance
         return SenseConfidence.HIGH;
     }
+    
+    @Override
+    public int range() {
+        // TODO Auto-generated method stub
+        return this.sightRange;
+    }
 }

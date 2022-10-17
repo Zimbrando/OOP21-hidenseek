@@ -20,6 +20,8 @@ public class SenseWorldImpl extends AbstractEntityWorldImpl {
         this.world().stream()
         .filter(e -> e.getComponent(BrainComponent.class).isPresent())  // get all entities 
         .forEach(e -> e.getComponent(BrainComponent.class).get().neuroImpulse());
+        
+        
     }
     
 }

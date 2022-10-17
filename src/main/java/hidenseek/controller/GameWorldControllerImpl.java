@@ -3,10 +3,23 @@ package hidenseek.controller;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import hidenseek.controller.entities.AbstractEntityController;
 import hidenseek.controller.entities.EntityController;
+import hidenseek.controller.entities.EntityControllerImpl;
+import hidenseek.model.components.PositionComponent;
+import hidenseek.model.components.PositionComponentImpl;
+import hidenseek.model.components.brains.BrainComponent;
+import hidenseek.model.components.senses.SenseComponent;
 import hidenseek.model.entities.Entity;
+import hidenseek.model.entities.Wall;
+import hidenseek.model.enums.SenseConfidence;
 import hidenseek.model.worlds.GameWorld;
 import hidenseek.model.worlds.GameWorldImpl;
+import hidenseek.view.GraphicsDevice;
+import hidenseek.view.entities.EntityView;
+import hidenseek.view.entities.WallView;
+import hidenseek.view.entities.WallViewImpl;
+import javafx.geometry.Point2D;
 
 
 public final class GameWorldControllerImpl implements GameWorldController {
@@ -48,6 +61,33 @@ public final class GameWorldControllerImpl implements GameWorldController {
         
         //Draw game
         view.refresh();
+        
+
+
+
+        //TODO remove this
+        // Draw sense range
+        this.model.world().stream()
+        .filter(e -> e.getComponent(SenseComponent.class).isPresent())  // get all entities 
+        .map(e -> new EntityControllerImpl<EntityView>(new Wall(new Point2D(0, 0), Set.of()), new WallView() {
+            
+            @Override
+            public void draw(GraphicsDevice device, Point2D position) {
+                // TODO Auto-generated method stub
+                device.drawCircle(e.getComponent(SenseComponent.class).get().range(), e.getComponent(PositionComponent.class).get().getPosition(), null);
+                
+            }
+        }))
+        .forEach(e -> e.getPosition().ifPresent(pos -> this.view.draw(e.getView(), pos)));;
+
+        //TODO remove this
+        // Draw grid AI
+        this.model.world().stream()
+        .filter(e -> e.getComponent(BrainComponent.class).isPresent())  // get all entities 
+        .flatMap(e -> e.getComponent(BrainComponent.class).get().cells().stream())
+        .map(c -> new EntityControllerImpl<WallView>(c, new WallViewImpl((Wall)c)))
+        .forEach(e -> e.getPosition().ifPresent(pos -> this.view.draw(e.getView(), pos)));;
+        
         
         // update entities
         this.entities.forEach(entity -> {

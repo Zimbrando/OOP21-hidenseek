@@ -105,6 +105,16 @@ public class GameLevelImpl implements GameLevel {
                         add(new Point2D(0, 17));
                     }}
             ));
+            
+
+            add(new Wall(new Point2D(27, 0), 
+                    new LinkedHashSet<Point2D>(){{
+                        add(new Point2D(0, 0));
+                        add(new Point2D(220, 0));
+                        add(new Point2D(220, 17));
+                        add(new Point2D(0, 17));
+                    }}
+            ));
         }};
     }
    

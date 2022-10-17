@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import hidenseek.controller.entities.EntityController;
@@ -63,8 +64,9 @@ public class GameSceneControllerImpl implements GameSceneController {
         .collect(Collectors.toList());
                 
         this.mainStage = stage;
+        System.out.println(this.interfacesPaths);
         
-        this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(3), STYLING_LOCATION + "MainMenuStyle.css");
+        this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(1), STYLING_LOCATION + "MainMenuStyle.css");
        
         this.init();
         
@@ -135,7 +137,7 @@ public class GameSceneControllerImpl implements GameSceneController {
     @Override
     public void goToGame() {
         
-        final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(0);
+        final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(2);
         
         sceneManager.activate(gameGuiPath);
         
@@ -164,6 +166,20 @@ public class GameSceneControllerImpl implements GameSceneController {
         gameLevel.getWalls().forEach(wall -> {
             gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl((Wall)wall)));
         });
+        
+        //TEST
+        final int offset = 100;
+        final int dim = 50;
+        final Point2D monsterPos = new Point2D(700, 400);
+        final Set<Point2D> points = Set.of(new Point2D(0, 0),new Point2D(0, dim),new Point2D(dim, dim),new Point2D(dim, 0));
+        Wall wall = new Wall(monsterPos.add(-offset, -offset), points);
+        gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl((Wall)wall)));
+        wall = new Wall(monsterPos.add(-offset, offset), points);
+        gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl((Wall)wall)));
+        wall = new Wall(monsterPos.add(offset, -offset), points);
+        gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl((Wall)wall)));
+        wall = new Wall(monsterPos.add(offset, offset), points);
+        gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl((Wall)wall)));
 
         
         //NOTE: we are passing Model to PlayerViewImpl and EnemyViewImpl, but only for debug.
@@ -175,7 +191,7 @@ public class GameSceneControllerImpl implements GameSceneController {
         gameController.addEntity(player);
 
         final EntityController monster = new MovableEntityControllerImpl<>(new Monster(), new MonsterViewImpl());
-        monster.setPosition(new Point2D(700, 400));
+        monster.setPosition(monsterPos);
         gameController.addEntity(monster);
 
         //gameController.addLevel(1, map);

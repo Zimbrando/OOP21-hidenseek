@@ -41,7 +41,7 @@ public final class CanvasDeviceImpl implements GraphicsDevice {
     @Override
     public void drawCircle(final int radius, final Point2D position, final Color color) {
         graphics.setFill(color);
-        graphics.fillOval(position.getX() - radius / 2, position.getY() - radius / 2, radius, radius);
+        graphics.fillOval(position.getX() - radius , position.getY() - radius , radius*2, radius*2);
     }
 
     @Override

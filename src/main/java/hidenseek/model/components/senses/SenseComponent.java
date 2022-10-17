@@ -23,4 +23,8 @@ public interface SenseComponent extends Component{
     Set<Entity> world();
     
 
+    //TODO REMOVE, ONLY FOR TEST
+    int range();
+    
+
 }

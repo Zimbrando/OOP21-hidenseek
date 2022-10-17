@@ -78,14 +78,14 @@ public class NaiveBrainComponentImpl extends AbstractBrainComponentImpl implemen
         if(targetPosition.get().getX() > position.getPosition().getX()) {
             moveXDirection = Direction.RIGHT;
             moveXIntensity = 2.5;
-        } else {
+        } else if(targetPosition.get().getX() < position.getPosition().getX()) {
             moveXDirection = Direction.LEFT;
             moveXIntensity = 2.5;
         }
         if(targetPosition.get().getY() > position.getPosition().getY()) {
             moveYDirection = Direction.DOWN;
             moveYIntensity = 2.5;
-        } else {
+        } else if(targetPosition.get().getY() < position.getPosition().getY()) {
             moveYDirection = Direction.UP;
             moveYIntensity = 2.5;
         }
@@ -98,6 +98,12 @@ public class NaiveBrainComponentImpl extends AbstractBrainComponentImpl implemen
     private Optional<Point2D> getRandomReachablePosition(final Set<Entity> entities) {
         //TODO use entities (walls)
         return Optional.empty();
+    }
+    
+    @Override
+    public Set<Entity> cells() {
+        // TODO Auto-generated method stub
+        return Set.of();
     }
 
     
