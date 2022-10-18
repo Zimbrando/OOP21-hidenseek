@@ -12,8 +12,12 @@ public interface CollisionComponent extends Component {
     void addHitboxPoint(Point2D point);
     void removeHitboxPoint(Point2D point);
 
-    Boolean collisionWith(Entity entity);
-    Boolean willCollisionWith(Entity entity, Point2D offset);
+    void onCollision(Entity entity);
+    void onNear(Entity entity);
+    
+    Boolean collisionTo(Entity entity, Point2D ownOffset);
+    Boolean nearTo(Entity entity, Point2D ownOffset);
+    Boolean collisionOrNearTo(Entity entity, Point2D ownOffset);
     
     Point2D getBounds();
 }

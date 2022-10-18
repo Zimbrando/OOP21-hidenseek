@@ -2,6 +2,8 @@ package hidenseek.model.components;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 import hidenseek.model.entities.Entity;
 import hidenseek.model.events.CollisionEvent;
@@ -56,16 +58,32 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
     }
 
     @Override
-    public Boolean collisionWith(final Entity entity) {
-        if (willCollisionWith(entity, new Point2D(0,0))) {
-            this.notifyListener(new CollisionEvent(this.getOwner().get(), entity),  CollisionEvent.class);
-            return true;    
-        }
-        return false;
+    public void onCollision(final Entity entity) {
+        this.notifyListener(new CollisionEvent(this.getOwner().get(), entity), CollisionEvent.class);
     }
 
     @Override
-    public Boolean willCollisionWith(final Entity entity, final Point2D offset) {
+    public void onNear(final Entity entity) {
+        this.notifyListener(new CollisionEvent(this.getOwner().get(), entity), CollisionEvent.class);
+    }
+
+    @Override
+    public Boolean collisionTo(final Entity entity, final Point2D ownOffset) {
+        return segmentsMatch(ownOffset, entity, new Point2D(0, 0), (a, b) -> a.intersectingTo(b));
+    }
+    
+    @Override
+    public Boolean nearTo(Entity entity, final Point2D ownOffset) {
+        return segmentsMatch(ownOffset, entity, new Point2D(0, 0), (a, b) -> a.consecutiveTo(b) || a.adjacentTo(b));
+    }
+    
+    @Override
+    public Boolean collisionOrNearTo(Entity entity, final Point2D ownOffset) {
+        return nearTo(entity, ownOffset) || collisionTo(entity, ownOffset);
+    }
+    
+    private Boolean segmentsMatch(final Point2D ownOffset, final Entity entity, final Point2D entityOffset, BiPredicate<Segment, Segment> condition) {
+
         if(getOwner().isPresent() && getOwner().get() == entity) {
             return false;
         }
@@ -89,66 +107,22 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
         Point2D[] ownHitbox = getOwner().get().getComponent(CollisionComponent.class).get().getHitbox().toArray(new Point2D[0]);
         
         for(int i=0; i<entityHitbox.length; i++) {
-            Point2D prevEntityPoint = (i == 0 ? entityHitbox[entityHitbox.length-1] : entityHitbox[i-1]).add(entityPosition);
-            Point2D currEntityPoint = entityHitbox[i].add(entityPosition);
+            Point2D prevEntityPoint = (i == 0 ? entityHitbox[entityHitbox.length-1] : entityHitbox[i-1]).add(entityPosition).add(entityOffset);
+            Point2D currEntityPoint = entityHitbox[i].add(entityPosition).add(entityOffset);
+            Segment entitySegment = new Segment(prevEntityPoint, currEntityPoint);
             
             for(int j=0; j<ownHitbox.length; j++) {
-                Point2D prevOwnPoint = (j == 0 ? ownHitbox[ownHitbox.length-1] : ownHitbox[j-1]).add(ownPosition).add(offset);
-                Point2D currOwnPoint = ownHitbox[j].add(ownPosition).add(offset);
+                Point2D prevOwnPoint = (j == 0 ? ownHitbox[ownHitbox.length-1] : ownHitbox[j-1]).add(ownPosition).add(ownOffset);
+                Point2D currOwnPoint = ownHitbox[j].add(ownPosition).add(ownOffset);
+                Segment ownSegment = new Segment(prevOwnPoint, currOwnPoint);
                 
-                if(prevEntityPoint.getX() == currEntityPoint.getX() && prevOwnPoint.getX() == currOwnPoint.getX() && prevEntityPoint.getX() == prevOwnPoint.getX()) {
-//                    System.out.println("");
-                }
-                
-                if(prevEntityPoint.getY() == currEntityPoint.getY() && prevOwnPoint.getY() == currOwnPoint.getY() && prevEntityPoint.getY() == prevOwnPoint.getY()) {
-//                    System.out.println("");
-                }
-                
-                if(getIntersectionPoint(prevEntityPoint, currEntityPoint, prevOwnPoint, currOwnPoint)) {
-                    //Notify listener here notifies two times powerUps
-                    //TODO maybe introduce MATERIAL collisions and NON MATERIAL collisions
+                if(condition.test(entitySegment, ownSegment)) {
                     return true;
                 }
             }
         }
         
         return false;
-    }
-    
-    private Boolean getIntersectionPoint(final Point2D l1p1, final Point2D l1p2, final Point2D l2p1, final Point2D l2p2) {
-        
-        int DY1 = (int)l1p2.getY() - (int)l1p1.getY();
-        int DX1 = (int)l1p1.getX() - (int)l1p2.getX();
-        int C1 = DY1 * (int)l1p1.getX() + DX1 * (int)l1p1.getY();
-        int DY2 = (int)l2p2.getY() - (int)l2p1.getY();
-        int DX2 = (int)l2p1.getX() - (int)l2p2.getX();
-        int C2 = DY2 * (int)l2p1.getX() + DX2 * (int)l2p1.getY();
-        
-        //lines are parallel
-        double det = DY1 * DX2 - DY2 * DX1;
-        if (det == 0d)
-        {
-            return false; //parallel lines
-        }
-        
-        double x = (DX2 * C1 - DX1 * C2) / det;
-        double y = (DY1 * C2 - DY2 * C1) / det;
-        Boolean online1 = 
-            (Math.min(l1p1.getX(), l1p2.getX()) < x || Math.min(l1p1.getX(), l1p2.getX()) == x) &&
-            (Math.max(l1p1.getX(), l1p2.getX()) > x || Math.max(l1p1.getX(), l1p2.getX()) == x) &&
-            (Math.min(l1p1.getY(), l1p2.getY()) < y || Math.max(l1p1.getY(), l1p2.getY()) == y) &&
-            (Math.max(l1p1.getY(), l1p2.getY()) > y || Math.max(l1p1.getY(), l1p2.getY()) == y);
-        
-        Boolean online2 = 
-            (Math.min(l2p1.getX(), l2p2.getX()) < x || Math.min(l2p1.getX(), l2p2.getX()) == x) &&
-            (Math.max(l2p1.getX(), l2p2.getX()) > x || Math.max(l2p1.getX(), l2p2.getX()) == x) &&
-            (Math.min(l2p1.getY(), l2p2.getY()) < y || Math.max(l2p1.getY(), l2p2.getY()) == y) &&
-            (Math.max(l2p1.getY(), l2p2.getY()) > y || Math.max(l2p1.getY(), l2p2.getY()) == y);
-        
-        if (online1 && online2)
-            return true;
-    
-        return false; 
     }
     
 }

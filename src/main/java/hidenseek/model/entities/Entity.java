@@ -35,4 +35,11 @@ public interface Entity {
      * @return The actual component instance
      */
     <C extends Component> Optional<C> getComponent(Class<C> component);
+    
+    /**
+     * @param component
+     *          The component type
+     * @return Returns true if component is present
+     */
+    <C extends Component> Boolean hasComponent(Class<C> component);
 }

@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 
 public interface MoveComponent extends Component {
 
+    void setSpeed(double speed);
+    double getSpeed();
+    
     void addForce(Force force);
     void removeForce(Force force);
     void removeForce(Predicate<Force> removeCondition);

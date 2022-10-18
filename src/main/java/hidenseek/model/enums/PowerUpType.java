@@ -6,6 +6,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
+import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.UpgradableComponent;
 import hidenseek.model.entities.Entity;
 import javafx.application.Platform;
@@ -14,9 +15,9 @@ import javafx.application.Platform;
  * Types of PowerUps
  */
 public enum PowerUpType {
-    INCREASE_SPEED(entity -> System.out.println("INCREASE SPEED")),
+    INCREASE_SPEED(entity -> entity.getComponent(MoveComponent.class).get().setSpeed(1.5)),
     INCREASE_VISIBILITY(entity -> System.out.println("INCREASE LIGHT RANGE")),
-    DECREASE_SPEED(entity -> System.out.println("DECREASE SPEED"));
+    DECREASE_SPEED(entity -> entity.getComponent(MoveComponent.class).get().setSpeed(1));
     
     /**
      * The effect applied to the Entity using the PowerUp

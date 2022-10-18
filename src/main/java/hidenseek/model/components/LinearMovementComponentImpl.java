@@ -7,7 +7,18 @@ import java.util.function.Predicate;
 
 final public class LinearMovementComponentImpl extends AbstractObservableComponent implements MoveComponent {
 
+    private double speed = 1;
     private Set<Force> forces = new HashSet<Force>();
+
+    @Override
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    @Override
+    public double getSpeed() {
+        return speed;
+    }
     
     @Override
     public void addForce(Force force) {

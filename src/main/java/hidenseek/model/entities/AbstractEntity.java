@@ -37,5 +37,10 @@ public abstract class AbstractEntity implements Entity {
                 .map(c -> component.cast(c))
                 .findFirst();
     }
+
+    @Override
+    public <C extends Component> Boolean hasComponent(final Class<C> component) {
+        return this.components.stream().anyMatch(c -> component.isInstance(c));
+    }
     
 }
