@@ -14,6 +14,7 @@ import hidenseek.controller.entities.EntityController;
 import hidenseek.controller.entities.EntityControllerImpl;
 import hidenseek.controller.entities.MovableEntityControllerImpl;
 import hidenseek.controller.entities.PlayerControllerImpl;
+import hidenseek.controller.entities.WallControllerImpl;
 import hidenseek.model.GameLevel;
 import hidenseek.model.GameLevelImpl;
 import hidenseek.model.SceneManagerImpl;
@@ -30,8 +31,6 @@ import hidenseek.view.entities.KeyView;
 import hidenseek.view.entities.KeyViewImpl;
 import hidenseek.view.entities.MonsterView;
 import hidenseek.view.entities.MonsterViewImpl;
-import hidenseek.view.entities.PlayerView;
-import hidenseek.view.entities.PlayerViewImpl;
 import hidenseek.view.entities.PowerUpView;
 import hidenseek.view.entities.PowerUpViewImpl;
 import hidenseek.view.entities.WallView;
@@ -166,7 +165,7 @@ public class GameSceneControllerImpl implements GameSceneController {
         
         final GameLevel gameLevel = new GameLevelImpl();
         gameLevel.getWalls().forEach(wall -> {
-            gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl((Wall)wall)));
+            gameController.addEntity(new WallControllerImpl(wall, new WallViewImpl()));
         });
         
         gameLevel.getPowerUps().forEach((type, powerups) -> {

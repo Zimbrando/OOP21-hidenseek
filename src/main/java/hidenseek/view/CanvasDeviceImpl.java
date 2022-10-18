@@ -1,13 +1,7 @@
 package hidenseek.view;
 
-import java.awt.Rectangle;
-import java.awt.TexturePaint;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -71,8 +65,23 @@ public final class CanvasDeviceImpl implements GraphicsDevice {
     }
 
     @Override
-    public void drawPolygon(List<Point2D> points, Color color, Image texture) {
-        this.graphics.setFill(new ImagePattern(texture));
+    public void drawPolygon(final List<Point2D> points, final ImagePattern pattern) {
+        this.graphics.setFill(pattern);
+        List<Double> xs = new ArrayList<>();
+        List<Double> ys = new ArrayList<>();
+        points.stream().forEach(point -> { 
+            xs.add(point.getX());
+            ys.add(point.getY());
+        });
+        double[] xPoints = xs.stream().mapToDouble(Double::doubleValue).toArray();
+        double[] yPoints = ys.stream().mapToDouble(Double::doubleValue).toArray();
+         
+        this.graphics.fillPolygon(xPoints, yPoints, points.size());
+    }
+
+    @Override
+    public void drawPolygon(final List<Point2D> points, final Color color) {
+        this.graphics.setFill(color);
         List<Double> xs = new ArrayList<>();
         List<Double> ys = new ArrayList<>();
         points.stream().forEach(point -> { 

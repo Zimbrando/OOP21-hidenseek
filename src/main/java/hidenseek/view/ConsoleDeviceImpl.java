@@ -1,9 +1,11 @@
 package hidenseek.view;
 
-import javafx.css.Size;
+import java.util.List;
+
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 
 public class ConsoleDeviceImpl implements GraphicsDevice{
      
@@ -48,6 +50,18 @@ public class ConsoleDeviceImpl implements GraphicsDevice{
     public double getHeight() {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public void drawPolygon(List<Point2D> points, ImagePattern pattern) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void drawPolygon(List<Point2D> points, Color color) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

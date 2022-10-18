@@ -1,31 +1,32 @@
 package hidenseek.view.entities;
 
-import hidenseek.model.entities.Wall;
 import hidenseek.view.GraphicsDevice;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.geometry.Point2D;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import hidenseek.model.components.CollisionComponent;
 
 
 public class WallViewImpl extends AbstractEntityView implements WallView {
     
-    Image image = new Image("./sprites/player-right.png");
-    Wall model;
-    
-    public WallViewImpl(Wall model) {
-        this.model = model;
-    }
+    private static final Image WALL_SPRITE = new Image("./sprites/wall.png");
+    private static final ImagePattern WALL_SPRITE_PATTERN = new ImagePattern(WALL_SPRITE, 0, 0, 50, 50, false);
+    private List<Point2D> polygonPoints;
     
     @Override
     public void draw(final GraphicsDevice device) {       
-        List<Point2D> hitboxPoints = model.getComponent(CollisionComponent.class).get().getHitbox().stream().map(point -> point.add(this.getPosition())).collect(Collectors.toList());
-        device.drawPolygon(hitboxPoints, Color.RED, image);
+        device.drawPolygon(polygonPoints, WALL_SPRITE_PATTERN);
     }
 
-
+    @Override
+    public void setHitbox(Set<Point2D> hitbox) {
+        this.polygonPoints = hitbox.stream()
+                    .map(point -> point.add(this.getPosition()))
+                    .collect(Collectors.toList());
+    }
+    
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 
 /**
  * Interface for a generic graphics device
@@ -62,8 +63,20 @@ public interface GraphicsDevice {
      */
     void drawLine(Point2D positionStart, Point2D positionEnd, Color color);
 
+    /**
+     * Draws a filled polygon
+     * @param points
+     * @param pattern
+     */
+    void drawPolygon(List<Point2D> points, ImagePattern pattern);
     
-    void drawPolygon(List<Point2D> points, Color color, Image texture);
+    /**
+     * Draws a filled polygon
+     * @param points
+     * @param color
+     *          The filled color
+     */
+    void drawPolygon(List<Point2D> points, Color color);
     
     /**
      * @return The area width
