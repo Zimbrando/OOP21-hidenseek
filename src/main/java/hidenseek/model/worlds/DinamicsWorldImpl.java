@@ -6,7 +6,6 @@ import hidenseek.model.components.Force;
 import hidenseek.model.components.MaterialComponent;
 import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.PositionComponent;
-import hidenseek.model.events.CollisionEvent;
 import javafx.geometry.Point2D;
 
 public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
@@ -98,13 +97,11 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
                 if(collisionComponent.get().collisionOrNearTo(entity1, new Point2D(0, 0))){
                     collisionComponent.get().onCollision(entity1);
                     entityCollisionComponent.get().onCollision(entity);
-                    System.out.println("COLLISION: " + entity + "; " + entity1);
                 }
                 
                 if(collisionComponent.get().nearTo(entity1, new Point2D(0, 0))){
                     collisionComponent.get().onNear(entity);
                     entityCollisionComponent.get().onNear(entity);
-                    System.out.println("NEAR: " + entity + "; " + entity1);
                 }
             });
         });

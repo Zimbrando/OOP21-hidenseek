@@ -3,7 +3,7 @@ package hidenseek.model.components;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public interface MoveComponent extends Component {
+public interface MoveComponent extends UpgradableComponent {
 
     void setSpeed(double speed);
     double getSpeed();

@@ -7,7 +7,8 @@ import java.util.function.Predicate;
 
 final public class LinearMovementComponentImpl extends AbstractObservableComponent implements MoveComponent {
 
-    private double speed = 1;
+    private static final double DEFAULT_SPEED = 1;
+    private double speed = DEFAULT_SPEED;
     private Set<Force> forces = new HashSet<Force>();
 
     @Override
@@ -67,6 +68,16 @@ final public class LinearMovementComponentImpl extends AbstractObservableCompone
             resultantDirection += 180;
         }
         return new Force("resultant", resultantIntensity , resultantDirection);
+    }
+
+    @Override
+    public void reset() {
+        this.setSpeed(DEFAULT_SPEED);
+    }
+
+    @Override
+    public boolean isUpgraded() {
+        return this.getSpeed() != DEFAULT_SPEED;
     }
 
 

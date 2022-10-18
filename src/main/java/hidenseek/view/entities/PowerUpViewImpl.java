@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 
 public class PowerUpViewImpl extends AbstractEntityView implements PowerUpView {
     
-    private static final String DECREASE_SPEED_SPRITE = "sprites/potion_01.png";
     private static final String INCREASE_SPEED_SPRITE = "sprites/potion_02.png";
     private static final String INCREASE_VISIBILITY_SPRITE = "sprites/potion_03.png";
     private static final int WIDTH = 40;
@@ -23,8 +22,6 @@ public class PowerUpViewImpl extends AbstractEntityView implements PowerUpView {
             device.drawImage(new Image(INCREASE_SPEED_SPRITE), WIDTH, HEIGHT, this.getPosition());        
         } else if (this.type.equals(PowerUpType.INCREASE_VISIBILITY)) {
             device.drawImage(new Image(INCREASE_VISIBILITY_SPRITE), WIDTH, HEIGHT, this.getPosition());   
-        } else if (this.type.equals(PowerUpType.DECREASE_SPEED)) {
-            device.drawImage(new Image(DECREASE_SPEED_SPRITE), WIDTH, HEIGHT, this.getPosition());   
         }
     }
 

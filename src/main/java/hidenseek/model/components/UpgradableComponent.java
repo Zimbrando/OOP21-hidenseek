@@ -4,7 +4,7 @@ package hidenseek.model.components;
 /**
  * Component that can be modified by {@link PowerUp}s
  */
-public interface UpgradableComponent {
+public interface UpgradableComponent extends Component {
 
     /**
      * Reset attributes

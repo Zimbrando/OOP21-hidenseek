@@ -15,26 +15,32 @@ import javafx.application.Platform;
  * Types of PowerUps
  */
 public enum PowerUpType {
-    INCREASE_SPEED(entity -> entity.getComponent(MoveComponent.class).get().setSpeed(1.5)),
-    INCREASE_VISIBILITY(entity -> System.out.println("INCREASE LIGHT RANGE")),
-    DECREASE_SPEED(entity -> entity.getComponent(MoveComponent.class).get().setSpeed(1));
-    
+
+    INCREASE_SPEED(entity -> entity.getComponent(MoveComponent.class).ifPresent(component -> {
+        if (!component.isUpgraded()) {
+            component.setSpeed(component.getSpeed() + 0.5);
+            resetAfter(component, 10);
+        }
+    })),
+
+    INCREASE_VISIBILITY(entity -> System.out.println("INCREASE LIGHT RANGE"));
+
     /**
      * The effect applied to the Entity using the PowerUp
      */
     public Consumer<Entity> effect;
-    
+
     private PowerUpType(Consumer<Entity> effect) {
         this.effect = effect;
     }
-    
+
     /**
      * @return A random type
      */
     public static PowerUpType generateRandomType() {
         return values()[(int)(Math.random() * values().length)];
     }
-    
+
     private static void resetAfter(final UpgradableComponent component, final int seconds) {
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         service.schedule(() -> {

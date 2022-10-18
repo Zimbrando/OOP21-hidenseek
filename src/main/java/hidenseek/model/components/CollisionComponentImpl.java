@@ -3,7 +3,6 @@ package hidenseek.model.components;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 
 import hidenseek.model.entities.Entity;
 import hidenseek.model.events.CollisionEvent;
