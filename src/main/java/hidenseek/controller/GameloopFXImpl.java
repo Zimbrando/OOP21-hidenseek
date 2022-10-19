@@ -20,7 +20,6 @@ abstract class GameloopFXImpl extends AnimationTimer implements Gameloop {
         super.stop();
     }
        
-    
     @Override
     public void handle(long now) {
         double delta =  (now - this.pastTick) / 1e9;

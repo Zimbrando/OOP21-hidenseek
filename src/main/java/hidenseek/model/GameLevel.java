@@ -1,17 +1,15 @@
 package hidenseek.model;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import hidenseek.model.entities.Entity;
-import hidenseek.model.enums.PowerUpType;
+import hidenseek.controller.HudController;
+import hidenseek.controller.entities.EntityController;
 
 public interface GameLevel {
-
-    Set<Entity> getWalls();
     
-    Map<PowerUpType, List<Entity>> getPowerUps();
+    Set<EntityController> getEntities();
     
-    Set<Entity> getKeys();
+    Set<HudController> getHuds();
+    
+    int keysInLevel();
 }
