@@ -28,4 +28,9 @@ public abstract class AbstractEntityWorldImpl implements EntityWorld {
         return this.entities;
     }
     
+    @Override
+    public void clearEntities() {
+        this.entities.clear();
+    }
+    
 }

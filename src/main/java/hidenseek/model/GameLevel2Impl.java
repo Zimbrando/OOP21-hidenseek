@@ -17,7 +17,6 @@ import hidenseek.controller.entities.PlayerControllerImpl;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.Key;
 import hidenseek.model.entities.Monster;
-import hidenseek.model.entities.Player;
 import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
 import hidenseek.model.enums.PowerUpType;
@@ -32,14 +31,17 @@ import hidenseek.view.entities.WallView;
 import hidenseek.view.entities.WallViewImpl;
 import javafx.geometry.Point2D;
 
-public class GameLevelImpl implements GameLevel {
+/*
+ * TODO DELETE THIS CLASS, USED ONLY TO TEST A DIFFERENT LEVEL!!!
+ */
+public class GameLevel2Impl implements GameLevel {
 
     private Optional<Entity> player = Optional.empty();
     
     private Set<Entity> getWalls() {
 
         return new LinkedHashSet<Entity>(){{
-            add(new Wall(new Point2D(48, 220), 
+            add(new Wall(new Point2D(400, 220), 
                     new LinkedHashSet<Point2D>(){{
                         add(new Point2D(0, 0));
                         add(new Point2D(118, 0));
@@ -48,7 +50,7 @@ public class GameLevelImpl implements GameLevel {
                     }}
                     ));
 
-            add(new Wall(new Point2D(461, 45), 
+            add(new Wall(new Point2D(200, 45), 
                     new LinkedHashSet<Point2D>(){{
                         add(new Point2D(175, 243));
                         add(new Point2D(175, 17));
@@ -71,7 +73,7 @@ public class GameLevelImpl implements GameLevel {
                     }}
                     ));
 
-            add(new Wall(new Point2D(217, 248), 
+            add(new Wall(new Point2D(754, 600), 
                     new LinkedHashSet<Point2D>(){{
                         add(new Point2D(127, 213));
                         add(new Point2D(127, 29));
@@ -99,7 +101,7 @@ public class GameLevelImpl implements GameLevel {
                     }}
                     ));
 
-            add(new Wall(new Point2D(288, 0), 
+            add(new Wall(new Point2D(500, 200), 
                     new LinkedHashSet<Point2D>(){{
                         add(new Point2D(0, 0));
                         add(new Point2D(17, 0));
@@ -108,7 +110,7 @@ public class GameLevelImpl implements GameLevel {
                     }}
                     ));
 
-            add(new Wall(new Point2D(308, 101), 
+            add(new Wall(new Point2D(321, 567), 
                     new LinkedHashSet<Point2D>(){{
                         add(new Point2D(127, 308));
                         add(new Point2D(127, 110));
@@ -123,7 +125,7 @@ public class GameLevelImpl implements GameLevel {
                     }}
                     ));
 
-            add(new Wall(new Point2D(27, 0), 
+            add(new Wall(new Point2D(89, 532), 
                     new LinkedHashSet<Point2D>(){{
                         add(new Point2D(0, 0));
                         add(new Point2D(220, 0));

@@ -4,10 +4,14 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import hidenseek.model.entities.Key;
 import hidenseek.model.components.InputHandlerComponent;
+import hidenseek.model.components.InventoryComponent;
 import hidenseek.model.components.LifeComponent;
+import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.entities.Entity;
-
+import hidenseek.model.enums.GameState;
+import hidenseek.model.enums.Heart;
 import javafx.scene.input.KeyCode;
 
 public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld {
@@ -15,17 +19,22 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
     final private EntityWorld senseWorld; // handler of senses
     final private EntityWorld dynamicsWorld; // handler of senses
     private Set<KeyCode> keysPressed;
+    private GameState state;
+    private int keys;
+    
     
     public GameWorldImpl() {
         super();
         this.senseWorld = new SenseWorldImpl();
         this.dynamicsWorld = new DinamicsWorldImpl();
         this.keysPressed = new HashSet<>();
+        this.state = GameState.STOPPED;
     }
     
     @Override
     public void update() {
-
+        this.state = GameState.RUNNING;
+        
         // ----- handle inputs:
         this.handleInput();
 
@@ -43,6 +52,9 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
         //      Questa parte è effettuata logicamente nella sezione precedente, poichè viene eseguita solo per gli oggetti che si sono mossi.
         //      Trova tutti gli oggetti che si stanno intersecando e manda l'evento intersectionWith(entity) ad entrambi
         this.dynamicsWorld.update();
+        
+        
+        this.isGameOver();
     }
 
     @Override
@@ -55,6 +67,30 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
             entity.getComponent(InputHandlerComponent.class)
             .ifPresent(c -> c.computeScheme(this.keysPressed));
         });
+    }
+    
+    private void isGameOver() {
+         boolean gameover = !this.world().stream()
+                 .filter(entity -> entity.hasComponent(HeartComponent.class))
+                 .anyMatch(entity -> entity.getComponent(HeartComponent.class).get().getHeart() == Heart.GOOD);
+         if (gameover) {
+             this.state = GameState.OVER_LOSE;
+             return;
+         }
+
+        this.world().stream()
+                .filter(entity -> entity.hasComponent(HeartComponent.class)) 
+                .filter(entity -> entity.getComponent(HeartComponent.class).get().getHeart() == Heart.GOOD)
+                .filter(entity -> entity.hasComponent(InventoryComponent.class))
+                .map(entity -> entity.getComponent(InventoryComponent.class).get().getQuantity(Key.class))
+                .reduce((total, count) -> total += count)
+                .map(totalKeys -> totalKeys == this.keys)
+                .ifPresent(win -> {
+                    if (win) {
+                        this.state = GameState.OVER_WIN;
+                    }
+                });
+            
     }
     
     @Override
@@ -78,9 +114,21 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
                 .filter(entity -> !entity.getComponent(LifeComponent.class).get().isAlive())
                 .collect(Collectors.toSet());
     }
+    
+    @Override
+    public void clearEntities() {
+        super.clearEntities();
+        this.dynamicsWorld.clearEntities();
+        this.senseWorld.clearEntities();
+    }
+    
+    @Override
+    public GameState getState() {
+        return this.state;
+    }
 
     @Override
-    public boolean hasWin() {
-        return false;
+    public void setKeys(final int keys) {
+        this.keys = keys;
     }
 }

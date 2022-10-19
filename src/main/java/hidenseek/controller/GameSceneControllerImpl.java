@@ -139,7 +139,7 @@ public class GameSceneControllerImpl implements GameSceneController {
 
     @Override
     public void goToGame() {
-        
+        System.out.println("GO TO GAME");
         final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(0);
         
         sceneManager.activate(gameGuiPath);
@@ -153,7 +153,7 @@ public class GameSceneControllerImpl implements GameSceneController {
         input.assignInputNode(gameCanvas);
         
         final Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
-        final GameWorldController gameController = new GameWorldControllerImpl(this, renderer, input);
+        final GameWorldController gameController = new GameWorldControllerImpl(this, renderer, input, new LevelHandlerImpl());
         
         gamePane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ESCAPE) {
@@ -164,49 +164,7 @@ public class GameSceneControllerImpl implements GameSceneController {
                 gameController.resume();
             }
         });
-        
-        final GameLevel gameLevel = new GameLevelImpl();
-        gameLevel.getWalls().forEach(wall -> {
-            gameController.addEntity(new EntityControllerImpl<WallView>(wall, new WallViewImpl()));
-        });
-        
-        gameLevel.getPowerUps().forEach((type, powerups) -> {
-            powerups.forEach(powerup -> {
-                gameController.addEntity(new EntityControllerImpl<PowerUpView>(powerup, new PowerUpViewImpl(type)));        
-            });
-        });
-        
-        gameLevel.getKeys().forEach(key -> {
-            gameController.addEntity(new EntityControllerImpl<KeyView>(key, new KeyViewImpl()));
-        });
 
-        
-        //NOTE: we are passing Model to PlayerViewImpl and EnemyViewImpl, but only for debug.
-        //It's used to draw collision hitbox. It'll be removed.
-
-        
-        final EntityController player = new PlayerControllerImpl();
-        player.setPosition(new Point2D(30, 30));
-        KeyHudView keyHudView = new KeyHudViewImpl(new Point2D(1400, 40));
-        //KEY HUD, set the max keys depending on the level number of keys
-        keyHudView.setMaxKeys(3);
-        final HudController keyHud = new KeyHudControllerImpl(player.getModel(), keyHudView);
-        gameController.addEntity(player);
-        gameController.addHud(keyHud);
-
-        final EntityController monster = new MovableEntityControllerImpl<>(new Monster(), new MonsterViewImpl());
-        monster.setPosition(new Point2D(700, 400));
-        gameController.addEntity(monster);
-
-        //gameController.addLevel(1, map);
-        
-        //primaryStage.setTitle("Hide'n Seek");
-        //primaryStage.setWidth(1600);
-        //primaryStage.setHeight(900);
-        //primaryStage.setScene(root);
-        //primaryStage.show();
-        
-        //this.currentScene.ifPresent(c-> c.getStylesheets().add(ClassLoader.getSystemResource("./stylesheets/MainMenuStyle.css").toExternalForm()));
     }
 
     @Override

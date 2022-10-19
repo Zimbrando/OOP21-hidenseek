@@ -3,6 +3,7 @@ package hidenseek.model.worlds;
 import java.util.Set;
 
 import hidenseek.model.entities.Entity;
+import hidenseek.model.enums.GameState;
 import javafx.scene.input.KeyCode;
 
 public interface GameWorld extends EntityWorld{
@@ -11,5 +12,7 @@ public interface GameWorld extends EntityWorld{
     
     Set<Entity> getDeadEntities();
     
-    boolean hasWin();
+    GameState getState();
+    
+    void setKeys(int keys);
 }
