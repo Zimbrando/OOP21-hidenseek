@@ -14,6 +14,7 @@ import hidenseek.controller.entities.EntityController;
 import hidenseek.controller.entities.EntityControllerImpl;
 import hidenseek.controller.entities.MovableEntityControllerImpl;
 import hidenseek.controller.entities.PlayerControllerImpl;
+import hidenseek.controller.entities.WallControllerImpl;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.Key;
 import hidenseek.model.entities.Monster;
@@ -163,7 +164,7 @@ public class GameLevel2Impl implements GameLevel {
         Set<EntityController> controllers = new LinkedHashSet<>();
 
         this.getWalls().forEach(wall -> {
-            controllers.add(new EntityControllerImpl<WallView>(wall, new WallViewImpl()));
+            controllers.add(new WallControllerImpl(wall, new WallViewImpl()));
         });
 
         this.getPowerUps().forEach((type, powerups) -> {

@@ -1,9 +1,13 @@
 package hidenseek.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 
 public final class CanvasDeviceImpl implements GraphicsDevice {
 
@@ -49,7 +53,7 @@ public final class CanvasDeviceImpl implements GraphicsDevice {
         graphics.setStroke(color);
         graphics.strokeLine(positionStart.getX(), positionStart.getY(), positionEnd.getX(), positionEnd.getY());
     }
-
+    
     @Override
     public double getWidth() {
         return this.width;
@@ -58,6 +62,36 @@ public final class CanvasDeviceImpl implements GraphicsDevice {
     @Override
     public double getHeight() {
         return this.height;
+    }
+
+    @Override
+    public void drawPolygon(final List<Point2D> points, final ImagePattern pattern) {
+        this.graphics.setFill(pattern);
+        List<Double> xs = new ArrayList<>();
+        List<Double> ys = new ArrayList<>();
+        points.stream().forEach(point -> { 
+            xs.add(point.getX());
+            ys.add(point.getY());
+        });
+        double[] xPoints = xs.stream().mapToDouble(Double::doubleValue).toArray();
+        double[] yPoints = ys.stream().mapToDouble(Double::doubleValue).toArray();
+         
+        this.graphics.fillPolygon(xPoints, yPoints, points.size());
+    }
+
+    @Override
+    public void drawPolygon(final List<Point2D> points, final Color color) {
+        this.graphics.setFill(color);
+        List<Double> xs = new ArrayList<>();
+        List<Double> ys = new ArrayList<>();
+        points.stream().forEach(point -> { 
+            xs.add(point.getX());
+            ys.add(point.getY());
+        });
+        double[] xPoints = xs.stream().mapToDouble(Double::doubleValue).toArray();
+        double[] yPoints = ys.stream().mapToDouble(Double::doubleValue).toArray();
+         
+        this.graphics.fillPolygon(xPoints, yPoints, points.size());
     }
 
 }

@@ -14,6 +14,7 @@ import hidenseek.controller.entities.EntityController;
 import hidenseek.controller.entities.EntityControllerImpl;
 import hidenseek.controller.entities.MovableEntityControllerImpl;
 import hidenseek.controller.entities.PlayerControllerImpl;
+import hidenseek.controller.entities.WallControllerImpl;
 import hidenseek.model.GameLevel;
 import hidenseek.model.GameLevelImpl;
 import hidenseek.model.SceneManagerImpl;
@@ -30,8 +31,6 @@ import hidenseek.view.entities.KeyView;
 import hidenseek.view.entities.KeyViewImpl;
 import hidenseek.view.entities.MonsterView;
 import hidenseek.view.entities.MonsterViewImpl;
-import hidenseek.view.entities.PlayerView;
-import hidenseek.view.entities.PlayerViewImpl;
 import hidenseek.view.entities.PowerUpView;
 import hidenseek.view.entities.PowerUpViewImpl;
 import hidenseek.view.entities.WallView;
@@ -110,7 +109,6 @@ public class GameSceneControllerImpl implements GameSceneController {
             sceneController.ifPresent(s-> s.setSceneController(this));
             sceneController.ifPresent(s -> sceneManager.addScreenController(pathToInterface, s));
             
-            
         } catch (IOException e) {
             System.out.println("[ERROR] - Error while trying to open file"+pathToInterface);
             e.printStackTrace();
@@ -139,7 +137,7 @@ public class GameSceneControllerImpl implements GameSceneController {
 
     @Override
     public void goToGame() {
-        System.out.println("GO TO GAME");
+        //TODO BUG: if you go back in the GameMenu, you can't create a new game
         final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(0);
         
         sceneManager.activate(gameGuiPath);
@@ -164,7 +162,6 @@ public class GameSceneControllerImpl implements GameSceneController {
                 gameController.resume();
             }
         });
-
     }
 
     @Override
