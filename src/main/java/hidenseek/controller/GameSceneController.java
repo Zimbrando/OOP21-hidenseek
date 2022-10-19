@@ -44,13 +44,23 @@ public interface GameSceneController {
     /**
      * 
      * @param name 
+     *          Name of the scene
      * @return the current scene's root object
      */
     Pane getSceneRoot(final String name);
     
-    
+    /**
+     * 
+     * @param controller
+     *          The gui controller
+     */
     void resumeGame(final GameGuiController controller);
     
+    /**
+     * 
+     * @param controller
+     *          The gui controller
+     */
     void pauseGame(final GameGuiController controller);
     
 }
