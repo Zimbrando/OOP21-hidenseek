@@ -24,14 +24,14 @@ abstract class GameloopFXImpl extends AnimationTimer implements Gameloop {
     public void handle(long now) {
         double delta =  (now - this.pastTick) / 1e9;
         this.currentFrameRate = 1 / delta;
-        this.tick();
+        this.tick(delta);
         this.pastTick = now;
     }
     
     /**
      * Method executed at a fixed rate
      */
-    protected abstract void tick();
+    protected abstract void tick(double delta);
     
     public int getCurrentFramerate() {
         return (int)this.currentFrameRate;

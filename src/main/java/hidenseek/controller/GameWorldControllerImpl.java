@@ -34,8 +34,8 @@ public final class GameWorldControllerImpl implements GameWorldController {
         this.loop = new GameloopFXImpl() {
 
             @Override
-            public void tick() {
-                update();
+            public void tick(final double delta) {
+                update(delta);
             }
 
         };
@@ -46,13 +46,13 @@ public final class GameWorldControllerImpl implements GameWorldController {
 
 
     @Override
-    public void update() {
+    public void update(final double delta) {
 
         // handle inputs
         model.updateInput(this.input.getCurrentPressedKeys());
         
         // update logic
-        model.update();
+        model.update(delta);
         
         this.removeDeadEntities(model.getDeadEntities());
         

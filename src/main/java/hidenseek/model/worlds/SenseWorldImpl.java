@@ -6,7 +6,7 @@ import hidenseek.model.components.senses.SenseComponent;
 public class SenseWorldImpl extends AbstractEntityWorldImpl {
     
     @Override
-    public void update() {
+    public void update(final double delta) {
         // handle senses
         this.world().stream()
         .filter(e -> e.getComponent(SenseComponent.class).isPresent())  // get all entities 

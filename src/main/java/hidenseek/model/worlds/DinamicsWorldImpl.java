@@ -11,15 +11,12 @@ import javafx.geometry.Point2D;
 public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
 
     @Override
-    public void update() {
-        //TODO move entities - apply Forces
-
-        // check collisions
-        this.handleCollisions();
+    public void update(final double delta) {
+        this.handleCollisions(delta);
     }
     
 
-    private void handleCollisions() {
+    private void handleCollisions(final double delta) {
         this.world().stream().forEach(entity -> {
 
             Optional<PositionComponent> positionComponent = entity.getComponent(PositionComponent.class);

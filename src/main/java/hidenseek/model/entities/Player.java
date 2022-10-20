@@ -1,6 +1,7 @@
 package hidenseek.model.entities;
 
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import hidenseek.model.components.CollisionComponent;
@@ -26,7 +27,7 @@ import javafx.scene.input.KeyCode;
 
 public final class Player extends AbstractEntity {
     
-    private static final int PLAYER_FORCE = 5;
+    private static final int PLAYER_FORCE = 150;
     
     public Player() {
         super();
@@ -73,18 +74,18 @@ public final class Player extends AbstractEntity {
         this.attach(inventory);
     }
     
-    private void mapKeyToAction(InputHandlerComponent inputHandlerComponent, KeyCode keyCode, Direction direction) {
+    private void mapKeyToAction(final InputHandlerComponent inputHandlerComponent, final KeyCode keyCode, Direction direction) {
 
-        Consumer<Entity> pressAction = (Entity entity) -> {
+        BiConsumer<Entity, Double> pressAction = (entity, delta) -> {
             Optional<MoveComponent> moveComponent = entity.getComponent(MoveComponent.class);
             if(!moveComponent.isPresent()) {
                 return;
             }
             moveComponent.get().removeForce(force -> force.getDirection() == direction.getValue() && force.getIdentifier() == "key");
-            moveComponent.get().addForce(new Force("key", PLAYER_FORCE, direction.getValue()));
+            moveComponent.get().addForce(new Force("key", PLAYER_FORCE * delta, direction.getValue()));
         };
         
-        Consumer<Entity> releaseAction = (Entity entity) -> {
+        Consumer<Entity> releaseAction = (entity) -> {
             Optional<MoveComponent> moveComponent = entity.getComponent(MoveComponent.class);
             if(!moveComponent.isPresent()) {
                 return;

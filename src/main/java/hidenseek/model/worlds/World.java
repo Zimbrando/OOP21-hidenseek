@@ -6,8 +6,10 @@ public interface World<T> {
 
     /**
      * Compute updates
+     * @param delta
+     *          Delta time between current and last frame
      */
-    void update();
+    void update(double delta);
     
     /**
      * Retrieve all the T entities in the world

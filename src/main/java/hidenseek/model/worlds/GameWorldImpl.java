@@ -17,7 +17,7 @@ import javafx.scene.input.KeyCode;
 public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld {
 
     final private EntityWorld senseWorld; // handler of senses
-    final private EntityWorld dynamicsWorld; // handler of senses
+    final private EntityWorld dynamicsWorld; // handler of movement
     private Set<KeyCode> keysPressed;
     private GameState state;
     private int keys;
@@ -32,16 +32,16 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
     }
     
     @Override
-    public void update() {
+    public void update(final double delta) {
         this.state = GameState.RUNNING;
         
         // ----- handle inputs:
-        this.handleInput();
+        this.handleInput(delta);
 
         // ----- handle SenseWorld:
         // - Gestione delle AI
         //      Per ogni entity che ha AIComponent, otteniamo direction e speed dalla AI
-        this.senseWorld.update();
+        this.senseWorld.update(delta);
         
         // ----- handle DynamicsWorld:
         // - Gestione della posizione degli oggetti
@@ -51,7 +51,7 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
         // - Gestione di tutte le collisione eccetto i muri
         //      Questa parte è effettuata logicamente nella sezione precedente, poichè viene eseguita solo per gli oggetti che si sono mossi.
         //      Trova tutti gli oggetti che si stanno intersecando e manda l'evento intersectionWith(entity) ad entrambi
-        this.dynamicsWorld.update();
+        this.dynamicsWorld.update(delta);
         
         
         this.isGameOver();
@@ -62,10 +62,10 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
         this.keysPressed = Set.copyOf(keysPressed);
     }
 
-    private void handleInput() {
+    private void handleInput(final double delta) {
         this.world().forEach(entity -> {
             entity.getComponent(InputHandlerComponent.class)
-            .ifPresent(c -> c.computeScheme(this.keysPressed));
+            .ifPresent(c -> c.computeScheme(this.keysPressed, delta));
         });
     }
     

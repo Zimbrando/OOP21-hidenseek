@@ -4,7 +4,7 @@ import hidenseek.controller.entities.EntityController;
 
 public interface GameWorldController {
 
-    void update();
+    void update(double delta);
   
     void pause();
     
