@@ -5,8 +5,8 @@ import javafx.scene.image.Image;
 
 public class KeyHudViewImpl implements KeyHudView {
 
-    private static final String KEY_SPRITE_BLANK = "assets/key_01_transparent.png";
-    private static final String KEY_SPRITE = "assets/key_01.png";
+    private static final Image KEY_SPRITE_BLANK = new Image("assets/key_01_transparent.png");
+    private static final Image KEY_SPRITE = new Image("assets/key_01.png");
     private static final int KEY_WIDTH = 50;
     private static final int KEY_HEIGHT = 50;
     private int numKeys;
@@ -22,9 +22,9 @@ public class KeyHudViewImpl implements KeyHudView {
         for (int i = 0; i < maxKeys; i++) {
             final Point2D newPosition = this.position.add(new Point2D(KEY_WIDTH * i, 0));
             if (i < numKeys) {
-                device.drawImage(new Image(KEY_SPRITE), KEY_WIDTH, KEY_HEIGHT, newPosition);            
+                device.drawImage(KEY_SPRITE, KEY_WIDTH, KEY_HEIGHT, newPosition);            
             }
-            device.drawImage(new Image(KEY_SPRITE_BLANK), KEY_WIDTH, KEY_HEIGHT, this.position.add(new Point2D(KEY_WIDTH * i, 0)));
+            device.drawImage(KEY_SPRITE_BLANK, KEY_WIDTH, KEY_HEIGHT, this.position.add(new Point2D(KEY_WIDTH * i, 0)));
         }
     }
 
