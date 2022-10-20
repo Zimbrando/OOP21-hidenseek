@@ -7,32 +7,31 @@ import javafx.scene.image.Image;
 
 public class MonsterViewImpl extends AbstractEntityMovableView implements MonsterView {
 
-    private String spriteUrl;
+    private static Image MONSTER_TOP = new Image("assets/player-top.png");
+    private static Image MONSTER_RIGHT = new Image("assets/player-right.png");
+    private static Image MONSTER_BOTTOM = new Image("assets/player-bottom.png");
+    private static Image MONSTER_LEFT= new Image("assets/player-left.png");
+    private static final int SPRITE_WIDTH = 40;
+    private static final int SPRITE_HEIGHT = 40;
     
-    public MonsterViewImpl() {
-        this.spriteUrl = "assets/player-top.png";
-    }
-    
-
     @Override
     public void draw(final GraphicsDevice device) {
 
         switch (this.getDirection()) {
         case UP:
-            this.spriteUrl = "assets/player-top.png";
+            device.drawImage(MONSTER_TOP, SPRITE_WIDTH, SPRITE_HEIGHT, this.getPosition().add(new Point2D(5, 5)));
             break;
         case DOWN:
-            this.spriteUrl = "assets/player-bottom.png";
+            device.drawImage(MONSTER_BOTTOM, SPRITE_WIDTH, SPRITE_HEIGHT, this.getPosition().add(new Point2D(5, 5)));
             break;
         case RIGHT:
-            this.spriteUrl = "assets/player-right.png";
+            device.drawImage(MONSTER_RIGHT, SPRITE_WIDTH, SPRITE_HEIGHT, this.getPosition().add(new Point2D(5, 5)));
             break;
         case LEFT:
-            this.spriteUrl = "assets/player-left.png";
+            device.drawImage(MONSTER_LEFT, SPRITE_WIDTH, SPRITE_HEIGHT, this.getPosition().add(new Point2D(5, 5)));
             break;
         }
         
-        device.drawImage(new Image(spriteUrl), 40, 40, this.getPosition().add(new Point2D(5, 5)));
         
         //DEBUG: hitbox draw
         Point2D[] hitbox = new Point2D[] {

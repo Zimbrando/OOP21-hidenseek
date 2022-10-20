@@ -1,3 +1,8 @@
+
+@font-face {
+  src: url('impact.ttf') format('truetype');
+}
+
 .rootStyle {
     -fx-background-color: "#2E2E2E";
     -fx-maxHeight:1080;
@@ -14,6 +19,11 @@
     -fx-minWidth:1024;
 }
 
+.title {
+   -fx-font-family: 'impact';
+   -fx-font-size: 100px;
+}
+
 .buttonStyle{
     -fx-contentDisplay:"CENTER";
     -fx-maxHeight:100.0;
@@ -21,4 +31,6 @@
     -fx-mnemonicParsing:false;
     -fx-textAlignment:"CENTER";
     -fx-textFill:"#2c2c2c";
+    -fx-font-family: 'impact';
+    -fx-font-size: 40px;
 }

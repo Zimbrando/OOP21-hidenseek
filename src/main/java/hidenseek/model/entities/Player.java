@@ -26,6 +26,8 @@ import javafx.scene.input.KeyCode;
 
 public final class Player extends AbstractEntity {
     
+    private static final int PLAYER_FORCE = 5;
+    
     public Player() {
         super();
         
@@ -79,7 +81,7 @@ public final class Player extends AbstractEntity {
                 return;
             }
             moveComponent.get().removeForce(force -> force.getDirection() == direction.getValue() && force.getIdentifier() == "key");
-            moveComponent.get().addForce(new Force("key", 15, direction.getValue()));
+            moveComponent.get().addForce(new Force("key", PLAYER_FORCE, direction.getValue()));
         };
         
         Consumer<Entity> releaseAction = (Entity entity) -> {

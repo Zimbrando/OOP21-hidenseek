@@ -47,6 +47,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
 
     @Override
     public void update() {
+
         // handle inputs
         model.updateInput(this.input.getCurrentPressedKeys());
         
@@ -80,6 +81,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
         if (this.model.getState() == GameState.OVER_WIN) {
             this.handleWin();
         }
+        
     }
     
     @Override

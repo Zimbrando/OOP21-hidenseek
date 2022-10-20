@@ -9,32 +9,20 @@
 <?import javafx.scene.text.Text?>
 
 <Pane id="mainMenuRoot" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hidenseek.controller.MainMenuController">
-    <AnchorPane fx:id="mainPane" styleClass="rootStyle" prefHeight="1080" prefWidth="1920">  
+    <AnchorPane fx:id="mainPane" styleClass="rootStyle" prefHeight="900" prefWidth="1600">  
       <children>
-         <Text fill="#eca623" layoutX="729.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hide 'n' Seek" wrappingWidth="500">
-            <font>
-               <Font name="Impact" size="90.0" />
-            </font>
+         <Text fill="#eca623" styleClass="title" layoutX="550" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hide 'n Seek" wrappingWidth="500">
          </Text>
-         <VBox alignment="CENTER" maxHeight="768.0" maxWidth="1024.0" prefHeight="0.0" prefWidth="932.0" spacing="25.0" AnchorPane.bottomAnchor="420.0" AnchorPane.leftAnchor="448.0" AnchorPane.rightAnchor="448.0" AnchorPane.topAnchor="420.0">
+         <VBox alignment="CENTER"  styleClass="buttonStyle" maxHeight="768.0" maxWidth="1024.0" prefHeight="0.0" prefWidth="932.0" spacing="25.0" AnchorPane.bottomAnchor="420.0" AnchorPane.leftAnchor="448.0" AnchorPane.rightAnchor="448.0" AnchorPane.topAnchor="420.0">
             <children>
                <Button fx:id="startButton" styleClass="buttonStyle" text="START NEW GAME" onAction="#handleStartClicked" prefHeight="80.0" prefWidth="500.0">
-                  <font>
-                     <Font name="Impact" size="30.0" />
-                  </font>
                   <VBox.margin>
                      <Insets />
                   </VBox.margin>
                </Button>
                <Button fx:id="goToSettingsButton" styleClass="buttonStyle" text="SETTINGS" onAction="#handleGoToSettingsClicked" layoutX="272.0" layoutY="65.0" prefHeight="80.0" prefWidth="500.0">
-                  <font>
-                     <Font name="Impact" size="26.0" />
-                  </font>
                </Button>
                <Button fx:id="exitButton" styleClass="buttonStyle" text="EXIT GAME"  onAction="#handleExitClicked" layoutX="272.0" layoutY="25.0" prefHeight="80.0" prefWidth="500.0">
-                  <font>
-                     <Font name="Impact" size="26.0" />
-                  </font>
                </Button>
             </children>
          </VBox>

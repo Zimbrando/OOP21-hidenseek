@@ -35,11 +35,14 @@ import hidenseek.view.entities.PowerUpView;
 import hidenseek.view.entities.PowerUpViewImpl;
 import hidenseek.view.entities.WallView;
 import hidenseek.view.entities.WallViewImpl;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
@@ -57,6 +60,8 @@ public class GameSceneControllerImpl implements GameSceneController {
     public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {
         final URL url = getClass().getResource("/layouts/");
         final Path path = Paths.get(url.toURI());
+        
+        stage.setResizable(false);
         
         this.interfacesPaths = Files.walk(path, 1)
         .skip(1)
@@ -141,7 +146,7 @@ public class GameSceneControllerImpl implements GameSceneController {
         final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(0);
         
         sceneManager.activate(gameGuiPath);
-        
+         
         final Pane gamePane = (Pane)getSceneRoot(gameGuiPath).lookup("#gameRoot");
 
         final Canvas gameCanvas = (Canvas)getSceneRoot(gameGuiPath).lookup("#gameMainCanvas");
@@ -187,7 +192,7 @@ public class GameSceneControllerImpl implements GameSceneController {
 
     @Override
     public void goToExit() {
-       System.exit(0);
+       Platform.exit();
     }
 
 }

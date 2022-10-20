@@ -5,14 +5,14 @@ import javafx.scene.image.Image;
 
 public class KeyViewImpl extends AbstractEntityView implements KeyView {
 
-    private static final String KEY_SPRITE = "assets/key_01.png";
+    private static final Image KEY_SPRITE = new Image("assets/key_01.png");
     private static final int WIDTH = 40;
     private static final int HEIGHT = 40;
     
     
     @Override
     public void draw(GraphicsDevice device) {
-        device.drawImage(new Image(KEY_SPRITE), WIDTH, HEIGHT, this.getPosition());
+        device.drawImage(KEY_SPRITE, WIDTH, HEIGHT, this.getPosition());
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class WallViewImpl extends AbstractEntityView implements WallView {
     
     private static final Image WALL_SPRITE = new Image("./assets/wall.png");
-    private static final ImagePattern WALL_SPRITE_PATTERN = new ImagePattern(WALL_SPRITE, 0, 0, 50, 50, false);
+    private final ImagePattern WALL_SPRITE_PATTERN = new ImagePattern(WALL_SPRITE, 0, 0, 50, 50, false);
     private List<Point2D> polygonPoints;
     
     @Override
