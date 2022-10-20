@@ -24,6 +24,8 @@ import javafx.geometry.Point2D;
 
 public class Monster extends AbstractEntity {
     
+    private static final double MONSTER_SPEED = 125;
+    
     public Monster() {
         super();
         
@@ -35,7 +37,7 @@ public class Monster extends AbstractEntity {
         this.attach(positionComponent);
         
         //Move component
-        final MoveComponent moveComponent = new LinearMovementComponentImpl();
+        final MoveComponent moveComponent = new LinearMovementComponentImpl(MONSTER_SPEED);
         this.attach(moveComponent);
         
         //Material component

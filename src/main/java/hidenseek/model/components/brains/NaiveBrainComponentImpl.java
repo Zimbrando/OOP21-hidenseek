@@ -77,17 +77,17 @@ public class NaiveBrainComponentImpl extends AbstractBrainComponentImpl implemen
         
         if(targetPosition.get().getX() > position.getPosition().getX()) {
             moveXDirection = Direction.RIGHT;
-            moveXIntensity = 2.5;
+            moveXIntensity = 1;
         } else {
             moveXDirection = Direction.LEFT;
-            moveXIntensity = 2.5;
+            moveXIntensity = 1;
         }
         if(targetPosition.get().getY() > position.getPosition().getY()) {
             moveYDirection = Direction.DOWN;
-            moveYIntensity = 2.5;
+            moveYIntensity = 1;
         } else {
             moveYDirection = Direction.UP;
-            moveYIntensity = 2.5;
+            moveYIntensity = 1;
         }
 
         movement.removeForce(force -> force.getIdentifier().startsWith("ai"));

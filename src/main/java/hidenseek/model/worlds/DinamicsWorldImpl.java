@@ -41,10 +41,10 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
                     return;
                 }
                 final double speedMultiplier = moveComponent.get().getSpeed();
-                int forceX = (int)Math.abs(force.getXComponent() * speedMultiplier);
+                int forceX = (int)Math.abs(force.getXComponent() * speedMultiplier * delta);
                 int forceXSign = force.getXComponent() < 0 ? -1 : 1;
                 Boolean forceXAccepted = false;
-                int forceY = (int)Math.abs(force.getYComponent() * speedMultiplier);
+                int forceY = (int)Math.abs(force.getYComponent() * speedMultiplier * delta);
                 int forceYSign = force.getYComponent() < 0 ? -1 : 1;
                 Boolean forceYAccepted = false;
                 

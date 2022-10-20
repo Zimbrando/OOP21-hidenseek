@@ -81,7 +81,6 @@ public final class GameWorldControllerImpl implements GameWorldController {
         if (this.model.getState() == GameState.OVER_WIN) {
             this.handleWin();
         }
-        
     }
     
     @Override

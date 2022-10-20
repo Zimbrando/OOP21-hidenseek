@@ -33,7 +33,7 @@ public class EntityTest {
         assertTrue(e.getComponents().isEmpty());
         
         e.attach(new LifeComponentImpl(100));
-        e.attach(new LinearMovementComponentImpl());  
+        e.attach(new LinearMovementComponentImpl(1));  
         e.detach(LifeComponent.class);
         final Set<Component> components = e.getComponents();
         assertEquals(1, components.size());
@@ -44,8 +44,8 @@ public class EntityTest {
     @Test
     public void testSingleComponentType() {
         final Entity e = new AbstractEntity(){};
-        e.attach(new LinearMovementComponentImpl());
-        e.attach(new LinearMovementComponentImpl());
+        e.attach(new LinearMovementComponentImpl(1));
+        e.attach(new LinearMovementComponentImpl(1));
         e.attach(new CollisionComponentImpl());
         e.attach(new CollisionComponentImpl());
         assertEquals(2, e.getComponents().size());

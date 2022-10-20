@@ -18,8 +18,8 @@ public enum PowerUpType {
 
     INCREASE_SPEED(entity -> entity.getComponent(MoveComponent.class).ifPresent(component -> {
         if (!component.isUpgraded()) {
-            component.setSpeed(component.getSpeed() + 0.5);
-            resetAfter(component, 10);
+            component.setSpeed(component.getSpeed() * 1.5);
+            resetAfter(component, 7);
         }
     })),
 

@@ -36,7 +36,7 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
         this.state = GameState.RUNNING;
         
         // ----- handle inputs:
-        this.handleInput(delta);
+        this.handleInput();
 
         // ----- handle SenseWorld:
         // - Gestione delle AI
@@ -62,10 +62,10 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
         this.keysPressed = Set.copyOf(keysPressed);
     }
 
-    private void handleInput(final double delta) {
+    private void handleInput() {
         this.world().forEach(entity -> {
             entity.getComponent(InputHandlerComponent.class)
-            .ifPresent(c -> c.computeScheme(this.keysPressed, delta));
+            .ifPresent(c -> c.computeScheme(this.keysPressed));
         });
     }
     

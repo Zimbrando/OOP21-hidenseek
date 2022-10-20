@@ -32,7 +32,7 @@ public class CollisionTest {
         positionComponent1.setPosition(new Point2D(100, 100));
         entity1.attach(positionComponent1);        
         //Move component
-        final MoveComponent moveComponent1 = new LinearMovementComponentImpl();
+        final MoveComponent moveComponent1 = new LinearMovementComponentImpl(1);
         entity1.attach(moveComponent1);        
         //Material component
         final MaterialComponent materialComponent1 = new MaterialComponentImpl();
@@ -51,7 +51,7 @@ public class CollisionTest {
         final PositionComponent positionComponent2 = new PositionComponentImpl();
         entity2.attach(positionComponent2);        
         //Move component
-        final MoveComponent moveComponent2 = new LinearMovementComponentImpl();
+        final MoveComponent moveComponent2 = new LinearMovementComponentImpl(1);
         entity2.attach(moveComponent2);        
         //Material component
         final MaterialComponent materialComponent2 = new MaterialComponentImpl();
