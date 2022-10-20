@@ -5,8 +5,8 @@ import javafx.scene.image.Image;
 
 public class KeyHudViewImpl implements KeyHudView {
 
-    private static final String KEY_SPRITE_BLANK = "sprites/key_01_transparent.png";
-    private static final String KEY_SPRITE = "sprites/key_01.png";
+    private static final String KEY_SPRITE_BLANK = "assets/key_01_transparent.png";
+    private static final String KEY_SPRITE = "assets/key_01.png";
     private static final int KEY_WIDTH = 50;
     private static final int KEY_HEIGHT = 50;
     private int numKeys;

@@ -112,6 +112,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
     private void handleGameOver() {
         //No more levels
         this.mainController.goToMenu();
+        this.loop.stop();
     }
     
     private void handleWin() {
@@ -122,6 +123,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
             return;
         }
         this.mainController.goToMenu();
+        this.loop.stop();
     }
     
     private void loadLevel(final GameLevel gameLevel) {

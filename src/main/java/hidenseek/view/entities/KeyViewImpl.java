@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 public class KeyViewImpl extends AbstractEntityView implements KeyView {
 
-    private static final String KEY_SPRITE = "sprites/key_01.png";
+    private static final String KEY_SPRITE = "assets/key_01.png";
     private static final int WIDTH = 40;
     private static final int HEIGHT = 40;
     

@@ -68,12 +68,33 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
 
     @Override
     public Boolean collisionTo(final Entity entity, final Point2D ownOffset) {
-        return segmentsMatch(ownOffset, entity, new Point2D(0, 0), (a, b) -> a.intersectingTo(b));
+        return segmentsMatch(ownOffset, entity, new Point2D(0, 0), (a, b) -> {
+            Point2D intersectionPoint = a.intersectingTo(b);
+            if(intersectionPoint == null) {
+                return false;
+            }
+            if(a.getPoint1().equals(intersectionPoint) || a.getPoint2().equals(intersectionPoint) || b.getPoint1().equals(intersectionPoint) || b.getPoint2().equals(intersectionPoint)) {
+                return false;
+            }
+            return true;
+        });
     }
     
     @Override
     public Boolean nearTo(Entity entity, final Point2D ownOffset) {
-        return segmentsMatch(ownOffset, entity, new Point2D(0, 0), (a, b) -> a.consecutiveTo(b) || a.adjacentTo(b));
+        return segmentsMatch(ownOffset, entity, new Point2D(0, 0), (a, b) -> {
+            Point2D intersectionPoint = a.intersectingTo(b);
+            if(intersectionPoint == null) {
+                return false;
+            }
+            if(a.getPoint1().equals(intersectionPoint) || a.getPoint2().equals(intersectionPoint) || b.getPoint1().equals(intersectionPoint) || b.getPoint2().equals(intersectionPoint)) {
+                return true;
+            }
+            return false;
+        });
+        
+        
+        //return segmentsMatch(ownOffset, entity, new Point2D(0, 0), (a, b) -> a.consecutiveTo(b) || a.adjacentTo(b));
     }
     
     @Override

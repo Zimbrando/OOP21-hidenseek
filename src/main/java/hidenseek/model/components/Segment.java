@@ -20,7 +20,7 @@ final public class Segment{
         return point2;
     }
     
-    public Boolean intersectingTo(final Segment segment) {
+    public Point2D intersectingTo(final Segment segment) {
         
         final Point2D l1p1 = getPoint1();
         final Point2D l1p2 = getPoint2();
@@ -38,27 +38,19 @@ final public class Segment{
         double det = DY1 * DX2 - DY2 * DX1;
         if (det == 0d)
         {
-            return false; //parallel lines
+            return null; //parallel lines
         }
         
         double x = (DX2 * C1 - DX1 * C2) / det;
         double y = (DY1 * C2 - DY2 * C1) / det;
-        Boolean online1 = 
-            (Math.min(l1p1.getX(), l1p2.getX()) < x || Math.min(l1p1.getX(), l1p2.getX()) == x) &&
-            (Math.max(l1p1.getX(), l1p2.getX()) > x || Math.max(l1p1.getX(), l1p2.getX()) == x) &&
-            (Math.min(l1p1.getY(), l1p2.getY()) < y || Math.max(l1p1.getY(), l1p2.getY()) == y) &&
-            (Math.max(l1p1.getY(), l1p2.getY()) > y || Math.max(l1p1.getY(), l1p2.getY()) == y);
+        Boolean online1 = (Math.min(l1p1.getX(), l1p2.getX()) <= x) && (Math.max(l1p1.getX(), l1p2.getX()) >= x) && (Math.min(l1p1.getY(), l1p2.getY()) <= y) && (Math.max(l1p1.getY(), l1p2.getY()) >= y);
+        Boolean online2 = (Math.min(l2p1.getX(), l2p2.getX()) <= x) && (Math.max(l2p1.getX(), l2p2.getX()) >= x) && (Math.min(l2p1.getY(), l2p2.getY()) <= y) && (Math.max(l2p1.getY(), l2p2.getY()) >= y);
         
-        Boolean online2 = 
-            (Math.min(l2p1.getX(), l2p2.getX()) < x || Math.min(l2p1.getX(), l2p2.getX()) == x) &&
-            (Math.max(l2p1.getX(), l2p2.getX()) > x || Math.max(l2p1.getX(), l2p2.getX()) == x) &&
-            (Math.min(l2p1.getY(), l2p2.getY()) < y || Math.max(l2p1.getY(), l2p2.getY()) == y) &&
-            (Math.max(l2p1.getY(), l2p2.getY()) > y || Math.max(l2p1.getY(), l2p2.getY()) == y);
-        
-        if (online1 && online2)
-            return true;
+        if (online1 && online2) {            
+            return new Point2D(x, y);
+        }
     
-        return false; 
+        return null; 
     }
     
     public Boolean consecutiveTo(final Segment segment) {
@@ -74,7 +66,7 @@ final public class Segment{
     
     private Boolean containsPoint(Point2D point) {
 
-        final double t = 5; //tolerance
+        final double t = 0; //tolerance
         
         
         // ensure points are collinear
@@ -114,5 +106,11 @@ final public class Segment{
         }
 
         return true;*/
+    }
+    
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "[" + point1.toString() + "; " + point2.toString() + "]";
     }
 }

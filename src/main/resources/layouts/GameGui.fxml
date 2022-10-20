@@ -16,7 +16,7 @@
       <children>
       	 <ImageView id="boxImage" fitWidth="1600.0" fitHeight="900.0" pickOnBounds="true" preserveRatio="true">    
 		    <image>
-		       <Image url="@../levels/level1.jpg" />
+		       <Image url="@../assets/terrain-texture.jpg" />
 		    </image>
 		 </ImageView>
          <Canvas id="gameMainCanvas" width="1600.0" height="900.0"/>

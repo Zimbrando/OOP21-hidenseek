@@ -58,7 +58,7 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
                 
                 while (forceX > 0 && !forceXAccepted) {
                     final int finalForceX = forceX * forceXSign;
-                    if (this.world().stream().noneMatch(entity1 -> entity1.hasComponent(MaterialComponent.class) && collisionComponent.get().collisionTo(entity1, new Point2D(finalForceX + forceXSign, 0)))) {                        
+                    if (this.world().stream().noneMatch(entity1 -> entity1.hasComponent(MaterialComponent.class) && collisionComponent.get().collisionTo(entity1, new Point2D(finalForceX, 0)))) {                        
                         resultantOffset = resultantOffset.add(new Point2D(finalForceX, 0));
                         forceXAccepted = true;
                         break;
@@ -68,7 +68,7 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
 
                 while (forceY > 0 && !forceYAccepted) {
                     final int finalForceY = forceY * forceYSign;
-                    if (this.world().stream().noneMatch(entity1 -> entity1.hasComponent(MaterialComponent.class) && collisionComponent.get().collisionTo(entity1, new Point2D(0, finalForceY + forceYSign)))) {                        
+                    if (this.world().stream().noneMatch(entity1 -> entity1.hasComponent(MaterialComponent.class) && collisionComponent.get().collisionTo(entity1, new Point2D(0, finalForceY)))) {                        
                         resultantOffset = resultantOffset.add(new Point2D(0, finalForceY));
                         forceYAccepted = true;
                         break;
@@ -94,7 +94,7 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
                     return;
                 }
                 
-                if(collisionComponent.get().collisionOrNearTo(entity1, new Point2D(0, 0))){
+                if(collisionComponent.get().collisionTo(entity1, new Point2D(0, 0))){
                     collisionComponent.get().onCollision(entity1);
                     entityCollisionComponent.get().onCollision(entity);
                 }

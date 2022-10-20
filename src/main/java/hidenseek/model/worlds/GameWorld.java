@@ -14,5 +14,7 @@ public interface GameWorld extends EntityWorld{
     
     GameState getState();
     
+    void setState(GameState gameState);
+    
     void setKeys(int keys);
 }
