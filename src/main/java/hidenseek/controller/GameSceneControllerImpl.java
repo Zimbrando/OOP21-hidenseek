@@ -1,53 +1,20 @@
 package hidenseek.controller;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import hidenseek.controller.entities.EntityController;
-import hidenseek.controller.entities.EntityControllerImpl;
-import hidenseek.controller.entities.MovableEntityControllerImpl;
-import hidenseek.controller.entities.PlayerControllerImpl;
-import hidenseek.controller.entities.WallControllerImpl;
-import hidenseek.model.GameLevel;
-import hidenseek.model.GameLevelImpl;
 import hidenseek.model.SceneManagerImpl;
-import hidenseek.model.components.physics.PositionComponent;
-import hidenseek.model.entities.Entity;
-import hidenseek.model.entities.Monster;
-import hidenseek.model.entities.Player;
-import hidenseek.model.entities.PowerUp;
-import hidenseek.model.entities.Wall;
 import hidenseek.view.CanvasDeviceImpl;
 import hidenseek.view.Renderer;
 import hidenseek.view.RendererImpl;
-import hidenseek.view.entities.KeyView;
-import hidenseek.view.entities.KeyViewImpl;
-import hidenseek.view.entities.MonsterView;
-import hidenseek.view.entities.MonsterViewImpl;
-import hidenseek.view.entities.PowerUpView;
-import hidenseek.view.entities.PowerUpViewImpl;
-import hidenseek.view.entities.WallView;
-import hidenseek.view.entities.WallViewImpl;
-import hidenseek.view.huds.KeyHudView;
-import hidenseek.view.huds.KeyHudViewImpl;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class GameSceneControllerImpl implements GameSceneController {
@@ -145,7 +112,6 @@ public class GameSceneControllerImpl implements GameSceneController {
 
     @Override
     public void goToGame() {
-        //TODO BUG: if you go back in the GameMenu, you can't create a new game
         final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(4);
         
         sceneManager.activate(gameGuiPath);

@@ -1,19 +1,26 @@
 package hidenseek.model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import hidenseek.controller.HudController;
 import hidenseek.controller.KeyHudControllerImpl;
 import hidenseek.controller.entities.EntityController;
-import hidenseek.controller.entities.EntityControllerImpl;
-import hidenseek.controller.entities.MovableEntityControllerImpl;
+import hidenseek.controller.entities.KeyControllerImpl;
+import hidenseek.controller.entities.MonsterControllerImpl;
 import hidenseek.controller.entities.PlayerControllerImpl;
+import hidenseek.controller.entities.PowerUpControllerImpl;
 import hidenseek.controller.entities.WallControllerImpl;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.Key;
@@ -22,184 +29,146 @@ import hidenseek.model.entities.Player;
 import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
 import hidenseek.model.enums.PowerUpType;
-import hidenseek.view.entities.KeyView;
-import hidenseek.view.entities.KeyViewImpl;
-import hidenseek.view.entities.MonsterViewImpl;
-import hidenseek.view.entities.PowerUpView;
-import hidenseek.view.entities.PowerUpViewImpl;
-import hidenseek.view.entities.WallView;
-import hidenseek.view.entities.WallViewImpl;
 import hidenseek.view.huds.KeyHudView;
 import hidenseek.view.huds.KeyHudViewImpl;
 import javafx.geometry.Point2D;
 
 public class GameLevelImpl implements GameLevel {
 
-    private Optional<Entity> player = Optional.empty();
+    private final Set<Wall> walls = new LinkedHashSet<>();
+    private final Set<Player> players = new LinkedHashSet<>();
+    private final Set<Monster> monsters = new LinkedHashSet<>();
+    private final Map<PowerUpType, List<Entity>> powerUps = new HashMap<>();
+    private final Set<Key> keys = new LinkedHashSet<Key>();
     
-    private Set<Entity> getWalls() {
-
-        return new LinkedHashSet<Entity>(){{
-            add(new Wall(new Point2D(48, 220), 
-                    new LinkedHashSet<Point2D>(){{
-                        add(new Point2D(0, 0));
-                        add(new Point2D(118, 0));
-                        add(new Point2D(118, 17));
-                        add(new Point2D(0, 17));
-                    }}
-                    ));
-
-            add(new Wall(new Point2D(461, 45), 
-                    new LinkedHashSet<Point2D>(){{
-                        add(new Point2D(175, 243));
-                        add(new Point2D(175, 17));
-                        add(new Point2D(197, 17));
-                        add(new Point2D(197, 0));
-                        add(new Point2D(79, 0));
-                        add(new Point2D(79, 17));
-                        add(new Point2D(158, 17));
-                        add(new Point2D(158, 176));
-                        add(new Point2D(96, 176));
-                        add(new Point2D(96, 92));
-                        add(new Point2D(117, 92));
-                        add(new Point2D(117, 75));
-                        add(new Point2D(0, 75));
-                        add(new Point2D(0, 92));
-                        add(new Point2D(80, 92));
-                        add(new Point2D(80, 192));
-                        add(new Point2D(157, 192));
-                        add(new Point2D(157, 243));
-                    }}
-                    ));
-
-            add(new Wall(new Point2D(217, 248), 
-                    new LinkedHashSet<Point2D>(){{
-                        add(new Point2D(127, 213));
-                        add(new Point2D(127, 29));
-                        add(new Point2D(110, 29));
-                        add(new Point2D(110, 110));
-                        add(new Point2D(37, 110));
-                        add(new Point2D(37, 0));
-                        add(new Point2D(20, 0));
-                        add(new Point2D(20, 110));
-                        add(new Point2D(0, 110));
-                        add(new Point2D(0, 127));
-                        add(new Point2D(110, 127));
-                        add(new Point2D(110, 213));
-                    }}
-                    ));
-
-            add(new Wall(new Point2D(0, 75), 
-                    new LinkedHashSet<Point2D>(){{
-                        add(new Point2D(234, 118));
-                        add(new Point2D(234, 0));
-                        add(new Point2D(0, 0));
-                        add(new Point2D(0, 17));
-                        add(new Point2D(217, 17));
-                        add(new Point2D(217, 118));
-                    }}
-                    ));
-
-            add(new Wall(new Point2D(288, 0), 
-                    new LinkedHashSet<Point2D>(){{
-                        add(new Point2D(0, 0));
-                        add(new Point2D(17, 0));
-                        add(new Point2D(17, 118));
-                        add(new Point2D(0, 118));
-                    }}
-                    ));
-
-            add(new Wall(new Point2D(308, 101), 
-                    new LinkedHashSet<Point2D>(){{
-                        add(new Point2D(127, 308));
-                        add(new Point2D(127, 110));
-                        add(new Point2D(60, 110));
-                        add(new Point2D(60, 0));
-                        add(new Point2D(43, 0));
-                        add(new Point2D(43, 110));
-                        add(new Point2D(0, 110));
-                        add(new Point2D(0, 127));
-                        add(new Point2D(110, 127));
-                        add(new Point2D(110, 308));
-                    }}
-                    ));
-
-            add(new Wall(new Point2D(27, 0), 
-                    new LinkedHashSet<Point2D>(){{
-                        add(new Point2D(0, 0));
-                        add(new Point2D(220, 0));
-                        add(new Point2D(220, 17));
-                        add(new Point2D(0, 17));
-                    }}
-                    ));
-        }};
+    public GameLevelImpl(final int levelID) {
+        try {
+            
+           final File inputFile = new File(getClass().getResource("/levels/level" + levelID + ".xml").getFile());
+           final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
+           doc.getDocumentElement().normalize();
+           
+           final NodeList xmlWalls = doc.getElementsByTagName("wall");
+           final NodeList xmlPlayers = doc.getElementsByTagName("player");
+           final NodeList xmlMonsters = doc.getElementsByTagName("monster");
+           final NodeList xmlPowerUps = doc.getElementsByTagName("powerup");
+           final NodeList xmlKeys = doc.getElementsByTagName("key");
+           
+           //parse Walls
+           for(int i=0; i<xmlWalls.getLength(); i++){
+               final Set<Point2D> wallVertices = new LinkedHashSet <Point2D>();               
+               final Node xmlWall = xmlWalls.item(i);
+               final Point2D wallPosition = deserializePoint(xmlWall.getAttributes().getNamedItem("position").getNodeValue());
+               final NodeList xmlWallVertices = xmlWall.getChildNodes();
+               for(int y=0; y<xmlWallVertices.getLength(); y++){
+                   if(xmlWallVertices.item(y).getNodeName() != "vertex") {
+                       continue;
+                   }
+                   final Node xmlWallVertex = xmlWallVertices.item(y);
+                   final Point2D wallVertexPosition = deserializePoint(xmlWallVertex.getAttributes().getNamedItem("position").getNodeValue());
+                   wallVertices.add(wallVertexPosition);
+               }
+               walls.add(new Wall(wallPosition, wallVertices));               
+           }
+           
+           //parse Players
+           for(int i=0; i<xmlPlayers.getLength(); i++){              
+               final Node xmlPlayer = xmlPlayers.item(i);
+               final Point2D playerPosition = deserializePoint(xmlPlayer.getAttributes().getNamedItem("position").getNodeValue());
+               final Player player = new Player(playerPosition);
+               players.add(player);               
+           }
+           
+           //parse Monsters
+           for(int i=0; i<xmlMonsters.getLength(); i++){              
+               final Node xmlMonster = xmlMonsters.item(i);
+               final Point2D monsterPosition = deserializePoint(xmlMonster.getAttributes().getNamedItem("position").getNodeValue());
+               final Monster monster = new Monster(monsterPosition);
+               monsters.add(monster);               
+           }
+           
+           //parse PowerUps
+           for(int i=0; i<xmlPowerUps.getLength(); i++){              
+               final Node xmlPowerUp = xmlPowerUps.item(i);
+               final Point2D powerUpPosition = deserializePoint(xmlPowerUp.getAttributes().getNamedItem("position").getNodeValue());
+               final PowerUpType type = PowerUpType.generateRandomType();
+               this.addPowerup(powerUpPosition, type);              
+           }
+           
+           //parse Keys
+           for(int i=0; i<xmlKeys.getLength(); i++){              
+               final Node xmlKey = xmlKeys.item(i);
+               Point2D keyPosition = deserializePoint(xmlKey.getAttributes().getNamedItem("position").getNodeValue());
+               Key key = new Key(keyPosition);
+               keys.add(key);               
+           }
+           
+           
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
     }
-
-    private Map<PowerUpType, List<Entity>> getPowerUps() {
-        List<Point2D> positions = List.of(new Point2D(200, 600), new Point2D(300, 600), new Point2D(500, 600), new Point2D(800, 200));
-        Map<PowerUpType, List<Entity>> powerups = new HashMap<>();
-        positions.forEach(pos -> {
-            PowerUpType type = PowerUpType.generateRandomType();
-            if (powerups.containsKey(type)) {
-                List<Entity> typeEntity = powerups.get(type);
-                typeEntity.add(new PowerUp(type, pos));
-                powerups.put(type, typeEntity);
-            } else {
-                List<Entity> typeEntity = new ArrayList<>(List.of(new PowerUp(type, pos)));
-                powerups.put(type, typeEntity);    
-            }
-        });
-        return powerups;
+    
+    private Point2D deserializePoint(String xmlValue) {
+        String[] coordinates = xmlValue.split(",");
+        return new Point2D(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
     }
-
-
-    private Set<Entity> getKeys() {
-        return Set.of(new Key(new Point2D(500, 500)), new Key(new Point2D(350, 750)));
+    
+    private void addPowerup(final Point2D pos, final PowerUpType type) {
+        if (this.powerUps.containsKey(type)) {
+            List<Entity> typeEntity = powerUps.get(type);
+            typeEntity.add(new PowerUp(type, pos));
+            powerUps.put(type, typeEntity);
+        } else {
+            List<Entity> typeEntity = new ArrayList<>(List.of(new PowerUp(type, pos)));
+            powerUps.put(type, typeEntity);    
+        }
     }
 
     @Override
     public Set<EntityController> getEntities() {
-        Set<EntityController> controllers = new LinkedHashSet<>();
+        final Set<EntityController> controllers = new LinkedHashSet<>();
 
-        this.getWalls().forEach(wall -> {
-            controllers.add(new WallControllerImpl(wall, new WallViewImpl()));
+        this.walls.forEach(wall -> {
+            controllers.add(new WallControllerImpl(wall));
         });
 
-        this.getPowerUps().forEach((type, powerups) -> {
+        this.powerUps.forEach((type, powerups) -> {
             powerups.forEach(powerup -> {
-                controllers.add(new EntityControllerImpl<PowerUpView>(powerup, new PowerUpViewImpl(type)));        
+                controllers.add(new PowerUpControllerImpl(type, powerup));        
             });
         });
 
-        this.getKeys().forEach(key -> {
-            controllers.add(new EntityControllerImpl<KeyView>(key, new KeyViewImpl()));
+        this.keys.forEach(key -> {
+            controllers.add(new KeyControllerImpl(key));
         });
 
-        final EntityController player = new PlayerControllerImpl();
-        player.setPosition(new Point2D(30, 30));
-        controllers.add(player);
-        this.player = Optional.of(player.getModel());
-        
-        final EntityController monster = new MovableEntityControllerImpl<>(new Monster(), new MonsterViewImpl());
-        monster.setPosition(new Point2D(700, 400));
-        controllers.add(monster);
+        this.players.forEach(player -> {
+            final EntityController playerController = new PlayerControllerImpl(player);
+            controllers.add(playerController);   
+        });
+       
+        this.monsters.forEach(monster -> {
+            final EntityController monsterController = new MonsterControllerImpl(monster);
+            controllers.add(monsterController);            
+        });
 
         return controllers;
     }
 
     @Override
-    public int keysInLevel() {
-        return this.getKeys().size();
+    public Set<HudController> getHuds() {
+        final Set<HudController> huds = new LinkedHashSet<>();
+        final KeyHudView keyHudView = new KeyHudViewImpl(new Point2D(1400, 30));
+        keyHudView.setMaxKeys(this.getKeysNumber());
+        final HudController keyHud = new KeyHudControllerImpl(this.players.stream().findAny().get(), keyHudView);
+        huds.add(keyHud);
+        return huds;
     }
 
     @Override
-    public Set<HudController> getHuds() {
-        Set<HudController> huds = new LinkedHashSet<>();
-        KeyHudView keyHudView = new KeyHudViewImpl(new Point2D(1400, 40));
-        keyHudView.setMaxKeys(this.keysInLevel());
-        final HudController keyHud = new KeyHudControllerImpl(player.get(), keyHudView);
-        huds.add(keyHud);
-        return huds;
+    public int getKeysNumber() {
+        return this.keys.size();
     }
 
 }

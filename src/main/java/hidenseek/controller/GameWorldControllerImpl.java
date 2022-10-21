@@ -133,6 +133,6 @@ public final class GameWorldControllerImpl implements GameWorldController {
         this.model.clearEntities();
         gameLevel.getEntities().forEach(entityController -> this.addEntity(entityController));
         gameLevel.getHuds().forEach(hudController -> this.addHud(hudController));
-        this.model.setKeys(gameLevel.keysInLevel());
+        this.model.setKeys(gameLevel.getKeysNumber());
     }
 }

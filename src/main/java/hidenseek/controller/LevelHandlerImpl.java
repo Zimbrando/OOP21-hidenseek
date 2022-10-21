@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import hidenseek.model.GameLevel;
-import hidenseek.model.GameLevel2Impl;
 import hidenseek.model.GameLevelImpl;
 
 public class LevelHandlerImpl implements LevelHandler {
@@ -13,9 +12,8 @@ public class LevelHandlerImpl implements LevelHandler {
     private int currentLevel = 0;
     
     public LevelHandlerImpl() {
-        GameLevel level1 = new GameLevelImpl();
-        GameLevel level2 = new GameLevel2Impl();
-        this.gameLevels = List.of(level1, level2);
+        GameLevel level1 = new GameLevelImpl(1);
+        this.gameLevels = List.of(level1);
     }
     
     @Override

@@ -25,6 +25,10 @@ public enum PowerUpType {
 
     INCREASE_VISIBILITY(entity -> System.out.println("INCREASE LIGHT RANGE"));
 
+    public static PowerUpType getValue(int value) {
+        return new PowerUpType[]{INCREASE_SPEED, INCREASE_VISIBILITY}[value];
+    }
+    
     /**
      * The effect applied to the Entity using the PowerUp
      */

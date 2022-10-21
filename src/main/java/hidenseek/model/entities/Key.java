@@ -8,11 +8,11 @@ public class Key extends AbstractCollectableEntity {
 
     private static final int HITBOX_SIZE = 30;
     
-    public Key(final Point2D pos) {
+    public Key(final Point2D position) {
         super(HITBOX_SIZE);
-        PositionComponent position = new PositionComponentImpl();
-        position.setPosition(pos);
-        this.attach(position);
+        PositionComponent positionComponent = new PositionComponentImpl();
+        positionComponent.setPosition(position);
+        this.attach(positionComponent);
     }
 
 }

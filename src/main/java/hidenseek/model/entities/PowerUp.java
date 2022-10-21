@@ -21,6 +21,7 @@ public final class PowerUp extends AbstractEntity {
     
     public PowerUp(final PowerUpType type, final Point2D pos) {
         super();
+        
         this.attach(new OneTimeLifeComponentImpl());
         PositionComponent position = new PositionComponentImpl();
         position.setPosition(pos);

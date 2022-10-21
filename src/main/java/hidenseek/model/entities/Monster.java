@@ -26,14 +26,16 @@ public class Monster extends AbstractEntity {
     
     private static final double MONSTER_SPEED = 125;
     
-    public Monster() {
+    public Monster(final Point2D position) {
         super();
         
-        this.attach(new LifeComponentImpl(1));  
+        //Life component
+        final LifeComponent lifeComponent = new LifeComponentImpl(1);
+        this.attach(lifeComponent);
         
         //Position component
         final PositionComponent positionComponent = new PositionComponentImpl();
-        positionComponent.setPosition(new Point2D(0, 0));
+        positionComponent.setPosition(position);
         this.attach(positionComponent);
         
         //Move component
