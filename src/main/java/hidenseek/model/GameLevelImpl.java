@@ -67,7 +67,7 @@ public class GameLevelImpl implements GameLevel {
            
            //parse Walls
            for(int i=0; i<xmlWalls.getLength(); i++){
-               Set<Point2D> wallVertices = new HashSet<Point2D>();               
+               Set<Point2D> wallVertices = new LinkedHashSet <Point2D>();               
                Node xmlWall = xmlWalls.item(i);
                Point2D wallPosition = deserializePoint(xmlWall.getAttributes().getNamedItem("position").getNodeValue());
                NodeList xmlWallVertices = xmlWall.getChildNodes();

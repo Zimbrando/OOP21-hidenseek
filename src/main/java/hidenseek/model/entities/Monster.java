@@ -29,7 +29,9 @@ public class Monster extends AbstractEntity {
     public Monster(final Point2D position) {
         super();
         
-        this.attach(new LifeComponentImpl(1));  
+        //Life component
+        final LifeComponent lifeComponent = new LifeComponentImpl(1);
+        this.attach(lifeComponent);
         
         //Position component
         final PositionComponent positionComponent = new PositionComponentImpl();
