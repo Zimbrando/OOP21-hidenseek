@@ -21,7 +21,7 @@ public class MovableEntityControllerImpl<V extends EntityMovableView>  extends E
             final double intensity = c.getResultantForce().getIntensity();
             // get direction
             final double direction = c.getResultantForce().getDirection();
-            // set view direciton
+            // set view direction
             if(intensity > 0) {
                 this.getView().setDirection(Direction.UP);
             }

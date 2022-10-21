@@ -7,10 +7,10 @@ import javafx.scene.image.Image;
 
 public class MonsterViewImpl extends AbstractEntityMovableView implements MonsterView {
 
-    private static Image MONSTER_TOP = new Image("assets/player-top.png");
-    private static Image MONSTER_RIGHT = new Image("assets/player-right.png");
-    private static Image MONSTER_BOTTOM = new Image("assets/player-bottom.png");
-    private static Image MONSTER_LEFT= new Image("assets/player-left.png");
+    private static Image MONSTER_TOP = new Image("assets/monster-top.png");
+    private static Image MONSTER_RIGHT = new Image("assets/monster-right.png");
+    private static Image MONSTER_BOTTOM = new Image("assets/monster-bottom.png");
+    private static Image MONSTER_LEFT= new Image("assets/monster-left.png");
     private static final int SPRITE_WIDTH = 40;
     private static final int SPRITE_HEIGHT = 40;
     
