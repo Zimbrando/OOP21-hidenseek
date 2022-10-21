@@ -12,7 +12,7 @@ import javafx.geometry.Point2D;
 
 public class Wall extends AbstractEntity {
     
-    public Wall(Point2D position, Set<Point2D> shape) {
+    public Wall(final Point2D position, final Set<Point2D> shape) {
         super();
         
         //Position component

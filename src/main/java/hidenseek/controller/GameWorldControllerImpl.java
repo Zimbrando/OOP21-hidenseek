@@ -4,11 +4,24 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import hidenseek.controller.entities.EntityController;
+import hidenseek.controller.entities.KeyControllerImpl;
+import hidenseek.controller.entities.MonsterControllerImpl;
+import hidenseek.controller.entities.PlayerControllerImpl;
+import hidenseek.controller.entities.PowerUpControllerImpl;
+import hidenseek.controller.entities.WallControllerImpl;
 import hidenseek.model.GameLevel;
 import hidenseek.model.entities.Entity;
+import hidenseek.model.entities.Player;
 import hidenseek.model.enums.GameState;
 import hidenseek.model.worlds.GameWorld;
 import hidenseek.model.worlds.GameWorldImpl;
+import hidenseek.view.KeyHudView;
+import hidenseek.view.KeyHudViewImpl;
+import hidenseek.view.entities.MonsterView;
+import hidenseek.view.entities.MonsterViewImpl;
+import hidenseek.view.entities.PlayerViewImpl;
+import hidenseek.view.entities.WallViewImpl;
+import javafx.geometry.Point2D;
 
 public final class GameWorldControllerImpl implements GameWorldController {
     
@@ -131,8 +144,21 @@ public final class GameWorldControllerImpl implements GameWorldController {
         this.entities.clear();
         this.huds.clear();
         this.model.clearEntities();
-        gameLevel.getEntities().forEach(entityController -> this.addEntity(entityController));
-        gameLevel.getHuds().forEach(hudController -> this.addHud(hudController));
-        this.model.setKeys(gameLevel.keysInLevel());
+        
+        gameLevel.getWalls().forEach(wall -> this.addEntity(new WallControllerImpl(wall)));
+        gameLevel.getPlayers().forEach(player -> this.addEntity(new PlayerControllerImpl(player)));
+        gameLevel.getMonsters().forEach(monster -> this.addEntity(new MonsterControllerImpl(monster)));
+        gameLevel.getPowerUps().forEach(powerup -> this.addEntity(new PowerUpControllerImpl(powerup.getType(), powerup)));
+        gameLevel.getKeys().forEach(key -> this.addEntity(new KeyControllerImpl(key)));
+
+        int currHudY = 0;
+        for(Player player : gameLevel.getPlayers()) {
+            KeyHudView keyHudView = new KeyHudViewImpl(new Point2D(1400, 40 + 60 * (currHudY++)));
+            keyHudView.setMaxKeys(gameLevel.getKeys().size());
+            final HudController keyHud = new KeyHudControllerImpl(player, keyHudView);
+            addHud(keyHud);
+        }
+
+        this.model.setKeys(gameLevel.getKeys().size());
     }
 }

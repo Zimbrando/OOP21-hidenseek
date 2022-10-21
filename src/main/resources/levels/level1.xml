@@ -1,0 +1,34 @@
+<level id="1" name="Ruins of War" gravity="1.5">
+	<wall position="10,20">
+		<vertex position="0,0"/>
+		<vertex position="0,10"/>
+		<vertex position="50,10"/>
+		<vertex position="50,0"/>
+	</wall>
+	
+	<wall position="150,60">
+		<vertex position="0,0"/>
+		<vertex position="0,10"/>
+		<vertex position="50,10"/>
+		<vertex position="50,0"/>
+	</wall>
+	
+	<player position="30,40">
+	</player>
+	
+	<monster position="150,80">
+	</monster>
+	
+	<powerup type="0" position="60,250">
+	</powerup>
+	
+	<powerup type="1" position="200,30">
+	</powerup>
+	
+	<key position="250,180">
+	</key>
+	
+	<key position="60,80">
+	</key>
+
+</level>

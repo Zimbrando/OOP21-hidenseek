@@ -28,7 +28,7 @@ public final class Player extends AbstractEntity {
     
     private static final double PLAYER_SPEED = 150;
     
-    public Player() {
+    public Player(final Point2D position) {
         super();
         
         //Life component
@@ -37,7 +37,7 @@ public final class Player extends AbstractEntity {
         
         //Position component
         final PositionComponent positionComponent = new PositionComponentImpl();
-        positionComponent.setPosition(new Point2D(0, 0));
+        positionComponent.setPosition(position);
         this.attach(positionComponent);
         
         //Move component

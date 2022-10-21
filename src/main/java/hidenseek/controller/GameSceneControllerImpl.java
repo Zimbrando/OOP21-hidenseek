@@ -142,7 +142,6 @@ public class GameSceneControllerImpl implements GameSceneController {
 
     @Override
     public void goToGame() {
-        //TODO BUG: if you go back in the GameMenu, you can't create a new game
         final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(0);
         
         sceneManager.activate(gameGuiPath);
