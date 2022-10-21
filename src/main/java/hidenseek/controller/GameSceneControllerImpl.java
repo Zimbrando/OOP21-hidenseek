@@ -57,26 +57,27 @@ public class GameSceneControllerImpl implements GameSceneController {
     private final SceneManagerImpl sceneManager = new SceneManagerImpl();
     private final static String RESOURCE_LOCATION = "./layouts/";
     private final static String STYLING_LOCATION = "./stylesheets/";
-    private final List<String> interfacesPaths;
+    private final List<String> interfacesPaths = List.of("MainMenuGui.fxml","GameSettingsGui.fxml","GameStatsGui.fxml","GameOverGui.fxml","GameGui.fxml");
+    
+    
 
     public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {
-        final URL url = getClass().getResource("/layouts/");
-        final Path path = Paths.get(url.toURI());
+        //final URL url = getClass().getResource("/layouts/");
+        //final Path path = Paths.get(url.toURI());
         
         stage.setResizable(false);
         
-        this.interfacesPaths = Files.walk(path, 1)
-        .skip(1)
-        .map(e -> e.toString())
-        .collect(Collectors.toList())
-        .stream()
-        .map(e -> e.substring(e.lastIndexOf(File.separator)).substring(1))
-        .sorted()
-        .collect(Collectors.toList());
-        
+//        this.interfacesPaths = Files.walk(path, 1)
+//        .skip(1)
+//        .map(e -> e.toString())
+//        .collect(Collectors.toList())
+//        .stream()
+//        .map(e -> e.substring(e.lastIndexOf(File.separator)).substring(1))
+//        .sorted()
+//        .collect(Collectors.toList());
         this.mainStage = stage;
         
-        this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(3), STYLING_LOCATION + "MainMenuStyle.css");
+        this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(0), STYLING_LOCATION + "MainMenuStyle.css");
        
         this.init();
         
@@ -127,8 +128,8 @@ public class GameSceneControllerImpl implements GameSceneController {
         return this.sceneManager.getSceneRootByScreen(name);
     }
     
-    public void resumeGame(final GameGuiController controller) {
-        controller.setPauseMode();
+    public void toggleResumeGame(final GameGuiController controller) {
+        
     }
     
     public void pauseGame(final GameGuiController controller) {
@@ -139,13 +140,13 @@ public class GameSceneControllerImpl implements GameSceneController {
         
     @Override
     public void goToMenu() {
-        sceneManager.activate(RESOURCE_LOCATION+this.interfacesPaths.get(3));
+        sceneManager.activate(RESOURCE_LOCATION+this.interfacesPaths.get(0));
     }
 
     @Override
     public void goToGame() {
         //TODO BUG: if you go back in the GameMenu, you can't create a new game
-        final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(0);
+        final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(4);
         
         sceneManager.activate(gameGuiPath);
          
@@ -155,25 +156,24 @@ public class GameSceneControllerImpl implements GameSceneController {
         gameCanvas.setFocusTraversable(true);
         
         final InputScheme input = new InputSchemeImpl();
-        input.assignInputNode(gameCanvas);
+        input.assignInputNode(gamePane);
         
         final Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
         final GameWorldController gameController = new GameWorldControllerImpl(this, renderer, input, new LevelHandlerImpl());
         
-        gamePane.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.ESCAPE) {
-                gameController.pause();
-            }
-          
-            if (e.getCode() == KeyCode.R) {
-                gameController.resume();
-            }
-        });
+        final GameGuiController temp = (GameGuiController) sceneManager.getSceneControllerByName(gameGuiPath);
+        temp.setGameController(gameController);
+        gameCanvas.setOnKeyPressed(e -> {
+        if (e.getCode() == KeyCode.ESCAPE) {
+            gameController.pause();
+            this.pauseGame(temp);
+        }
+       });
     }
 
     @Override
     public void goToPause() {
-        final String pauseGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(4);
+        final String pauseGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(3);
         
         sceneManager.activate(pauseGuiPath);       
     }

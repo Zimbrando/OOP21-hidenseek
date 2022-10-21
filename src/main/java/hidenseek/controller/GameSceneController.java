@@ -49,12 +49,12 @@ public interface GameSceneController {
      */
     Pane getSceneRoot(final String name);
     
-    /**
-     * 
-     * @param controller
-     *          The gui controller
-     */
-    void resumeGame(final GameGuiController controller);
+//    /**
+//     * 
+//     * @param controller
+//     *          The gui controller
+//     */
+//    void resumeGame(final GameGuiController controller);
     
     /**
      * 

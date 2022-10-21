@@ -7,7 +7,8 @@ import javafx.scene.text.Text;
 
 public class GameGuiController implements MenuController {
     
-    private GameSceneController gameController;
+    private GameSceneController gameSceneController;
+    private GameWorldController gameController;
     private boolean paused;
     
     @FXML
@@ -26,13 +27,14 @@ public class GameGuiController implements MenuController {
     
     @FXML
     public void handleResumeClicked() {
+        this.gameController.resume();
         setPauseMode();
         //this.gameController.resumeGame(null);
     }
     
     @FXML
     public void handlegoToMainMenuClicked() {
-        this.gameController.goToMenu();
+        this.gameSceneController.goToMenu();
         setPauseMode();
     }
     
@@ -46,9 +48,14 @@ public class GameGuiController implements MenuController {
         return this.paused;
     }
     
-    @Override
-    public void setSceneController(final GameSceneController gameController) {
+    public void setGameController(final GameWorldController gameController) {
         this.gameController = gameController; 
+    }
+
+    
+    @Override
+    public void setSceneController(final GameSceneController gameSceneController) {
+        this.gameSceneController = gameSceneController; 
     }
 
 }

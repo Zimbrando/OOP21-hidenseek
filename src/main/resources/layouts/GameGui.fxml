@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -11,23 +12,23 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<Pane id="gameRoot" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15" fx:controller="hidenseek.controller.GameGuiController">
-    <AnchorPane id="mainPane" prefWidth="1600.0" prefHeight="900.0">
+<Pane id="gameRoot" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hidenseek.controller.GameGuiController">
+    <AnchorPane id="mainPane" prefHeight="900.0" prefWidth="1600.0">
       <children>
-      	 <ImageView id="boxImage" fitWidth="1600.0" fitHeight="900.0" pickOnBounds="true" preserveRatio="true">    
+      	 <ImageView id="boxImage" fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true">    
 		    <image>
 		       <Image url="@../assets/terrain-texture.png" />
 		    </image>
 		 </ImageView>
-         <Canvas id="gameMainCanvas" width="1600.0" height="900.0"/>
-         <Pane fx:id="pausePane" styleClass="pausePane" layoutX="50.0" layoutY="50.0" prefHeight="980.0" prefWidth="1820.0" visible="false">
+         <Canvas id="gameMainCanvas" height="900.0" width="1600.0" />
+         <Pane fx:id="pausePane" prefHeight="900" prefWidth="1600" styleClass="pausePane" visible="false">
             <children>
-               <Text fx:id="pauseTitle" fill="#eca623" layoutX="679.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pause" textAlignment="CENTER" wrappingWidth="500">
+               <Text fx:id="pauseTitle" fill="#eca623" layoutX="550.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pause" textAlignment="CENTER" wrappingWidth="500">
                   <font>
                      <Font name="Impact" size="90.0" />
                   </font>
                </Text>
-               <VBox alignment="CENTER" layoutX="444.0" layoutY="423.0" maxHeight="768.0" maxWidth="1024.0" prefHeight="0.0" prefWidth="932.0" spacing="25.0">
+               <VBox alignment="CENTER" layoutX="334.0" layoutY="383.0" maxHeight="768.0" maxWidth="1024.0" prefHeight="0.0" prefWidth="932.0" spacing="25.0">
                   <children>
                      <Button fx:id="resumeButton" onAction="#handleResumeClicked" prefHeight="80.0" prefWidth="500.0" text="RESUME">
                         <font>

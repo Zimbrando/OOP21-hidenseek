@@ -97,7 +97,6 @@ public final class GameWorldControllerImpl implements GameWorldController {
 
     @Override
     public void pause() {
-        System.out.println("Game paused: press 'R' to resume");
         this.loop.stop();
     }
 
