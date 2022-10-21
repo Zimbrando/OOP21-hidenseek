@@ -1,17 +1,17 @@
 package hidenseek.model.entities;
 
-import hidenseek.model.components.CollisionComponent;
-import hidenseek.model.components.CollisionComponentImpl;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.ObservableComponent;
 import hidenseek.model.components.OneTimeLifeComponentImpl;
-import hidenseek.model.components.PositionComponent;
-import hidenseek.model.components.PositionComponentImpl;
 import hidenseek.model.components.Trigger;
 import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.enums.Heart;
 import hidenseek.model.enums.PowerUpType;
 import hidenseek.model.components.hearts.HeartComponent;
+import hidenseek.model.components.physics.CollisionComponent;
+import hidenseek.model.components.physics.CollisionComponentImpl;
+import hidenseek.model.components.physics.PositionComponent;
+import hidenseek.model.components.physics.PositionComponentImpl;
 import hidenseek.model.events.CollisionEvent;
 import javafx.geometry.Point2D;
 

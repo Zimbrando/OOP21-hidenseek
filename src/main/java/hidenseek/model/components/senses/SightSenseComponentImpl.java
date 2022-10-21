@@ -1,6 +1,6 @@
 package hidenseek.model.components.senses;
 
-import hidenseek.model.components.PositionComponent;
+import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.SenseConfidence;
 import javafx.geometry.Point2D;

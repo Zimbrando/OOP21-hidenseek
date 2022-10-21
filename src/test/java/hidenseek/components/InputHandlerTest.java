@@ -11,8 +11,8 @@ import hidenseek.model.entities.Entity;
 import javafx.scene.input.KeyCode;
 import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.InputHandlerComponentImpl;
-import hidenseek.model.components.LinearMovementComponentImpl;
-import hidenseek.model.components.MoveComponent;
+import hidenseek.model.components.physics.LinearMovementComponentImpl;
+import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.entities.AbstractEntity;
 
 public class InputHandlerTest {

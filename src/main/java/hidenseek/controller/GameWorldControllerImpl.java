@@ -9,6 +9,7 @@ import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.GameState;
 import hidenseek.model.worlds.GameWorld;
 import hidenseek.model.worlds.GameWorldImpl;
+import hidenseek.view.Renderer;
 
 public final class GameWorldControllerImpl implements GameWorldController {
     

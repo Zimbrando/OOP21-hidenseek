@@ -1,5 +1,6 @@
 package hidenseek.model.components;
 
+import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.entities.Entity;
 
 final public class Utils {

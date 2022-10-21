@@ -1,5 +1,6 @@
-package hidenseek.model.components;
+package hidenseek.model.components.physics;
 
+import hidenseek.model.components.Component;
 import javafx.geometry.Point2D;
 
 public interface PositionComponent extends Component {

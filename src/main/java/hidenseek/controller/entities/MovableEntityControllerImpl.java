@@ -1,6 +1,6 @@
 package hidenseek.controller.entities;
 
-import hidenseek.model.components.MoveComponent;
+import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.Direction;
 import hidenseek.view.entities.EntityMovableView;

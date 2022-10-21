@@ -1,9 +1,10 @@
-package hidenseek.model.components;
+package hidenseek.model.components.physics;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiPredicate;
 
+import hidenseek.model.components.AbstractObservableComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.events.CollisionEvent;
 import javafx.geometry.Point2D;

@@ -1,4 +1,6 @@
-package hidenseek.view;
+package hidenseek.view.huds;
+
+import hidenseek.view.GraphicsDevice;
 
 public interface HudView {
 

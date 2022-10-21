@@ -7,14 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import hidenseek.model.entities.Entity;
-import hidenseek.model.components.CollisionComponent;
-import hidenseek.model.components.CollisionComponentImpl;
-import hidenseek.model.components.LinearMovementComponentImpl;
-import hidenseek.model.components.MaterialComponent;
-import hidenseek.model.components.MaterialComponentImpl;
-import hidenseek.model.components.MoveComponent;
-import hidenseek.model.components.PositionComponent;
-import hidenseek.model.components.PositionComponentImpl;
+import hidenseek.model.components.physics.CollisionComponent;
+import hidenseek.model.components.physics.CollisionComponentImpl;
+import hidenseek.model.components.physics.LinearMovementComponentImpl;
+import hidenseek.model.components.physics.MaterialComponent;
+import hidenseek.model.components.physics.MaterialComponentImpl;
+import hidenseek.model.components.physics.MoveComponent;
+import hidenseek.model.components.physics.PositionComponent;
+import hidenseek.model.components.physics.PositionComponentImpl;
 import hidenseek.model.entities.AbstractEntity;
 import javafx.geometry.Point2D;
 

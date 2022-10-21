@@ -9,8 +9,6 @@ public class Launcher extends Application {
 
     @Override
     public final void start(final Stage primaryStage) throws Exception {
-        
         final GameSceneController gameSceneController = new GameSceneControllerImpl(primaryStage);
-        
     }
 }

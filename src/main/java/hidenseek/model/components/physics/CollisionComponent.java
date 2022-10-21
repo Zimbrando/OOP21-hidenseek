@@ -1,7 +1,8 @@
-package hidenseek.model.components;
+package hidenseek.model.components.physics;
 
 import java.util.Set;
 
+import hidenseek.model.components.Component;
 import hidenseek.model.entities.Entity;
 import javafx.geometry.Point2D;
 

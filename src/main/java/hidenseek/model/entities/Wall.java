@@ -2,12 +2,12 @@ package hidenseek.model.entities;
 
 import java.util.Set;
 
-import hidenseek.model.components.CollisionComponent;
-import hidenseek.model.components.CollisionComponentImpl;
-import hidenseek.model.components.MaterialComponent;
-import hidenseek.model.components.MaterialComponentImpl;
-import hidenseek.model.components.PositionComponent;
-import hidenseek.model.components.PositionComponentImpl;
+import hidenseek.model.components.physics.CollisionComponent;
+import hidenseek.model.components.physics.CollisionComponentImpl;
+import hidenseek.model.components.physics.MaterialComponent;
+import hidenseek.model.components.physics.MaterialComponentImpl;
+import hidenseek.model.components.physics.PositionComponent;
+import hidenseek.model.components.physics.PositionComponentImpl;
 import javafx.geometry.Point2D;
 
 public class Wall extends AbstractEntity {

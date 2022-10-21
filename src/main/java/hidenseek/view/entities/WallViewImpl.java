@@ -21,8 +21,6 @@ public class WallViewImpl extends AbstractEntityView implements WallView {
     public void draw(final GraphicsDevice device) {       
         device.drawPolygon(polygonPoints, WALL_SPRITE_PATTERN);
         
-
-        
         //DEBUG: hitbox draw
         
         for(int i=0; i<polygonPoints.size(); i++) {
@@ -33,7 +31,7 @@ public class WallViewImpl extends AbstractEntityView implements WallView {
     }
 
     @Override
-    public void setHitbox(Set<Point2D> hitbox) {
+    public void setHitbox(final Set<Point2D> hitbox) {
         this.polygonPoints = hitbox.stream()
                     .map(point -> point.add(this.getPosition()))
                     .collect(Collectors.toList());

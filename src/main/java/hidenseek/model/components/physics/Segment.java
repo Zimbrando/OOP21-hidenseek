@@ -1,4 +1,4 @@
-package hidenseek.model.components;
+package hidenseek.model.components.physics;
 
 import javafx.geometry.Point2D;
 

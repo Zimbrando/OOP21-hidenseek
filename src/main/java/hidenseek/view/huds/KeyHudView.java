@@ -1,4 +1,4 @@
-package hidenseek.view;
+package hidenseek.view.huds;
 
 public interface KeyHudView extends HudView {
     

@@ -1,6 +1,6 @@
 package hidenseek.controller;
 
-import hidenseek.view.HudView;
+import hidenseek.view.huds.HudView;
 
 /**
  * Models a generic hud interface controller

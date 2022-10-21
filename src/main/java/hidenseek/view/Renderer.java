@@ -1,8 +1,7 @@
-package hidenseek.controller;
+package hidenseek.view;
 
-import hidenseek.view.GraphicsDevice;
-import hidenseek.view.HudView;
 import hidenseek.view.entities.EntityView;
+import hidenseek.view.huds.HudView;
 
 /** 
  * Components that handles the general game graphics

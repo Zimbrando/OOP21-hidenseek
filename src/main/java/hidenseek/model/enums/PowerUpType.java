@@ -6,8 +6,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import hidenseek.model.components.MoveComponent;
 import hidenseek.model.components.UpgradableComponent;
+import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.entities.Entity;
 import javafx.application.Platform;
 
@@ -42,7 +42,7 @@ public enum PowerUpType {
     }
 
     private static void resetAfter(final UpgradableComponent component, final int seconds) {
-        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+        final ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         service.schedule(() -> {
             Platform.runLater(() -> component.reset());
         }, seconds, TimeUnit.SECONDS);

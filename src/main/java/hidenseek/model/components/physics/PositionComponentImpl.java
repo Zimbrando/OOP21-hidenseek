@@ -1,5 +1,6 @@
-package hidenseek.model.components;
+package hidenseek.model.components.physics;
 
+import hidenseek.model.components.AbstractObservableComponent;
 import javafx.geometry.Point2D;
 
 final public class PositionComponentImpl extends AbstractObservableComponent implements PositionComponent {

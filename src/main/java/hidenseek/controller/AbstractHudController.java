@@ -1,7 +1,7 @@
 package hidenseek.controller;
 
 import hidenseek.model.entities.Entity;
-import hidenseek.view.HudView;
+import hidenseek.view.huds.HudView;
 
 /**
  * 

@@ -1,13 +1,13 @@
 package hidenseek.model.entities;
 
-import hidenseek.model.components.CollisionComponent;
-import hidenseek.model.components.CollisionComponentImpl;
 import hidenseek.model.components.InventoryComponent;
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.ObservableComponent;
 import hidenseek.model.components.OneTimeLifeComponentImpl;
 import hidenseek.model.components.Trigger;
 import hidenseek.model.components.TriggerImpl;
+import hidenseek.model.components.physics.CollisionComponent;
+import hidenseek.model.components.physics.CollisionComponentImpl;
 import hidenseek.model.events.CollisionEvent;
 import javafx.geometry.Point2D;
 

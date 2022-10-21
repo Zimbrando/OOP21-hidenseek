@@ -2,7 +2,7 @@ package hidenseek.controller.entities;
 
 import java.util.Optional;
 
-import hidenseek.model.components.PositionComponent;
+import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.view.entities.EntityView;
 import javafx.geometry.Point2D;

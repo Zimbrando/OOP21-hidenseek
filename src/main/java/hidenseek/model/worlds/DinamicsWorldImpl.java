@@ -1,11 +1,12 @@
 package hidenseek.model.worlds;
 
 import java.util.Optional;
-import hidenseek.model.components.CollisionComponent;
-import hidenseek.model.components.Force;
-import hidenseek.model.components.MaterialComponent;
-import hidenseek.model.components.MoveComponent;
-import hidenseek.model.components.PositionComponent;
+
+import hidenseek.model.components.physics.CollisionComponent;
+import hidenseek.model.components.physics.Force;
+import hidenseek.model.components.physics.MaterialComponent;
+import hidenseek.model.components.physics.MoveComponent;
+import hidenseek.model.components.physics.PositionComponent;
 import javafx.geometry.Point2D;
 
 public class DinamicsWorldImpl extends AbstractEntityWorldImpl {

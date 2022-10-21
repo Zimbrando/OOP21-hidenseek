@@ -3,10 +3,10 @@ package hidenseek.model.components.brains;
 import java.util.Optional;
 import java.util.Set;
 
-import hidenseek.model.components.PositionComponent;
 import hidenseek.model.components.hearts.HeartComponent;
-import hidenseek.model.components.Force;
-import hidenseek.model.components.MoveComponent;
+import hidenseek.model.components.physics.Force;
+import hidenseek.model.components.physics.MoveComponent;
+import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.Direction;
 import hidenseek.model.enums.Heart;

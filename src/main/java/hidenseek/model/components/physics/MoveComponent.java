@@ -1,7 +1,9 @@
-package hidenseek.model.components;
+package hidenseek.model.components.physics;
 
 import java.util.Set;
 import java.util.function.Predicate;
+
+import hidenseek.model.components.UpgradableComponent;
 
 public interface MoveComponent extends UpgradableComponent {
 

@@ -22,8 +22,6 @@ import hidenseek.model.entities.Player;
 import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
 import hidenseek.model.enums.PowerUpType;
-import hidenseek.view.KeyHudView;
-import hidenseek.view.KeyHudViewImpl;
 import hidenseek.view.entities.KeyView;
 import hidenseek.view.entities.KeyViewImpl;
 import hidenseek.view.entities.MonsterViewImpl;
@@ -31,6 +29,8 @@ import hidenseek.view.entities.PowerUpView;
 import hidenseek.view.entities.PowerUpViewImpl;
 import hidenseek.view.entities.WallView;
 import hidenseek.view.entities.WallViewImpl;
+import hidenseek.view.huds.KeyHudView;
+import hidenseek.view.huds.KeyHudViewImpl;
 import javafx.geometry.Point2D;
 
 public class GameLevelImpl implements GameLevel {

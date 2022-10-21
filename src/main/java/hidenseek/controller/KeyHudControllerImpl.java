@@ -3,7 +3,7 @@ package hidenseek.controller;
 import hidenseek.model.components.InventoryComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.Key;
-import hidenseek.view.KeyHudView;
+import hidenseek.view.huds.KeyHudView;
 
 /**
  * Hud controller for the key counter interface

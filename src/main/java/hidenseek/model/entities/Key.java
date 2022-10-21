@@ -1,7 +1,7 @@
 package hidenseek.model.entities;
 
-import hidenseek.model.components.PositionComponent;
-import hidenseek.model.components.PositionComponentImpl;
+import hidenseek.model.components.physics.PositionComponent;
+import hidenseek.model.components.physics.PositionComponentImpl;
 import javafx.geometry.Point2D;
 
 public class Key extends AbstractCollectableEntity {

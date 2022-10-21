@@ -1,6 +1,6 @@
 package hidenseek.controller.entities;
 
-import hidenseek.model.components.CollisionComponent;
+import hidenseek.model.components.physics.CollisionComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.view.entities.WallView;
 
