@@ -18,11 +18,9 @@ import javafx.geometry.Point2D;
 public final class PowerUp extends AbstractEntity {
     
     private static final int HITBOX_SIZE = 30;
-    private final PowerUpType type;
     
     public PowerUp(final PowerUpType type, final Point2D pos) {
         super();
-        this.type = type;
         
         this.attach(new OneTimeLifeComponentImpl());
         PositionComponent position = new PositionComponentImpl();
@@ -53,9 +51,5 @@ public final class PowerUp extends AbstractEntity {
         ObservableComponent collisionObserver = (ObservableComponent) collisionComponent;
         collisionObserver.attachListener(collisionListener);
         this.attach(collisionComponent);
-    }
-    
-    public PowerUpType getType() {
-        return type;
     }
 }

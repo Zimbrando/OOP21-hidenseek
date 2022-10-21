@@ -144,21 +144,8 @@ public final class GameWorldControllerImpl implements GameWorldController {
         this.entities.clear();
         this.huds.clear();
         this.model.clearEntities();
-        
-        gameLevel.getWalls().forEach(wall -> this.addEntity(new WallControllerImpl(wall)));
-        gameLevel.getPlayers().forEach(player -> this.addEntity(new PlayerControllerImpl(player)));
-        gameLevel.getMonsters().forEach(monster -> this.addEntity(new MonsterControllerImpl(monster)));
-        gameLevel.getPowerUps().forEach(powerup -> this.addEntity(new PowerUpControllerImpl(powerup.getType(), powerup)));
-        gameLevel.getKeys().forEach(key -> this.addEntity(new KeyControllerImpl(key)));
-
-        int currHudY = 0;
-        for(Player player : gameLevel.getPlayers()) {
-            KeyHudView keyHudView = new KeyHudViewImpl(new Point2D(1400, 40 + 60 * (currHudY++)));
-            keyHudView.setMaxKeys(gameLevel.getKeys().size());
-            final HudController keyHud = new KeyHudControllerImpl(player, keyHudView);
-            addHud(keyHud);
-        }
-
-        this.model.setKeys(gameLevel.getKeys().size());
+        gameLevel.getEntities().forEach(entityController -> this.addEntity(entityController));
+        gameLevel.getHuds().forEach(hudController -> this.addHud(hudController));
+        this.model.setKeys(gameLevel.getKeysNumber());
     }
 }
