@@ -26,9 +26,9 @@ import hidenseek.model.enums.Direction;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
-public class Monster extends AbstractEntity {
+public class NaiveMonster extends AbstractEntity {
     
-    public Monster() {
+    public NaiveMonster() {
         super();
         
         this.attach(new LifeComponentImpl(1));  
@@ -48,10 +48,10 @@ public class Monster extends AbstractEntity {
         
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
-        collisionComponent.addHitboxPoint(new Point2D(-25, -25));
-        collisionComponent.addHitboxPoint(new Point2D(25, -25));
-        collisionComponent.addHitboxPoint(new Point2D(25, 25));
-        collisionComponent.addHitboxPoint(new Point2D(-25, 25));
+        collisionComponent.addHitboxPoint(new Point2D(0, 0));
+        collisionComponent.addHitboxPoint(new Point2D(0, 50));
+        collisionComponent.addHitboxPoint(new Point2D(50, 50));
+        collisionComponent.addHitboxPoint(new Point2D(50, 0));
         this.attach(collisionComponent);        
         
         // heart
@@ -63,7 +63,7 @@ public class Monster extends AbstractEntity {
         this.attach(sight);
         
         // brain sense
-        final BrainComponent brain = new ExpertBrainComponentImpl();
+        final BrainComponent brain = new NaiveBrainComponentImpl();
         this.attach(brain);
         
 

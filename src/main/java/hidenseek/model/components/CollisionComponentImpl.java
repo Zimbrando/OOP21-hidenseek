@@ -1,10 +1,17 @@
 package hidenseek.model.components;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import hidenseek.model.entities.Entity;
 import javafx.geometry.Point2D;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
 
 final public class CollisionComponentImpl extends AbstractObservableComponent implements CollisionComponent {
     
@@ -20,6 +27,8 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
     public Set<Point2D> getHitbox() {
         return hitbox;
     }
+    
+    
 
     @Override
     public Point2D getBounds() {
@@ -56,8 +65,15 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
 
     @Override
     public Boolean collisionWith(Entity entity) {
+
+//        final Double points[] = (Double[])hitbox.stream().flatMap(p -> Stream.of(p.getX(), p.getY())).collect(Collectors.toList()).toArray();
+//        Polygon poly = new Polygon();
+//        poly.getPoints().addAll(points);
+//        Shape a = new Polygon();
+//        
         return willCollisionWith(entity, new Point2D(0,0));
     }
+    
 
     @Override
     public Boolean willCollisionWith(Entity entity, Point2D offset) {
@@ -92,11 +108,11 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
                 Point2D currOwnPoint = ownHitbox[j].add(ownPosition).add(offset);
                 
                 if(prevEntityPoint.getX() == currEntityPoint.getX() && prevOwnPoint.getX() == currOwnPoint.getX() && prevEntityPoint.getX() == prevOwnPoint.getX()) {
-                    System.out.println("");
+                    //System.out.println("");
                 }
                 
                 if(prevEntityPoint.getY() == currEntityPoint.getY() && prevOwnPoint.getY() == currOwnPoint.getY() && prevEntityPoint.getY() == prevOwnPoint.getY()) {
-                    System.out.println("");
+                    //System.out.println("");
                 }
                 
                 if(getIntersectionPoint(prevEntityPoint, currEntityPoint, prevOwnPoint, currOwnPoint)) {

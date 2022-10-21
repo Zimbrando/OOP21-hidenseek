@@ -17,6 +17,7 @@ import hidenseek.model.worlds.GameWorld;
 import hidenseek.model.worlds.GameWorldImpl;
 import hidenseek.view.GraphicsDevice;
 import hidenseek.view.entities.EntityView;
+import hidenseek.view.entities.PathWallViewImpl;
 import hidenseek.view.entities.WallView;
 import hidenseek.view.entities.WallViewImpl;
 import javafx.geometry.Point2D;
@@ -87,7 +88,13 @@ public final class GameWorldControllerImpl implements GameWorldController {
         .flatMap(e -> e.getComponent(BrainComponent.class).get().cells().stream())
         .map(c -> new EntityControllerImpl<WallView>(c, new WallViewImpl((Wall)c)))
         .forEach(e -> e.getPosition().ifPresent(pos -> this.view.draw(e.getView(), pos)));;
-        
+
+        // Draw path AI
+        this.model.world().stream()
+        .filter(e -> e.getComponent(BrainComponent.class).isPresent())  // get all entities 
+        .flatMap(e -> e.getComponent(BrainComponent.class).get().path().stream())
+        .map(c -> new EntityControllerImpl<WallView>(c, new PathWallViewImpl((Wall)c)))
+        .forEach(e -> e.getPosition().ifPresent(pos -> this.view.draw(e.getView(), pos)));;
         
         // update entities
         this.entities.forEach(entity -> {

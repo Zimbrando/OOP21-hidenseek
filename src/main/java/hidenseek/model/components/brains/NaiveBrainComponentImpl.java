@@ -102,7 +102,11 @@ public class NaiveBrainComponentImpl extends AbstractBrainComponentImpl implemen
     
     @Override
     public Set<Entity> cells() {
-        // TODO Auto-generated method stub
+        return Set.of();
+    }
+    
+    @Override
+    public Set<Entity> path() {
         return Set.of();
     }
 

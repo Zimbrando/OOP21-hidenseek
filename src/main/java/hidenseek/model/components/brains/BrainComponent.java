@@ -13,6 +13,7 @@ public interface BrainComponent extends Component{
      */
     void neuroImpulse();
     
-    //TODO remove this, only for test
+    //TODO remove these, only for test
     Set<Entity> cells();
+    Set<Entity> path();
 }
