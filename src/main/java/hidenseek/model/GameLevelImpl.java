@@ -1,6 +1,7 @@
 package hidenseek.model;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -44,7 +45,7 @@ public class GameLevelImpl implements GameLevel {
     public GameLevelImpl(final int levelID) {
         try {
             
-           final File inputFile = new File(getClass().getResource("/levels/level" + levelID + ".xml").getFile());
+           final InputStream inputFile = getClass().getResourceAsStream("/levels/level" + levelID + ".xml");
            final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
            doc.getDocumentElement().normalize();
            

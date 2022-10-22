@@ -22,8 +22,8 @@ public class GameSceneControllerImpl implements GameSceneController {
     private final Stage mainStage;
     private Optional<Scene> currentScene = Optional.empty(); 
     private final SceneManagerImpl sceneManager = new SceneManagerImpl();
-    private final static String RESOURCE_LOCATION = "./layouts/";
-    private final static String STYLING_LOCATION = "./stylesheets/";
+    private final static String RESOURCE_LOCATION = "/layouts/";
+    private final static String STYLING_LOCATION = "/stylesheets/";
     private final List<String> interfacesPaths = List.of("MainMenuGui.fxml","GameSettingsGui.fxml","GameStatsGui.fxml","GameOverGui.fxml","GameGui.fxml");
     
     
@@ -66,17 +66,16 @@ public class GameSceneControllerImpl implements GameSceneController {
             
             final FXMLLoader loader = new FXMLLoader();   
             
-            loader.setLocation(ClassLoader.getSystemResource(pathToInterface));
-            
+            loader.setLocation(getClass().getResource(pathToInterface));
+
             final Parent root = loader.load();
             
             if(this.currentScene.isEmpty()) {
-               
                 this.currentScene = Optional.of(new Scene(root));
                 this.sceneManager.setMainScene(this.currentScene.get());
             }
             
-            this.currentScene.ifPresent(c-> c.getStylesheets().add(ClassLoader.getSystemResource(cssStyle).toExternalForm()));
+            this.currentScene.ifPresent(c-> c.getStylesheets().add(getClass().getResource(cssStyle).toExternalForm()));
             
             sceneManager.addScreen(pathToInterface, (Pane)root);
             
