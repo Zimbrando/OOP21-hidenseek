@@ -20,14 +20,6 @@ public class WallViewImpl extends AbstractEntityView implements WallView {
     @Override
     public void draw(final GraphicsDevice device) {       
         device.drawPolygon(polygonPoints, WALL_SPRITE_PATTERN);
-        
-        //DEBUG: hitbox draw
-        
-        for(int i=0; i<polygonPoints.size(); i++) {
-            Point2D prevEntityPoint = (i == 0 ? polygonPoints.get(polygonPoints.size()-1) : polygonPoints.get(i-1));
-            Point2D currEntityPoint = polygonPoints.get(i);
-            device.drawLine(prevEntityPoint, currEntityPoint, javafx.scene.paint.Color.MAGENTA);
-        }
     }
 
     @Override

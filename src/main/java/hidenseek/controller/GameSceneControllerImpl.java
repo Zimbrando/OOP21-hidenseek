@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import hidenseek.model.SceneManagerImpl;
+import hidenseek.model.statistics.StatisticsManager;
+import hidenseek.model.statistics.StatisticsManagerImpl;
+import hidenseek.model.statistics.numeric.NumericStatistic;
 import hidenseek.view.CanvasDeviceImpl;
 import hidenseek.view.Renderer;
 import hidenseek.view.RendererImpl;
@@ -24,24 +27,21 @@ public class GameSceneControllerImpl implements GameSceneController {
     private final SceneManagerImpl sceneManager = new SceneManagerImpl();
     private final static String RESOURCE_LOCATION = "/layouts/";
     private final static String STYLING_LOCATION = "/stylesheets/";
-    private final List<String> interfacesPaths = List.of("MainMenuGui.fxml","GameSettingsGui.fxml","GameStatsGui.fxml","GameOverGui.fxml","GameGui.fxml");
-    
+    private final List<String> interfacesPaths = List.of("MainMenuGui.fxml","GameStatisticsGui.fxml","GameStatsGui.fxml","GameOverGui.fxml","GameGui.fxml");
+    private final StatisticsManager statisticsManager = new StatisticsManagerImpl();
     
 
     public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {
-        //final URL url = getClass().getResource("/layouts/");
-        //final Path path = Paths.get(url.toURI());
+
+        statisticsManager.addStatistic(new NumericStatistic("curr_level", "root", "Livello attuale"));
+        statisticsManager.addStatistic(new NumericStatistic("total_play_time", "root", "Tempo totale di gioco"));
+        statisticsManager.addStatistic(new NumericStatistic("total_win", "root", "Vittorie totali"));
+        statisticsManager.addStatistic(new NumericStatistic("total_loose", "root", "Perdite totali"));
+        statisticsManager.addStatistic(new NumericStatistic("win_percentage", "root", "Percentuale vittoria", "%"));
+        statisticsManager.addStatistic(new NumericStatistic("collected_keys", "root", "Chiavi raccolte"));
         
         stage.setResizable(false);
         
-//        this.interfacesPaths = Files.walk(path, 1)
-//        .skip(1)
-//        .map(e -> e.toString())
-//        .collect(Collectors.toList())
-//        .stream()
-//        .map(e -> e.substring(e.lastIndexOf(File.separator)).substring(1))
-//        .sorted()
-//        .collect(Collectors.toList());
         this.mainStage = stage;
         
         this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(0), STYLING_LOCATION + "MainMenuStyle.css");
@@ -124,7 +124,10 @@ public class GameSceneControllerImpl implements GameSceneController {
         input.assignInputNode(gamePane);
         
         final Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
-        final GameWorldController gameController = new GameWorldControllerImpl(this, renderer, input, new LevelHandlerImpl());
+        
+        final LevelHandler levelhandler = new LevelHandlerImpl(statisticsManager);
+        
+        final GameWorldController gameController = new GameWorldControllerImpl(this, renderer, input, levelhandler, statisticsManager);
         
         final GameGuiController temp = (GameGuiController) sceneManager.getSceneControllerByName(gameGuiPath);
         temp.setGameController(gameController);
@@ -144,10 +147,10 @@ public class GameSceneControllerImpl implements GameSceneController {
     }
 
     @Override
-    public void goToSettings() {
-        final String settingsGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(1);
+    public void goToStatistics() {
+        final String statisticsGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(1);
         
-        sceneManager.activate(settingsGuiPath);        
+        sceneManager.activate(statisticsGuiPath);        
     }
     
     @Override
@@ -160,6 +163,11 @@ public class GameSceneControllerImpl implements GameSceneController {
     @Override
     public void goToExit() {
        Platform.exit();
+    }
+
+    @Override
+    public StatisticsManager getStatisticsManager() {
+        return statisticsManager;
     }
 
 }

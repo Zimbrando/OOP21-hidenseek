@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import hidenseek.model.components.UpgradableComponent;
+import hidenseek.model.components.physics.LightComponent;
 import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.entities.Entity;
 import javafx.application.Platform;
@@ -23,16 +24,17 @@ public enum PowerUpType {
         }
     })),
 
-    INCREASE_VISIBILITY(entity -> System.out.println("INCREASE LIGHT RANGE"));
-
-    public static PowerUpType getValue(int value) {
-        return new PowerUpType[]{INCREASE_SPEED, INCREASE_VISIBILITY}[value];
-    }
+    INCREASE_VISIBILITY(entity -> entity.getComponent(LightComponent.class).ifPresent(component -> {
+        if (!component.isUpgraded()) {
+            component.setRadius(LightRadius.LARGE);
+            resetAfter(component, 7);
+        }
+    }));
     
     /**
      * The effect applied to the Entity using the PowerUp
      */
-    public Consumer<Entity> effect;
+    private Consumer<Entity> effect;
 
     private PowerUpType(Consumer<Entity> effect) {
         this.effect = effect;
@@ -45,10 +47,19 @@ public enum PowerUpType {
         return values()[(int)(Math.random() * values().length)];
     }
 
+    /**
+     * @return The power up effect
+     */
+    public Consumer<Entity> getEffect() {
+        return this.effect;
+    }
+    
     private static void resetAfter(final UpgradableComponent component, final int seconds) {
         final ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         service.schedule(() -> {
             Platform.runLater(() -> component.reset());
         }, seconds, TimeUnit.SECONDS);
     }
+
+
 }

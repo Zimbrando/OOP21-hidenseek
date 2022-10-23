@@ -1,5 +1,6 @@
 package hidenseek.controller;
 
+import hidenseek.model.statistics.StatisticsManager;
 import javafx.scene.layout.Pane;
 
 public interface GameSceneController {
@@ -27,7 +28,7 @@ public interface GameSceneController {
      * Goes to the statistics page.
      */
     
-    void goToSettings();
+    void goToStatistics();
     
     /**
      * Goes to the statistics page.
@@ -62,5 +63,7 @@ public interface GameSceneController {
      *          The gui controller
      */
     void pauseGame(final GameGuiController controller);
+    
+    StatisticsManager getStatisticsManager();
     
 }

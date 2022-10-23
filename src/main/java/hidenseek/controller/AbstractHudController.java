@@ -1,5 +1,7 @@
 package hidenseek.controller;
 
+import java.util.Set;
+
 import hidenseek.model.entities.Entity;
 import hidenseek.view.huds.HudView;
 
@@ -12,10 +14,10 @@ import hidenseek.view.huds.HudView;
  */
 abstract class AbstractHudController<V extends HudView> implements HudController {
     
-    final private Entity model;
+    final private Set<Entity> model;
     final private V view;
 
-    AbstractHudController(final Entity model, final V view) {
+    AbstractHudController(final Set<Entity> model, final V view) {
        this.model = model;
        this.view = view;
     }
@@ -31,7 +33,7 @@ abstract class AbstractHudController<V extends HudView> implements HudController
     /**
      * @return The relative Entity model
      */
-    protected Entity getModel() {
+    protected Set<Entity> getModel() {
         return this.model;
     }
 
