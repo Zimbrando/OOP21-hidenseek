@@ -20,7 +20,7 @@ import static hidenseek.model.components.Utils.distanceBetween;
  * @author Marco Sangiorgi
  *
  */
-public class NaiveBrainComponentImpl extends AbstractBrainComponentImpl implements BrainComponent {
+public class NaiveBrainComponentImpl extends AbstractBrainComponent implements BrainComponent {
 
     // next position useful when no targets are reachable
     private Optional<Point2D> targetPosition;
@@ -98,6 +98,16 @@ public class NaiveBrainComponentImpl extends AbstractBrainComponentImpl implemen
     private Optional<Point2D> getRandomReachablePosition(final Set<Entity> entities) {
         //TODO use entities (walls)
         return Optional.empty();
+    }
+    
+    @Override
+    public Set<Entity> cells() {
+        return Set.of();
+    }
+    
+    @Override
+    public Set<Entity> path() {
+        return Set.of();
     }
 
     
