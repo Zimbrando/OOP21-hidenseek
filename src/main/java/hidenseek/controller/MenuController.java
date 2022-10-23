@@ -1,7 +1,5 @@
 package hidenseek.controller;
 
-import javafx.fxml.FXML;
-
 public interface MenuController {
     
     /**

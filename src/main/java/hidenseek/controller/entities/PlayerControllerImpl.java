@@ -1,9 +1,7 @@
 package hidenseek.controller.entities;
 
 import hidenseek.model.components.physics.LightComponent;
-import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.entities.Entity;
-import hidenseek.model.enums.Direction;
 import hidenseek.model.enums.LightRadius;
 import hidenseek.view.entities.PlayerView;
 import hidenseek.view.entities.PlayerViewImpl;

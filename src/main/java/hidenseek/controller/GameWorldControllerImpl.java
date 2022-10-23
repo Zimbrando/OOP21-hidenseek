@@ -5,13 +5,9 @@ import java.util.Set;
 
 import hidenseek.controller.entities.EntityController;
 import hidenseek.model.GameLevel;
-import hidenseek.model.components.Trigger;
-import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.GameState;
-import hidenseek.model.events.LevelUpEvent;
 import hidenseek.model.statistics.StatisticsManager;
-import hidenseek.model.statistics.StatisticsManagerImpl;
 import hidenseek.model.statistics.numeric.Numeric;
 import hidenseek.model.statistics.numeric.NumericStatistic;
 import hidenseek.model.statistics.score.ScoreStatistic;

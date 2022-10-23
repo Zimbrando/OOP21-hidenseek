@@ -2,7 +2,6 @@ package hidenseek.controller;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import hidenseek.model.SceneManagerImpl;
@@ -21,7 +20,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 
 public class GameSceneControllerImpl implements GameSceneController {
 
