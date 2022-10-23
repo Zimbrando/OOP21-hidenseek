@@ -36,7 +36,7 @@ public final class PowerUp extends AbstractEntity {
                 
                 ((Entity)powerup).getComponent(LifeComponent.class).get().hurt(1);
                 //Effect on player
-                type.effect.accept(event.getCollider());
+                type.getEffect().accept(event.getCollider());
             }
         });
         

@@ -150,7 +150,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
                 Math.max(levelScore, ((ScoreStatistic)statisticsManager.getStatistic("best_score", levelID).findFirst().get()).getProperty().getValue())
         );        
         
-        setWinPercentage();
+        this.setWinPercentage();
         
         //There's a next level
         if (this.level.hasNext()) {

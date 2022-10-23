@@ -30,15 +30,11 @@ public enum PowerUpType {
             resetAfter(component, 7);
         }
     }));
-
-    public static PowerUpType getValue(int value) {
-        return new PowerUpType[]{INCREASE_SPEED, INCREASE_VISIBILITY}[value];
-    }
     
     /**
      * The effect applied to the Entity using the PowerUp
      */
-    public Consumer<Entity> effect;
+    private Consumer<Entity> effect;
 
     private PowerUpType(Consumer<Entity> effect) {
         this.effect = effect;
@@ -51,10 +47,19 @@ public enum PowerUpType {
         return values()[(int)(Math.random() * values().length)];
     }
 
+    /**
+     * @return The power up effect
+     */
+    public Consumer<Entity> getEffect() {
+        return this.effect;
+    }
+    
     private static void resetAfter(final UpgradableComponent component, final int seconds) {
         final ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         service.schedule(() -> {
             Platform.runLater(() -> component.reset());
         }, seconds, TimeUnit.SECONDS);
     }
+
+
 }

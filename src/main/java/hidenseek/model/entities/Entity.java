@@ -3,12 +3,13 @@ package hidenseek.model.entities;
 import java.util.Optional;
 import java.util.Set;
 
+import hidenseek.model.Triggerable;
 import hidenseek.model.components.Component;
 
 /**
  * Basic unit in a game world
  */
-public interface Entity {
+public interface Entity extends Triggerable {
 
     /**
      * Attach a component

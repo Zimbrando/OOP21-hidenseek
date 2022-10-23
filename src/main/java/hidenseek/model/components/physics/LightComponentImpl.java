@@ -5,13 +5,17 @@ import hidenseek.model.enums.LightRadius;
 
 public class LightComponentImpl extends AbstractObservableComponent implements LightComponent {
 
-    private LightRadius defaultRadius = LightRadius.SMALL;
-    private LightRadius lightRadius = LightRadius.SMALL;
+    private final LightRadius defaultRadius;
+    private LightRadius lightRadius;
     
+    public LightComponentImpl(final LightRadius radius) {
+        this.lightRadius = radius;
+        this.defaultRadius = radius;
+    }
     
     @Override
     public LightRadius getRadius() {
-        return lightRadius;
+        return this.lightRadius;
     }
 
     @Override
@@ -21,14 +25,12 @@ public class LightComponentImpl extends AbstractObservableComponent implements L
 
     @Override
     public void reset() {
-        setRadius(LightRadius.LARGE);
+        this.setRadius(this.defaultRadius);
     }
 
     @Override
     public boolean isUpgraded() {
-        return lightRadius != defaultRadius;
+        return this.lightRadius != this.defaultRadius;
     }
-    
-
     
 }

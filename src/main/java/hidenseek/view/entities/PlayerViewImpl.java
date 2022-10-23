@@ -32,6 +32,7 @@ public class PlayerViewImpl extends AbstractEntityMovableView implements PlayerV
             lightMask = LIGHTMASK_LARGE;
             break;
         }
+        
         device.drawImage(lightMask, (int)device.getWidth() * 2, (int)device.getHeight() * 2, this.getPosition().add(new Point2D(-device.getWidth(), -device.getHeight())));
         
         //draw player sprite
