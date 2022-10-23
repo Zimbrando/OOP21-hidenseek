@@ -2,10 +2,13 @@ package hidenseek.model.entities;
 
 import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.LifeComponentImpl;
+import hidenseek.model.components.MapComponent;
+import hidenseek.model.components.MapComponentImpl;
 import hidenseek.model.components.ObservableComponent;
 import hidenseek.model.components.Trigger;
 import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.components.brains.BrainComponent;
+import hidenseek.model.components.brains.ExpertBrainComponentImpl;
 import hidenseek.model.components.brains.NaiveBrainComponentImpl;
 import hidenseek.model.components.hearts.EvilHeartComponentImpl;
 import hidenseek.model.components.hearts.HeartComponent;
@@ -49,9 +52,9 @@ public class Monster extends AbstractEntity {
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
         collisionComponent.addHitboxPoint(new Point2D(0, 0));
-        collisionComponent.addHitboxPoint(new Point2D(0, 50));
-        collisionComponent.addHitboxPoint(new Point2D(50, 50));
-        collisionComponent.addHitboxPoint(new Point2D(50, 0));
+        collisionComponent.addHitboxPoint(new Point2D(0, 40));
+        collisionComponent.addHitboxPoint(new Point2D(40, 40));
+        collisionComponent.addHitboxPoint(new Point2D(40, 0));
         this.attach(collisionComponent);  
         
         //Trigger for collisions (Hurt if I touch the player)
@@ -61,7 +64,7 @@ public class Monster extends AbstractEntity {
             }
         });
         
-        ObservableComponent collisionObserver = (ObservableComponent) collisionComponent;
+        final ObservableComponent collisionObserver = (ObservableComponent) collisionComponent;
         collisionObserver.attachListener(collisionListener);
         
         // heart
@@ -69,11 +72,15 @@ public class Monster extends AbstractEntity {
         this.attach(heart);
 
         // sight sense
-        final SenseComponent sight = new SightSenseComponentImpl(200);
+        final SenseComponent sight = new SightSenseComponentImpl(1000);
         this.attach(sight);
-        
-        // brain sense
-        final BrainComponent brain = new NaiveBrainComponentImpl();
+
+        // brain
+        final BrainComponent brain = new ExpertBrainComponentImpl();
         this.attach(brain);
+//        
+//        // map
+        final MapComponent map = new MapComponentImpl();
+        this.attach(map);
     }
 }
