@@ -1,5 +1,7 @@
 package hidenseek.model.components;
 
+import static hidenseek.utils.Utils.*;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,8 +16,6 @@ import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.Wall;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
-
-import static hidenseek.model.components.Utils.*;
 
 public class MapComponentImpl extends AbstractComponent implements MapComponent {
     

@@ -1,5 +1,7 @@
 package hidenseek.model.components.brains;
 
+import static hidenseek.utils.Utils.distanceBetween;
+
 import java.util.Optional;
 import java.util.Set;
 
@@ -11,8 +13,6 @@ import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.Direction;
 import hidenseek.model.enums.Heart;
 import javafx.geometry.Point2D;
-
-import static hidenseek.model.components.Utils.distanceBetween;
 
 
 /**

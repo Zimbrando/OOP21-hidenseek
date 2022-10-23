@@ -1,4 +1,4 @@
-package hidenseek.model.components;
+package hidenseek.utils;
 
 import java.util.HashMap;
 import java.util.HashSet;
