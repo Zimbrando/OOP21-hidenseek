@@ -10,11 +10,14 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import hidenseek.model.components.AbstractDependencyComponent;
 import hidenseek.model.components.hearts.HeartComponent;
+import hidenseek.model.components.physics.Force;
 import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.components.senses.SenseComponent;
 import hidenseek.model.entities.Entity;
+import hidenseek.model.enums.Direction;
 import hidenseek.model.enums.Heart;
+import javafx.geometry.Point2D;
 import javafx.util.Pair;
 
 
@@ -115,6 +118,34 @@ public abstract class AbstractBrainComponent extends AbstractDependencyComponent
             , final BiFunction<Entity, Entity, Entity> confrontTargetables
             , final BiConsumer<Optional<Entity>, Set<Entity>> actionOnTarget) {
         this.heartBeahaviours.put(heart, new Pair<>(new Pair<>(isTargetable, confrontTargetables), actionOnTarget));
+    }
+    
+    /**
+     * move towards next position
+     * @param nextPosition point2D of next position
+     */
+    public void move(final Point2D nextPosition) {
+        // get movement component
+        final PositionComponent position = this.getOwner().get().getComponent(PositionComponent.class).get();
+        final MoveComponent movement = this.getOwner().get().getComponent(MoveComponent.class).get();
+        // move based on target position
+        movement.removeForce(force -> force.getIdentifier().startsWith("ai"));
+        // move right
+        if(nextPosition.getX() > position.getPosition().getX()) {
+            movement.addForce(new Force("ai-horizontal", 1, Direction.RIGHT.getValue()));
+        }
+        // move left
+        if(nextPosition.getX() < position.getPosition().getX()){
+            movement.addForce(new Force("ai-horizontal", 1, Direction.LEFT.getValue()));
+        }
+        // move down
+        if(nextPosition.getY() > position.getPosition().getY()) {
+            movement.addForce(new Force("ai-vertical", 1, Direction.DOWN.getValue()));
+        }
+        // move up
+        if(nextPosition.getY() < position.getPosition().getY()) {
+            movement.addForce(new Force("ai-vertical", 1, Direction.UP.getValue()));
+        }
     }
     
 }

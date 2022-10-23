@@ -1,21 +1,11 @@
 package hidenseek.model.components;
 
-import static hidenseek.model.components.Utils.distanceBetween;
-
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.jgrapht.Graph;
-import org.jgrapht.alg.interfaces.ShortestPathAlgorithm.SingleSourcePaths;
-import org.jgrapht.alg.shortestpath.FloydWarshallShortestPaths;
 import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
-
 import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.components.physics.CollisionComponent;
 import hidenseek.model.components.physics.MaterialComponent;

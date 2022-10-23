@@ -98,37 +98,8 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponent implements 
         if(nextPosition.isEmpty()) {
             return;
         }
-        // get movement component
-        final PositionComponent position = this.getOwner().get().getComponent(PositionComponent.class).get();
-        final MoveComponent movement = this.getOwner().get().getComponent(MoveComponent.class).get();
-        // move based on target position
-
-        double moveXIntensity;
-        Direction moveXDirection;
-        
-        double moveYIntensity;
-        Direction moveYDirection;
-        
-        if(nextPosition.get().getX() > position.getPosition().getX()) {
-            moveXDirection = Direction.RIGHT;
-            moveXIntensity = 1;
-        } else {
-            moveXDirection = Direction.LEFT;
-            moveXIntensity = 1;
-        }
-        if(nextPosition.get().getY() > position.getPosition().getY()) {
-            moveYDirection = Direction.DOWN;
-            moveYIntensity = 1;
-        } else {
-            moveYDirection = Direction.UP;
-            moveYIntensity = 1;
-        }
-
-
-        movement.removeForce(force -> force.getIdentifier().startsWith("ai"));
-        movement.addForce(new Force("ai-horizontal", moveXIntensity, moveXDirection.getValue()));
-        movement.addForce(new Force("ai-vertical", moveYIntensity, moveYDirection.getValue()));
-
+        // move
+        move(nextPosition.get());
     }
 
     private Optional<Point2D> getRandomReachablePosition(final Set<Entity> entities) {

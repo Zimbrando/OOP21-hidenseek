@@ -81,20 +81,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
             // draw entity
             this.view.drawEntity(entity.getView());
         });
-        
-
-        // Draw grid AI
-        this.model.world().stream()
-        .filter(e -> e.getComponent(BrainComponent.class).isPresent())  // get all entities 
-        .flatMap(e -> e.getComponent(BrainComponent.class).get().path().stream())
-        .map(c -> {
-            final WallView v = new WallViewImpl();
-            v.setPosition(c.getComponent(PositionComponent.class).get().getPosition());
-            v.setHitbox(c.getComponent(CollisionComponent.class).get().getHitbox());
-            return new EntityControllerImpl<WallView>(c, v);
-        })
-        .forEach(e -> e.getPosition().ifPresent(pos -> this.view.drawEntity(e.getView())));
-        
+                
         this.huds.forEach(hud -> {
             // update view
             hud.update();
