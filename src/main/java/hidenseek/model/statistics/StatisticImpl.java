@@ -66,6 +66,11 @@ public class StatisticImpl<T extends StatisticProperty<?>> implements Statistic<
     }
 
     @Override
+    public String getValue() {
+        return "A" + property.toString();
+    }
+
+    @Override
     public void setStatisticSaver(StatisticSaver statisticSaver) {
         getProperty().setStatisticSaver(statisticSaver);
     }

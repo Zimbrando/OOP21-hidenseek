@@ -16,6 +16,8 @@ public interface Statistic<T extends StatisticProperty<?>> {
     
     String getTitle();
     
+    String getValue();
+    
     T getProperty();
     
     void setStatisticSaver(StatisticSaver statisticSaver);

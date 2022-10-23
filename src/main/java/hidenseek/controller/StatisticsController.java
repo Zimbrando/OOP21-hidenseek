@@ -63,7 +63,7 @@ public class StatisticsController implements MenuController{
             statisticTitleLbl.setFont(new Font("impact", 14));
             statisticTitleLbl.setTextFill(Color.WHITE);
             
-            Label statisticValueLbl = new Label("0");
+            Label statisticValueLbl = new Label(statistic.getValue());
             statisticTitleLbl.setMinWidth(200);
             statisticValueLbl.setFont(new Font("impact", 14));
             statisticValueLbl.setTextFill(Color.YELLOW);

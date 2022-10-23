@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <gamedata>
-  <hidenseek.model.statistics.numeric.NumericStatistic id="curr_level" tag="root" value="26"/>
+  <hidenseek.model.statistics.numeric.NumericStatistic id="curr_level" tag="root" value="1"/>
   <hidenseek.model.statistics.numeric.NumericStatistic id="total_play_time" tag="root" value="42565362"/>
-  <hidenseek.model.statistics.numeric.NumericStatistic id="total_win" tag="root" value="26"/>
+  <hidenseek.model.statistics.numeric.NumericStatistic id="total_win" tag="root" value="5"/>
   <hidenseek.model.statistics.numeric.NumericStatistic id="total_loose" tag="root" value="27"/>
   <hidenseek.model.statistics.numeric.NumericStatistic id="win_percentage" tag="root" value="0"/>
-  <hidenseek.model.statistics.numeric.NumericStatistic id="collected_keys" tag="root" value="26"/>
+  <hidenseek.model.statistics.numeric.NumericStatistic id="collected_keys" tag="root" value="8"/>
   <hidenseek.model.statistics.score.ScoreStatistic id="actual_score" tag="1" value="5.0"/>
   <hidenseek.model.statistics.score.ScoreStatistic id="best_score" tag="1" value="5.0"/>
   <hidenseek.model.statistics.numeric.NumericStatistic id="total_attempts" tag="1" value="8"/>

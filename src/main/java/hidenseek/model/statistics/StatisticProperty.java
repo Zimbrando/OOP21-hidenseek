@@ -21,4 +21,5 @@ public abstract class StatisticProperty<T> {
         statisticSaver.saveStatistic();
     }
     
+    
 }

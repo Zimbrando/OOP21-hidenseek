@@ -37,4 +37,9 @@ public class Numeric extends StatisticProperty<Integer> {
     public void decrease(Integer diff) {
         setValue(Math.max(0, _number-diff));
     }
+    
+    @Override
+    public String toString() {
+        return Integer.toString(_number);
+    }
 }

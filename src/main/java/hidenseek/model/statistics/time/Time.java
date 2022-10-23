@@ -39,4 +39,10 @@ public class Time extends StatisticProperty<Duration> {
     public void subtractTime(long seconds) {
         setValue(Duration.ofSeconds(Math.max(0, _duration.toSeconds() - seconds)));
     }
+
+    @Override
+    public String toString() {
+        return _duration.toString();
+    }
+    
 }
