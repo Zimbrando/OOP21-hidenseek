@@ -72,16 +72,4 @@ public class NaiveBrainComponentImpl extends AbstractBrainComponent implements B
         //TODO use entities (walls)
         return Optional.empty();
     }
-    
-    @Override
-    public Set<Entity> cells() {
-        return Set.of();
-    }
-    
-    @Override
-    public Set<Entity> path() {
-        return Set.of();
-    }
-
-    
 }

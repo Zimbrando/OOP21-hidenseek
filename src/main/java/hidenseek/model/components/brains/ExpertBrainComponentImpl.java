@@ -40,19 +40,11 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponent implements 
 
     // next position useful when no targets are reachable
     private Optional<Point2D> targetPosition;
-    private Set<Entity> cells;
-    private Set<Entity> path;
-    private Optional<Point2D> targetCell;
-    private Optional<Point2D> sourceCell;
     
     public ExpertBrainComponentImpl() {
         // define dependencies
         super();
         this.targetPosition = Optional.empty();
-        this.cells = Set.of();
-        this.path = Set.of();
-        this.targetCell = Optional.empty();
-        this.sourceCell = Optional.empty();
         
         // Set heart.GOOD behavior
         // TODO set Heart.GOOD behavior
@@ -127,10 +119,6 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponent implements 
         map.mapEntities(entities);
         // get map points
         final Set<Point2D> gameMap = map.getGameMap();
-        //TODO delete, just for debug
-        this.cells = gameMap.stream()
-                .map(p -> new Wall(p, Set.of(new Point2D(-10, -10), new Point2D(10, -10), new Point2D(10, 10), new Point2D(-10, 10))))
-                .collect(Collectors.toSet());
         
         // get nearest point to target in map
         final Point2D targetPos = findNearestPoint(target.getComponent(PositionComponent.class).get().getPosition(), gameMap).get();
@@ -140,11 +128,6 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponent implements 
         
         // find shortest path points
         final Set<Point2D> path = map.getPath(myPos, targetPos);
-        //TODO delete, just for debug
-        this.path = path.stream()
-                .map(p -> new Wall(p, Set.of(new Point2D(-10, -10), new Point2D(10, -10), new Point2D(10, 10), new Point2D(-10, 10))))
-                .collect(Collectors.toSet());
-        
 
         // get hitbox
         final Set<Point2D> hitbox = owner.getComponent(CollisionComponent.class).get().getHitbox();
@@ -161,18 +144,6 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponent implements 
 
     private Optional<Point2D> findNearestPoint(final Point2D source, final Set<Point2D> points) {
         return points.stream().reduce((p1,p2) -> (p1.distance(source) < p2.distance(source)) ? p1 :p2);
-    }
-    
-    @Override
-    public Set<Entity> cells() {
-        // TODO Auto-generated method stub
-        return this.cells;
-    }
-
-    @Override
-    public Set<Entity> path() {
-        // TODO Auto-generated method stub
-        return this.path;
     }
     
 }
