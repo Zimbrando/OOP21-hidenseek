@@ -1,17 +1,17 @@
 package hidenseek.model.events;
 
-import hidenseek.model.entities.Entity;
+import hidenseek.model.Triggerable;
 
 public abstract class AbstractEvent implements Event {
 
-    private final Entity sender;
+    private final Triggerable sender;
     
-    public AbstractEvent(final Entity sender) {
+    public AbstractEvent(final Triggerable sender) {
         this.sender = sender;
     }
     
     @Override
-    public Entity getSender() {
+    public Triggerable getSender() {
         return this.sender;
     }
 

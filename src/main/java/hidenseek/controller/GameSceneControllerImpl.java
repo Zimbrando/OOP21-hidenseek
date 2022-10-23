@@ -1,53 +1,23 @@
 package hidenseek.controller;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import hidenseek.controller.entities.EntityController;
-import hidenseek.controller.entities.EntityControllerImpl;
-import hidenseek.controller.entities.MovableEntityControllerImpl;
-import hidenseek.controller.entities.PlayerControllerImpl;
-import hidenseek.controller.entities.WallControllerImpl;
-import hidenseek.model.GameLevel;
-import hidenseek.model.GameLevelImpl;
 import hidenseek.model.SceneManagerImpl;
-import hidenseek.model.components.physics.PositionComponent;
-import hidenseek.model.entities.Entity;
-import hidenseek.model.entities.Monster;
-import hidenseek.model.entities.Player;
-import hidenseek.model.entities.PowerUp;
-import hidenseek.model.entities.Wall;
+import hidenseek.model.statistics.StatisticsManager;
+import hidenseek.model.statistics.StatisticsManagerImpl;
+import hidenseek.model.statistics.numeric.NumericStatistic;
 import hidenseek.view.CanvasDeviceImpl;
 import hidenseek.view.Renderer;
 import hidenseek.view.RendererImpl;
-import hidenseek.view.entities.KeyView;
-import hidenseek.view.entities.KeyViewImpl;
-import hidenseek.view.entities.MonsterView;
-import hidenseek.view.entities.MonsterViewImpl;
-import hidenseek.view.entities.PowerUpView;
-import hidenseek.view.entities.PowerUpViewImpl;
-import hidenseek.view.entities.WallView;
-import hidenseek.view.entities.WallViewImpl;
-import hidenseek.view.huds.KeyHudView;
-import hidenseek.view.huds.KeyHudViewImpl;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class GameSceneControllerImpl implements GameSceneController {
@@ -55,26 +25,23 @@ public class GameSceneControllerImpl implements GameSceneController {
     private final Stage mainStage;
     private Optional<Scene> currentScene = Optional.empty(); 
     private final SceneManagerImpl sceneManager = new SceneManagerImpl();
-    private final static String RESOURCE_LOCATION = "./layouts/";
-    private final static String STYLING_LOCATION = "./stylesheets/";
-    private final List<String> interfacesPaths = List.of("MainMenuGui.fxml","GameSettingsGui.fxml","GameStatsGui.fxml","GameOverGui.fxml","GameGui.fxml");
-    
+    private final static String RESOURCE_LOCATION = "/layouts/";
+    private final static String STYLING_LOCATION = "/stylesheets/";
+    private final List<String> interfacesPaths = List.of("MainMenuGui.fxml","GameStatisticsGui.fxml","GameStatsGui.fxml","GameOverGui.fxml","GameGui.fxml");
+    private final StatisticsManager statisticsManager = new StatisticsManagerImpl();
     
 
     public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {
-        //final URL url = getClass().getResource("/layouts/");
-        //final Path path = Paths.get(url.toURI());
+
+        statisticsManager.addStatistic(new NumericStatistic("curr_level", "root", "Livello attuale"));
+        statisticsManager.addStatistic(new NumericStatistic("total_play_time", "root", "Tempo totale di gioco"));
+        statisticsManager.addStatistic(new NumericStatistic("total_win", "root", "Vittorie totali"));
+        statisticsManager.addStatistic(new NumericStatistic("total_loose", "root", "Perdite totali"));
+        statisticsManager.addStatistic(new NumericStatistic("win_percentage", "root", "Percentuale vittoria", "%"));
+        statisticsManager.addStatistic(new NumericStatistic("collected_keys", "root", "Chiavi raccolte"));
         
         stage.setResizable(false);
         
-//        this.interfacesPaths = Files.walk(path, 1)
-//        .skip(1)
-//        .map(e -> e.toString())
-//        .collect(Collectors.toList())
-//        .stream()
-//        .map(e -> e.substring(e.lastIndexOf(File.separator)).substring(1))
-//        .sorted()
-//        .collect(Collectors.toList());
         this.mainStage = stage;
         
         this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(0), STYLING_LOCATION + "MainMenuStyle.css");
@@ -99,17 +66,16 @@ public class GameSceneControllerImpl implements GameSceneController {
             
             final FXMLLoader loader = new FXMLLoader();   
             
-            loader.setLocation(ClassLoader.getSystemResource(pathToInterface));
-            
+            loader.setLocation(getClass().getResource(pathToInterface));
+
             final Parent root = loader.load();
             
             if(this.currentScene.isEmpty()) {
-               
                 this.currentScene = Optional.of(new Scene(root));
                 this.sceneManager.setMainScene(this.currentScene.get());
             }
             
-            this.currentScene.ifPresent(c-> c.getStylesheets().add(ClassLoader.getSystemResource(cssStyle).toExternalForm()));
+            this.currentScene.ifPresent(c-> c.getStylesheets().add(getClass().getResource(cssStyle).toExternalForm()));
             
             sceneManager.addScreen(pathToInterface, (Pane)root);
             
@@ -146,7 +112,6 @@ public class GameSceneControllerImpl implements GameSceneController {
 
     @Override
     public void goToGame() {
-        //TODO BUG: if you go back in the GameMenu, you can't create a new game
         final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(4);
         
         sceneManager.activate(gameGuiPath);
@@ -160,7 +125,10 @@ public class GameSceneControllerImpl implements GameSceneController {
         input.assignInputNode(gamePane);
         
         final Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
-        final GameWorldController gameController = new GameWorldControllerImpl(this, renderer, input, new LevelHandlerImpl());
+        
+        final LevelHandler levelhandler = new LevelHandlerImpl(statisticsManager);
+        
+        final GameWorldController gameController = new GameWorldControllerImpl(this, renderer, input, levelhandler, statisticsManager);
         
         final GameGuiController temp = (GameGuiController) sceneManager.getSceneControllerByName(gameGuiPath);
         temp.setGameController(gameController);
@@ -180,10 +148,10 @@ public class GameSceneControllerImpl implements GameSceneController {
     }
 
     @Override
-    public void goToSettings() {
-        final String settingsGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(1);
+    public void goToStatistics() {
+        final String statisticsGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(1);
         
-        sceneManager.activate(settingsGuiPath);        
+        sceneManager.activate(statisticsGuiPath);        
     }
     
     @Override
@@ -196,6 +164,11 @@ public class GameSceneControllerImpl implements GameSceneController {
     @Override
     public void goToExit() {
        Platform.exit();
+    }
+
+    @Override
+    public StatisticsManager getStatisticsManager() {
+        return statisticsManager;
     }
 
 }

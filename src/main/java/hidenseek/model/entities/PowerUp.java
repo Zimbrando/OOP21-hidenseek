@@ -21,6 +21,7 @@ public final class PowerUp extends AbstractEntity {
     
     public PowerUp(final PowerUpType type, final Point2D pos) {
         super();
+        
         this.attach(new OneTimeLifeComponentImpl());
         PositionComponent position = new PositionComponentImpl();
         position.setPosition(pos);
@@ -33,9 +34,9 @@ public final class PowerUp extends AbstractEntity {
                     && collider.getComponent(HeartComponent.class).get().getHeart() == Heart.GOOD
                     && this.getComponent(LifeComponent.class).get().isAlive()) {
                 
-                powerup.getComponent(LifeComponent.class).get().hurt(1);
+                ((Entity)powerup).getComponent(LifeComponent.class).get().hurt(1);
                 //Effect on player
-                type.effect.accept(event.getCollider());
+                type.getEffect().accept(event.getCollider());
             }
         });
         

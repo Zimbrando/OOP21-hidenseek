@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 
 public class PowerUpViewImpl extends AbstractEntityView implements PowerUpView {
     
-    private static final Image INCREASE_SPEED = new Image("assets/potion_02.png");
-    private static final Image INCREASE_VISIBILITY = new Image("assets/potion_03.png");
+    private static final Image INCREASE_SPEED = new Image("/assets/potion_02.png");
+    private static final Image INCREASE_VISIBILITY = new Image("/assets/potion_03.png");
     private static final int SPRITE_WIDTH = 40;
     private static final int SPRITE_HEIGHT = 40;
     private final PowerUpType type;

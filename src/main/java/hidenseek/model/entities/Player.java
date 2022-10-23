@@ -14,6 +14,8 @@ import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.components.physics.CollisionComponent;
 import hidenseek.model.components.physics.CollisionComponentImpl;
 import hidenseek.model.components.physics.Force;
+import hidenseek.model.components.physics.LightComponent;
+import hidenseek.model.components.physics.LightComponentImpl;
 import hidenseek.model.components.physics.LinearMovementComponentImpl;
 import hidenseek.model.components.physics.MaterialComponent;
 import hidenseek.model.components.physics.MaterialComponentImpl;
@@ -21,6 +23,7 @@ import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.components.physics.PositionComponentImpl;
 import hidenseek.model.enums.Direction;
+import hidenseek.model.enums.LightRadius;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
@@ -28,7 +31,7 @@ public final class Player extends AbstractEntity {
     
     private static final double PLAYER_SPEED = 150;
     
-    public Player() {
+    public Player(final Point2D position) {
         super();
         
         //Life component
@@ -37,7 +40,7 @@ public final class Player extends AbstractEntity {
         
         //Position component
         final PositionComponent positionComponent = new PositionComponentImpl();
-        positionComponent.setPosition(new Point2D(0, 0));
+        positionComponent.setPosition(position);
         this.attach(positionComponent);
         
         //Move component
@@ -63,6 +66,9 @@ public final class Player extends AbstractEntity {
         mapKeyToAction(inputHandlerComponent, KeyCode.S, Direction.DOWN);
         mapKeyToAction(inputHandlerComponent, KeyCode.D, Direction.RIGHT);
         this.attach(inputHandlerComponent);
+        
+        final LightComponent lightComponent = new LightComponentImpl(LightRadius.SMALL);
+        this.attach(lightComponent);
         
         //Heart
         HeartComponent heart = new GoodHeartComponentImpl();

@@ -23,25 +23,13 @@
          <Canvas id="gameMainCanvas" height="900.0" width="1600.0" />
          <Pane fx:id="pausePane" prefHeight="900" prefWidth="1600" styleClass="pausePane" visible="false">
             <children>
-               <Text fx:id="pauseTitle" fill="#eca623" layoutX="550.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pause" textAlignment="CENTER" wrappingWidth="500">
-                  <font>
-                     <Font name="Impact" size="90.0" />
-                  </font>
+               <Text fx:id="pauseTitle" styleClass="title" fill="#eca623" layoutX="550.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pause" textAlignment="CENTER" wrappingWidth="500">
                </Text>
                <VBox alignment="CENTER" layoutX="334.0" layoutY="383.0" maxHeight="768.0" maxWidth="1024.0" prefHeight="0.0" prefWidth="932.0" spacing="25.0">
                   <children>
-                     <Button fx:id="resumeButton" onAction="#handleResumeClicked" prefHeight="80.0" prefWidth="500.0" text="RESUME">
-                        <font>
-                           <Font name="Impact" size="30.0" />
-                        </font>
-                        <VBox.margin>
-                           <Insets />
-                        </VBox.margin>
+                     <Button fx:id="resumeButton" styleClass="buttonStyle" onAction="#handleResumeClicked" prefHeight="80.0" prefWidth="500.0" text="RESUME">
                      </Button>
-                     <Button fx:id="goToMainMenuButton" layoutX="272.0" layoutY="65.0" onAction="#handlegoToMainMenuClicked" prefHeight="80.0" prefWidth="500.0" text="BACK TO MAIN MENU">
-                        <font>
-                           <Font name="Impact" size="26.0" />
-                        </font>
+                     <Button fx:id="goToMainMenuButton" styleClass="buttonStyle" layoutX="272.0" layoutY="65.0" onAction="#handlegoToMainMenuClicked" prefHeight="80.0" prefWidth="500.0" text="BACK TO MAIN MENU">
                      </Button>
                   </children>
                </VBox>

@@ -1,6 +1,5 @@
 package hidenseek.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.geometry.Point2D;
@@ -66,31 +65,17 @@ public final class CanvasDeviceImpl implements GraphicsDevice {
 
     @Override
     public void drawPolygon(final List<Point2D> points, final ImagePattern pattern) {
-        this.graphics.setFill(pattern);
-        List<Double> xs = new ArrayList<>();
-        List<Double> ys = new ArrayList<>();
-        points.stream().forEach(point -> { 
-            xs.add(point.getX());
-            ys.add(point.getY());
-        });
-        double[] xPoints = xs.stream().mapToDouble(Double::doubleValue).toArray();
-        double[] yPoints = ys.stream().mapToDouble(Double::doubleValue).toArray();
-         
+        this.graphics.setFill(pattern);;
+        double[] xPoints = points.stream().mapToDouble(point -> point.getX()).toArray();
+        double[] yPoints = points.stream().mapToDouble(point -> point.getY()).toArray();
         this.graphics.fillPolygon(xPoints, yPoints, points.size());
     }
 
     @Override
     public void drawPolygon(final List<Point2D> points, final Color color) {
         this.graphics.setFill(color);
-        List<Double> xs = new ArrayList<>();
-        List<Double> ys = new ArrayList<>();
-        points.stream().forEach(point -> { 
-            xs.add(point.getX());
-            ys.add(point.getY());
-        });
-        double[] xPoints = xs.stream().mapToDouble(Double::doubleValue).toArray();
-        double[] yPoints = ys.stream().mapToDouble(Double::doubleValue).toArray();
-         
+        double[] xPoints = points.stream().mapToDouble(point -> point.getX()).toArray();
+        double[] yPoints = points.stream().mapToDouble(point -> point.getY()).toArray();
         this.graphics.fillPolygon(xPoints, yPoints, points.size());
     }
 

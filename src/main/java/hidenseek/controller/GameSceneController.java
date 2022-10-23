@@ -1,5 +1,6 @@
 package hidenseek.controller;
 
+import hidenseek.model.statistics.StatisticsManager;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -28,7 +29,7 @@ public interface GameSceneController {
      * Goes to the statistics page.
      */
     
-    void goToSettings();
+    void goToStatistics();
     
     /**
      * Goes to the statistics page.
@@ -69,5 +70,7 @@ public interface GameSceneController {
      * @return the main Stage object for displaying UIs
      */
     Stage getMainStage();
+    
+    StatisticsManager getStatisticsManager();
     
 }

@@ -28,7 +28,7 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
         this.senseWorld = new SenseWorldImpl();
         this.dynamicsWorld = new DinamicsWorldImpl();
         this.keysPressed = new HashSet<>();
-        this.state = GameState.STOPPED;
+        this.state = GameState.STOPPED;     
     }
     
     @Override

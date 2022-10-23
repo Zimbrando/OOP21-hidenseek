@@ -1,17 +1,8 @@
 package hidenseek.controller;
 
-import hidenseek.model.entities.Player;
-import hidenseek.view.CanvasDeviceImpl;
-import hidenseek.view.entities.PlayerView;
-import hidenseek.view.entities.PlayerViewImpl;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.Pane;
 
 public class MainMenuController implements MenuController{
@@ -44,7 +35,7 @@ public class MainMenuController implements MenuController{
         this.interfaceHeight = 1080;
         this.interfaceWidth = 1920;
 
-    } 
+    }
    
     @FXML
     public void handleStartClicked() {
@@ -52,8 +43,8 @@ public class MainMenuController implements MenuController{
     }
     
     @FXML
-    public void handleGoToSettingsClicked() {
-        this.gameController.goToSettings();  
+    public void handleGoToStatisticsClicked() {
+        this.gameController.goToStatistics();  
     }
     
     @FXML

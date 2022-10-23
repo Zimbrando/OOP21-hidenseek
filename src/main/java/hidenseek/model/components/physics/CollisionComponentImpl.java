@@ -93,9 +93,6 @@ final public class CollisionComponentImpl extends AbstractObservableComponent im
             }
             return false;
         });
-        
-        
-        //return segmentsMatch(ownOffset, entity, new Point2D(0, 0), (a, b) -> a.consecutiveTo(b) || a.adjacentTo(b));
     }
     
     @Override
