@@ -7,6 +7,7 @@ import javafx.animation.AnimationTimer;
  */
 abstract class GameloopFXImpl extends AnimationTimer implements Gameloop {
 
+    private static double TARGET_FPS = 30.0;
     private long pastTick;
     private double currentFrameRate;
     private boolean restarting;
@@ -29,7 +30,7 @@ abstract class GameloopFXImpl extends AnimationTimer implements Gameloop {
        
     @Override
     public void handle(final long now) {
-        final double delta =  Math.min(1.0/60.0,(now - this.pastTick) / 1e9);
+        final double delta =  Math.min(1.0 / TARGET_FPS,(now - this.pastTick) / 1e9);
         if (!restarting) {
             this.currentFrameRate = 1 / delta;
             this.tick(delta);
