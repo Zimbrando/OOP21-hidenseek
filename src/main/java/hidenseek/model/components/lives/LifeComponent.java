@@ -1,4 +1,6 @@
-package hidenseek.model.components;
+package hidenseek.model.components.lives;
+
+import hidenseek.model.components.Component;
 
 /**
  * The life of an Entity

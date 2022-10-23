@@ -1,5 +1,6 @@
-package hidenseek.model.components;
+package hidenseek.model.components.lives;
 
+import hidenseek.model.components.AbstractObservableComponent;
 import hidenseek.model.events.DamageEvent;
 
 /**

@@ -13,8 +13,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import hidenseek.model.components.Component;
-import hidenseek.model.components.LifeComponent;
-import hidenseek.model.components.LifeComponentImpl;
+import hidenseek.model.components.lives.LifeComponent;
+import hidenseek.model.components.lives.LifeComponentImpl;
 import hidenseek.model.components.physics.CollisionComponentImpl;
 import hidenseek.model.components.physics.LinearMovementComponentImpl;
 import hidenseek.model.components.physics.MoveComponent;

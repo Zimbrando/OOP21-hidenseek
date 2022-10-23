@@ -1,12 +1,14 @@
 package hidenseek.model.entities;
 
 import hidenseek.model.components.InventoryComponent;
-import hidenseek.model.components.LifeComponent;
 import hidenseek.model.components.ObservableComponent;
-import hidenseek.model.components.OneTimeLifeComponentImpl;
+import hidenseek.model.components.RewardComponent;
+import hidenseek.model.components.RewardComponentImpl;
 import hidenseek.model.components.Trigger;
 import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.components.hearts.HeartComponent;
+import hidenseek.model.components.lives.LifeComponent;
+import hidenseek.model.components.lives.OneTimeLifeComponentImpl;
 import hidenseek.model.components.physics.CollisionComponent;
 import hidenseek.model.components.physics.CollisionComponentImpl;
 import hidenseek.model.enums.Heart;
@@ -16,7 +18,7 @@ import javafx.geometry.Point2D;
 public abstract class AbstractCollectableEntity extends AbstractEntity implements CollectableEntity {
 
     public AbstractCollectableEntity(final int hitboxSize) {
-        LifeComponent life = new OneTimeLifeComponentImpl();
+        final LifeComponent life = new OneTimeLifeComponentImpl();
         this.attach(life);
         
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
@@ -35,7 +37,7 @@ public abstract class AbstractCollectableEntity extends AbstractEntity implement
             }
         });
         
-        ObservableComponent collisionObservable = (ObservableComponent) collisionComponent;
+        final ObservableComponent collisionObservable = (ObservableComponent) collisionComponent;
         collisionObservable.attachListener(collisionListener);
     }
 }

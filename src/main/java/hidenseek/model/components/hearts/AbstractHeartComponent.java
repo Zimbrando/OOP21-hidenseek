@@ -17,12 +17,5 @@ public abstract class AbstractHeartComponent extends AbstractComponent implement
         return this.heart;
     }
 
-    @Override
-    public <T extends Entity> boolean hates(final T e) {
-        return this.hateCheck(e);
-    }
-    
-
-    abstract public <T extends Entity> boolean hateCheck(T e);
     
 }

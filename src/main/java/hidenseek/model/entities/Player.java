@@ -7,10 +7,12 @@ import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.InputHandlerComponentImpl;
 import hidenseek.model.components.InventoryComponent;
 import hidenseek.model.components.InventoryComponentImpl;
-import hidenseek.model.components.LifeComponent;
-import hidenseek.model.components.LifeComponentImpl;
+import hidenseek.model.components.brains.BrainComponent;
+import hidenseek.model.components.brains.ExpertBrainComponentImpl;
 import hidenseek.model.components.hearts.GoodHeartComponentImpl;
 import hidenseek.model.components.hearts.HeartComponent;
+import hidenseek.model.components.lives.LifeComponent;
+import hidenseek.model.components.lives.LifeComponentImpl;
 import hidenseek.model.components.physics.CollisionComponent;
 import hidenseek.model.components.physics.CollisionComponentImpl;
 import hidenseek.model.components.physics.Force;
@@ -22,6 +24,8 @@ import hidenseek.model.components.physics.MaterialComponentImpl;
 import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.components.physics.PositionComponentImpl;
+import hidenseek.model.components.senses.SenseComponent;
+import hidenseek.model.components.senses.SightSenseComponentImpl;
 import hidenseek.model.enums.Direction;
 import hidenseek.model.enums.LightRadius;
 import javafx.geometry.Point2D;
@@ -73,10 +77,11 @@ public final class Player extends AbstractEntity {
         //Heart
         HeartComponent heart = new GoodHeartComponentImpl();
         this.attach(heart);
-        
+
         //Inventory
         InventoryComponent inventory = new InventoryComponentImpl();
         this.attach(inventory);
+
     }
     
     private void mapKeyToAction(final InputHandlerComponent inputHandlerComponent, final KeyCode keyCode, Direction direction) {

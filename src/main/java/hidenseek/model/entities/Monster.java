@@ -1,7 +1,5 @@
 package hidenseek.model.entities;
 
-import hidenseek.model.components.LifeComponent;
-import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.MapComponent;
 import hidenseek.model.components.MapComponentImpl;
 import hidenseek.model.components.ObservableComponent;
@@ -12,6 +10,8 @@ import hidenseek.model.components.brains.ExpertBrainComponentImpl;
 import hidenseek.model.components.brains.NaiveBrainComponentImpl;
 import hidenseek.model.components.hearts.EvilHeartComponentImpl;
 import hidenseek.model.components.hearts.HeartComponent;
+import hidenseek.model.components.lives.LifeComponent;
+import hidenseek.model.components.lives.LifeComponentImpl;
 import hidenseek.model.components.physics.CollisionComponent;
 import hidenseek.model.components.physics.CollisionComponentImpl;
 import hidenseek.model.components.physics.LinearMovementComponentImpl;

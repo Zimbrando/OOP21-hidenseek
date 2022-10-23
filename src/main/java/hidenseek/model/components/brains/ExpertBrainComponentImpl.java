@@ -20,6 +20,7 @@ import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.components.Component;
 import hidenseek.model.components.MapComponent;
+import hidenseek.model.components.RewardComponent;
 import hidenseek.model.entities.AbstractEntity;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.Player;
@@ -48,6 +49,11 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponent implements 
         
         // Set heart.GOOD behavior
         // TODO set Heart.GOOD behavior
+        setBehaviour(Heart.GOOD
+                , e  -> e.getComponent(PositionComponent.class).isPresent()
+                        && this.getOwner().get().getComponent(HeartComponent.class).get().loves(e)
+                , (e1,e2) -> distanceBetween(this.getOwner().get(),e1) < distanceBetween(this.getOwner().get(),e2) ? e1 : e2
+                , (e1, setE) -> moveTowards(e1, setE));
 
         // Set heart.EVIL behavior
         setBehaviour(Heart.EVIL

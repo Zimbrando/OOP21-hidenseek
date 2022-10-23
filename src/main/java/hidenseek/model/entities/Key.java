@@ -1,5 +1,7 @@
 package hidenseek.model.entities;
 
+import hidenseek.model.components.RewardComponent;
+import hidenseek.model.components.RewardComponentImpl;
 import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.components.physics.PositionComponentImpl;
 import javafx.geometry.Point2D;
@@ -13,6 +15,9 @@ public class Key extends AbstractCollectableEntity {
         PositionComponent positionComponent = new PositionComponentImpl();
         positionComponent.setPosition(position);
         this.attach(positionComponent);
+
+        final RewardComponent reward = new RewardComponentImpl(1);
+        this.attach(reward);
     }
 
 }

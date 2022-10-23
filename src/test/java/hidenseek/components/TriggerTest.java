@@ -7,11 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import hidenseek.model.entities.Entity;
-import hidenseek.model.components.LifeComponent;
-import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.ObservableComponent;
 import hidenseek.model.components.Trigger;
 import hidenseek.model.components.TriggerImpl;
+import hidenseek.model.components.lives.LifeComponent;
+import hidenseek.model.components.lives.LifeComponentImpl;
 import hidenseek.model.entities.AbstractEntity;
 import hidenseek.model.events.CollisionEvent;
 import hidenseek.model.events.DamageEvent;
