@@ -1,5 +1,33 @@
 <level name="Ruins of War" gravity="1.5" maximumTime="150">
 
+	<wall position="0,0">
+		<vertex position="0,0"/>
+		<vertex position="1600,0"/>
+		<vertex position="1600,15"/>
+		<vertex position="0,15"/>
+	</wall>
+
+	<wall position="0,900">
+		<vertex position="0,0"/>
+		<vertex position="1600,0"/>
+		<vertex position="1600,15"/>
+		<vertex position="0,15"/>
+	</wall>
+
+	<wall position="0,0">
+		<vertex position="0,0"/>
+		<vertex position="15,0"/>
+		<vertex position="15,900"/>
+		<vertex position="0,900"/>
+	</wall>
+
+	<wall position="1600,0">
+		<vertex position="0,0"/>
+		<vertex position="0,900"/>
+		<vertex position="-15,900"/>
+		<vertex position="-15,0"/>
+	</wall>
+
 	<wall position="219,17">
 		<vertex position="272,0"/>
 		<vertex position="289,0"/>

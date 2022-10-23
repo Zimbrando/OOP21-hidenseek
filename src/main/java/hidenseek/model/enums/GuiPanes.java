@@ -7,8 +7,6 @@ public enum GuiPanes {
     GAMEOVER_MENU("GameOverGui.fxml"),
     GAME_GUI("GameGui.fxml");
     
-    
-    
     private String guiFileSystemName;
     
     GuiPanes(final String name){

@@ -24,7 +24,7 @@ import javafx.geometry.Point2D;
 
 public class Monster extends AbstractEntity {
     
-    private static final double MONSTER_SPEED = 600;
+    private static final double MONSTER_SPEED = 250;
     
     public Monster(final Point2D position) {
         super();

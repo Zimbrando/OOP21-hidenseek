@@ -33,7 +33,7 @@ public class GameSceneControllerImpl implements GameSceneController {
     private final static double INTERFACE_HEIGHT = 900.0;
     
 
-    public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {
+    public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {      
 
         statisticsManager.addStatistic(new NumericStatistic("curr_level", "root", "Current level"));
         statisticsManager.addStatistic(new NumericStatistic("total_play_time", "root", "Play time"));
@@ -45,8 +45,6 @@ public class GameSceneControllerImpl implements GameSceneController {
         stage.setResizable(false);
         
         this.mainStage = stage;
-        
-        this.loadInterface(RESOURCE_LOCATION+GuiPanes.MAIN_MENU.getFileName(), STYLING_LOCATION + "MainMenuStyle.css");
        
         this.init();
         

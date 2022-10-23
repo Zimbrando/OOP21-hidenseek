@@ -1,0 +1,165 @@
+<level name="Ruins of War" gravity="1.5" maximumTime="150">
+	
+	<wall position="0,0">
+		<vertex position="0,0"/>
+		<vertex position="1600,0"/>
+		<vertex position="1600,15"/>
+		<vertex position="0,15"/>
+	</wall>
+
+	<wall position="0,900">
+		<vertex position="0,0"/>
+		<vertex position="1600,0"/>
+		<vertex position="1600,15"/>
+		<vertex position="0,15"/>
+	</wall>
+
+	<wall position="0,0">
+		<vertex position="0,0"/>
+		<vertex position="15,0"/>
+		<vertex position="15,900"/>
+		<vertex position="0,900"/>
+	</wall>
+
+	<wall position="1600,0">
+		<vertex position="0,0"/>
+		<vertex position="0,900"/>
+		<vertex position="-15,900"/>
+		<vertex position="-15,0"/>
+	</wall>
+
+	<wall position="629,17">
+		<vertex position="0,0"/>
+		<vertex position="187,0"/>
+		<vertex position="187,17"/>
+		<vertex position="0,17"/>
+	</wall>
+
+	<wall position="0,153">
+		<vertex position="0,0"/>
+		<vertex position="187,0"/>
+		<vertex position="187,-34"/>
+		<vertex position="204,-34"/>
+		<vertex position="204,-51"/>
+		<vertex position="255,-51"/>
+		<vertex position="255,-68"/>
+		<vertex position="323,-68"/>
+		<vertex position="323,-51"/>
+		<vertex position="510,-51"/>
+		<vertex position="510,-34"/>
+		<vertex position="527,-34"/>
+		<vertex position="527,0"/>
+		<vertex position="510,0"/>
+		<vertex position="510,-17"/>
+		<vertex position="493,-17"/>
+		<vertex position="493,-34"/>
+		<vertex position="306,-34"/>
+		<vertex position="306,-51"/>
+		<vertex position="272,-51"/>
+		<vertex position="272,-34"/>
+		<vertex position="221,-34"/>
+		<vertex position="221,-17"/>
+		<vertex position="204,-17"/>
+		<vertex position="204,17"/>
+		<vertex position="0,17"/>
+	</wall>
+
+	<wall position="646,85">
+		<vertex position="0,0"/>
+		<vertex position="119,0"/>
+		<vertex position="119,17"/>
+		<vertex position="17,17"/>
+		<vertex position="17,51"/>
+		<vertex position="34,51"/>
+		<vertex position="34,102"/>
+		<vertex position="17,102"/>
+		<vertex position="17,51"/>
+		<vertex position="0,51"/>
+	</wall>
+
+	<wall position="867,85">
+		<vertex position="0,0"/>
+		<vertex position="17,0"/>
+		<vertex position="17,85"/>
+		<vertex position="0,85"/>
+		<vertex position="0,102"/>
+		<vertex position="-102,102"/>
+		<vertex position="-102,85"/>
+		<vertex position="-17,85"/>
+		<vertex position="-17,68"/>
+		<vertex position="0,68"/>
+	</wall>
+
+	<wall position="578,255">
+		<vertex position="0,0"/>
+		<vertex position="119,0"/>
+		<vertex position="119,-51"/>
+		<vertex position="136,-51"/>
+		<vertex position="136,17"/>
+		<vertex position="0,17"/>
+	</wall>
+
+	<wall position="0,323">
+		<vertex position="0,0"/>
+		<vertex position="0,-68"/>
+		<vertex position="17,-68"/>
+		<vertex position="17,-102"/>
+		<vertex position="68,-102"/>
+		<vertex position="68,-85"/>
+		<vertex position="102,-85"/>
+		<vertex position="102,-68"/>
+		<vertex position="51,-68"/>
+		<vertex position="51,-85"/>
+		<vertex position="34,-85"/>
+		<vertex position="34,-51"/>
+		<vertex position="17,-51"/>
+		<vertex position="17,0"/>
+	</wall>
+
+	<wall position="170,255">
+		<vertex position="0,0"/>
+		<vertex position="85,0"/>
+		<vertex position="85,-68"/>
+		<vertex position="102,-68"/>
+		<vertex position="102,-85"/>
+		<vertex position="119,-85"/>
+		<vertex position="119,-51"/>
+		<vertex position="102,-51"/>
+		<vertex position="102,17"/>
+		<vertex position="0,17"/>
+	</wall>
+	
+	<player position="391,300">
+	</player>
+	
+	<monster position="100,200">
+	</monster>
+	
+	<powerup type="0" position="289,415">
+	</powerup>
+	
+	<powerup type="1" position="340,34">
+	</powerup>
+	
+	<powerup type="0" position="888,329">
+	</powerup>
+	
+	<powerup type="1" position="300,458">
+	</powerup>
+	
+	<powerup type="0" position="589,403">
+	</powerup>
+	
+	<powerup type="0" position="125,123">
+	</powerup>
+	
+	<key position="350,205">
+	</key>
+	
+	<key position="147,30">
+	</key>
+	
+	<key position="459,390">
+	</key>
+
+</level>

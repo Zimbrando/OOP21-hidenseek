@@ -16,9 +16,10 @@ public class LevelHandlerImpl implements LevelHandler {
     
     public LevelHandlerImpl(final StatisticsManager statisticsManager) {
         final GameLevel level1 = new GameLevelImpl(1);        
-        final GameLevel level2 = new GameLevelImpl(2);
+        final GameLevel level2 = new GameLevelImpl(2);        
+        final GameLevel level3 = new GameLevelImpl(3);
         
-        this.gameLevels = List.of(level1, level2);
+        this.gameLevels = List.of(level3, level2, level1);
         this.currentLevel = 0;
         
         gameLevels.forEach(gameLevel -> {
@@ -31,7 +32,6 @@ public class LevelHandlerImpl implements LevelHandler {
     @Override
     public void next() {
         this.currentLevel++;
-        System.out.println(this.currentLevel);
     }
 
     @Override
