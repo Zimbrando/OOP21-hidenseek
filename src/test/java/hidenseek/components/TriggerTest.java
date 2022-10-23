@@ -2,11 +2,10 @@ package hidenseek.components;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
 import hidenseek.model.entities.Entity;
+import hidenseek.model.components.AbstractObservableComponent;
 import hidenseek.model.components.ObservableComponent;
 import hidenseek.model.components.Trigger;
 import hidenseek.model.components.TriggerImpl;
@@ -21,6 +20,7 @@ public class TriggerTest {
     private int count = 0;
     
     @Test public void testTriggerComponent() {
+        this.count = 0;
         final Entity e = new AbstractEntity(){};
         final int damage = 10;
         final ObservableComponent life = new LifeComponentImpl(100);
@@ -32,23 +32,38 @@ public class TriggerTest {
         e.attach(life);
         final LifeComponent compLife = (LifeComponent) life;
         compLife.hurt(damage);
-        assertEquals(1, count);
+        assertEquals(1, this.count);
     }
     
-    //TODO fix multiple triggers test (needs a component that can throw different events)
+    /**
+     * Test class that can throw events of different type
+     */
+    class DoubleEventObservableComponent extends AbstractObservableComponent {
+        
+        void sendDamageEvent() {
+            this.notifyListener(new DamageEvent(this.getOwner().get(), 10), DamageEvent.class);
+        }
+        
+        void sendCollisionEvent() {
+            this.notifyListener(new CollisionEvent(this.getOwner().get(), this.getOwner().get()), CollisionEvent.class);
+        }
+    }
+    
     @Test public void testMultipleTriggers() {
-        final int damage = 10;
+        this.count = 0;
         final Entity e = new AbstractEntity(){};
         final Trigger<DamageEvent> damageListener = new TriggerImpl<>(DamageEvent.class);
         final Trigger<CollisionEvent> collisionListener = new TriggerImpl<>(CollisionEvent.class);
-        final ObservableComponent publisher = new LifeComponentImpl(100);
+        final ObservableComponent publisher = new DoubleEventObservableComponent();
         publisher.attachListener(damageListener);
         publisher.attachListener(collisionListener);
-        damageListener.assignCallback((event, source) -> assertEquals(damage, event.getDamage()));
-        collisionListener.assignCallback((event, source) -> assertTrue(true));
+        damageListener.assignCallback((event, source) -> this.count++);
+        collisionListener.assignCallback((event, source) -> this.count++);
         e.attach(publisher);
-        final LifeComponent life = (LifeComponent) publisher;
-        life.hurt(damage);
+        DoubleEventObservableComponent sender = (DoubleEventObservableComponent) publisher;
+        sender.sendCollisionEvent();
+        sender.sendDamageEvent();
+        assertEquals(2, this.count);
     }
     
 }
