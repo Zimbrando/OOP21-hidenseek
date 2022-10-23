@@ -191,11 +191,11 @@ public class GameSceneControllerImpl implements GameSceneController {
         final EntityController monster = new MovableEntityControllerImpl<>(new Monster(), new MonsterViewImpl());
         monster.setPosition(monsterPos);
         gameController.addEntity(monster);
-
-        final EntityController monsterNaive = new MovableEntityControllerImpl<>(new NaiveMonster(),
-                new MonsterViewImpl());
-        monsterNaive.setPosition(monsterPos.add(new Point2D(200, 0)));
-        gameController.addEntity(monsterNaive);
+//
+//        final EntityController monsterNaive = new MovableEntityControllerImpl<>(new NaiveMonster(),
+//                new MonsterViewImpl());
+//        monsterNaive.setPosition(monsterPos.add(new Point2D(200, 0)));
+//        gameController.addEntity(monsterNaive);
 
         // gameController.addLevel(1, map);
 

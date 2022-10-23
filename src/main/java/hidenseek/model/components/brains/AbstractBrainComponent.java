@@ -23,14 +23,14 @@ import javafx.util.Pair;
  * @author Marco Sangiorgi
  *
  */
-public abstract class AbstractBrainComponentImpl extends AbstractDependencyComponent implements BrainComponent {
+public abstract class AbstractBrainComponent extends AbstractDependencyComponent implements BrainComponent {
 
     /**
      * Map: HEART -> Predicate, Bifunction, BiConsumer
      */
     Map<Heart, Pair<Pair<Predicate<Entity>, BiFunction<Entity, Entity, Entity>>, BiConsumer<Optional<Entity>, Set<Entity>>>> heartBeahaviours;
     
-    public AbstractBrainComponentImpl() {
+    public AbstractBrainComponent() {
         // define dependencies
         super(Set.of(
                 HeartComponent.class, 

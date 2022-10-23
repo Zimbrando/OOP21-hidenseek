@@ -21,6 +21,7 @@ import hidenseek.model.components.CollisionComponent;
 import hidenseek.model.components.CollisionComponentImpl;
 import hidenseek.model.components.Component;
 import hidenseek.model.components.Force;
+import hidenseek.model.components.MapComponent;
 import hidenseek.model.components.MaterialComponent;
 import hidenseek.model.components.MoveComponent;
 import hidenseek.model.entities.AbstractEntity;
@@ -39,7 +40,7 @@ import static hidenseek.model.components.Utils.distanceBetween;
  * @author Marco Sangiorgi
  *
  */
-public class ExpertBrainComponentImpl extends AbstractBrainComponentImpl implements BrainComponent {
+public class ExpertBrainComponentImpl extends AbstractBrainComponent implements BrainComponent {
 
     // next position useful when no targets are reachable
     private Optional<Point2D> targetPosition;
@@ -93,7 +94,10 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponentImpl impleme
             return;
         }
         // find shortest path to target position
-        final Optional<Point2D> nextPosition = findShortestPath(target.orElse(createGhostEntity(targetPosition.get(),Set.of(new Point2D(-1,-1), new Point2D(1,-1), new Point2D(1,1), new Point2D(-1,1) ))), entities);
+        final Optional<Point2D> nextPosition = findShortestPath(target.orElse(
+                            new Wall(targetPosition.get(), Set.of(new Point2D(-10, -10), new Point2D(10, -10), new Point2D(10, 10), new Point2D(-10, 10))))
+                            , entities
+                );
         // if no path is found
         if(nextPosition.isEmpty()) {
             return;
@@ -144,200 +148,43 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponentImpl impleme
      * @return
      */
     private Optional<Point2D> findShortestPath(final Entity target, final Set<Entity> entities) {
-
-        
-        // create ghost target
+        // get owner
         Entity owner = this.getOwner().get();
-        
-        Set<Point2D> hitbox = owner.getComponent(CollisionComponent.class).get().getHitbox();
-//        final Entity target = createGhostEntity(targetPosition,hitbox);
-
-//                createGhostEntity(this.getOwner().get().getComponent(PositionComponent.class).get().getPosition(),
-//                Set.of(new Point2D(-1,-1), new Point2D(1,-1), new Point2D(1,1), new Point2D(-1,1) )
-//                );
-//        entities.remove(target);
-        
-        
-        // get all materials
-        Set<Entity> materials = Stream.concat(Stream.of(owner, target), entities.stream()
-        .filter(e -> e.getComponent(PositionComponent.class).isPresent())
-        .filter(e -> e.getComponent(MaterialComponent.class).isPresent()))
-        .collect(Collectors.toSet());
-        
-        
-//        materials.forEach(System.out::println);
-        
-        // get all materials positions
-        Set<Point2D> positions = materials.stream()
-                .map(e -> e.getComponent(PositionComponent.class).get().getPosition())
-                .collect(Collectors.toSet());
-        
-        
-        // check it there no materials
-        if(positions.isEmpty()) {
+        // check map
+        if(owner.getComponent(MapComponent.class).isEmpty()) {
             return Optional.empty();
         }
-
-//        positions.forEach(p -> System.out.println(p));
-        
-
-            // bottom right point
-        final Point2D brPoint = positions.stream().reduce(new Point2D(Integer.MIN_VALUE,Integer.MIN_VALUE), (p1,p2) -> new Point2D(Math.max(p1.getX(), p2.getX()),Math.max(p1.getY(), p2.getY())));
-
-            // upper left point
-        final Point2D ulPoint = positions.stream().reduce(new Point2D(Integer.MAX_VALUE, Integer.MAX_VALUE), (p1,p2) -> new Point2D(Math.min(p1.getX(), p2.getX()),Math.min(p1.getY(), p2.getY())));
-        
-        // rowCols fixed
-        final int rowCols = 7;
-        
-        final int xJump = Math.max(1,(int)(brPoint.getX() - ulPoint.getX()) / rowCols);
-        final int yJump = Math.max(1,(int)(brPoint.getY() - ulPoint.getY()) / rowCols);
-        
-
-        
-        
-        //        // cell size fixed
-//        final Point2D ownerBrPoint = hitbox.stream().reduce(new Point2D(Integer.MIN_VALUE,Integer.MIN_VALUE), (p1,p2) -> new Point2D(Math.max(p1.getX(), p2.getX()),Math.max(p1.getY(), p2.getY())));
-//
-//            // upper left point
-//        final Point2D ownerUlPoint = hitbox.stream().reduce(new Point2D(Integer.MAX_VALUE, Integer.MAX_VALUE), (p1,p2) -> new Point2D(Math.min(p1.getX(), p2.getX()),Math.min(p1.getY(), p2.getY())));
-//        
-//        int cellWidth = (int)(ownerBrPoint.getX() - ownerUlPoint.getX()) * 3/ 4;
-//        
-//        final int rowCols = Math.max(1,(int)((brPoint.getX() - ulPoint.getX()) / cellWidth));
-//        
-//        final int xJump = Math.max(1,cellWidth);
-//        final int yJump = Math.max(1,cellWidth);
-
-
-//        CollisionComponent col = this.getOwner().get().getComponent(CollisionComponent.class).get();
-//        col.getHitbox().forEach(p -> col.removeHitboxPoint(p));
-//        Set.of(new Point2D(0,0), new Point2D(xJump,0), new Point2D(xJump,yJump), new Point2D(0,yJump) )
-//        .forEach(p -> coll.addHitboxPoint(p));
-        // generate grid position of enities sensed
-
-        final Set<Point2D> cells = Stream.iterate(new Point2D(ulPoint.getX()-xJump, ulPoint.getY()-yJump), p -> new Point2D(p.getX()+xJump, ulPoint.getY()-yJump))
-            .limit(rowCols+2)
-            .flatMap(p -> Stream.iterate(p, p2 -> new Point2D(p2.getX(), p2.getY()+yJump)).limit(rowCols+2))
-            .collect(Collectors.toSet());
-        
-
-        final SimpleGraph<Point2D, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
-        // traverse grid and link graph
-        cells.stream().forEach(p -> {
-            graph.addVertex(p);
-        });
-        cells.stream().forEach(p -> {
-            Point2D offset;
-            // updx
-            offset = p.add(new Point2D(xJump, -yJump));
-            if(cells.contains(offset)) {
-                graph.addEdge(p, offset);
-            }
-            // dx
-            offset = p.add(new Point2D(xJump, 0));
-            if(cells.contains(offset)) {
-                graph.addEdge(p, offset);
-            }
-            // down dx
-            offset = p.add(new Point2D(xJump, yJump));
-            if(cells.contains(offset)) {
-                graph.addEdge(p, offset);
-            }
-            // down
-            offset = p.add(new Point2D(0, yJump));
-            if(cells.contains(offset)) {
-                graph.addEdge(p, offset);
-            }
-        });
-        
-        
-//        cells.forEach(c -> System.out.println("before:"+ c));
-        this.targetCell = Optional.ofNullable(null);
-        this.sourceCell = Optional.ofNullable(null);
-        
-        // remove grid position where there is a material entity
-        this.cells = cells.stream()
-            .map(c -> {
-                    // create fake entity
-                    return new Wall(c, Set.of(new Point2D(0,0), new Point2D(xJump,0), new Point2D(xJump,yJump), new Point2D(0,yJump) ));
-                    
-             })
-            .filter(e->{
-                
-                    // check if all materials don't collide with this cell
-                final boolean out = materials.stream().filter(m -> !m.equals(target) && !m.equals(owner)).allMatch(m -> !m.getComponent(CollisionComponent.class).get().collisionWith(e));
-                if(!out) {
-                    graph.removeVertex(e.getComponent(PositionComponent.class).get().getPosition());
-                    return false;
-                }
-
-                if(distanceBetween(e, target) < 27) {
-//                if(e.getComponent(CollisionComponent.class).get().collisionWith(target)) {
-                    this.targetCell = Optional.of(e.getComponent(PositionComponent.class).get().getPosition());
-                    return true;
-                }
-              if(distanceBetween(e, owner) < 27) {
-//                if(e.getComponent(CollisionComponent.class).get().collisionWith(owner)) {
-                    this.sourceCell = Optional.of(e.getComponent(PositionComponent.class).get().getPosition());
-                    return true;
-                }
-                return out;
-            })
-            .collect(Collectors.toSet());
-        
-        if(targetCell.isEmpty() || this.sourceCell.isEmpty()) {
-            //System.out.println("target empty");
-            return Optional.empty();
-        }
-
-        final Optional<GraphPath<Point2D, DefaultEdge>> path = Optional.ofNullable(new DijkstraShortestPath<>(graph).getPath(this.sourceCell.get(),this.targetCell.get()));
-         
-         if(path.isEmpty()) {
-             //System.out.println("path empty");
-             return Optional.empty();
-         }
-         Set<Entity> pa = path.get()
-                .getVertexList()
-                .stream()
-                .map(c -> {
-                    // create fake entity
-                    return new Wall(c, Set.of(new Point2D(0,0), new Point2D(xJump,0), new Point2D(xJump,yJump), new Point2D(0,yJump) ));
-                    
-                })
-                
-                // filter some sources
-                .filter(e-> distanceBetween(e, owner) > 27)
+        // get map
+        MapComponent map = owner.getComponent(MapComponent.class).get();
+        // put entities in map
+        map.mapEntities(entities);
+        // get map points
+        final Set<Point2D> gameMap = map.getGameMap();
+        //TODO delete, just for debug
+        this.cells = gameMap.stream()
+                .map(p -> new Wall(p, Set.of(new Point2D(-10, -10), new Point2D(10, -10), new Point2D(10, 10), new Point2D(-10, 10))))
                 .collect(Collectors.toSet());
-         
-         Optional<Entity> nextCell = pa.stream().reduce((c1,c2) -> {
-                     return  !c1.getComponent(CollisionComponent.class).get().collisionWith(owner)
-                             && distanceBetween(c1, this.getOwner().get()) < distanceBetween(c2, owner) 
-                             ? c1
-                             : c2;
-         });
-         this.path = pa;
-         if(nextCell.isEmpty()) {
-             return Optional.empty();
-         }
-         
-         return Optional.of(nextCell.get().getComponent(PositionComponent.class).get().getPosition());
-         
         
-        // 
-//        cells.forEach(System.out::println);
-//        cells.stream().map(e -> graph.addVertex(e));
+        // get nearest point to target in map
+        final Point2D targetPos = findNearestPoint(target.getComponent(PositionComponent.class).get().getPosition(), gameMap).get();
+        
+        // get nearest point to me in map
+        final Point2D myPos = findNearestPoint(owner.getComponent(PositionComponent.class).get().getPosition(), gameMap).get();
+        
+        // find shortest path points
+        final Set<Point2D> path = map.getPath(myPos, targetPos);
+        //TODO delete, just for debug
+        this.path = path.stream()
+                .map(p -> new Wall(p, Set.of(new Point2D(-10, -10), new Point2D(10, -10), new Point2D(10, 10), new Point2D(-10, 10))))
+                .collect(Collectors.toSet());
+        
+        return findNearestPoint(myPos, path.stream().filter(p -> p.distance(myPos)>50).collect(Collectors.toSet()));
+    }
 
-
-//        cells.forEach(p -> System.out.println(p));
-        
-        
+    private Optional<Point2D> findNearestPoint(final Point2D source, final Set<Point2D> points) {
+        return points.stream().reduce((p1,p2) -> (p1.distance(source) < p2.distance(source)) ? p1 :p2);
     }
     
-    private Entity createGhostEntity(final Point2D position, Set<Point2D> hitbox) {
-        return new Wall(position, hitbox);
-    }
-
     @Override
     public Set<Entity> cells() {
         // TODO Auto-generated method stub

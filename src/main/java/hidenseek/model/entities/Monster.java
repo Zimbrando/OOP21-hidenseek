@@ -10,6 +10,8 @@ import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.InputHandlerComponentImpl;
 import hidenseek.model.components.LifeComponentImpl;
 import hidenseek.model.components.LinearMovementComponentImpl;
+import hidenseek.model.components.MapComponent;
+import hidenseek.model.components.MapComponentImpl;
 import hidenseek.model.components.MaterialComponent;
 import hidenseek.model.components.MaterialComponentImpl;
 import hidenseek.model.components.MoveComponent;
@@ -48,10 +50,10 @@ public class Monster extends AbstractEntity {
         
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
-        collisionComponent.addHitboxPoint(new Point2D(-25, -25));
-        collisionComponent.addHitboxPoint(new Point2D(25, -25));
-        collisionComponent.addHitboxPoint(new Point2D(25, 25));
-        collisionComponent.addHitboxPoint(new Point2D(-25, 25));
+        collisionComponent.addHitboxPoint(new Point2D(0, 0));
+        collisionComponent.addHitboxPoint(new Point2D(50, 0));
+        collisionComponent.addHitboxPoint(new Point2D(50, 50));
+        collisionComponent.addHitboxPoint(new Point2D(0, 50));
         this.attach(collisionComponent);        
         
         // heart
@@ -59,14 +61,16 @@ public class Monster extends AbstractEntity {
         this.attach(heart);
 
         // sight sense
-        final SenseComponent sight = new SightSenseComponentImpl(200);
+        final SenseComponent sight = new SightSenseComponentImpl(800);
         this.attach(sight);
-        
+
         // brain sense
         final BrainComponent brain = new ExpertBrainComponentImpl();
         this.attach(brain);
-        
 
+        // map
+        final MapComponent map = new MapComponentImpl();
+        this.attach(map);
         
         //InputHandler component
         final InputHandlerComponent inputHandlerComponent = new InputHandlerComponentImpl();
