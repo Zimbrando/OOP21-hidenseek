@@ -4,37 +4,37 @@ import hidenseek.model.statistics.StatisticProperty;
 
 public class Numeric extends StatisticProperty<Integer> {
 
-    private int _number;
+    private int number;
     public Numeric(int number) {
-        _number = number;
+        this.number = number;
     }
     
     @Override
     public String XMLSerialize() {
-        return Integer.toString(_number);
+        return Integer.toString(number);
     }
 
     @Override
     public void XMLDeserialize(String value) {
-        _number = Integer.parseInt(value);
+        number = Integer.parseInt(value);
     }
 
     @Override
     public Integer getValue() {
-        return _number;
+        return number;
     }
 
     @Override
     public void setValue(Integer value) {
-        _number = value;
+        number = value;
         saveStatistics();
     }
     
     public void increase(Integer diff) {
-        setValue(_number+diff);
+        setValue(number+diff);
     }
     
     public void decrease(Integer diff) {
-        setValue(Math.max(0, _number-diff));
+        setValue(Math.max(0, number-diff));
     }
 }

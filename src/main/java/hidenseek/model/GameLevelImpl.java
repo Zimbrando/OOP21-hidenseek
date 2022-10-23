@@ -183,7 +183,7 @@ public class GameLevelImpl implements GameLevel {
         final Set<HudController> huds = new LinkedHashSet<>();
         final KeyHudView keyHudView = new KeyHudViewImpl(new Point2D(1400, 30));
         keyHudView.setMaxKeys(this.getKeysNumber());
-        final HudController keyHud = new KeyHudControllerImpl(this.players.stream().findAny().get(), keyHudView);
+        final HudController keyHud = new KeyHudControllerImpl(Set.copyOf(this.players), keyHudView);
         huds.add(keyHud);
         return huds;
     }

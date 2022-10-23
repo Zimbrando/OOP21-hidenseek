@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <gamedata>
   <hidenseek.model.statistics.numeric.NumericStatistic id="curr_level" tag="root" value="2"/>
-  <hidenseek.model.statistics.numeric.NumericStatistic id="total_play_time" tag="root" value="28"/>
-  <hidenseek.model.statistics.numeric.NumericStatistic id="total_win" tag="root" value="30"/>
-  <hidenseek.model.statistics.numeric.NumericStatistic id="total_loose" tag="root" value="28"/>
+  <hidenseek.model.statistics.numeric.NumericStatistic id="total_play_time" tag="root" value="34"/>
+  <hidenseek.model.statistics.numeric.NumericStatistic id="total_win" tag="root" value="35"/>
+  <hidenseek.model.statistics.numeric.NumericStatistic id="total_loose" tag="root" value="34"/>
   <hidenseek.model.statistics.numeric.NumericStatistic id="win_percentage" tag="root" value="0"/>
-  <hidenseek.model.statistics.numeric.NumericStatistic id="collected_keys" tag="root" value="32"/>
+  <hidenseek.model.statistics.numeric.NumericStatistic id="collected_keys" tag="root" value="36"/>
   <hidenseek.model.statistics.score.ScoreStatistic id="actual_score" tag="1" value="5.0"/>
   <hidenseek.model.statistics.score.ScoreStatistic id="best_score" tag="1" value="5.0"/>
-  <hidenseek.model.statistics.numeric.NumericStatistic id="total_attempts" tag="1" value="10"/>
+  <hidenseek.model.statistics.numeric.NumericStatistic id="total_attempts" tag="1" value="12"/>
   <hidenseek.model.statistics.score.ScoreStatistic id="actual_score" tag="2" value="5.0"/>
   <hidenseek.model.statistics.score.ScoreStatistic id="best_score" tag="2" value="5.0"/>
   <hidenseek.model.statistics.numeric.NumericStatistic id="total_attempts" tag="2" value="5"/>

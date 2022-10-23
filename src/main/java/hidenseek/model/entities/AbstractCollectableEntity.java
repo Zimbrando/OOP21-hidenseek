@@ -6,8 +6,10 @@ import hidenseek.model.components.ObservableComponent;
 import hidenseek.model.components.OneTimeLifeComponentImpl;
 import hidenseek.model.components.Trigger;
 import hidenseek.model.components.TriggerImpl;
+import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.components.physics.CollisionComponent;
 import hidenseek.model.components.physics.CollisionComponentImpl;
+import hidenseek.model.enums.Heart;
 import hidenseek.model.events.CollisionEvent;
 import javafx.geometry.Point2D;
 
@@ -25,7 +27,9 @@ public abstract class AbstractCollectableEntity extends AbstractEntity implement
         this.attach(collisionComponent);
         
         Trigger<CollisionEvent> collisionListener = new TriggerImpl<>(CollisionEvent.class, (event, entity) -> {
-            if (Player.class.isInstance(event.getCollider())) {
+            final Entity collider = event.getCollider();
+            if (collider.getComponent(HeartComponent.class).isPresent() 
+                    && collider.getComponent(HeartComponent.class).get().getHeart() == Heart.GOOD) {
                 life.hurt(1);
                 event.getCollider().getComponent(InventoryComponent.class).ifPresent(inventory -> inventory.addCollectible(this));
             }

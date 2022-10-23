@@ -6,37 +6,37 @@ import hidenseek.model.statistics.StatisticProperty;
 
 public class Time extends StatisticProperty<Duration> {
 
-    private Duration _duration;
+    private Duration duration;
     public Time(int seconds) {
-        _duration = Duration.ofSeconds(seconds);
+        duration = Duration.ofSeconds(seconds);
     }
     
     @Override
     public String XMLSerialize() {
-        return Long.toString(_duration.toSeconds());
+        return Long.toString(duration.toSeconds());
     }
 
     @Override
     public void XMLDeserialize(String value) {
-        _duration = Duration.ofSeconds(Long.parseLong(value));
+        duration = Duration.ofSeconds(Long.parseLong(value));
     }
 
     @Override
     public Duration getValue() {
-        return _duration;
+        return duration;
     }
 
     @Override
     public void setValue(Duration value) {
-        _duration = value;
+        duration = value;
         saveStatistics();
     }
     
     public void addTime(long seconds) {
-        setValue(Duration.ofSeconds(_duration.toSeconds() + seconds));
+        setValue(Duration.ofSeconds(duration.toSeconds() + seconds));
     }
     
     public void subtractTime(long seconds) {
-        setValue(Duration.ofSeconds(Math.max(0, _duration.toSeconds() - seconds)));
+        setValue(Duration.ofSeconds(Math.max(0, duration.toSeconds() - seconds)));
     }
 }
