@@ -15,12 +15,12 @@ public class InventoryComponentImpl extends AbstractObservableComponent implemen
     }
 
     @Override
-    public void addCollectible(CollectableEntity entity) {
+    public void addCollectible(final CollectableEntity entity) {
         this.inventory.add(entity);
     }
 
     @Override
-    public int getQuantity(Class<? extends CollectableEntity> type) {
+    public int getQuantity(final Class<? extends CollectableEntity> type) {
         return (int)this.inventory.stream()
                 .filter(entity -> type.isInstance(entity))
                 .count();

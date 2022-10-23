@@ -96,7 +96,7 @@ public class MapComponentImpl extends AbstractComponent implements MapComponent 
         final Point2D ulPoint = upperLeft(hitboxes);
         
         // rowCols fixed
-        final int rowCols = 20;
+        final int rowCols = 25;
         // grid cells width and height
         final int xJump = Math.max(1,(int)(brPoint.getX() - ulPoint.getX()) / rowCols);
         final int yJump = Math.max(1,(int)(brPoint.getY() - ulPoint.getY()) / rowCols);

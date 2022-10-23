@@ -72,7 +72,7 @@ public class Monster extends AbstractEntity {
         this.attach(heart);
 
         // sight sense
-        final SenseComponent sight = new SightSenseComponentImpl(1000);
+        final SenseComponent sight = new SightSenseComponentImpl(2000);
         this.attach(sight);
 
         // brain

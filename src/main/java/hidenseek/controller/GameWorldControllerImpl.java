@@ -4,8 +4,13 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import hidenseek.controller.entities.EntityController;
+import hidenseek.controller.entities.EntityControllerImpl;
 import hidenseek.model.GameLevel;
+import hidenseek.model.components.brains.BrainComponent;
+import hidenseek.model.components.physics.CollisionComponent;
+import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.entities.Entity;
+import hidenseek.model.entities.Wall;
 import hidenseek.model.enums.GameState;
 import hidenseek.model.statistics.StatisticsManager;
 import hidenseek.model.statistics.numeric.Numeric;
@@ -14,6 +19,8 @@ import hidenseek.model.statistics.score.ScoreStatistic;
 import hidenseek.model.worlds.GameWorld;
 import hidenseek.model.worlds.GameWorldImpl;
 import hidenseek.view.Renderer;
+import hidenseek.view.entities.WallView;
+import hidenseek.view.entities.WallViewImpl;
 
 public final class GameWorldControllerImpl implements GameWorldController {
     
@@ -29,7 +36,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
     private long levelPlayTime;
     
     public GameWorldControllerImpl(final GameSceneController mainController, final Renderer view, 
-                                final InputScheme input, final LevelHandler level, StatisticsManager statisticsManager) {
+                                final InputScheme input, final LevelHandler level, final StatisticsManager statisticsManager) {
         this.view = view;
         this.mainController = mainController;
         this.entities = new LinkedHashSet<>();
@@ -74,6 +81,19 @@ public final class GameWorldControllerImpl implements GameWorldController {
             // draw entity
             this.view.drawEntity(entity.getView());
         });
+        
+
+        // Draw grid AI
+        this.model.world().stream()
+        .filter(e -> e.getComponent(BrainComponent.class).isPresent())  // get all entities 
+        .flatMap(e -> e.getComponent(BrainComponent.class).get().path().stream())
+        .map(c -> {
+            final WallView v = new WallViewImpl();
+            v.setPosition(c.getComponent(PositionComponent.class).get().getPosition());
+            v.setHitbox(c.getComponent(CollisionComponent.class).get().getHitbox());
+            return new EntityControllerImpl<WallView>(c, v);
+        })
+        .forEach(e -> e.getPosition().ifPresent(pos -> this.view.drawEntity(e.getView())));
         
         this.huds.forEach(hud -> {
             // update view
@@ -172,9 +192,9 @@ public final class GameWorldControllerImpl implements GameWorldController {
     }
     
     private void setWinPercentage() {
-        int totalWin = ((Numeric)statisticsManager.getStatistic("total_win").findFirst().get().getProperty()).getValue();
-        int totalLoose = ((Numeric)statisticsManager.getStatistic("total_loose").findFirst().get().getProperty()).getValue();
-        int winPercentage = totalWin / (totalWin + totalLoose);
+        final int totalWin = ((Numeric)statisticsManager.getStatistic("total_win").findFirst().get().getProperty()).getValue();
+        final int totalLoose = ((Numeric)statisticsManager.getStatistic("total_loose").findFirst().get().getProperty()).getValue();
+        final int winPercentage = totalWin / (totalWin + totalLoose);
         
         ((NumericStatistic)statisticsManager.getStatistic("win_percentage").findFirst().get()).getProperty().setValue(winPercentage);;
     }
