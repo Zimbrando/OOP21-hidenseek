@@ -58,7 +58,6 @@ public class GameGuiController implements MenuController {
     public void handleResumeClicked() {
         this.gameController.resume();
         setPauseMode();
-        //this.gameController.resumeGame(null);
     }
     
     @FXML

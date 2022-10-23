@@ -59,6 +59,7 @@ public class GameSceneControllerImpl implements GameSceneController {
     private void init() {
         Arrays.asList(GuiPanes.values()).stream().forEach(e-> this.loadInterface(RESOURCE_LOCATION+e.getFileName(), STYLING_LOCATION + "MainMenuStyle.css"));
     }
+   
     
     private void loadInterface(final String pathToInterface, final String cssStyle) {
     
@@ -168,7 +169,9 @@ public class GameSceneControllerImpl implements GameSceneController {
 
     @Override
     public void goToExit() {
+       Platform.setImplicitExit(true);
        Platform.exit();
+       System.exit(0);
     }
 
     @Override

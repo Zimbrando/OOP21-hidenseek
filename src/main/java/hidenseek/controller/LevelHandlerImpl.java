@@ -18,8 +18,9 @@ public class LevelHandlerImpl implements LevelHandler {
         final GameLevel level1 = new GameLevelImpl(1);        
         final GameLevel level2 = new GameLevelImpl(2);        
         final GameLevel level3 = new GameLevelImpl(3);
+        final GameLevel level4 = new GameLevelImpl(4);
         
-        this.gameLevels = List.of(level1, level2, level3);
+        this.gameLevels = List.of(level1, level2, level3, level4);
         this.currentLevel = 0;
         
         gameLevels.forEach(gameLevel -> {
