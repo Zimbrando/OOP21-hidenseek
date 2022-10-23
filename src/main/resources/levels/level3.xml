@@ -7,12 +7,13 @@
 		<vertex position="0,15"/>
 	</wall>
 
-	<wall position="0,900">
+	<wall position="0,845">
 		<vertex position="0,0"/>
 		<vertex position="1600,0"/>
 		<vertex position="1600,15"/>
 		<vertex position="0,15"/>
 	</wall>
+
 
 	<wall position="0,0">
 		<vertex position="0,0"/>
@@ -21,7 +22,7 @@
 		<vertex position="0,900"/>
 	</wall>
 
-	<wall position="1600,0">
+	<wall position="1585,0">
 		<vertex position="0,0"/>
 		<vertex position="0,900"/>
 		<vertex position="-15,900"/>
