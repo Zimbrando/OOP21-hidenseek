@@ -127,7 +127,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
         setWinPercentage();
         
         //No more levels
-        this.mainController.goToMenu();
+        this.mainController.goToGameOver();
         this.loop.stop();
     }
     

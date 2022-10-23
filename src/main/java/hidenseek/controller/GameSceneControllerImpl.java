@@ -1,10 +1,12 @@
 package hidenseek.controller;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import hidenseek.model.SceneManagerImpl;
+import hidenseek.model.enums.GuiPanes;
 import hidenseek.model.statistics.StatisticsManager;
 import hidenseek.model.statistics.StatisticsManagerImpl;
 import hidenseek.model.statistics.numeric.NumericStatistic;
@@ -19,6 +21,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 public class GameSceneControllerImpl implements GameSceneController {
 
@@ -27,24 +30,25 @@ public class GameSceneControllerImpl implements GameSceneController {
     private final SceneManagerImpl sceneManager = new SceneManagerImpl();
     private final static String RESOURCE_LOCATION = "/layouts/";
     private final static String STYLING_LOCATION = "/stylesheets/";
-    private final List<String> interfacesPaths = List.of("MainMenuGui.fxml","GameStatisticsGui.fxml","GameStatsGui.fxml","GameOverGui.fxml","GameGui.fxml");
     private final StatisticsManager statisticsManager = new StatisticsManagerImpl();
+    private final static double INTERFACE_WIDTH = 1600.0;
+    private final static double INTERFACE_HEIGHT = 900.0;
     
 
     public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {
 
-        statisticsManager.addStatistic(new NumericStatistic("curr_level", "root", "Livello attuale"));
-        statisticsManager.addStatistic(new NumericStatistic("total_play_time", "root", "Tempo totale di gioco"));
-        statisticsManager.addStatistic(new NumericStatistic("total_win", "root", "Vittorie totali"));
-        statisticsManager.addStatistic(new NumericStatistic("total_loose", "root", "Perdite totali"));
-        statisticsManager.addStatistic(new NumericStatistic("win_percentage", "root", "Percentuale vittoria", "%"));
-        statisticsManager.addStatistic(new NumericStatistic("collected_keys", "root", "Chiavi raccolte"));
+        statisticsManager.addStatistic(new NumericStatistic("curr_level", "root", "Current level"));
+        statisticsManager.addStatistic(new NumericStatistic("total_play_time", "root", "Play time"));
+        statisticsManager.addStatistic(new NumericStatistic("total_win", "root", "Victories"));
+        statisticsManager.addStatistic(new NumericStatistic("total_loose", "root", "Losses"));
+        statisticsManager.addStatistic(new NumericStatistic("win_percentage", "root", "Win percentage", "%"));
+        statisticsManager.addStatistic(new NumericStatistic("collected_keys", "root", "Collected keys"));
         
         stage.setResizable(false);
         
         this.mainStage = stage;
         
-        this.loadInterface(RESOURCE_LOCATION+this.interfacesPaths.get(0), STYLING_LOCATION + "MainMenuStyle.css");
+        this.loadInterface(RESOURCE_LOCATION+GuiPanes.MAIN_MENU.getFileName(), STYLING_LOCATION + "MainMenuStyle.css");
        
         this.init();
         
@@ -56,8 +60,8 @@ public class GameSceneControllerImpl implements GameSceneController {
         
     }
     
-    private void init() {        
-        this.interfacesPaths.stream().forEach(e-> this.loadInterface(RESOURCE_LOCATION+e, STYLING_LOCATION + "MainMenuStyle.css"));
+    private void init() {
+        Arrays.asList(GuiPanes.values()).stream().forEach(e-> this.loadInterface(RESOURCE_LOCATION+e.getFileName(), STYLING_LOCATION + "MainMenuStyle.css"));
     }
     
     private void loadInterface(final String pathToInterface, final String cssStyle) {
@@ -80,6 +84,8 @@ public class GameSceneControllerImpl implements GameSceneController {
             sceneManager.addScreen(pathToInterface, (Pane)root);
             
             final Optional<MenuController> sceneController = Optional.ofNullable((MenuController)loader.getController());
+            sceneController.ifPresent(s-> s.setWidth(INTERFACE_WIDTH));
+            sceneController.ifPresent(s-> s.setHeight(INTERFACE_HEIGHT));
             sceneController.ifPresent(s-> s.setSceneController(this));
             sceneController.ifPresent(s -> sceneManager.addScreenController(pathToInterface, s));
             
@@ -107,12 +113,12 @@ public class GameSceneControllerImpl implements GameSceneController {
         
     @Override
     public void goToMenu() {
-        sceneManager.activate(RESOURCE_LOCATION+this.interfacesPaths.get(0));
+        sceneManager.activate(RESOURCE_LOCATION+GuiPanes.MAIN_MENU.getFileName());
     }
 
     @Override
     public void goToGame() {
-        final String gameGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(4);
+        final String gameGuiPath = RESOURCE_LOCATION+GuiPanes.GAME_GUI.getFileName();
         
         sceneManager.activate(gameGuiPath);
          
@@ -140,26 +146,21 @@ public class GameSceneControllerImpl implements GameSceneController {
        });
     }
 
-    @Override
-    public void goToPause() {
-        final String pauseGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(3);
-        
-        sceneManager.activate(pauseGuiPath);       
-    }
-
-    @Override
-    public void goToStatistics() {
-        final String statisticsGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(1);
-        
-        sceneManager.activate(statisticsGuiPath);        
-    }
     
     @Override
     public void goToStats() {
-        final String statsGuiPath = RESOURCE_LOCATION+this.interfacesPaths.get(2);
+        final String statsGuiPath = RESOURCE_LOCATION+GuiPanes.STATS_MENU.getFileName();
         
         sceneManager.activate(statsGuiPath);    
     }
+    
+    @Override
+    public void goToGameOver() {
+        final String statsGuiPath = RESOURCE_LOCATION+GuiPanes.GAMEOVER_MENU.getFileName();
+        
+        sceneManager.activate(statsGuiPath);    
+    }
+
 
     @Override
     public void goToExit() {
@@ -168,7 +169,8 @@ public class GameSceneControllerImpl implements GameSceneController {
 
     @Override
     public StatisticsManager getStatisticsManager() {
-        return statisticsManager;
+        return this.statisticsManager;
     }
+
 
 }

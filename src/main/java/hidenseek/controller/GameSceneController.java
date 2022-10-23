@@ -20,22 +20,16 @@ public interface GameSceneController {
     void goToGame();
     
     /**
-     * Goes to pause menu.
-     */
-    
-    void goToPause();
-    
-    /**
-     * Goes to the statistics page.
-     */
-    
-    void goToStatistics();
-    
-    /**
      * Goes to the statistics page.
      */
     
     void goToStats();
+    
+    /**
+     * Goes to the "Game Over" page.
+     */
+    
+    void goToGameOver();
     
     /**
      * Exits the program. 
@@ -50,18 +44,11 @@ public interface GameSceneController {
      * @return the current scene's root object
      */
     Pane getSceneRoot(final String name);
-    
-//    /**
-//     * 
-//     * @param controller
-//     *          The gui controller
-//     */
-//    void resumeGame(final GameGuiController controller);
-    
+        
     /**
      * 
      * @param controller
-     *          The gui controller
+     *          the game gui controller
      */
     void pauseGame(final GameGuiController controller);
     
@@ -71,6 +58,10 @@ public interface GameSceneController {
      */
     Stage getMainStage();
     
+    /**
+     * 
+     * @return the statistics manager object
+     */
     StatisticsManager getStatisticsManager();
     
 }

@@ -5,22 +5,21 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class StatisticsController implements MenuController{
 
     @FXML
-    private final double interfaceHeight;
+    private double interfaceHeight;
     
     @FXML
-    private final double interfaceWidth;
+    private double interfaceWidth;
     
     @FXML
-    private Pane statisticsRoot;
+    private AnchorPane gameStatsMainPane;
     
     @FXML
     private VBox statisticsContainer;
@@ -29,23 +28,30 @@ public class StatisticsController implements MenuController{
     private Button exitButton;
     
     private GameSceneController gameController;
-   
-    public StatisticsController() {
-        this.interfaceHeight = 1080;
-        this.interfaceWidth = 1920;
-    }
-    
+       
     @FXML
     public void handleStatisticsExit() {
         this.gameController.goToMenu();  
     }
     
-    @FXML
+
+    @Override
+    public void setWidth(final double width) {
+       this.interfaceWidth = width;
+        
+    }
+
+    @Override
+    public void setHeight(final double height) {
+        this.interfaceHeight = height;
+    }
+    
+    @Override
     public double getHeight() {
         return this.interfaceHeight;
     }
     
-    @FXML
+    @Override
     public double getWidth() {
         return this.interfaceWidth;
     }
@@ -53,18 +59,22 @@ public class StatisticsController implements MenuController{
     @Override
     public void setSceneController(final GameSceneController gameController) {
         this.gameController = gameController;
-        for(Statistic<?> statistic : gameController.getStatisticsManager().getStatistics()) {
-            HBox statisticBox = new HBox();
+        
+        this.gameStatsMainPane.setPrefHeight(this.getHeight());
+        this.gameStatsMainPane.setPrefWidth(this.getWidth());
+        
+        for(final Statistic<?> statistic : gameController.getStatisticsManager().getStatistics()) {
+            final HBox statisticBox = new HBox();
             statisticBox.setAlignment(Pos.TOP_CENTER);
             
-            Label statisticTitleLbl = new Label(statistic.getTitle());
+            final Label statisticTitleLbl = new Label(statistic.getTitle());
             statisticTitleLbl.setMinWidth(1000);
-            statisticTitleLbl.setFont(new Font("impact", 14));
+            //statisticTitleLbl.setFont(new Font("impact", 14));
             statisticTitleLbl.setTextFill(Color.WHITE);
             
-            Label statisticValueLbl = new Label("0");
+            final Label statisticValueLbl = new Label("0");
             statisticTitleLbl.setMinWidth(200);
-            statisticValueLbl.setFont(new Font("impact", 14));
+            //statisticValueLbl.setFont(new Font("impact", 14));
             statisticValueLbl.setTextFill(Color.YELLOW);
 
             statisticBox.getChildren().add(statisticTitleLbl);
@@ -72,5 +82,6 @@ public class StatisticsController implements MenuController{
             statisticsContainer.getChildren().add(statisticBox);
         }
     }
+
     
 }

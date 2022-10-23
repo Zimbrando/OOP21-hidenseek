@@ -2,6 +2,7 @@ package hidenseek.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -10,6 +11,15 @@ public class GameGuiController implements MenuController {
     private GameSceneController gameSceneController;
     private GameWorldController gameController;
     private boolean paused;
+    
+    @FXML
+    private double interfaceHeight;
+    
+    @FXML
+    private double interfaceWidth;
+    
+    @FXML
+    private AnchorPane gameGuiMainPane;
     
     @FXML
     private Pane pausePane;
@@ -23,7 +33,26 @@ public class GameGuiController implements MenuController {
     @FXML
     private Button goToMainMenuButton;
     
+    @Override
+    public void setWidth(final double width) {
+       this.interfaceWidth = width;
+        
+    }
+
+    @Override
+    public void setHeight(final double height) {
+        this.interfaceHeight = height;
+    }
     
+    @Override
+    public double getHeight() {
+        return this.interfaceHeight;
+    }
+    
+    @Override
+    public double getWidth() {
+        return this.interfaceWidth;
+    }
     
     @FXML
     public void handleResumeClicked() {
@@ -56,6 +85,8 @@ public class GameGuiController implements MenuController {
     @Override
     public void setSceneController(final GameSceneController gameSceneController) {
         this.gameSceneController = gameSceneController; 
+        this.gameGuiMainPane.setPrefHeight(this.getHeight());
+        this.gameGuiMainPane.setPrefWidth(this.getWidth());
     }
 
 }

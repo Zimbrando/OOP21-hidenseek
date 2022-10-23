@@ -3,10 +3,9 @@ package hidenseek.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
-public class MainMenuController implements MenuController{
-
+public class GameOverMenuController implements MenuController{
+    
     @FXML
     private double interfaceHeight;
     
@@ -14,20 +13,18 @@ public class MainMenuController implements MenuController{
     private double interfaceWidth;
     
     @FXML
-    private AnchorPane mainPane;
-    
+    private AnchorPane gameOverMainPane;
+        
     @FXML
-    private Button startButton;
-    
-    @FXML
-    private Button goToSettingsButton;
-    
-    @FXML
-    private Button exitButton;
+    private Button exitToMenu;
     
     private GameSceneController gameController;
    
-    
+    @FXML
+    public void handleExitToMenuClicked() {
+        this.gameController.goToMenu();  
+    }
+        
     @Override
     public void setWidth(final double width) {
        this.interfaceWidth = width;
@@ -48,27 +45,11 @@ public class MainMenuController implements MenuController{
     public double getWidth() {
         return this.interfaceWidth;
     }
-    
-    @FXML
-    public void handleStartClicked() {
-        this.gameController.goToGame();  
-    }
-    
-    @FXML
-    public void handleGoToStatisticsClicked() {
-        this.gameController.goToStats();  
-    }
-    
-    @FXML
-    public void handleExitClicked() {
-        this.gameController.goToExit();
-    }
 
     @Override
     public void setSceneController(final  GameSceneController gameController) {
-        this.gameController = gameController; 
-        this.mainPane.setPrefHeight(this.getHeight());
-        this.mainPane.setPrefWidth(this.getWidth());
-    }
-    
+        this.gameController = gameController;
+        this.gameOverMainPane.setPrefHeight(this.getHeight());
+        this.gameOverMainPane.setPrefWidth(this.getWidth());
+    }   
 }
