@@ -64,35 +64,8 @@ public class NaiveBrainComponentImpl extends AbstractBrainComponent implements B
         if(targetPosition.isEmpty()) {
             return;
         }
-        // get movement component
-        final PositionComponent position = this.getOwner().get().getComponent(PositionComponent.class).get();
-        final MoveComponent movement = this.getOwner().get().getComponent(MoveComponent.class).get();
-        // move based on target position
-
-        double moveXIntensity = 0;
-        Direction moveXDirection = Direction.DOWN;
-        
-        double moveYIntensity = 0;
-        Direction moveYDirection = Direction.DOWN;
-        
-        if(targetPosition.get().getX() > position.getPosition().getX()) {
-            moveXDirection = Direction.RIGHT;
-            moveXIntensity = 1;
-        } else {
-            moveXDirection = Direction.LEFT;
-            moveXIntensity = 1;
-        }
-        if(targetPosition.get().getY() > position.getPosition().getY()) {
-            moveYDirection = Direction.DOWN;
-            moveYIntensity = 1;
-        } else {
-            moveYDirection = Direction.UP;
-            moveYIntensity = 1;
-        }
-
-        movement.removeForce(force -> force.getIdentifier().startsWith("ai"));
-        movement.addForce(new Force("ai-horizontal", moveXIntensity, moveXDirection.getValue()));
-        movement.addForce(new Force("ai-vertical", moveYIntensity, moveYDirection.getValue()));
+        // move
+        move(targetPosition.get());
     }
 
     private Optional<Point2D> getRandomReachablePosition(final Set<Entity> entities) {
