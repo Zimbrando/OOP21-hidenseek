@@ -2,7 +2,6 @@ package hidenseek.view;
 
 import hidenseek.view.entities.EntityView;
 import hidenseek.view.huds.HudView;
-import javafx.scene.paint.Color;
 
 /**
  * Basic Renderer
@@ -28,7 +27,6 @@ public class RendererImpl implements Renderer {
     @Override
     public void refresh() {
         gd.repaint();
-        gd.fill(Color.BLACK);
     }
 
 }
