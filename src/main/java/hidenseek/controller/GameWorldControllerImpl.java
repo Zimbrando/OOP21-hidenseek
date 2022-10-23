@@ -156,7 +156,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
             ((NumericStatistic)statisticsManager.getStatistic("curr_level").findFirst().get()).getProperty().setValue(currentLevelID);
             return;
         }
-        this.mainController.goToMenu();
+        this.mainController.goToGameWin();
         this.loop.stop();
     }
     

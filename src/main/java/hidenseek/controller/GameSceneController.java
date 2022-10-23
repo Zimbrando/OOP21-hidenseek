@@ -26,6 +26,12 @@ public interface GameSceneController {
     void goToStats();
     
     /**
+     * Goes to the "You Won" page.
+     */
+    
+    void goToGameWin();
+    
+    /**
      * Goes to the "Game Over" page.
      */
     

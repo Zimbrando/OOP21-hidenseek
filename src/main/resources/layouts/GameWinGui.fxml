@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -8,14 +7,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15" fx:controller="hidenseek.controller.GameOverMenuController">
+<Pane xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hidenseek.controller.GameWinController">
    <children>
-      <AnchorPane fx:id="gameOverMainPane" styleClass="rootStyle">
+      <AnchorPane fx:id="gameWinMainPane" styleClass="rootStyle">
          <children>
-            <Text fill="#eca623" layoutX="550.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Game Over :/" wrappingWidth="600">
+            <Text fill="#eca623" layoutX="550.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="You win!" textAlignment="CENTER" wrappingWidth="500">
             </Text>
-            <VBox alignment="CENTER" layoutX="334.0" layoutY="388.0" maxHeight="768.0" maxWidth="1024.0" prefHeight="0.0" prefWidth="932.0" spacing="25.0" styleClass="buttonStyle">
+            <VBox alignment="CENTER" layoutX="334.0" layoutY="438.0" maxHeight="768.0" maxWidth="1024.0" prefHeight="0.0" prefWidth="932.0" spacing="25.0" styleClass="buttonStyle">
                <children>
                   <Button fx:id="exitToMenu" onAction="#handleExitToMenuClicked" prefHeight="80.0" prefWidth="500.0" styleClass="buttonStyle" text="EXIT TO MAIN MENU">
                   </Button>

@@ -12,18 +12,19 @@ import hidenseek.model.statistics.score.ScoreStatistic;
 public class LevelHandlerImpl implements LevelHandler {
     
     private final List<GameLevel> gameLevels;
-    private int currentLevel = 0;
+    private int currentLevel;
     
-    public LevelHandlerImpl(StatisticsManager statisticsManager) {
-        GameLevel level1 = new GameLevelImpl(1);        
-        GameLevel level2 = new GameLevelImpl(2);
+    public LevelHandlerImpl(final StatisticsManager statisticsManager) {
+        final GameLevel level1 = new GameLevelImpl(1);        
+        final GameLevel level2 = new GameLevelImpl(2);
         
         this.gameLevels = List.of(level1, level2);
+        this.currentLevel = 0;
         
         gameLevels.forEach(gameLevel -> {
-            statisticsManager.addStatistic(new ScoreStatistic("actual_score", Integer.toString(gameLevel.getLevelID()), "Punteggio ultimo tentativo"));
-            statisticsManager.addStatistic(new ScoreStatistic("best_score", Integer.toString(gameLevel.getLevelID()), "Punteggio migliore"));
-            statisticsManager.addStatistic(new NumericStatistic("total_attempts", Integer.toString(gameLevel.getLevelID()), "Tentativi totali"));
+            statisticsManager.addStatistic(new ScoreStatistic("actual_score", Integer.toString(gameLevel.getLevelID()), "Current score"));
+            statisticsManager.addStatistic(new ScoreStatistic("best_score", Integer.toString(gameLevel.getLevelID()), "Best score"));
+            statisticsManager.addStatistic(new NumericStatistic("total_attempts", Integer.toString(gameLevel.getLevelID()), "Total attempts"));
         });
     }
     

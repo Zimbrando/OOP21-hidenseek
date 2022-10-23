@@ -12,11 +12,6 @@ public class SceneManagerImpl implements SceneManager {
     private final Map<String,MenuController> sceneControllers = new HashMap<>();
     private Scene main;
 
-    
-//    public SceneManagerImpl() {
-//       
-//    }
-
     @Override
     public void addScreen(final String name, final Pane pane){
          this.screenMap.put(name, pane);     
@@ -52,10 +47,6 @@ public class SceneManagerImpl implements SceneManager {
         return this.screenMap.get(name);    
     }
     
-    public void printMap() {
-        System.out.println("map-->"+this.screenMap);
-    }
-
     @Override
     public void setMainScene(final Scene mainScene) {
         this.main = mainScene;

@@ -153,10 +153,18 @@ public class GameSceneControllerImpl implements GameSceneController {
     }
     
     @Override
-    public void goToGameOver() {
-        final String statsGuiPath = RESOURCE_LOCATION+GuiPanes.GAMEOVER_MENU.getFileName();
+    public void goToGameWin() {
+        final String gameWinGuiPath = RESOURCE_LOCATION+GuiPanes.GAMEWIN_MENU.getFileName();
         
-        sceneManager.activate(statsGuiPath);    
+        sceneManager.activate(gameWinGuiPath);  
+        
+    }
+    
+    @Override
+    public void goToGameOver() {
+        final String gameOverGuiPath = RESOURCE_LOCATION+GuiPanes.GAMEOVER_MENU.getFileName();
+        
+        sceneManager.activate(gameOverGuiPath);    
     }
 
 
@@ -169,6 +177,4 @@ public class GameSceneControllerImpl implements GameSceneController {
     public StatisticsManager getStatisticsManager() {
         return this.statisticsManager;
     }
-
-
 }

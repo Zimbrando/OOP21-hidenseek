@@ -43,24 +43,26 @@ public class GameLevelImpl implements GameLevel {
     private final Set<Player> players = new LinkedHashSet<>();
     private final Set<Monster> monsters = new LinkedHashSet<>();
     private final Map<PowerUpType, List<Entity>> powerUps = new HashMap<>();
-    private final Set<Key> keys = new LinkedHashSet<Key>();
+    private final Set<Key> keys = new LinkedHashSet<>();
     
     public GameLevelImpl(final int levelID) {
         this.levelID = levelID;
 
-        String _levelName = "";
-        double _levelGravity = 1.0;
-        int _levelMaximumTime = 0;
+        String levelName = "";
+        double levelGravity = 1.0;
+        int levelMaximumTime = 0;
         
         try {
             
            final InputStream inputFile = getClass().getResourceAsStream("/levels/level" + levelID + ".xml");
            final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
+           inputFile.close();
+           
            doc.getDocumentElement().normalize();
 
-           _levelName = doc.getDocumentElement().getAttribute("name");
-           _levelGravity = Double.parseDouble(doc.getDocumentElement().getAttribute("gravity"));
-           _levelMaximumTime = Integer.parseInt(doc.getDocumentElement().getAttribute("maximumTime"));
+           levelName = doc.getDocumentElement().getAttribute("name");
+           levelGravity = Double.parseDouble(doc.getDocumentElement().getAttribute("gravity"));
+           levelMaximumTime = Integer.parseInt(doc.getDocumentElement().getAttribute("maximumTime"));
            
            final NodeList xmlWalls = doc.getElementsByTagName("wall");
            final NodeList xmlPlayers = doc.getElementsByTagName("player");
@@ -69,12 +71,12 @@ public class GameLevelImpl implements GameLevel {
            final NodeList xmlKeys = doc.getElementsByTagName("key");
            //parse Walls
            for(int i=0; i<xmlWalls.getLength(); i++){
-               final Set<Point2D> wallVertices = new LinkedHashSet <Point2D>();
+               final Set<Point2D> wallVertices = new LinkedHashSet <>();
                final Node xmlWall = xmlWalls.item(i);
                final Point2D wallPosition = deserializePoint(xmlWall.getAttributes().getNamedItem("position").getNodeValue());
                final NodeList xmlWallVertices = xmlWall.getChildNodes();
                for(int y=0; y<xmlWallVertices.getLength(); y++){
-                   if(xmlWallVertices.item(y).getNodeName() != "vertex") {
+                   if(!"vertex".equals(xmlWallVertices.item(y).getNodeName())) {
                        continue;
                    }
                    final Node xmlWallVertex = xmlWallVertices.item(y);
@@ -111,8 +113,8 @@ public class GameLevelImpl implements GameLevel {
            //parse Keys
            for(int i=0; i<xmlKeys.getLength(); i++){
                final Node xmlKey = xmlKeys.item(i);
-               Point2D keyPosition = deserializePoint(xmlKey.getAttributes().getNamedItem("position").getNodeValue());
-               Key key = new Key(keyPosition);
+               final Point2D keyPosition = deserializePoint(xmlKey.getAttributes().getNamedItem("position").getNodeValue());
+               final Key key = new Key(keyPosition);
                keys.add(key);
            }
 
@@ -121,9 +123,9 @@ public class GameLevelImpl implements GameLevel {
            e.printStackTrace();
         }
         
-        this.levelName = _levelName;
-        this.levelGravity = _levelGravity;
-        this.levelMaximumTime = _levelMaximumTime;
+        this.levelName = levelName;
+        this.levelGravity = levelGravity;
+        this.levelMaximumTime = levelMaximumTime;
     }
 
     @Override
@@ -131,18 +133,18 @@ public class GameLevelImpl implements GameLevel {
         return levelID;
     }
     
-    private Point2D deserializePoint(String xmlValue) {
-        String[] coordinates = xmlValue.split(",");
+    private Point2D deserializePoint(final String xmlValue) {
+        final String[] coordinates = xmlValue.split(",");
         return new Point2D(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
     }
     
     private void addPowerup(final Point2D pos, final PowerUpType type) {
         if (this.powerUps.containsKey(type)) {
-            List<Entity> typeEntity = powerUps.get(type);
+            final List<Entity> typeEntity = powerUps.get(type);
             typeEntity.add(new PowerUp(type, pos));
             powerUps.put(type, typeEntity);
         } else {
-            List<Entity> typeEntity = new ArrayList<>(List.of(new PowerUp(type, pos)));
+            final List<Entity> typeEntity = new ArrayList<>(List.of(new PowerUp(type, pos)));
             powerUps.put(type, typeEntity);    
         }
     }
