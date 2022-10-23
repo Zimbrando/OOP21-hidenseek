@@ -1,6 +1,7 @@
 package hidenseek.controller;
 
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public interface GameSceneController {
     
@@ -62,5 +63,11 @@ public interface GameSceneController {
      *          The gui controller
      */
     void pauseGame(final GameGuiController controller);
+    
+    /**
+     * 
+     * @return the main Stage object for displaying UIs
+     */
+    Stage getMainStage();
     
 }

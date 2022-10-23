@@ -128,8 +128,9 @@ public class GameSceneControllerImpl implements GameSceneController {
         return this.sceneManager.getSceneRootByScreen(name);
     }
     
-    public void toggleResumeGame(final GameGuiController controller) {
-        
+    @Override
+    public Stage getMainStage() {
+        return this.mainStage;
     }
     
     public void pauseGame(final GameGuiController controller) {
