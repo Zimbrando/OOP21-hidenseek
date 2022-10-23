@@ -59,9 +59,12 @@ public class Monster extends AbstractEntity {
         
         //Trigger for collisions (Hurt if I touch the player)
         final Trigger<CollisionEvent> collisionListener = new TriggerImpl<>(CollisionEvent.class, (event, powerup) -> {
-            if (Player.class.isInstance(event.getCollider())) {
-                event.getCollider().getComponent(LifeComponent.class).ifPresent(component -> component.hurt(1));
-            }
+            this.getComponent(HeartComponent.class).ifPresent(c -> {
+                // check if hated
+                if(c.hates(event.getCollider())) {
+                    event.getCollider().getComponent(LifeComponent.class).ifPresent(component -> component.hurt(1));
+                }
+            });
         });
         
         final ObservableComponent collisionObserver = (ObservableComponent) collisionComponent;
