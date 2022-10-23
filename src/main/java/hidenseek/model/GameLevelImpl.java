@@ -1,6 +1,6 @@
 package hidenseek.model;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -29,9 +29,6 @@ import hidenseek.model.entities.Player;
 import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
 import hidenseek.model.enums.PowerUpType;
-import hidenseek.model.statistics.StatisticsManager;
-import hidenseek.model.statistics.numeric.NumericStatistic;
-import hidenseek.model.statistics.score.ScoreStatistic;
 import hidenseek.view.huds.KeyHudView;
 import hidenseek.view.huds.KeyHudViewImpl;
 import javafx.geometry.Point2D;
@@ -57,7 +54,7 @@ public class GameLevelImpl implements GameLevel {
         
         try {
             
-           final File inputFile = new File(getClass().getResource("/levels/level" + levelID + ".xml").getFile());
+           final InputStream inputFile = getClass().getResourceAsStream("/levels/level" + levelID + ".xml");
            final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
            doc.getDocumentElement().normalize();
 
@@ -186,7 +183,7 @@ public class GameLevelImpl implements GameLevel {
         final Set<HudController> huds = new LinkedHashSet<>();
         final KeyHudView keyHudView = new KeyHudViewImpl(new Point2D(1400, 30));
         keyHudView.setMaxKeys(this.getKeysNumber());
-        final HudController keyHud = new KeyHudControllerImpl(this.players.stream().findAny().get(), keyHudView);
+        final HudController keyHud = new KeyHudControllerImpl(Set.copyOf(this.players), keyHudView);
         huds.add(keyHud);
         return huds;
     }
@@ -210,6 +207,6 @@ public class GameLevelImpl implements GameLevel {
     public int getLevelMaximumTime() {
         return levelMaximumTime;
     }
-
+    
 }
 

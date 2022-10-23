@@ -1,7 +1,6 @@
 package hidenseek.model.statistics.time;
 
 import org.w3c.dom.Element;
-
 import hidenseek.model.statistics.StatisticImpl;
 
 public class TimeStatistic extends StatisticImpl<Time> {

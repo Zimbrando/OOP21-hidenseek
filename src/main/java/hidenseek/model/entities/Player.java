@@ -23,6 +23,7 @@ import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.components.physics.PositionComponentImpl;
 import hidenseek.model.enums.Direction;
+import hidenseek.model.enums.LightRadius;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
@@ -66,7 +67,7 @@ public final class Player extends AbstractEntity {
         mapKeyToAction(inputHandlerComponent, KeyCode.D, Direction.RIGHT);
         this.attach(inputHandlerComponent);
         
-        final LightComponent lightComponent = new LightComponentImpl();
+        final LightComponent lightComponent = new LightComponentImpl(LightRadius.SMALL);
         this.attach(lightComponent);
         
         //Heart

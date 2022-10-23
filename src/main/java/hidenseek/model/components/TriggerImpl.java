@@ -3,7 +3,8 @@ package hidenseek.model.components;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
-import hidenseek.model.entities.Entity;
+
+import hidenseek.model.Triggerable;
 import hidenseek.model.events.Event;
 
 /**
@@ -13,13 +14,13 @@ import hidenseek.model.events.Event;
 public class TriggerImpl<E extends Event> implements Trigger<E> {
 
     private final Class<E> eventType;
-    private Optional<BiConsumer<E, Object>> action = Optional.empty();
+    private Optional<BiConsumer<E, Triggerable>> action = Optional.empty();
     
     public TriggerImpl(final Class<E> eventType) {
         this.eventType = eventType;
     }
     
-    public TriggerImpl(final Class<E> eventType, final BiConsumer<E, Object> action) {
+    public TriggerImpl(final Class<E> eventType, final BiConsumer<E, Triggerable> action) {
         this.eventType = eventType;
         this.action = Optional.ofNullable(action);
     }
@@ -32,7 +33,7 @@ public class TriggerImpl<E extends Event> implements Trigger<E> {
     }
 
     @Override
-    public void assignCallback(final BiConsumer<E, Object> action) {
+    public void assignCallback(final BiConsumer<E, Triggerable> action) {
         this.action = Optional.ofNullable(action);
     }
 

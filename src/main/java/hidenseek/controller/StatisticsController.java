@@ -31,7 +31,6 @@ public class StatisticsController implements MenuController{
     private GameSceneController gameController;
    
     public StatisticsController() {
-        
         this.interfaceHeight = 1080;
         this.interfaceWidth = 1920;
     }
