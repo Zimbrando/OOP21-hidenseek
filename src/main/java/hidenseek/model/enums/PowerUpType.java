@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import hidenseek.model.components.UpgradableComponent;
+import hidenseek.model.components.physics.LightComponent;
 import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.entities.Entity;
 import javafx.application.Platform;
@@ -23,7 +24,12 @@ public enum PowerUpType {
         }
     })),
 
-    INCREASE_VISIBILITY(entity -> System.out.println("INCREASE LIGHT RANGE"));
+    INCREASE_VISIBILITY(entity -> entity.getComponent(LightComponent.class).ifPresent(component -> {
+        if (!component.isUpgraded()) {
+            component.setRadius(LightRadius.LARGE);
+            resetAfter(component, 7);
+        }
+    }));
 
     public static PowerUpType getValue(int value) {
         return new PowerUpType[]{INCREASE_SPEED, INCREASE_VISIBILITY}[value];

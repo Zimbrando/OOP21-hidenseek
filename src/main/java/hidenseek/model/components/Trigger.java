@@ -15,7 +15,7 @@ public interface Trigger<E extends Event> {
      * @param action
      *          Callback executed when notified
      */
-    void assignCallback(BiConsumer<E, Entity> action);
+    void assignCallback(BiConsumer<E, Object> action);
     
     /**
      * Removes the current callback 

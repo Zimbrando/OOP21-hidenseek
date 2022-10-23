@@ -2,7 +2,7 @@ package hidenseek.view.entities;
 
 import hidenseek.model.enums.Direction;
 
-abstract class AbstractEntityMovableView extends AbstractEntityView  implements EntityMovableView{
+abstract class AbstractEntityMovableView extends AbstractEntityView implements EntityMovableView{
 
     private Direction spriteDirection;
 

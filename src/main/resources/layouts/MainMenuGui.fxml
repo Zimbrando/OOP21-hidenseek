@@ -20,7 +20,7 @@
                      <Insets />
                   </VBox.margin>
                </Button>
-               <Button fx:id="goToSettingsButton" styleClass="buttonStyle" text="SETTINGS" onAction="#handleGoToSettingsClicked" layoutX="272.0" layoutY="65.0" prefHeight="80.0" prefWidth="500.0">
+               <Button fx:id="goToStatisticsButton" styleClass="buttonStyle" text="STATISTICS" onAction="#handleGoToStatisticsClicked" layoutX="272.0" layoutY="65.0" prefHeight="80.0" prefWidth="500.0">
                </Button>
                <Button fx:id="exitButton" styleClass="buttonStyle" text="EXIT GAME"  onAction="#handleExitClicked" layoutX="272.0" layoutY="25.0" prefHeight="80.0" prefWidth="500.0">
                </Button>

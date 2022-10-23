@@ -29,12 +29,19 @@ import hidenseek.model.entities.Player;
 import hidenseek.model.entities.PowerUp;
 import hidenseek.model.entities.Wall;
 import hidenseek.model.enums.PowerUpType;
+import hidenseek.model.statistics.StatisticsManager;
+import hidenseek.model.statistics.numeric.NumericStatistic;
+import hidenseek.model.statistics.score.ScoreStatistic;
 import hidenseek.view.huds.KeyHudView;
 import hidenseek.view.huds.KeyHudViewImpl;
 import javafx.geometry.Point2D;
 
 public class GameLevelImpl implements GameLevel {
 
+    private final int levelID;
+    private final String levelName;
+    private final double levelGravity;
+    private final int levelMaximumTime;
     private final Set<Wall> walls = new LinkedHashSet<>();
     private final Set<Player> players = new LinkedHashSet<>();
     private final Set<Monster> monsters = new LinkedHashSet<>();
@@ -42,21 +49,30 @@ public class GameLevelImpl implements GameLevel {
     private final Set<Key> keys = new LinkedHashSet<Key>();
     
     public GameLevelImpl(final int levelID) {
+        this.levelID = levelID;
+
+        String _levelName = "";
+        double _levelGravity = 1.0;
+        int _levelMaximumTime = 0;
+        
         try {
             
            final File inputFile = new File(getClass().getResource("/levels/level" + levelID + ".xml").getFile());
            final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
            doc.getDocumentElement().normalize();
+
+           _levelName = doc.getDocumentElement().getAttribute("name");
+           _levelGravity = Double.parseDouble(doc.getDocumentElement().getAttribute("gravity"));
+           _levelMaximumTime = Integer.parseInt(doc.getDocumentElement().getAttribute("maximumTime"));
            
            final NodeList xmlWalls = doc.getElementsByTagName("wall");
            final NodeList xmlPlayers = doc.getElementsByTagName("player");
            final NodeList xmlMonsters = doc.getElementsByTagName("monster");
            final NodeList xmlPowerUps = doc.getElementsByTagName("powerup");
            final NodeList xmlKeys = doc.getElementsByTagName("key");
-           
            //parse Walls
            for(int i=0; i<xmlWalls.getLength(); i++){
-               final Set<Point2D> wallVertices = new LinkedHashSet <Point2D>();               
+               final Set<Point2D> wallVertices = new LinkedHashSet <Point2D>();
                final Node xmlWall = xmlWalls.item(i);
                final Point2D wallPosition = deserializePoint(xmlWall.getAttributes().getNamedItem("position").getNodeValue());
                final NodeList xmlWallVertices = xmlWall.getChildNodes();
@@ -68,45 +84,54 @@ public class GameLevelImpl implements GameLevel {
                    final Point2D wallVertexPosition = deserializePoint(xmlWallVertex.getAttributes().getNamedItem("position").getNodeValue());
                    wallVertices.add(wallVertexPosition);
                }
-               walls.add(new Wall(wallPosition, wallVertices));               
+               walls.add(new Wall(wallPosition, wallVertices));
            }
            
            //parse Players
-           for(int i=0; i<xmlPlayers.getLength(); i++){              
+           for(int i=0; i<xmlPlayers.getLength(); i++){
                final Node xmlPlayer = xmlPlayers.item(i);
                final Point2D playerPosition = deserializePoint(xmlPlayer.getAttributes().getNamedItem("position").getNodeValue());
                final Player player = new Player(playerPosition);
-               players.add(player);               
+               players.add(player);
            }
            
            //parse Monsters
-           for(int i=0; i<xmlMonsters.getLength(); i++){              
+           for(int i=0; i<xmlMonsters.getLength(); i++){
                final Node xmlMonster = xmlMonsters.item(i);
                final Point2D monsterPosition = deserializePoint(xmlMonster.getAttributes().getNamedItem("position").getNodeValue());
                final Monster monster = new Monster(monsterPosition);
-               monsters.add(monster);               
+               monsters.add(monster);
            }
            
            //parse PowerUps
-           for(int i=0; i<xmlPowerUps.getLength(); i++){              
+           for(int i=0; i<xmlPowerUps.getLength(); i++){
                final Node xmlPowerUp = xmlPowerUps.item(i);
                final Point2D powerUpPosition = deserializePoint(xmlPowerUp.getAttributes().getNamedItem("position").getNodeValue());
                final PowerUpType type = PowerUpType.generateRandomType();
-               this.addPowerup(powerUpPosition, type);              
+               this.addPowerup(powerUpPosition, type);
            }
            
            //parse Keys
-           for(int i=0; i<xmlKeys.getLength(); i++){              
+           for(int i=0; i<xmlKeys.getLength(); i++){
                final Node xmlKey = xmlKeys.item(i);
                Point2D keyPosition = deserializePoint(xmlKey.getAttributes().getNamedItem("position").getNodeValue());
                Key key = new Key(keyPosition);
-               keys.add(key);               
+               keys.add(key);
            }
-           
+
            
         } catch (Exception e) {
            e.printStackTrace();
         }
+        
+        this.levelName = _levelName;
+        this.levelGravity = _levelGravity;
+        this.levelMaximumTime = _levelMaximumTime;
+    }
+
+    @Override
+    public int getLevelID() {
+        return levelID;
     }
     
     private Point2D deserializePoint(String xmlValue) {
@@ -142,15 +167,15 @@ public class GameLevelImpl implements GameLevel {
         this.keys.forEach(key -> {
             controllers.add(new KeyControllerImpl(key));
         });
-
-        this.players.forEach(player -> {
-            final EntityController playerController = new PlayerControllerImpl(player);
-            controllers.add(playerController);   
-        });
        
         this.monsters.forEach(monster -> {
             final EntityController monsterController = new MonsterControllerImpl(monster);
             controllers.add(monsterController);            
+        });
+
+        this.players.forEach(player -> {
+            final EntityController playerController = new PlayerControllerImpl(player);
+            controllers.add(playerController);   
         });
 
         return controllers;
@@ -169,6 +194,21 @@ public class GameLevelImpl implements GameLevel {
     @Override
     public int getKeysNumber() {
         return this.keys.size();
+    }
+
+    @Override
+    public String getLevelName() {
+        return levelName;
+    }
+
+    @Override
+    public double getLevelGravity() {
+        return levelGravity;
+    }
+
+    @Override
+    public int getLevelMaximumTime() {
+        return levelMaximumTime;
     }
 
 }

@@ -13,13 +13,13 @@ import hidenseek.model.events.Event;
 public class TriggerImpl<E extends Event> implements Trigger<E> {
 
     private final Class<E> eventType;
-    private Optional<BiConsumer<E, Entity>> action = Optional.empty();
+    private Optional<BiConsumer<E, Object>> action = Optional.empty();
     
     public TriggerImpl(final Class<E> eventType) {
         this.eventType = eventType;
     }
     
-    public TriggerImpl(final Class<E> eventType, final BiConsumer<E, Entity> action) {
+    public TriggerImpl(final Class<E> eventType, final BiConsumer<E, Object> action) {
         this.eventType = eventType;
         this.action = Optional.ofNullable(action);
     }
@@ -32,7 +32,7 @@ public class TriggerImpl<E extends Event> implements Trigger<E> {
     }
 
     @Override
-    public void assignCallback(final BiConsumer<E, Entity> action) {
+    public void assignCallback(final BiConsumer<E, Object> action) {
         this.action = Optional.ofNullable(action);
     }
 

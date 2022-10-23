@@ -10,5 +10,5 @@ public interface Event {
     /**
      * @return The @link{Entity} that generated the event
      */
-    Entity getSender();
+    Object getSender();
 }

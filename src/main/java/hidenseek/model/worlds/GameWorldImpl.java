@@ -5,13 +5,21 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import hidenseek.model.entities.Key;
+import hidenseek.model.entities.Player;
 import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.InventoryComponent;
 import hidenseek.model.components.LifeComponent;
+import hidenseek.model.components.Trigger;
+import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.GameState;
 import hidenseek.model.enums.Heart;
+import hidenseek.model.events.CollisionEvent;
+import hidenseek.model.events.LevelUpEvent;
+import hidenseek.model.statistics.StatisticsManager;
+import hidenseek.model.statistics.StatisticsManagerImpl;
+import hidenseek.model.statistics.numeric.NumericStatistic;
 import javafx.scene.input.KeyCode;
 
 public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld {
@@ -29,6 +37,8 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
         this.dynamicsWorld = new DinamicsWorldImpl();
         this.keysPressed = new HashSet<>();
         this.state = GameState.STOPPED;
+
+        
     }
     
     @Override
