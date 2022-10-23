@@ -86,18 +86,17 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponent implements 
                             new Wall(targetPosition.get(), Set.of(new Point2D(-10, -10), new Point2D(10, -10), new Point2D(10, 10), new Point2D(-10, 10))))
                             , entities
                 );
-        // if no path is found
+        // if no path is found - maybe no walls are found
         if(nextPosition.isEmpty()) {
+            move(targetPosition.get());
             return;
         }
-        // move
+        // move avoiding walls
         move(nextPosition.get());
     }
 
     private Optional<Point2D> getRandomReachablePosition(final Set<Entity> entities) {
         //TODO use entities (walls)
-        
-        
         return Optional.empty();
     }
     
