@@ -49,8 +49,8 @@ public class GameSceneControllerImpl implements GameSceneController {
         this.init();
         
         mainStage.setTitle("Hide'n Seek");
-        mainStage.setWidth(1600); //Screen.getPrimary().getBounds().getWidth()
-        mainStage.setHeight(900); //Screen.getPrimary().getBounds().getHeight()
+        mainStage.setWidth(INTERFACE_WIDTH); 
+        mainStage.setHeight(INTERFACE_HEIGHT);
         mainStage.setScene(currentScene.get());
         mainStage.show();
         
@@ -130,16 +130,17 @@ public class GameSceneControllerImpl implements GameSceneController {
         
         final Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
 
-        LevelHandler levelhandler = new LevelHandlerImpl(statisticsManager);
+        final LevelHandler levelhandler = new LevelHandlerImpl(statisticsManager);
+       
         final GameWorldController gameController = new GameWorldControllerImpl(this, renderer, input, levelhandler, statisticsManager);
         
         final GameGuiController temp = (GameGuiController) sceneManager.getSceneControllerByName(gameGuiPath);
         temp.setGameController(gameController);
         gameCanvas.setOnKeyPressed(e -> {
-        if (e.getCode() == KeyCode.ESCAPE) {
-            gameController.pause();
-            this.pauseGame(temp);
-        }
+            if (e.getCode() == KeyCode.ESCAPE) {
+                gameController.pause();
+                this.pauseGame(temp);
+            }
        });
     }
 

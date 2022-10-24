@@ -1,6 +1,6 @@
 package hidenseek.model.events;
 
-import hidenseek.model.Triggerable;
+import hidenseek.model.entities.Entity;
 
 /**
  * Event exchanged between {@link ObservableComponent}s and {@link Trigger}s
@@ -8,7 +8,7 @@ import hidenseek.model.Triggerable;
 public interface Event {
     
     /**
-     * @return The @link{Triggerable} that generated the event
+     * @return The @link{Entity} that generated the event
      */
-    Triggerable getSender();
+    Entity getSender();
 }

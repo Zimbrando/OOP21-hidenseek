@@ -2,8 +2,6 @@ package hidenseek.model.entities;
 
 import hidenseek.model.components.InventoryComponent;
 import hidenseek.model.components.ObservableComponent;
-import hidenseek.model.components.RewardComponent;
-import hidenseek.model.components.RewardComponentImpl;
 import hidenseek.model.components.Trigger;
 import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.components.hearts.HeartComponent;

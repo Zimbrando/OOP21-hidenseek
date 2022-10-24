@@ -93,10 +93,15 @@ public class StatisticsController implements MenuController{
     @Override
     public void setSceneController(final GameSceneController gameController) {
         this.gameController = gameController;
+        this.loadStatistics();
     }
 
     @Override
     public void onActivate() {
+        this.loadStatistics();
+    }
+    
+    private void loadStatistics() {
         statisticsContainer.getChildren().clear();
 
         final Map<String, List<Statistic<?>>> groupedStatistics = 

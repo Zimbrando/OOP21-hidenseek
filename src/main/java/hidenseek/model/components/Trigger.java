@@ -2,7 +2,7 @@ package hidenseek.model.components;
 
 import java.util.function.BiConsumer;
 
-import hidenseek.model.Triggerable;
+import hidenseek.model.entities.Entity;
 import hidenseek.model.events.Event;
 
 /**
@@ -16,7 +16,7 @@ public interface Trigger<E extends Event> {
      * @param action
      *          Callback executed when notified
      */
-    void assignCallback(BiConsumer<E, Triggerable> action);
+    void assignCallback(BiConsumer<E, Entity> action);
     
     /**
      * Removes the current callback 
