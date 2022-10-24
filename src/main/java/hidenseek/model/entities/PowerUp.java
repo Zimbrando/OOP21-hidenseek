@@ -1,8 +1,8 @@
 package hidenseek.model.entities;
 
+import hidenseek.model.Trigger;
+import hidenseek.model.TriggerImpl;
 import hidenseek.model.components.ObservableComponent;
-import hidenseek.model.components.Trigger;
-import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.enums.Heart;
 import hidenseek.model.enums.PowerUpType;
 import hidenseek.model.components.hearts.HeartComponent;

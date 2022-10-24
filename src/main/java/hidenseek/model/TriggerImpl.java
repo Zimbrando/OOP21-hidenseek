@@ -1,4 +1,4 @@
-package hidenseek.model.components;
+package hidenseek.model;
 
 import java.util.Objects;
 import java.util.Optional;

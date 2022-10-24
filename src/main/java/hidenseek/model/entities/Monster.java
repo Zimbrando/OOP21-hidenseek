@@ -1,10 +1,10 @@
 package hidenseek.model.entities;
 
+import hidenseek.model.Trigger;
+import hidenseek.model.TriggerImpl;
 import hidenseek.model.components.MapComponent;
 import hidenseek.model.components.MapComponentImpl;
 import hidenseek.model.components.ObservableComponent;
-import hidenseek.model.components.Trigger;
-import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.components.brains.BrainComponent;
 import hidenseek.model.components.brains.ExpertBrainComponentImpl;
 import hidenseek.model.components.hearts.EvilHeartComponentImpl;

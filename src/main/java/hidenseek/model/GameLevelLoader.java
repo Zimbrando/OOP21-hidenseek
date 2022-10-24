@@ -21,14 +21,14 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import hidenseek.controller.HudController;
-import hidenseek.controller.KeyHudControllerImpl;
 import hidenseek.controller.entities.EntityController;
 import hidenseek.controller.entities.KeyControllerImpl;
 import hidenseek.controller.entities.MonsterControllerImpl;
 import hidenseek.controller.entities.PlayerControllerImpl;
 import hidenseek.controller.entities.PowerUpControllerImpl;
 import hidenseek.controller.entities.WallControllerImpl;
+import hidenseek.controller.huds.HudController;
+import hidenseek.controller.huds.KeyHudControllerImpl;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.entities.Key;
 import hidenseek.model.entities.Monster;

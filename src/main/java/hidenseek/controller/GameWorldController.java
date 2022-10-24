@@ -1,6 +1,7 @@
 package hidenseek.controller;
 
 import hidenseek.controller.entities.EntityController;
+import hidenseek.controller.huds.HudController;
 
 public interface GameWorldController {
 

@@ -1,7 +1,8 @@
-package hidenseek.model.components;
+package hidenseek.model;
 
 import java.util.function.BiConsumer;
 
+import hidenseek.model.components.ObservableComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.events.Event;
 

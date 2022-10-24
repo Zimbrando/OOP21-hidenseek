@@ -5,7 +5,9 @@ import java.util.Set;
 
 import hidenseek.controller.entities.EntityController;
 import hidenseek.controller.entities.EntityControllerImpl;
+import hidenseek.controller.huds.HudController;
 import hidenseek.model.GameLevel;
+import hidenseek.model.LevelHandler;
 import hidenseek.model.components.brains.BrainComponent;
 import hidenseek.model.components.physics.CollisionComponent;
 import hidenseek.model.components.physics.PositionComponent;

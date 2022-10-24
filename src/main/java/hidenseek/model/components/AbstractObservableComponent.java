@@ -3,6 +3,7 @@ package hidenseek.model.components;
 import java.util.HashSet;
 import java.util.Set;
 
+import hidenseek.model.Trigger;
 import hidenseek.model.events.Event;
 
 public abstract class AbstractObservableComponent extends AbstractComponent implements ObservableComponent {

@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import hidenseek.model.entities.Entity;
+import hidenseek.model.Trigger;
+import hidenseek.model.TriggerImpl;
 import hidenseek.model.components.AbstractObservableComponent;
 import hidenseek.model.components.ObservableComponent;
-import hidenseek.model.components.Trigger;
-import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.components.lives.LifeComponent;
 import hidenseek.model.components.lives.LifeComponentImpl;
 import hidenseek.model.entities.AbstractEntity;
