@@ -114,7 +114,7 @@ public class StatisticsController implements MenuController{
         for(String statisticTag : sortedStatisticsGround) {
             
             Label statisticGroupLbl = new Label(statisticTag == "" ? "" : "LIVELLO " + statisticTag);
-            statisticGroupLbl.setFont(new Font("impact", 22));
+            statisticGroupLbl.getStyleClass().add("statsCategory");
             statisticGroupLbl.setTextFill(Color.WHITESMOKE);
             statisticGroupLbl.setMinWidth(450);
             VBox.setMargin(statisticGroupLbl, new Insets(20, 0, 0, 0));
@@ -127,7 +127,7 @@ public class StatisticsController implements MenuController{
                 statisticBox.setMinHeight(30);
                 
                 Label statisticTitleLbl = new Label(statistic.getTitle());
-                statisticTitleLbl.setFont(new Font("impact", 14));
+                statisticTitleLbl.getStyleClass().add("statsValue");
                 statisticTitleLbl.setTextFill(Color.WHITE);
                 
                 javafx.scene.Node statisticValueLbl = null;

@@ -32,7 +32,7 @@ public class MonsterViewImpl extends AbstractEntityMovableView implements Monste
             monsterSprite = MONSTER_LEFT;
             break;
         }
-        device.drawImage(monsterSprite, SPRITE_WIDTH, SPRITE_HEIGHT, this.getPosition().add(new Point2D(5, 5)));
+        device.drawImage(monsterSprite, SPRITE_WIDTH, SPRITE_HEIGHT, this.getPosition());
     }
 
 }

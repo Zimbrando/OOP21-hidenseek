@@ -7,8 +7,6 @@ import hidenseek.model.components.InputHandlerComponent;
 import hidenseek.model.components.InputHandlerComponentImpl;
 import hidenseek.model.components.InventoryComponent;
 import hidenseek.model.components.InventoryComponentImpl;
-import hidenseek.model.components.brains.BrainComponent;
-import hidenseek.model.components.brains.ExpertBrainComponentImpl;
 import hidenseek.model.components.hearts.GoodHeartComponentImpl;
 import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.components.lives.LifeComponent;
@@ -24,8 +22,6 @@ import hidenseek.model.components.physics.MaterialComponentImpl;
 import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.components.physics.PositionComponentImpl;
-import hidenseek.model.components.senses.SenseComponent;
-import hidenseek.model.components.senses.SightSenseComponentImpl;
 import hidenseek.model.enums.Direction;
 import hidenseek.model.enums.LightRadius;
 import javafx.geometry.Point2D;
@@ -34,6 +30,7 @@ import javafx.scene.input.KeyCode;
 public final class Player extends AbstractEntity {
     
     private static final double PLAYER_SPEED = 150;
+    private static final int HITBOX_SIZE = 30;
     
     public Player(final Point2D position) {
         super();
@@ -58,9 +55,9 @@ public final class Player extends AbstractEntity {
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
         collisionComponent.addHitboxPoint(new Point2D(0, 0));
-        collisionComponent.addHitboxPoint(new Point2D(0, 30));
-        collisionComponent.addHitboxPoint(new Point2D(30, 30));
-        collisionComponent.addHitboxPoint(new Point2D(30, 0));
+        collisionComponent.addHitboxPoint(new Point2D(0, HITBOX_SIZE));
+        collisionComponent.addHitboxPoint(new Point2D(HITBOX_SIZE, HITBOX_SIZE));
+        collisionComponent.addHitboxPoint(new Point2D(HITBOX_SIZE, 0));
         this.attach(collisionComponent);
         
         //InputHandler component

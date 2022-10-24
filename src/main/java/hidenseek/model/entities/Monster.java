@@ -7,7 +7,6 @@ import hidenseek.model.components.Trigger;
 import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.components.brains.BrainComponent;
 import hidenseek.model.components.brains.ExpertBrainComponentImpl;
-import hidenseek.model.components.brains.NaiveBrainComponentImpl;
 import hidenseek.model.components.hearts.EvilHeartComponentImpl;
 import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.components.lives.LifeComponent;
@@ -28,6 +27,7 @@ import javafx.geometry.Point2D;
 public class Monster extends AbstractEntity {
     
     private static final double MONSTER_SPEED = 125;
+    private static final int HITBOX_SIZE = 40;
     
     public Monster(final Point2D position) {
         super();
@@ -52,9 +52,9 @@ public class Monster extends AbstractEntity {
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
         collisionComponent.addHitboxPoint(new Point2D(0, 0));
-        collisionComponent.addHitboxPoint(new Point2D(0, 40));
-        collisionComponent.addHitboxPoint(new Point2D(40, 40));
-        collisionComponent.addHitboxPoint(new Point2D(40, 0));
+        collisionComponent.addHitboxPoint(new Point2D(0, HITBOX_SIZE));
+        collisionComponent.addHitboxPoint(new Point2D(HITBOX_SIZE, HITBOX_SIZE));
+        collisionComponent.addHitboxPoint(new Point2D(HITBOX_SIZE, 0));
         this.attach(collisionComponent);  
         
         //Trigger for collisions (Hurt if I touch the player)

@@ -3,11 +3,12 @@ package hidenseek.view.statistics;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 
 public class TextStatisticViewImpl extends Label implements TextStatisticView {
 
+    private static String STYLE_CLASS = "statsValue";
+    
     public TextStatisticViewImpl() {
         this("");
     }
@@ -15,7 +16,7 @@ public class TextStatisticViewImpl extends Label implements TextStatisticView {
     public TextStatisticViewImpl(String text) {
         super();
         setAlignment(Pos.TOP_RIGHT);
-        setFont(new Font("impact", 14));
+        getStyleClass().add(STYLE_CLASS);
         setTextFill(Color.ORANGE);
         updateText("");
     }

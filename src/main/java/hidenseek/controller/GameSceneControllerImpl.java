@@ -35,12 +35,14 @@ public class GameSceneControllerImpl implements GameSceneController {
 
     public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {  
 
-        statisticsManager.addStatistic(new NumericStatistic("curr_level", "", "Current level"));
-        statisticsManager.addStatistic(new TimeStatistic("total_play_time", "", "Play time"));
-        statisticsManager.addStatistic(new NumericStatistic("total_win", "", "Victories"));
-        statisticsManager.addStatistic(new NumericStatistic("total_loose", "", "Losses"));
-        statisticsManager.addStatistic(new NumericStatistic("win_percentage", "", "Win percentage", "%"));
-        statisticsManager.addStatistic(new NumericStatistic("collected_keys", "", "Collected keys"));        
+        this.statisticsManager.addStatistic(new NumericStatistic("curr_level", "", "Current level"));
+        this.statisticsManager.addStatistic(new TimeStatistic("total_play_time", "", "Play time"));
+        this.statisticsManager.addStatistic(new NumericStatistic("total_win", "", "Victories"));
+        this.statisticsManager.addStatistic(new NumericStatistic("total_loose", "", "Losses"));
+        this.statisticsManager.addStatistic(new NumericStatistic("win_percentage", "", "Win percentage", "%"));
+        this.statisticsManager.addStatistic(new NumericStatistic("collected_keys", "", "Collected keys"));        
+        
+        new LevelHandlerImpl(this.statisticsManager);
         
         stage.setResizable(false);
         
