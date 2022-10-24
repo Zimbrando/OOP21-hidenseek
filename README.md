@@ -12,6 +12,15 @@
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License.
+
+
+## Assets
+
+Thanks to [searhere](https://searhere.itch.io/) for the monster sprite <br>
+
+Thanks to [thatsprettyneat](https://www.pixilart.com/thatsprettyneat) for the wall texture
+
+See `LICENSE.txt` for more information.
 
 
