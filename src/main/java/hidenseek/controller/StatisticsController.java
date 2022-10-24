@@ -99,12 +99,12 @@ public class StatisticsController implements MenuController{
     public void onActivate() {
         statisticsContainer.getChildren().clear();
 
-        Map<String, List<Statistic<?>>> groupedStatistics = 
+        final Map<String, List<Statistic<?>>> groupedStatistics = 
                 gameController.getStatisticsManager().getStatistics().stream().collect(Collectors.groupingBy(Statistic::getTag));
         
-        List<String> sortedStatisticsGround = groupedStatistics.keySet().stream().sorted((x, y) -> {
+        final List<String> sortedStatisticsGround = groupedStatistics.keySet().stream().sorted((x, y) -> {
             return x.equals("") ? -1 : 1;
-        }).toList();
+        }).collect(Collectors.toList());
         
         for(String statisticTag : sortedStatisticsGround) {
             
