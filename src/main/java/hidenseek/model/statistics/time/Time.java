@@ -42,7 +42,7 @@ public class Time extends StatisticProperty<Duration> {
 
     @Override
     public String toString() {
-        return _duration.toString();
+        return String.format("%1$sh %2$sm", Integer.toString((int)Math.floor(duration.toHours())), Integer.toString(duration.toMinutesPart()));
     }
     
 }

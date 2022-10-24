@@ -15,6 +15,7 @@ import hidenseek.model.statistics.StatisticsManagerImpl;
 import hidenseek.model.statistics.numeric.Numeric;
 import hidenseek.model.statistics.numeric.NumericStatistic;
 import hidenseek.model.statistics.score.ScoreStatistic;
+import hidenseek.model.statistics.time.TimeStatistic;
 import hidenseek.model.worlds.GameWorld;
 import hidenseek.model.worlds.GameWorldImpl;
 import hidenseek.view.Renderer;
@@ -30,7 +31,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
     private final GameWorld model;
     private final LevelHandler level;
     private final StatisticsManager statisticsManager;
-    private long levelPlayTime;
+    private long levelPlayTimeStart;
     
     public GameWorldControllerImpl(final GameSceneController mainController, final Renderer view, 
                                 final InputScheme input, final LevelHandler level, StatisticsManager statisticsManager) {
@@ -122,8 +123,13 @@ public final class GameWorldControllerImpl implements GameWorldController {
     }
     
     private void handleGameOver() {
+        final GameLevel level = this.level.getCurrentLevel().get();
+        final String levelID = Integer.toString(level.getLevelID());
+        
+        ((NumericStatistic)statisticsManager.getStatistic("total_attempts", levelID).findFirst().get()).getProperty().increase(1);
         ((NumericStatistic)statisticsManager.getStatistic("total_loose").findFirst().get()).getProperty().increase(1);
-        ((NumericStatistic)statisticsManager.getStatistic("total_play_time").findFirst().get()).getProperty().increase((int) levelPlayTime);
+        ((TimeStatistic)statisticsManager.getStatistic("total_play_time").findFirst().get()).getProperty().addTime(getLevelPlayTime());
+        ((ScoreStatistic)statisticsManager.getStatistic("actual_score", levelID).findFirst().get()).getProperty().setValue(0.0);
         setWinPercentage();
         
         //No more levels
@@ -136,13 +142,19 @@ public final class GameWorldControllerImpl implements GameWorldController {
         final GameLevel level = this.level.getCurrentLevel().get();
         final int levelKeysCount = level.getKeysNumber();
         final String levelID = Integer.toString(level.getLevelID());
-        final double levelScore = 5 * (levelPlayTime / level.getLevelMaximumTime());
+        
+        var a = getLevelPlayTime();
+        var b = level.getLevelMaximumTime();
+        
+        final double levelScore = Math.min(5.0, 5.0 * (1.0 * level.getLevelMaximumTime() / getLevelPlayTime()));
         
         ((NumericStatistic)statisticsManager.getStatistic("collected_keys").findFirst().get()).getProperty().increase(levelKeysCount);
         
         ((NumericStatistic)statisticsManager.getStatistic("total_win").findFirst().get()).getProperty().increase(1);
         
         ((NumericStatistic)statisticsManager.getStatistic("total_attempts", levelID).findFirst().get()).getProperty().increase(1);
+
+        ((TimeStatistic)statisticsManager.getStatistic("total_play_time").findFirst().get()).getProperty().addTime(getLevelPlayTime());
         
         ((ScoreStatistic)statisticsManager.getStatistic("actual_score", levelID).findFirst().get()).getProperty().setValue(levelScore);
         
@@ -172,14 +184,18 @@ public final class GameWorldControllerImpl implements GameWorldController {
         gameLevel.getHuds().forEach(hudController -> this.addHud(hudController));
         this.model.setKeys(gameLevel.getKeysNumber());
         
-        levelPlayTime = System.currentTimeMillis();
+        levelPlayTimeStart = System.currentTimeMillis() / 1000;
     }
     
     private void setWinPercentage() {
         int totalWin = ((Numeric)statisticsManager.getStatistic("total_win").findFirst().get().getProperty()).getValue();
         int totalLoose = ((Numeric)statisticsManager.getStatistic("total_loose").findFirst().get().getProperty()).getValue();
-        int winPercentage = totalWin / (totalWin + totalLoose);
+        int winPercentage = (int)(100.0 * totalWin / (totalWin + totalLoose));
         
         ((NumericStatistic)statisticsManager.getStatistic("win_percentage").findFirst().get()).getProperty().setValue(winPercentage);;
+    }
+    
+    private int getLevelPlayTime() {
+        return (int)(System.currentTimeMillis() / 1000 - levelPlayTimeStart);
     }
 }

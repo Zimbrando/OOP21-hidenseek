@@ -1,7 +1,6 @@
 package hidenseek.model.statistics.numeric;
 
 import org.w3c.dom.Element;
-
 import hidenseek.model.statistics.StatisticImpl;
 
 public class NumericStatistic extends StatisticImpl<Numeric> {
@@ -21,9 +20,14 @@ public class NumericStatistic extends StatisticImpl<Numeric> {
     public NumericStatistic(String name, String tag, String title) {
         this(name, tag, title, "", null);
     }
+
+    public String getValue() {
+        return getProperty().toString();
+    }
     
     public String getUnits() {
         return units;
     }
+
 
 }

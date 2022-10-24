@@ -30,11 +30,9 @@ public class MainMenuController implements MenuController{
     
     private GameSceneController gameController;
    
-    public MainMenuController() {
-        
+    public MainMenuController() {        
         this.interfaceHeight = 1080;
         this.interfaceWidth = 1920;
-
     }
    
     @FXML
@@ -65,6 +63,11 @@ public class MainMenuController implements MenuController{
     @Override
     public void setSceneController(final  GameSceneController gameController) {
         this.gameController = gameController; 
+    }
+
+    @Override
+    public void onActivate() {
+        
     }
     
 }

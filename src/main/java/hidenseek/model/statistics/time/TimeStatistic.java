@@ -13,4 +13,8 @@ public class TimeStatistic extends StatisticImpl<Time> {
         this(name, tag, title, null);
     }
 
+    public String getValue() {
+        return getProperty().toString();
+    }
+
 }

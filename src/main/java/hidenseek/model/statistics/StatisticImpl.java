@@ -27,7 +27,7 @@ public class StatisticImpl<T extends StatisticProperty<?>> implements Statistic<
     @Override
     public Element XMLSerialize(Document document) {
         Element element = document.createElement(getClass().getName());
-        element.setAttribute("id", name);
+        element.setAttribute("name", name);
         element.setAttribute("tag", tag);
         element.setAttribute("value", getProperty().XMLSerialize());
         return element;
@@ -35,7 +35,7 @@ public class StatisticImpl<T extends StatisticProperty<?>> implements Statistic<
 
     @Override
     public Boolean XMLDeserialize(Element element) {
-        if(!element.getTagName().equals(getClass().getName()) || !element.getAttribute("tag").equals(tag)) {
+        if(!element.getTagName().equals(getClass().getName()) || !element.getAttribute("name").equals(name) || !element.getAttribute("tag").equals(tag)) {
             return false;
         }
         if(!element.hasAttribute("value")) {
@@ -63,11 +63,6 @@ public class StatisticImpl<T extends StatisticProperty<?>> implements Statistic<
     @Override
     public T getProperty() {
         return property;
-    }
-
-    @Override
-    public String getValue() {
-        return "A" + property.toString();
     }
 
     @Override

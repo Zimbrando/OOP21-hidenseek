@@ -58,4 +58,9 @@ public class GameGuiController implements MenuController {
         this.gameSceneController = gameSceneController; 
     }
 
+    @Override
+    public void onActivate() {
+        
+    }
+
 }

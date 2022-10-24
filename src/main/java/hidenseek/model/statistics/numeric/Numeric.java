@@ -40,6 +40,6 @@ public class Numeric extends StatisticProperty<Integer> {
     
     @Override
     public String toString() {
-        return Integer.toString(_number);
+        return Integer.toString(number);
     }
 }

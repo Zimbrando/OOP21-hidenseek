@@ -14,4 +14,8 @@ public class ScoreStatistic extends StatisticImpl<Score> {
         this(name, tag, title, null);
     }
 
+    public double getValue() {
+        return getProperty().getValue();
+    }
+
 }
