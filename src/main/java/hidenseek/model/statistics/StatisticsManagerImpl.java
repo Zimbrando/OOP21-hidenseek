@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -24,22 +26,28 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import net.harawata.appdirs.AppDirsFactory;
+
 public class StatisticsManagerImpl implements StatisticsManager, StatisticSaver {
 
     private final Set<Statistic<?>> statistics = new LinkedHashSet<Statistic<?>>();
     private final Element rootSaverXML; 
+    private static final String FILE_PATH = AppDirsFactory.getInstance().getUserDataDir("stats", "", "hidenseek");
+    private static final String FILE_NAME = "game_stats.xml";
     
     public StatisticsManagerImpl() {
         Element _rootSaverXML = null;
         try {
-            final File inputFile = new File("game_data.xml");
-            if(inputFile.exists()) {
+            Files.createDirectories(Paths.get(FILE_PATH));
+            final File inputFile = new File(FILE_PATH + FILE_NAME);
+            if (inputFile.exists()) {
                 Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
                 _rootSaverXML = doc.getDocumentElement();
                 _rootSaverXML.normalize();
             }
-        } catch (SAXException | IOException | ParserConfigurationException e) {
             
+        } catch (SAXException | IOException | ParserConfigurationException e) {
+            e.printStackTrace();
         }
         this.rootSaverXML = _rootSaverXML;
     }
@@ -92,7 +100,7 @@ public class StatisticsManagerImpl implements StatisticsManager, StatisticSaver 
                 rootElement.appendChild(statistic.XMLSerialize(doc));
             }
 
-            FileOutputStream output = new FileOutputStream("game_data.xml");
+            FileOutputStream output = new FileOutputStream(FILE_PATH + FILE_NAME);
             writeXml(doc, output);
         
         } catch (ParserConfigurationException e) {

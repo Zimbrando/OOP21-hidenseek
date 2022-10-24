@@ -38,6 +38,8 @@ dependencies {
     
     // JGraphT: comment out if you do not need them
     implementation("org.jgrapht:jgrapht-core:$jgraphtVersion")
+    
+    implementation("net.harawata:appdirs:1.2.1")
 
     for (platform in supportedPlatforms) {
         for (module in javaFXModules) {
