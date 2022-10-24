@@ -1,5 +1,8 @@
 <level name="Ruins of War" gravity="1.5" maximumTime="150">
 
+	<hud position="1400,50">
+	</hud>
+
 	<wall position="0,0">
 		<vertex position="0,0"/>
 		<vertex position="1600,0"/>

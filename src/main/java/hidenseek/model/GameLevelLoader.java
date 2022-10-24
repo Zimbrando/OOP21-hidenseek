@@ -45,6 +45,7 @@ public class GameLevelLoader{
     private final Set<Monster> monsters = new LinkedHashSet<>();
     private final Map<PowerUpType, List<Entity>> powerUps = new HashMap<>();
     private final Set<Key> keys = new LinkedHashSet<>();
+    private final Set<Point2D> hudsPositions = new LinkedHashSet<>();
     private Document document;
     
     public enum LevelElements{
@@ -57,7 +58,8 @@ public class GameLevelLoader{
         LEVEL_PLAYER("player"),
         LEVEL_MONSTER("monster"),
         LEVEL_POWERUP("powerup"),
-        LEVEL_KEY("key");
+        LEVEL_KEY("key"),
+        LEVEL_HUD("hud");
 
         private final String text;
         
@@ -95,6 +97,7 @@ public class GameLevelLoader{
         parsePlayers();
         parsePowerUps();
         parseKeys();
+        parseHuds();
     }
     
     public String getLevelName() {
@@ -112,13 +115,13 @@ public class GameLevelLoader{
     private void parseWalls() {
         final NodeList xmlWalls = this.document.getElementsByTagName(LevelElements.LEVEL_WALL.getName());      
         
-        for(int i=0; i<xmlWalls.getLength(); i++){
+        for (int i=0; i<xmlWalls.getLength(); i++){
             final Set<Point2D> wallVertices = new LinkedHashSet <>();
             final Node xmlWall = xmlWalls.item(i);
             final Point2D wallPosition = deserializePoint(xmlWall.getAttributes().getNamedItem(LevelElements.LEVEL_POSITION.getName()).getNodeValue());
             final NodeList xmlWallVertices = xmlWall.getChildNodes();
-            for(int y=0; y<xmlWallVertices.getLength(); y++){
-                if(!"vertex".equals(xmlWallVertices.item(y).getNodeName())) {
+            for (int y=0; y<xmlWallVertices.getLength(); y++){
+                if (!"vertex".equals(xmlWallVertices.item(y).getNodeName())) {
                     continue;
                 }
                 final Node xmlWallVertex = xmlWallVertices.item(y);
@@ -160,6 +163,13 @@ public class GameLevelLoader{
         xmlKeysStream.forEach(e -> this.keys.add(new Key(deserializePoint(e.getAttributes().getNamedItem(LevelElements.LEVEL_POSITION.getName()).getNodeValue()))));
         
     }
+    
+    private void parseHuds() {
+        final NodeList xmlHuds = this.document.getElementsByTagName(LevelElements.LEVEL_HUD.getName());
+        
+        final Stream<Node> xmlHudsStream = IntStream.range(0, xmlHuds.getLength()).mapToObj(xmlHuds::item);
+        xmlHudsStream.forEach(e -> this.hudsPositions.add(deserializePoint(e.getAttributes().getNamedItem(LevelElements.LEVEL_POSITION.getName()).getNodeValue())));
+    }
 
     public Set<EntityController> getEntities() {
         final Set<EntityController> controllers = new LinkedHashSet<>();
@@ -180,7 +190,7 @@ public class GameLevelLoader{
     
     public Set<HudController> getHuds() {
         final Set<HudController> huds = new LinkedHashSet<>();
-        final KeyHudView keyHudView = new KeyHudViewImpl(new Point2D(1400, 30));
+        final KeyHudView keyHudView = new KeyHudViewImpl(this.hudsPositions.stream().findAny().get());
         keyHudView.setMaxKeys(this.getKeysNumber());
         final HudController keyHud = new KeyHudControllerImpl(Set.copyOf(this.players), keyHudView);
         huds.add(keyHud);
