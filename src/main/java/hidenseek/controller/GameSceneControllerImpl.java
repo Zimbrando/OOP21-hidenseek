@@ -171,9 +171,7 @@ public class GameSceneControllerImpl implements GameSceneController {
 
     @Override
     public void goToExit() {
-       Platform.setImplicitExit(true);
        Platform.exit();
-       System.exit(0);
     }
 
     @Override

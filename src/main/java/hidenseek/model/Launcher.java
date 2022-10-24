@@ -12,14 +12,7 @@ public class Launcher extends Application {
 
     @Override
     public final void start(final Stage primaryStage) throws Exception {
+        Platform.setImplicitExit(true);
         final GameSceneController gameSceneController = new GameSceneControllerImpl(primaryStage);
-             
-        //Prevents the program from running even if close
-        primaryStage.setOnCloseRequest(new EventHandler<>() {
-            public void handle(final WindowEvent t) {
-                Platform.exit();
-                System.exit(0);
-            }
-        });
     }
 }

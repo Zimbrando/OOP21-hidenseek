@@ -58,6 +58,7 @@ public enum PowerUpType {
         final ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         service.schedule(() -> {
             Platform.runLater(() -> component.reset());
+            service.shutdown();
         }, seconds, TimeUnit.SECONDS);
     }
 
