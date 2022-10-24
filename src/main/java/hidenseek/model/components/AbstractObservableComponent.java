@@ -6,6 +6,9 @@ import java.util.Set;
 import hidenseek.model.Trigger;
 import hidenseek.model.events.Event;
 
+/**
+ * Base class for {@link ObservableComponent}
+ */
 public abstract class AbstractObservableComponent extends AbstractComponent implements ObservableComponent {
 
     private final Set<Trigger<? extends Event>> listeners = new HashSet<>();

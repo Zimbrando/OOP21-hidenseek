@@ -17,18 +17,18 @@ public interface GraphicsDevice {
      * @param sprite
      *          The image that has to be drawn
      * @param position
-     *          The position in the 'canvas'
+     *          The position in the game area
+     * @param h
+     * @param w 
      */
     void drawImage(Image sprite, int w, int h, Point2D position);
     
     /**
      * Draws a filled rect
-     * @param w 
-     *          Width
+     * @param w
      * @param h
-     *          Height
      * @param position
-     *          The position in the 'canvas'
+     *          The position in the game area
      * @param color
      *          The fill color
      */
@@ -74,7 +74,6 @@ public interface GraphicsDevice {
      * Draws a filled polygon
      * @param points
      * @param color
-     *          The filled color
      */
     void drawPolygon(List<Point2D> points, Color color);
     

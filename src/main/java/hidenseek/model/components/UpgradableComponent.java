@@ -2,7 +2,7 @@ package hidenseek.model.components;
 
 
 /**
- * Component that can be modified by {@link PowerUp}s
+ * Component that can be modified by {@link hidenseek.model.entities.PowerUp}s
  */
 public interface UpgradableComponent extends Component {
 

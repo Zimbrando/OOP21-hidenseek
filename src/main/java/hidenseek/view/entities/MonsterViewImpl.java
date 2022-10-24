@@ -1,7 +1,6 @@
 package hidenseek.view.entities;
 
 import hidenseek.view.GraphicsDevice;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 

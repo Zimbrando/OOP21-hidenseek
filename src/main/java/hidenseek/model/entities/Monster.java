@@ -24,7 +24,7 @@ import hidenseek.model.components.senses.SightSenseComponentImpl;
 import hidenseek.model.events.CollisionEvent;
 import javafx.geometry.Point2D;
 
-public class Monster extends AbstractEntity {
+public final class Monster extends AbstractEntity {
     
     private static final double MONSTER_SPEED = 125;
     private static final int HITBOX_SIZE = 40;
