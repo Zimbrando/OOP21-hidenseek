@@ -65,6 +65,9 @@ public class StatisticsManagerImpl implements StatisticsManager, StatisticSaver 
 
     @Override
     public void addStatistic(Statistic<?> statistic) {
+        if(statistics.contains(statistic)) {
+            return;
+        }
         statistics.add(statistic);
         statistic.getProperty().setStatisticSaver(this);
         loadStatistic(statistic);

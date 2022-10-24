@@ -1,4 +1,4 @@
-<level name="Ruins of War" gravity="1.5" maximumTime="150">
+<level name="Ruins of War" gravity="1.5" maximumTime="10">
 
 	<hud position="1400,50">
 	</hud>

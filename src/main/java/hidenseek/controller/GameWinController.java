@@ -55,5 +55,10 @@ public class GameWinController implements MenuController{
         this.gameController = gameController;
         this.gameWinMainPane.setPrefHeight(this.getHeight());
         this.gameWinMainPane.setPrefWidth(this.getWidth());
+    }
+
+    @Override
+    public void onActivate() {
+        
     }   
 }

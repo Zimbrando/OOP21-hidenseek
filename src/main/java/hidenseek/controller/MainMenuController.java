@@ -25,12 +25,10 @@ public class MainMenuController implements MenuController{
     private Button exitButton;
     
     private GameSceneController gameController;
-   
     
     @Override
     public void setWidth(final double width) {
        this.interfaceWidth = width;
-        
     }
 
     @Override
@@ -80,6 +78,11 @@ public class MainMenuController implements MenuController{
         this.gameController = gameController; 
         this.mainPane.setPrefHeight(this.getHeight());
         this.mainPane.setPrefWidth(this.getWidth());
+    }
+
+    @Override
+    public void onActivate() {
+        
     }
     
 }

@@ -1,5 +1,7 @@
 package hidenseek.model.statistics.score;
 
+import java.text.DecimalFormat;
+
 import hidenseek.model.statistics.StatisticProperty;
 
 public class Score extends StatisticProperty<Double> {
@@ -34,5 +36,10 @@ public class Score extends StatisticProperty<Double> {
         }
         _score = value;
         saveStatistics();
+    }
+    
+    @Override
+    public String toString() {
+        return new DecimalFormat("0.0").format(_score) + "/5";
     }
 }

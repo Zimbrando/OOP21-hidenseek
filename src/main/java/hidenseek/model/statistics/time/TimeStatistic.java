@@ -1,9 +1,9 @@
 package hidenseek.model.statistics.time;
 
 import org.w3c.dom.Element;
-import hidenseek.model.statistics.StatisticImpl;
+import hidenseek.model.statistics.AbstractStatistic;
 
-public class TimeStatistic extends StatisticImpl<Time> {
+public class TimeStatistic extends AbstractStatistic<Time> {
     
     public TimeStatistic(String name, String tag, String title, Element element) {
         super(name, tag, title, new Time(0), element);
@@ -11,6 +11,10 @@ public class TimeStatistic extends StatisticImpl<Time> {
     
     public TimeStatistic(String name, String tag, String title) {
         this(name, tag, title, null);
+    }
+
+    public String getValue() {
+        return getProperty().toString();
     }
 
 }

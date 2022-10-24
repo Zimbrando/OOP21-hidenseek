@@ -9,6 +9,7 @@ import hidenseek.model.enums.GuiPanes;
 import hidenseek.model.statistics.StatisticsManager;
 import hidenseek.model.statistics.StatisticsManagerImpl;
 import hidenseek.model.statistics.numeric.NumericStatistic;
+import hidenseek.model.statistics.time.TimeStatistic;
 import hidenseek.view.CanvasDeviceImpl;
 import hidenseek.view.Renderer;
 import hidenseek.view.RendererImpl;
@@ -31,16 +32,15 @@ public class GameSceneControllerImpl implements GameSceneController {
     private final StatisticsManager statisticsManager = new StatisticsManagerImpl();
     private final static double INTERFACE_WIDTH = 1600.0;
     private final static double INTERFACE_HEIGHT = 900.0;
-    
 
-    public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {      
+    public GameSceneControllerImpl(final Stage stage) throws IOException, URISyntaxException {  
 
-        statisticsManager.addStatistic(new NumericStatistic("curr_level", "root", "Current level"));
-        statisticsManager.addStatistic(new NumericStatistic("total_play_time", "root", "Play time"));
-        statisticsManager.addStatistic(new NumericStatistic("total_win", "root", "Victories"));
-        statisticsManager.addStatistic(new NumericStatistic("total_loose", "root", "Losses"));
-        statisticsManager.addStatistic(new NumericStatistic("win_percentage", "root", "Win percentage", "%"));
-        statisticsManager.addStatistic(new NumericStatistic("collected_keys", "root", "Collected keys"));
+        statisticsManager.addStatistic(new NumericStatistic("curr_level", "", "Current level"));
+        statisticsManager.addStatistic(new TimeStatistic("total_play_time", "", "Play time"));
+        statisticsManager.addStatistic(new NumericStatistic("total_win", "", "Victories"));
+        statisticsManager.addStatistic(new NumericStatistic("total_loose", "", "Losses"));
+        statisticsManager.addStatistic(new NumericStatistic("win_percentage", "", "Win percentage", "%"));
+        statisticsManager.addStatistic(new NumericStatistic("collected_keys", "", "Collected keys"));        
         
         stage.setResizable(false);
         
@@ -129,9 +129,8 @@ public class GameSceneControllerImpl implements GameSceneController {
         input.assignInputNode(gamePane);
         
         final Renderer renderer = new RendererImpl(new CanvasDeviceImpl(gameCanvas.getGraphicsContext2D()));
-        
-        final LevelHandler levelhandler = new LevelHandlerImpl(statisticsManager);
-        
+
+        LevelHandler levelhandler = new LevelHandlerImpl(statisticsManager);
         final GameWorldController gameController = new GameWorldControllerImpl(this, renderer, input, levelhandler, statisticsManager);
         
         final GameGuiController temp = (GameGuiController) sceneManager.getSceneControllerByName(gameGuiPath);
@@ -156,8 +155,7 @@ public class GameSceneControllerImpl implements GameSceneController {
     public void goToGameWin() {
         final String gameWinGuiPath = RESOURCE_LOCATION+GuiPanes.GAMEWIN_MENU.getFileName();
         
-        sceneManager.activate(gameWinGuiPath);  
-        
+        sceneManager.activate(gameWinGuiPath);
     }
     
     @Override

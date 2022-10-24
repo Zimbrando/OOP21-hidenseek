@@ -108,4 +108,9 @@ public class GameGuiController implements MenuController {
         this.gameGuiMainPane.setPrefWidth(this.getWidth());
     }
 
+    @Override
+    public void onActivate() {
+        
+    }
+
 }

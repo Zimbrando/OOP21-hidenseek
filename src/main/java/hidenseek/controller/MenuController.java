@@ -39,4 +39,5 @@ public interface MenuController {
     
     void setSceneController(final GameSceneController gameController);
     
+    void onActivate();
 }

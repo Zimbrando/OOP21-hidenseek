@@ -1,19 +1,21 @@
 package hidenseek.model.statistics;
 
+import java.util.Objects;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class StatisticImpl<T extends StatisticProperty<?>> implements Statistic<T> {
+public abstract class AbstractStatistic<T extends StatisticProperty<?>> implements Statistic<T> {
     private final String name;
     private final String tag;
     private final String title;
     private final T property;
     
-    public StatisticImpl(String name, String tag, String title, T property) {
+    public AbstractStatistic(String name, String tag, String title, T property) {
         this(name, tag, title, property, null);
     }
     
-    public StatisticImpl(String name, String tag, String title, T property, Element element) {
+    public AbstractStatistic(String name, String tag, String title, T property, Element element) {
         this.name = name;
         this.tag = tag;
         this.title = title;
@@ -27,7 +29,7 @@ public class StatisticImpl<T extends StatisticProperty<?>> implements Statistic<
     @Override
     public Element XMLSerialize(Document document) {
         Element element = document.createElement(getClass().getName());
-        element.setAttribute("id", name);
+        element.setAttribute("name", name);
         element.setAttribute("tag", tag);
         element.setAttribute("value", getProperty().XMLSerialize());
         return element;
@@ -35,7 +37,7 @@ public class StatisticImpl<T extends StatisticProperty<?>> implements Statistic<
 
     @Override
     public Boolean XMLDeserialize(Element element) {
-        if(!element.getTagName().equals(getClass().getName()) || !element.getAttribute("tag").equals(tag)) {
+        if(!element.getTagName().equals(getClass().getName()) || !element.getAttribute("name").equals(name) || !element.getAttribute("tag").equals(tag)) {
             return false;
         }
         if(!element.hasAttribute("value")) {
@@ -68,5 +70,22 @@ public class StatisticImpl<T extends StatisticProperty<?>> implements Statistic<
     @Override
     public void setStatisticSaver(StatisticSaver statisticSaver) {
         getProperty().setStatisticSaver(statisticSaver);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, tag);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AbstractStatistic other = (AbstractStatistic) obj;
+        return Objects.equals(name, other.name) && Objects.equals(tag, other.tag);
     }
 }

@@ -55,5 +55,10 @@ public class GameOverMenuController implements MenuController{
         this.gameController = gameController;
         this.gameOverMainPane.setPrefHeight(this.getHeight());
         this.gameOverMainPane.setPrefWidth(this.getWidth());
+    }
+
+    @Override
+    public void onActivate() {
+        
     }   
 }

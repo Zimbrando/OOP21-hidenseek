@@ -39,6 +39,7 @@ public class SceneManagerImpl implements SceneManager {
 
     @Override
     public void activate(final String name){
+        getSceneControllerByName(name).onActivate();
         this.main.setRoot(this.screenMap.get(name));
     }
     
