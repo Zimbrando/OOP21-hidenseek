@@ -1,35 +1,21 @@
 package hidenseek.model.components.brains;
 
-import static hidenseek.utils.Utils.*;
-
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import org.jgrapht.GraphPath;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
 import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.components.physics.CollisionComponent;
-import hidenseek.model.components.physics.Force;
-import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.components.physics.PositionComponent;
-import hidenseek.model.components.Component;
 import hidenseek.model.components.MapComponent;
-import hidenseek.model.components.RewardComponent;
-import hidenseek.model.entities.AbstractEntity;
 import hidenseek.model.entities.Entity;
-import hidenseek.model.entities.Player;
 import hidenseek.model.entities.Wall;
-import hidenseek.model.enums.Direction;
 import hidenseek.model.enums.Heart;
 import javafx.geometry.Point2D;
+
+import static hidenseek.utils.Utils.distanceBetween;
+import static hidenseek.utils.Utils.upperLeft;
+import static hidenseek.utils.Utils.bottomRight;
 
 
 /**
@@ -37,7 +23,7 @@ import javafx.geometry.Point2D;
  * @author Marco Sangiorgi
  *
  */
-public class ExpertBrainComponentImpl extends AbstractBrainComponent implements BrainComponent {
+public class ExpertBrainComponentImpl extends AbstractBrainComponent {
 
     // next position useful when no targets are reachable
     private Optional<Point2D> targetPosition;
@@ -126,10 +112,18 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponent implements 
         final Set<Point2D> gameMap = map.getGameMap();
         
         // get nearest point to target in map
-        final Point2D targetPos = findNearestPoint(target.getComponent(PositionComponent.class).get().getPosition(), gameMap).get();
+        final Optional<Point2D> optTargetPos = findNearestPoint(target.getComponent(PositionComponent.class).get().getPosition(), gameMap);
+        if(optTargetPos.isEmpty()) {
+            return Optional.empty();
+        }
+        Point2D targetPos = optTargetPos.get();
         
         // get nearest point to me in map
-        final Point2D myPos = findNearestPoint(owner.getComponent(PositionComponent.class).get().getPosition(), gameMap).get();
+        final Optional<Point2D> optMyPos = findNearestPoint(owner.getComponent(PositionComponent.class).get().getPosition(), gameMap);
+        if(optMyPos.isEmpty()) {
+            return Optional.empty();
+        }
+        Point2D myPos = optMyPos.get();
         
         // find shortest path points
         final Set<Point2D> path = map.getPath(myPos, targetPos);
@@ -147,8 +141,14 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponent implements 
         return findNearestPoint(myPos, path.stream().filter(p -> p.distance(myPos)>brPoint.getX()-ulPoint.getX()).collect(Collectors.toSet()));
     }
 
+    /**
+     * Find nearest point in set of point
+     * @param source current position
+     * @param points set of point to search
+     * @return the nearest point, empty otherwise
+     */
     private Optional<Point2D> findNearestPoint(final Point2D source, final Set<Point2D> points) {
-        return points.stream().reduce((p1,p2) -> (p1.distance(source) < p2.distance(source)) ? p1 :p2);
+        return points.stream().reduce((p1,p2) -> p1.distance(source) < p2.distance(source) ? p1 :p2);
     }
     
 }

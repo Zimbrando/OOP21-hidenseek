@@ -20,7 +20,7 @@ import javafx.geometry.Point2D;
  * @author Marco Sangiorgi
  *
  */
-public class NaiveBrainComponentImpl extends AbstractBrainComponent implements BrainComponent {
+public class NaiveBrainComponentImpl extends AbstractBrainComponent {
 
     // next position useful when no targets are reachable
     private Optional<Point2D> targetPosition;
