@@ -3,29 +3,33 @@ package hidenseek.controller;
 public interface MenuController {
     
     /**
-     * 
+     * The width to assign to the gui
      * @param width
-     *          The width to assign to the gui
+     *          
      */
+    
     void setWidth(final double width);
     
     /**
-     * 
+     * The height to assign to the gui
      * @param height
-     *          The height to assign to the gui 
+     *           
      */
+    
     void setHeight(final double height);
     
     /**
      * 
-     * @return the gui's width
+     * @return the gui's width.
      */
+    
     double getWidth();
     
     /**
      * 
-     * @return the gui's height
+     * @return the gui's height.
      */
+    
     double getHeight();
         
     /**

@@ -29,7 +29,7 @@
                   <children>
                      <Button fx:id="resumeButton" styleClass="buttonStyle" onAction="#handleResumeClicked" prefHeight="80.0" prefWidth="500.0" text="RESUME">
                      </Button>
-                     <Button fx:id="goToMainMenuButton" styleClass="buttonStyle" layoutX="272.0" layoutY="65.0" onAction="#handlegoToMainMenuClicked" prefHeight="80.0" prefWidth="500.0" text="BACK TO MAIN MENU">
+                     <Button fx:id="goToMainMenuButton" styleClass="buttonStyle" layoutX="272.0" layoutY="65.0" onAction="#handleGoToMainMenuClicked" prefHeight="80.0" prefWidth="500.0" text="GO TO MAIN MENU">
                      </Button>
                   </children>
                </VBox>

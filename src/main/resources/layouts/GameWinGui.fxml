@@ -15,7 +15,7 @@
             </Text>
             <VBox alignment="CENTER" layoutX="334.0" layoutY="438.0" maxHeight="768.0" maxWidth="1024.0" prefHeight="0.0" prefWidth="932.0" spacing="25.0" styleClass="buttonStyle">
                <children>
-                  <Button fx:id="exitToMenu" onAction="#handleExitToMenuClicked" prefHeight="80.0" prefWidth="500.0" styleClass="buttonStyle" text="EXIT TO MAIN MENU">
+                  <Button fx:id="goToMenu" onAction="#handleGoToMenuClicked" prefHeight="80.0" prefWidth="500.0" styleClass="buttonStyle" text="GO TO MAIN MENU">
                   </Button>
                </children>
             </VBox>

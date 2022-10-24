@@ -8,48 +8,42 @@ public interface GameLevel {
     
     /**
      * 
-     * @return the game level identificator.
+     * @return The game level identifier.
      */
     
     int getLevelID();
     
     /**
      * 
-     * @return the level name.
+     * @return The level name.
      */
     
     String getLevelName();
-    
+        
     /**
      * 
-     * @return the level gravity.
-     */
-    
-    double getLevelGravity();
-    
-    /**
-     * 
-     * @return the level maximum time of completion.
+     * @return The maximum amount of time to get the best score.
      */
     
     int getLevelMaximumTime();
     
     /**
      * 
-     * @return the parsed entities from file.
+     * @return The game entities.
      */
     
     Set<EntityController> getEntities();
     
     /**
      * 
-     * @return the HUDs from file.
+     * @return The game HUDs.
      */
+    
     Set<HudController> getHuds();
     
     /**
      * 
-     * @return the parsed number of keys.
+     * @return The level's number of keys.
      */
     
     int getKeysNumber();

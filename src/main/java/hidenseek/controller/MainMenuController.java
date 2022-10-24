@@ -48,15 +48,27 @@ public class MainMenuController implements MenuController{
         return this.interfaceWidth;
     }
     
+    /**
+     * The "Start new game" button action handler. 
+     */
+    
     @FXML
     public void handleStartClicked() {
         this.gameController.goToGame();  
     }
     
+    /**
+     * The "Statistics" button action handler. 
+     */
+    
     @FXML
     public void handleGoToStatisticsClicked() {
         this.gameController.goToStats();  
     }
+    
+    /**
+     * The "Exit game" button action handler. 
+     */
     
     @FXML
     public void handleExitClicked() {

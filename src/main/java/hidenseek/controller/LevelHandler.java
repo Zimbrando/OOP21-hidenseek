@@ -14,14 +14,15 @@ public interface LevelHandler {
     
     /**
      * 
-     * @return if a next level exist.
+     * @return If a next level exist.
      */
     
     boolean hasNext();
     
     /**
      * 
-     * @return the current level.
+     * @return The current level.
      */
+    
     Optional<GameLevel> getCurrentLevel();
 }

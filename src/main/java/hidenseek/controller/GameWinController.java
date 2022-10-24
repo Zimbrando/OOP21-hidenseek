@@ -16,12 +16,16 @@ public class GameWinController implements MenuController{
     private AnchorPane gameWinMainPane;
         
     @FXML
-    private Button exitToMenu;
+    private Button goToMenu;
     
     private GameSceneController gameController;
    
+    /**
+     * The "Go to main menu" button action handler 
+     */
+    
     @FXML
-    public void handleExitToMenuClicked() {
+    public void handleGoToMenuClicked() {
         this.gameController.goToMenu();  
     }
         

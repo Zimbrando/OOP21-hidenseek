@@ -8,7 +8,6 @@ public class GameLevelImpl implements GameLevel {
 
     private final int levelID;
     private final String levelName;
-    private final double levelGravity;
     private final int levelMaximumTime;
     final GameLevelLoader levelLoader;
     
@@ -18,7 +17,6 @@ public class GameLevelImpl implements GameLevel {
         this.levelLoader = new GameLevelLoader(levelID);
         
         this.levelName = levelLoader.getLevelName();
-        this.levelGravity = levelLoader.getLevelGravity();
         this.levelMaximumTime = levelLoader.getLevelMaxTime();
     }
 
@@ -45,11 +43,6 @@ public class GameLevelImpl implements GameLevel {
     @Override
     public String getLevelName() {
         return levelName;
-    }
-
-    @Override
-    public double getLevelGravity() {
-        return levelGravity;
     }
 
     @Override

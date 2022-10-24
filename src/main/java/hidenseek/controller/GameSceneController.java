@@ -45,29 +45,32 @@ public interface GameSceneController {
     
     /**
      * 
-     * @param name 
-     *          Name of the scene
-     * @return the current scene's root object
+     * @param name of the scene.
+     *  
+     * @return the current scene's root object.
      */
+    
     Pane getSceneRoot(final String name);
         
     /**
-     * 
-     * @param controller
-     *          the game gui controller
+     * Toggles the pause mode in the game canvas gui.
+     * @param controller of the GameGui graphical interface.
      */
+    
     void pauseGame(final GameGuiController controller);
     
     /**
      * 
-     * @return the main Stage object for displaying UIs
+     * @return the main Stage object for displaying UIs.
      */
+    
     Stage getMainStage();
     
     /**
      * 
-     * @return the statistics manager object
+     * @return the statistics manager object.
      */
+    
     StatisticsManager getStatisticsManager();
     
 }

@@ -54,27 +54,47 @@ public class GameGuiController implements MenuController {
         return this.interfaceWidth;
     }
     
+    /**
+     * The "Resume" button action handler 
+     */
+    
     @FXML
     public void handleResumeClicked() {
         this.gameController.resume();
         setPauseMode();
     }
     
+    /**
+     * The "Go to main menu" button action handler 
+     */
+    
     @FXML
-    public void handlegoToMainMenuClicked() {
+    public void handleGoToMainMenuClicked() {
         this.gameSceneController.goToMenu();
         setPauseMode();
     }
+    
+    /**
+     * Toggles the pause mode. 
+     */
     
     public void setPauseMode(){
         pausePane.setVisible(!pausePane.isVisible());
         paused = !paused;
     }
     
-    
+    /**
+     * 
+     * @return if the GUI is paused or not.
+     */
     public boolean isPaused() {
         return this.paused;
     }
+    
+    /**
+     * Sets the GameWorldController.
+     * @param gameController
+     */
     
     public void setGameController(final GameWorldController gameController) {
         this.gameController = gameController; 

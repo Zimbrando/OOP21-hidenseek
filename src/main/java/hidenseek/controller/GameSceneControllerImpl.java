@@ -102,6 +102,7 @@ public class GameSceneControllerImpl implements GameSceneController {
         return this.mainStage;
     }
     
+    @Override
     public void pauseGame(final GameGuiController controller) {
         if(!controller.isPaused()) {
             controller.setPauseMode();
