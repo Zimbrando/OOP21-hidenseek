@@ -18,7 +18,6 @@ import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.Direction;
 import hidenseek.model.enums.Heart;
 import javafx.geometry.Point2D;
-import javafx.util.Pair;
 
 
 /**

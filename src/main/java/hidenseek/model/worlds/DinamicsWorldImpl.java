@@ -21,17 +21,18 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
         this.world().stream().forEach(entity -> {
 
             final Optional<PositionComponent> positionComponent = entity.getComponent(PositionComponent.class);
-            final Optional<MoveComponent> moveComponent = entity.getComponent(MoveComponent.class);
-            final Optional<CollisionComponent> collisionComponent = entity.getComponent(CollisionComponent.class);
-            final Optional<MaterialComponent> materialComponent = entity.getComponent(MaterialComponent.class);
-
+            
             if (!positionComponent.isPresent()) {
                 return;
             }
+            final Optional<MoveComponent> moveComponent = entity.getComponent(MoveComponent.class);
             
             if (!moveComponent.isPresent()) {
                 return;
             }
+            final Optional<CollisionComponent> collisionComponent = entity.getComponent(CollisionComponent.class);
+            final Optional<MaterialComponent> materialComponent = entity.getComponent(MaterialComponent.class);
+
 
             //COLLISION DETECT METHOD 2
             //TODO: write it better with no code repetition

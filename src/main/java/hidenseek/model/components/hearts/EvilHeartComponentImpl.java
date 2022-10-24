@@ -2,8 +2,6 @@ package hidenseek.model.components.hearts;
 
 import java.util.Optional;
 import java.util.Set;
-
-import hidenseek.model.components.RewardComponent;
 import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.Heart;
 

@@ -116,14 +116,14 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponent {
         if(optTargetPos.isEmpty()) {
             return Optional.empty();
         }
-        Point2D targetPos = optTargetPos.get();
         
         // get nearest point to me in map
         final Optional<Point2D> optMyPos = findNearestPoint(owner.getComponent(PositionComponent.class).get().getPosition(), gameMap);
         if(optMyPos.isEmpty()) {
             return Optional.empty();
         }
-        Point2D myPos = optMyPos.get();
+        final Point2D targetPos = optTargetPos.get();
+        final Point2D myPos = optMyPos.get();
         
         // find shortest path points
         final Set<Point2D> path = map.getPath(myPos, targetPos);
