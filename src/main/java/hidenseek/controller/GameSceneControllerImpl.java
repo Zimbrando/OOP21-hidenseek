@@ -50,7 +50,7 @@ public class GameSceneControllerImpl implements GameSceneController {
        
         this.init();
         
-        mainStage.setTitle("Hide'n Seek");
+        mainStage.setTitle("Hide 'n Seek");
         mainStage.setWidth(INTERFACE_WIDTH); 
         mainStage.setHeight(INTERFACE_HEIGHT);
         mainStage.setScene(currentScene.get());

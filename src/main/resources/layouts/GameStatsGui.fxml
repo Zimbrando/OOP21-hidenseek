@@ -20,7 +20,7 @@
 					<VBox fx:id="statisticsContainer" alignment="CENTER" spacing="5.0" >
 	               	</VBox>
 		       </ScrollPane>
-               <Button fx:id="exitButton" styleClass="buttonStyle" text="CHIUDI"  onAction="#handleStatisticsExit" layoutX="272.0" layoutY="25.0" prefHeight="80.0" prefWidth="500.0">
+               <Button fx:id="exitButton" styleClass="buttonStyle" text="CLOSE"  onAction="#handleStatisticsExit" layoutX="272.0" layoutY="25.0" prefHeight="80.0" prefWidth="500.0">
                </Button>
             </children>
          </VBox>

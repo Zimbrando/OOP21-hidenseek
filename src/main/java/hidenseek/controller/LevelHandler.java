@@ -20,6 +20,12 @@ public interface LevelHandler {
     boolean hasNext();
     
     /**
+     * Resets the current level counter.
+     */
+    
+    void reset();
+    
+    /**
      * 
      * @return The current level.
      */

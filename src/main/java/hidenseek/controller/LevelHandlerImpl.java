@@ -39,6 +39,12 @@ public class LevelHandlerImpl implements LevelHandler {
     public boolean hasNext() {
         return this.currentLevel < this.gameLevels.size() - 1;
     }
+    
+    @Override
+    public void reset() {
+        this.currentLevel = 0;
+    }
+
 
     @Override
     public Optional<GameLevel> getCurrentLevel() {
@@ -48,4 +54,5 @@ public class LevelHandlerImpl implements LevelHandler {
         return Optional.of(this.gameLevels.get(this.currentLevel));
     }
 
+    
 }

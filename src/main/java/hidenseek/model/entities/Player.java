@@ -29,7 +29,7 @@ import javafx.scene.input.KeyCode;
 
 public final class Player extends AbstractEntity {
     
-    private static final double PLAYER_SPEED = 150;
+    private static final double PLAYER_SPEED = 175;
     private static final int HITBOX_SIZE = 30;
     
     public Player(final Point2D position) {

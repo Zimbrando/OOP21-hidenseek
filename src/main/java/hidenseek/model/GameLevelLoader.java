@@ -56,7 +56,6 @@ public class GameLevelLoader {
     public enum LevelElements{
         
         LEVEL_NAME("name"),
-        LEVEL_GRAVITY("gravity"),
         LEVEL_MAX_TIME("maximumTime"),
         LEVEL_POSITION("position"),
         LEVEL_WALL("wall"),
