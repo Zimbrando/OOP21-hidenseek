@@ -21,6 +21,7 @@ public interface GraphicsDevice {
      */
     void drawImage(Image sprite, int w, int h, Point2D position);
     
+
     /**
      * Draws a filled rect
      * @param w 

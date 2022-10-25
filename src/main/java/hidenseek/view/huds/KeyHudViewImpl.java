@@ -1,13 +1,14 @@
 package hidenseek.view.huds;
 
+import hidenseek.utils.ViewUtils;
 import hidenseek.view.GraphicsDevice;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 public class KeyHudViewImpl implements KeyHudView {
 
-    private static final Image KEY_SPRITE_BLANK = new Image("assets/key_01_transparent.png");
-    private static final Image KEY_SPRITE = new Image("assets/key_01.png");
+    private static final Image KEY_SPRITE_BLANK = ViewUtils.loadImage("/assets/key_01_transparent.png");
+    private static final Image KEY_SPRITE = ViewUtils.loadImage("/assets/key_01.png");
     private static final int KEY_WIDTH = 50;
     private static final int KEY_HEIGHT = 50;
     private int numKeys;

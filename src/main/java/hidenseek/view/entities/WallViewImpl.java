@@ -1,5 +1,6 @@
 package hidenseek.view.entities;
 
+import hidenseek.utils.ViewUtils;
 import hidenseek.view.GraphicsDevice;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class WallViewImpl extends AbstractEntityView implements WallView {
     
-    private static final Image WALL_SPRITE = new Image("/assets/wall.png");
+    private static final Image WALL_SPRITE = ViewUtils.loadImage("/assets/wall.png");
     private final ImagePattern WALL_SPRITE_PATTERN = new ImagePattern(WALL_SPRITE, 0, 0, 50, 50, false);
     private Set<Point2D> hitbox;
     
