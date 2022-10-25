@@ -105,50 +105,54 @@ public class StatisticsController implements MenuController{
     private void loadStatistics() {
         statisticsContainer.getChildren().clear();
 
+        //group statistics by Tag
         final Map<String, List<Statistic<?>>> groupedStatistics = 
                 gameController.getStatisticsManager().getStatistics().stream().collect(Collectors.groupingBy(Statistic::getTag));
         
+        //sort statistics: at first the ones with empty tag (general statistics), then levels statistics.
         final List<String> sortedStatisticsGround = groupedStatistics.keySet().stream().sorted((x, y) -> {
             return x.equals("") ? -1 : 1;
         }).collect(Collectors.toList());
         
-        for(String statisticTag : sortedStatisticsGround) {
+        //create a statistic category into view for each level
+        for(final String statisticTag : sortedStatisticsGround) {
             
-            Label statisticGroupLbl = new Label(statisticTag == "" ? "" : "LEVEL " + statisticTag);
+            final Label statisticGroupLbl = new Label(statisticTag == "" ? "" : "LIVELLO " + statisticTag);
             statisticGroupLbl.getStyleClass().add("statsCategory");
             statisticGroupLbl.setTextFill(Color.WHITESMOKE);
             statisticGroupLbl.setMinWidth(450);
             VBox.setMargin(statisticGroupLbl, new Insets(20, 0, 0, 0));
             statisticsContainer.getChildren().add(statisticGroupLbl);
-            
-            for(Statistic<?> statistic : groupedStatistics.get(statisticTag)) { 
+
+            //populate each category with respective statistics
+            for(final Statistic<?> statistic : groupedStatistics.get(statisticTag)) { 
                 
-                AnchorPane statisticBox = new AnchorPane();
+                final AnchorPane statisticBox = new AnchorPane();
                 statisticBox.setMaxWidth(450);
                 statisticBox.setMinHeight(30);
                 
-                Label statisticTitleLbl = new Label(statistic.getTitle());
+                final Label statisticTitleLbl = new Label(statistic.getTitle());
                 statisticTitleLbl.getStyleClass().add("statsValue");
                 statisticTitleLbl.setTextFill(Color.WHITE);
                 
                 javafx.scene.Node statisticValueLbl = null;
                 
                 if(NumericStatistic.class.isAssignableFrom(statistic.getClass())) {
-                    TextStatisticViewImpl statisticValue = new TextStatisticViewImpl();
+                    final TextStatisticViewImpl statisticValue = new TextStatisticViewImpl();
                     statisticValue.updateText(((NumericStatistic)statistic).getValue() + ((NumericStatistic)statistic).getUnits());
                     statisticValueLbl = statisticValue;
                     AnchorPane.setTopAnchor(statisticValueLbl, 6.0);
                 }
                 
                 if(TimeStatistic.class.isAssignableFrom(statistic.getClass())) {
-                    TextStatisticViewImpl statisticValue = new TextStatisticViewImpl();
+                    final TextStatisticViewImpl statisticValue = new TextStatisticViewImpl();
                     statisticValue.updateText(((TimeStatistic)statistic).getValue());
                     statisticValueLbl = statisticValue;
                     AnchorPane.setTopAnchor(statisticValueLbl, 6.0);
                 }
                 
                 if(ScoreStatistic.class.isAssignableFrom(statistic.getClass())) {
-                    ScoreStatisticViewImpl statisticValue = new ScoreStatisticViewImpl();
+                    final ScoreStatisticViewImpl statisticValue = new ScoreStatisticViewImpl();
                     statisticValue.updateScore(((ScoreStatistic)statistic).getValue());
                     statisticValueLbl = statisticValue;
                 }

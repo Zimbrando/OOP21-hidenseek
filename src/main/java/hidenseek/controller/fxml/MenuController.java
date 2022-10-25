@@ -42,7 +42,7 @@ public interface MenuController {
     void setSceneController(final GameSceneController gameController);
     
     /**
-     * 
+     * This method is called before the scene activation
      */
     
     void onActivate();

@@ -39,10 +39,10 @@ public class CollisionTest {
         entity1.attach(materialComponent1);        
         //Collision component
         final CollisionComponent collisionComponent1 = new CollisionComponentImpl();
-        collisionComponent1.addHitboxPoint(new Point2D(0, 0));
-        collisionComponent1.addHitboxPoint(new Point2D(0, 30));
-        collisionComponent1.addHitboxPoint(new Point2D(30, 30));
-        collisionComponent1.addHitboxPoint(new Point2D(30, 0));
+        collisionComponent1.getHitbox().addPoint(new Point2D(0, 0));
+        collisionComponent1.getHitbox().addPoint(new Point2D(0, 30));
+        collisionComponent1.getHitbox().addPoint(new Point2D(30, 30));
+        collisionComponent1.getHitbox().addPoint(new Point2D(30, 0));
         entity1.attach(collisionComponent1);
 
         //CREATE ENTITY2
@@ -58,10 +58,10 @@ public class CollisionTest {
         entity2.attach(materialComponent2);        
         //Collision component
         final CollisionComponent collisionComponent2 = new CollisionComponentImpl();
-        collisionComponent2.addHitboxPoint(new Point2D(0, 0));
-        collisionComponent2.addHitboxPoint(new Point2D(0, 30));
-        collisionComponent2.addHitboxPoint(new Point2D(30, 30));
-        collisionComponent2.addHitboxPoint(new Point2D(30, 0));
+        collisionComponent2.getHitbox().addPoint(new Point2D(0, 0));
+        collisionComponent2.getHitbox().addPoint(new Point2D(0, 30));
+        collisionComponent2.getHitbox().addPoint(new Point2D(30, 30));
+        collisionComponent2.getHitbox().addPoint(new Point2D(30, 0));
         entity2.attach(collisionComponent2);
         
         
@@ -98,5 +98,10 @@ public class CollisionTest {
         assertFalse(collisionComponent1.collisionTo(entity2, offset) || collisionComponent2.collisionTo(entity1, offset));
         assertTrue(collisionComponent1.nearTo(entity2, offset) && collisionComponent2.nearTo(entity1, offset));
 
+    }
+    
+    @Test
+    void testIntersection() {
+        
     }
 }

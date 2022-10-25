@@ -53,10 +53,10 @@ public class BrainTest {
         entity.attach(material);
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
-        collisionComponent.addHitboxPoint(new Point2D(0, 0));
-        collisionComponent.addHitboxPoint(new Point2D(0, 40));
-        collisionComponent.addHitboxPoint(new Point2D(40, 40));
-        collisionComponent.addHitboxPoint(new Point2D(40, 0));
+        collisionComponent.getHitbox().addPoint(new Point2D(0, 0));
+        collisionComponent.getHitbox().addPoint(new Point2D(0, 40));
+        collisionComponent.getHitbox().addPoint(new Point2D(40, 40));
+        collisionComponent.getHitbox().addPoint(new Point2D(40, 0));
         entity.attach(collisionComponent);  
         
         return entity;

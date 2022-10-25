@@ -26,7 +26,7 @@ public final class Wall extends AbstractEntity {
         
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
-        shape.stream().forEach(point -> collisionComponent.addHitboxPoint(point));
+        shape.stream().forEach(point -> collisionComponent.getHitbox().addPoint(point));
         this.attach(collisionComponent);
        
     }

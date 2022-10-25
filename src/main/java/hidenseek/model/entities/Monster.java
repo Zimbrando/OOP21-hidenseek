@@ -51,10 +51,10 @@ public final class Monster extends AbstractEntity {
         
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
-        collisionComponent.addHitboxPoint(new Point2D(0, 0));
-        collisionComponent.addHitboxPoint(new Point2D(0, HITBOX_SIZE));
-        collisionComponent.addHitboxPoint(new Point2D(HITBOX_SIZE, HITBOX_SIZE));
-        collisionComponent.addHitboxPoint(new Point2D(HITBOX_SIZE, 0));
+        collisionComponent.getHitbox().addPoint(new Point2D(0, 0));
+        collisionComponent.getHitbox().addPoint(new Point2D(0, HITBOX_SIZE));
+        collisionComponent.getHitbox().addPoint(new Point2D(HITBOX_SIZE, HITBOX_SIZE));
+        collisionComponent.getHitbox().addPoint(new Point2D(HITBOX_SIZE, 0));
         this.attach(collisionComponent);  
         
         //Trigger for collisions (Hurt if I touch the player)

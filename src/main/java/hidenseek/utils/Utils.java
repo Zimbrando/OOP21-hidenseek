@@ -17,7 +17,7 @@ import hidenseek.model.entities.Entity;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
 
-final public class Utils {
+public final class Utils {
     
     private Utils() {
     }

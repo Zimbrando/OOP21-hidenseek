@@ -8,6 +8,8 @@ import javafx.scene.paint.Color;
 
 public class ScoreStatisticViewImpl extends Canvas implements ScoreStatisticView {
 
+    private final static Image scoreOpacityMask = new Image("/assets/score_mask.png");
+    
     public ScoreStatisticViewImpl() {
         this(0);
     }
@@ -21,14 +23,12 @@ public class ScoreStatisticViewImpl extends Canvas implements ScoreStatisticView
 
     @Override
     public void updateScore(double score) {
-
-        GraphicsContext context = getGraphicsContext2D();
+        final GraphicsContext context = getGraphicsContext2D();
         context.clearRect(score, score, score, score);
         
-        Image scoreOpacityMask = ViewUtils.loadImage("/assets/score_mask.png");
         for (int y = 0; y < scoreOpacityMask.getHeight(); y++) {
             for (int x = 0; x < scoreOpacityMask.getWidth(); x++) {
-                int maskOpacity = (scoreOpacityMask.getPixelReader().getArgb(x, y) >> 24) & 0xFF;
+                final int maskOpacity = (scoreOpacityMask.getPixelReader().getArgb(x, y) >> 24) & 0xFF;
                 
                 Color fillColor = (score * scoreOpacityMask.getWidth() / 5 > x) ? Color.ORANGE : Color.GRAY;
                 fillColor = Color.color(fillColor.getRed(), fillColor.getGreen(), fillColor.getBlue(), 1.0 - maskOpacity/255.0);

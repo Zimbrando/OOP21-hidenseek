@@ -6,7 +6,7 @@ import hidenseek.model.events.DamageEvent;
 /**
  * Basic life implementation
  */
-final public class LifeComponentImpl extends AbstractObservableComponent implements LifeComponent {
+public final class LifeComponentImpl extends AbstractObservableComponent implements LifeComponent {
 
     private final int maxHealth;
     private int health;

@@ -13,6 +13,9 @@ public class TimeStatistic extends AbstractStatistic<Time> {
         this(name, tag, title, null);
     }
 
+    /**
+     * @return the value of the statistic
+     */
     public String getValue() {
         return getProperty().toString();
     }

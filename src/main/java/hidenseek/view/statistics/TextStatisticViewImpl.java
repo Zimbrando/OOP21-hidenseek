@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 
 public class TextStatisticViewImpl extends Label implements TextStatisticView {
 
-    private static String STYLE_CLASS = "statsValue";
+    private static final String STYLE_CLASS = "statsValue";
     
     public TextStatisticViewImpl() {
         this("");

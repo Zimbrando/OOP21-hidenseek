@@ -14,6 +14,9 @@ public class ScoreStatistic extends AbstractStatistic<Score> {
         this(name, tag, title, null);
     }
 
+    /**
+     * @return the value of the statistic
+     */
     public double getValue() {
         return getProperty().getValue();
     }

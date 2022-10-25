@@ -20,10 +20,10 @@ public abstract class AbstractCollectableEntity extends AbstractEntity implement
         this.attach(life);
         
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
-        collisionComponent.addHitboxPoint(new Point2D(0, 0));
-        collisionComponent.addHitboxPoint(new Point2D(0, hitboxSize));
-        collisionComponent.addHitboxPoint(new Point2D(hitboxSize, hitboxSize));
-        collisionComponent.addHitboxPoint(new Point2D(hitboxSize, 0));
+        collisionComponent.getHitbox().addPoint(new Point2D(0, 0));
+        collisionComponent.getHitbox().addPoint(new Point2D(0, hitboxSize));
+        collisionComponent.getHitbox().addPoint(new Point2D(hitboxSize, hitboxSize));
+        collisionComponent.getHitbox().addPoint(new Point2D(hitboxSize, 0));
         this.attach(collisionComponent);
         
         Trigger<CollisionEvent> collisionListener = new TriggerImpl<>(CollisionEvent.class, (event, entity) -> {

@@ -28,7 +28,7 @@ public abstract class AbstractStatistic<T extends StatisticProperty<?>> implemen
 
     @Override
     public Element XMLSerialize(Document document) {
-        Element element = document.createElement(getClass().getName());
+        final Element element = document.createElement(getClass().getName());
         element.setAttribute("name", name);
         element.setAttribute("tag", tag);
         element.setAttribute("value", getProperty().XMLSerialize());
@@ -85,7 +85,7 @@ public abstract class AbstractStatistic<T extends StatisticProperty<?>> implemen
             return false;
         if (getClass() != obj.getClass())
             return false;
-        AbstractStatistic other = (AbstractStatistic) obj;
+        final AbstractStatistic<?> other = (AbstractStatistic<?>) obj;
         return Objects.equals(name, other.name) && Objects.equals(tag, other.tag);
     }
 }

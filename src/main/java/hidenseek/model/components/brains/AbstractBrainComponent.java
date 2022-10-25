@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import hidenseek.model.components.AbstractDependencyComponent;
 import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.components.physics.Force;
+import hidenseek.model.components.physics.ForceImpl;
 import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.components.senses.SenseComponent;
@@ -137,19 +138,19 @@ public abstract class AbstractBrainComponent extends AbstractDependencyComponent
         movement.removeForce(force -> force.getIdentifier().startsWith("ai"));
         // move right
         if(nextPosition.getX() > position.getPosition().getX()) {
-            movement.addForce(new Force("ai-horizontal", 1, Direction.RIGHT.getValue()));
+            movement.addForce(new ForceImpl("ai-horizontal", 1, Direction.RIGHT.getValue()));
         }
         // move left
         if(nextPosition.getX() < position.getPosition().getX()){
-            movement.addForce(new Force("ai-horizontal", 1, Direction.LEFT.getValue()));
+            movement.addForce(new ForceImpl("ai-horizontal", 1, Direction.LEFT.getValue()));
         }
         // move down
         if(nextPosition.getY() > position.getPosition().getY()) {
-            movement.addForce(new Force("ai-vertical", 1, Direction.DOWN.getValue()));
+            movement.addForce(new ForceImpl("ai-vertical", 1, Direction.DOWN.getValue()));
         }
         // move up
         if(nextPosition.getY() < position.getPosition().getY()) {
-            movement.addForce(new Force("ai-vertical", 1, Direction.UP.getValue()));
+            movement.addForce(new ForceImpl("ai-vertical", 1, Direction.UP.getValue()));
         }
     }
     
