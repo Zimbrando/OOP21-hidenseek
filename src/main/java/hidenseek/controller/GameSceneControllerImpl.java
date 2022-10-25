@@ -95,7 +95,7 @@ public class GameSceneControllerImpl implements GameSceneController {
             System.out.println("[ERROR] - Error while trying to open file"+pathToInterface);
             e.printStackTrace();
         }
-    };
+    }
     
     @Override
     public Pane getSceneRoot(final String name) {

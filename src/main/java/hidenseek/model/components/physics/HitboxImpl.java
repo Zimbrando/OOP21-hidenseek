@@ -21,7 +21,7 @@ public class HitboxImpl implements Hitbox {
     }
 
     @Override
-    public void addPoint(Point2D point) {
+    public void addPoint(final Point2D point) {
         if(points.contains(point)) {
             return;
         }

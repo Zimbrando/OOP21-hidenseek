@@ -11,11 +11,11 @@ public abstract class AbstractStatistic<T extends StatisticProperty<?>> implemen
     private final String title;
     private final T property;
     
-    public AbstractStatistic(String name, String tag, String title, T property) {
+    public AbstractStatistic(final String name, final String tag, final String title, final T property) {
         this(name, tag, title, property, null);
     }
     
-    public AbstractStatistic(String name, String tag, String title, T property, Element element) {
+    public AbstractStatistic(final String name, final String tag, final String title, final T property, final Element element) {
         this.name = name;
         this.tag = tag;
         this.title = title;
@@ -27,7 +27,7 @@ public abstract class AbstractStatistic<T extends StatisticProperty<?>> implemen
     }
 
     @Override
-    public Element XMLSerialize(Document document) {
+    public Element XMLSerialize(final Document document) {
         final Element element = document.createElement(getClass().getName());
         element.setAttribute("name", name);
         element.setAttribute("tag", tag);
@@ -36,7 +36,7 @@ public abstract class AbstractStatistic<T extends StatisticProperty<?>> implemen
     }
 
     @Override
-    public Boolean XMLDeserialize(Element element) {
+    public Boolean XMLDeserialize(final Element element) {
         if(!element.getTagName().equals(getClass().getName()) || !element.getAttribute("name").equals(name) || !element.getAttribute("tag").equals(tag)) {
             return false;
         }
@@ -68,7 +68,7 @@ public abstract class AbstractStatistic<T extends StatisticProperty<?>> implemen
     }
 
     @Override
-    public void setStatisticSaver(StatisticSaver statisticSaver) {
+    public void setStatisticSaver(final StatisticSaver statisticSaver) {
         getProperty().setStatisticSaver(statisticSaver);
     }
 

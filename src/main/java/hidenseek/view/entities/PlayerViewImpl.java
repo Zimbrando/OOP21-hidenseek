@@ -57,7 +57,7 @@ public class PlayerViewImpl extends AbstractEntityMovableView implements PlayerV
 
 
     @Override
-    public void setLightRadius(LightRadius lightRadius) {
+    public void setLightRadius(final LightRadius lightRadius) {
         this.lightRadius = lightRadius;
     }
 

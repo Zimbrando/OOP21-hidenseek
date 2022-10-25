@@ -19,7 +19,7 @@ public class LightComponentImpl extends AbstractObservableComponent implements L
     }
 
     @Override
-    public void setRadius(LightRadius radius) {
+    public void setRadius(final LightRadius radius) {
         this.lightRadius = radius;
     }
 

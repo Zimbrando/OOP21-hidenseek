@@ -7,17 +7,17 @@ public class NumericStatistic extends AbstractStatistic<Numeric> {
     
     private final String units;
     
-    public NumericStatistic(String name, String tag, String title, String units, Element element) {
+    public NumericStatistic(final String name, final String tag, final String title, final String units, final Element element) {
         super(name, tag, title, new Numeric(0), element);
         
         this.units = units;
     }
     
-    public NumericStatistic(String name, String tag, String title, String units) {
+    public NumericStatistic(final String name, final String tag, final String title, final String units) {
         this(name, tag, title, units, null);
     }
     
-    public NumericStatistic(String name, String tag, String title) {
+    public NumericStatistic(final String name, final String tag, final String title) {
         this(name, tag, title, "", null);
     }
 

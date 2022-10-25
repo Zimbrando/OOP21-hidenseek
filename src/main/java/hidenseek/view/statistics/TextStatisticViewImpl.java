@@ -18,7 +18,7 @@ public class TextStatisticViewImpl extends Label implements TextStatisticView {
         setAlignment(Pos.TOP_RIGHT);
         getStyleClass().add(STYLE_CLASS);
         setTextFill(Color.ORANGE);
-        updateText("");
+        this.updateText("");
     }
     
     @Override

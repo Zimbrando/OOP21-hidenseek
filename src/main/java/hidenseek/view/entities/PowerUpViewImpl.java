@@ -13,12 +13,12 @@ public class PowerUpViewImpl extends AbstractEntityView implements PowerUpView {
     private static final int SPRITE_HEIGHT = 40;
     private final PowerUpType type;
 
-    public PowerUpViewImpl(PowerUpType type) {
+    public PowerUpViewImpl(final PowerUpType type) {
         this.type = type;
     }
     
     @Override
-    public void draw(GraphicsDevice device) {
+    public void draw(final GraphicsDevice device) {
         if (this.type.equals(PowerUpType.INCREASE_SPEED)) {
             device.drawImage(INCREASE_SPEED, SPRITE_WIDTH, SPRITE_HEIGHT, this.getPosition());        
         } else if (this.type.equals(PowerUpType.INCREASE_VISIBILITY)) {

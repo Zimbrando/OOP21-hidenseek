@@ -1,5 +1,6 @@
 package hidenseek.view.statistics;
 
+import hidenseek.utils.ViewUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -7,7 +8,7 @@ import javafx.scene.paint.Color;
 
 public class ScoreStatisticViewImpl extends Canvas implements ScoreStatisticView {
 
-    private final static Image scoreOpacityMask = new Image("/assets/score_mask.png");
+    private final static Image scoreOpacityMask = ViewUtils.loadImage("/assets/score_mask.png");
     
     public ScoreStatisticViewImpl() {
         this(0);
@@ -17,7 +18,7 @@ public class ScoreStatisticViewImpl extends Canvas implements ScoreStatisticView
         super();
         setWidth(110);
         setHeight(30);
-        updateScore(score);
+        this.updateScore(score);
     }
 
     @Override

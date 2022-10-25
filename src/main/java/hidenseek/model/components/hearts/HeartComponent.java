@@ -17,12 +17,12 @@ public interface HeartComponent extends Component {
      * Get who hates this heart
      * @return true if hated, false otherwise
      */
-    <T extends Entity> boolean hates(final T e);
+    <T extends Entity> boolean hates(T e);
 
 
     /**
      * Get who loves this heart
      * @return true if loved, false otherwise
      */
-    <T extends Entity> boolean loves(final T e);
+    <T extends Entity> boolean loves(T e);
 }

@@ -12,7 +12,7 @@ public class KeyViewImpl extends AbstractEntityView implements KeyView {
     private static final int HEIGHT = 40;
     
     @Override
-    public void draw(GraphicsDevice device) {
+    public void draw(final GraphicsDevice device) {
         device.drawImage(KEY_SPRITE, WIDTH, HEIGHT, this.getPosition());
     }
 

@@ -73,19 +73,19 @@ public final class Player extends AbstractEntity {
         this.attach(lightComponent);
         
         //Heart
-        HeartComponent heart = new GoodHeartComponentImpl();
+        final HeartComponent heart = new GoodHeartComponentImpl();
         this.attach(heart);
 
         //Inventory
-        InventoryComponent inventory = new InventoryComponentImpl();
+        final InventoryComponent inventory = new InventoryComponentImpl();
         this.attach(inventory);
 
     }
     
-    private void mapKeyToAction(final InputHandlerComponent inputHandlerComponent, final KeyCode keyCode, Direction direction) {
+    private void mapKeyToAction(final InputHandlerComponent inputHandlerComponent, final KeyCode keyCode, final Direction direction) {
 
-        Consumer<Entity> pressAction = (entity) -> {
-            Optional<MoveComponent> moveComponent = entity.getComponent(MoveComponent.class);
+        final Consumer<Entity> pressAction = (entity) -> {
+            final Optional<MoveComponent> moveComponent = entity.getComponent(MoveComponent.class);
             if(!moveComponent.isPresent()) {
                 return;
             }
@@ -93,8 +93,8 @@ public final class Player extends AbstractEntity {
             moveComponent.get().addForce(new ForceImpl("key", 1, direction.getValue()));
         };
         
-        Consumer<Entity> releaseAction = (entity) -> {
-            Optional<MoveComponent> moveComponent = entity.getComponent(MoveComponent.class);
+        final Consumer<Entity> releaseAction = (entity) -> {
+            final Optional<MoveComponent> moveComponent = entity.getComponent(MoveComponent.class);
             if(!moveComponent.isPresent()) {
                 return;
             }

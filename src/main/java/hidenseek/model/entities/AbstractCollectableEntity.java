@@ -26,7 +26,7 @@ public abstract class AbstractCollectableEntity extends AbstractEntity implement
         collisionComponent.getHitbox().addPoint(new Point2D(hitboxSize, 0));
         this.attach(collisionComponent);
         
-        Trigger<CollisionEvent> collisionListener = new TriggerImpl<>(CollisionEvent.class, (event, entity) -> {
+        final Trigger<CollisionEvent> collisionListener = new TriggerImpl<>(CollisionEvent.class, (event, entity) -> {
             final Entity collider = event.getCollider();
             if (collider.getComponent(HeartComponent.class).isPresent() 
                     && collider.getComponent(HeartComponent.class).get().getHeart() == Heart.GOOD) {

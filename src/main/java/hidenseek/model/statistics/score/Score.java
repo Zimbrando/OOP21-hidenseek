@@ -6,24 +6,24 @@ import hidenseek.model.statistics.StatisticProperty;
 
 public class Score extends StatisticProperty<Double> {
 
-    private Double _score;
-    public Score(Double score) {
-        _score = score;
+    private Double score;
+    public Score(final Double score) {
+        this.score = score;
     }
     
     @Override
     public String XMLSerialize() {
-        return Double.toString(_score);
+        return Double.toString(score);
     }
 
     @Override
-    public void XMLDeserialize(String value) {
-        _score = Double.parseDouble(value);
+    public void XMLDeserialize(final String value) {
+        score = Double.parseDouble(value);
     }
 
     @Override
     public Double getValue() {
-        return _score;
+        return score;
     }
 
     @Override
@@ -34,12 +34,12 @@ public class Score extends StatisticProperty<Double> {
         if(value > 5) {
             value = 5.0;
         }
-        _score = value;
+        score = value;
         saveStatistics();
     }
     
     @Override
     public String toString() {
-        return new DecimalFormat("0.0").format(_score) + "/5";
+        return new DecimalFormat("0.0").format(score) + "/5";
     }
 }

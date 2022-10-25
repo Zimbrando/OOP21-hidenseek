@@ -59,20 +59,20 @@ public class StatisticsManagerImpl implements StatisticsManager, StatisticSaver 
     }
 
     @Override
-    public Stream<Statistic<?>> getStatistic(String statisticID) {
+    public Stream<Statistic<?>> getStatistic(final String statisticID) {
         return statistics.stream()
                 .filter(x -> x.getName().equals(statisticID));
     }
 
     @Override
-    public Stream<Statistic<?>> getStatistic(String statisticID, String statisticTag) {
+    public Stream<Statistic<?>> getStatistic(final String statisticID, final String statisticTag) {
         return statistics.stream()
                 .filter(x -> x.getName().equals(statisticID))
                 .filter(x -> x.getTag().equals(statisticTag));
     }
 
     @Override
-    public void addStatistic(Statistic<?> statistic) {
+    public void addStatistic(final Statistic<?> statistic) {
         if(statistics.contains(statistic)) {
             return;
         }
@@ -82,7 +82,7 @@ public class StatisticsManagerImpl implements StatisticsManager, StatisticSaver 
     }
 
     @Override
-    public void removeStatistic(Statistic<?> statistic) {
+    public void removeStatistic(final Statistic<?> statistic) {
         statistics.remove(statistic);
     }
 
@@ -112,7 +112,7 @@ public class StatisticsManagerImpl implements StatisticsManager, StatisticSaver 
     }
 
     @Override
-    public void loadStatistic(Statistic<?> statistic) {
+    public void loadStatistic(final Statistic<?> statistic) {
         if(rootSaverXML == null) {
             return;
         }
@@ -126,7 +126,7 @@ public class StatisticsManagerImpl implements StatisticsManager, StatisticSaver 
         }
     }
     
-    private static void writeXml(Document doc, OutputStream output) throws TransformerException {
+    private static void writeXml(final Document doc, final OutputStream output) throws TransformerException {
         final Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");

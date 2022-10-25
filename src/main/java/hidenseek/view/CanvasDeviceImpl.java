@@ -66,16 +66,16 @@ public final class CanvasDeviceImpl implements GraphicsDevice {
     @Override
     public void drawPolygon(final List<Point2D> points, final ImagePattern pattern) {
         this.graphics.setFill(pattern);;
-        double[] xPoints = points.stream().mapToDouble(point -> point.getX()).toArray();
-        double[] yPoints = points.stream().mapToDouble(point -> point.getY()).toArray();
+        final double[] xPoints = points.stream().mapToDouble(point -> point.getX()).toArray();
+        final double[] yPoints = points.stream().mapToDouble(point -> point.getY()).toArray();
         this.graphics.fillPolygon(xPoints, yPoints, points.size());
     }
 
     @Override
     public void drawPolygon(final List<Point2D> points, final Color color) {
         this.graphics.setFill(color);
-        double[] xPoints = points.stream().mapToDouble(point -> point.getX()).toArray();
-        double[] yPoints = points.stream().mapToDouble(point -> point.getY()).toArray();
+        final double[] xPoints = points.stream().mapToDouble(point -> point.getX()).toArray();
+        final double[] yPoints = points.stream().mapToDouble(point -> point.getY()).toArray();
         this.graphics.fillPolygon(xPoints, yPoints, points.size());
     }
 

@@ -23,13 +23,13 @@ public final class PowerUp extends AbstractEntity {
         super();
         
         this.attach(new OneTimeLifeComponentImpl());
-        PositionComponent position = new PositionComponentImpl();
+        final PositionComponent position = new PositionComponentImpl();
         position.setPosition(pos);
         this.attach(position);
 
         //Trigger for collisions
         final Trigger<CollisionEvent> collisionListener = new TriggerImpl<>(CollisionEvent.class, (event, powerup) -> {
-            Entity collider = event.getCollider();
+            final Entity collider = event.getCollider();
             if (collider.getComponent(HeartComponent.class).isPresent() 
                     && collider.getComponent(HeartComponent.class).get().getHeart() == Heart.GOOD
                     && this.getComponent(LifeComponent.class).get().isAlive()) {
@@ -48,7 +48,7 @@ public final class PowerUp extends AbstractEntity {
         collisionComponent.getHitbox().addPoint(new Point2D(HITBOX_SIZE, 0));
         
         //Attach listener
-        ObservableComponent collisionObserver = (ObservableComponent) collisionComponent;
+        final ObservableComponent collisionObserver = (ObservableComponent) collisionComponent;
         collisionObserver.attachListener(collisionListener);
         this.attach(collisionComponent);
     }

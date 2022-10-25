@@ -46,7 +46,7 @@ public final class CollisionComponentImpl extends AbstractObservableComponent im
     }
     
     @Override
-    public Boolean nearTo(Entity entity, final Point2D ownOffset) {
+    public Boolean nearTo(final Entity entity, final Point2D ownOffset) {
         return segmentsMatch(ownOffset, entity, new Point2D(0, 0), (a, b) -> {
             final Point2D intersectionPoint = a.intersectingTo(b);
             if(intersectionPoint == null) {
@@ -61,11 +61,11 @@ public final class CollisionComponentImpl extends AbstractObservableComponent im
     }
     
     @Override
-    public Boolean collisionOrNearTo(Entity entity, final Point2D ownOffset) {
+    public Boolean collisionOrNearTo(final Entity entity, final Point2D ownOffset) {
         return nearTo(entity, ownOffset) || collisionTo(entity, ownOffset);
     }
     
-    private Boolean segmentsMatch(final Point2D ownOffset, final Entity entity, final Point2D entityOffset, BiPredicate<Segment, Segment> condition) {
+    private Boolean segmentsMatch(final Point2D ownOffset, final Entity entity, final Point2D entityOffset, final BiPredicate<Segment, Segment> condition) {
 
         if(getOwner().isPresent() && getOwner().get() == entity) {
             return false;

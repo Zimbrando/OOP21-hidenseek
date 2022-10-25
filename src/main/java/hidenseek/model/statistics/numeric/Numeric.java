@@ -5,7 +5,7 @@ import hidenseek.model.statistics.StatisticProperty;
 public class Numeric extends StatisticProperty<Integer> {
 
     private int number;
-    public Numeric(int number) {
+    public Numeric(final int number) {
         this.number = number;
     }
     
@@ -15,7 +15,7 @@ public class Numeric extends StatisticProperty<Integer> {
     }
 
     @Override
-    public void XMLDeserialize(String value) {
+    public void XMLDeserialize(final String value) {
         number = Integer.parseInt(value);
     }
 
@@ -25,16 +25,16 @@ public class Numeric extends StatisticProperty<Integer> {
     }
 
     @Override
-    public void setValue(Integer value) {
+    public void setValue(final Integer value) {
         number = value;
         saveStatistics();
     }
     
-    public void increase(Integer diff) {
+    public void increase(final Integer diff) {
         setValue(number+diff);
     }
     
-    public void decrease(Integer diff) {
+    public void decrease(final Integer diff) {
         setValue(Math.max(0, number-diff));
     }
     

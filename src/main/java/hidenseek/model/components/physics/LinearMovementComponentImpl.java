@@ -9,7 +9,7 @@ import hidenseek.model.components.AbstractObservableComponent;
 
 public final class LinearMovementComponentImpl extends AbstractObservableComponent implements MoveComponent {
 
-    private final Set<Force> forces = new HashSet<Force>();
+    private final Set<Force> forces = new HashSet<>();
     private final double defaultSpeed;
     private double speed;
     
@@ -34,12 +34,12 @@ public final class LinearMovementComponentImpl extends AbstractObservableCompone
     }
 
     @Override
-    public void removeForce(Force force) {
+    public void removeForce(final Force force) {
         forces.remove(force);
     }
 
     @Override
-    public void removeForce(Predicate<Force> removeCondition) {
+    public void removeForce(final Predicate<Force> removeCondition) {
         final Iterator<Force> itr = forces.iterator();
         while (itr.hasNext()) {
             Force t = itr.next();

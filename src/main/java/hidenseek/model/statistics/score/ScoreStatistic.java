@@ -6,11 +6,11 @@ import hidenseek.model.statistics.AbstractStatistic;
 
 public class ScoreStatistic extends AbstractStatistic<Score> {
     
-    public ScoreStatistic(String name, String tag, String title, Element element) {
+    public ScoreStatistic(final String name, final String tag, final String title, final Element element) {
         super(name, tag, title, new Score(0.0), element);
     }
     
-    public ScoreStatistic(String name, String tag, String title) {
+    public ScoreStatistic(final String name, final String tag, final String title) {
         this(name, tag, title, null);
     }
 

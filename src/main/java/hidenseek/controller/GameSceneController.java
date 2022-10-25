@@ -51,14 +51,14 @@ public interface GameSceneController {
      * @return the current scene's root object.
      */
     
-    Pane getSceneRoot(final String name);
+    Pane getSceneRoot(String name);
         
     /**
      * Toggles the pause mode in the game canvas gui.
      * @param controller of the GameGui graphical interface.
      */
     
-    void pauseGame(final GameGuiController controller);
+    void pauseGame(GameGuiController controller);
     
     /**
      * 

@@ -13,7 +13,7 @@ public final class PositionComponentImpl extends AbstractObservableComponent imp
     }
 
     @Override
-    public void setPosition(Point2D position) {
+    public void setPosition(final Point2D position) {
         this.position = position;
     }
     

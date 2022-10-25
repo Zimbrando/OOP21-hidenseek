@@ -24,6 +24,7 @@ final public class ViewUtils {
         final InputStream stream = ViewUtils.class.getResourceAsStream(path);
         try {
             final Image image = SwingFXUtils.toFXImage(ImageIO.read(stream), null);
+            stream.close();
             return image;
         } catch (IOException e) {
             return null;

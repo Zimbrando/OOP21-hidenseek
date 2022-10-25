@@ -187,7 +187,7 @@ public final class GameWorldControllerImpl implements GameWorldController {
         final int totalLoose = ((Numeric)statisticsManager.getStatistic("total_loose").findFirst().get().getProperty()).getValue();
         final int winPercentage = (int)(100.0 * totalWin / (totalWin + totalLoose));
    
-        ((NumericStatistic)statisticsManager.getStatistic("win_percentage").findFirst().get()).getProperty().setValue(winPercentage);;
+        ((NumericStatistic)statisticsManager.getStatistic("win_percentage").findFirst().get()).getProperty().setValue(winPercentage);
     }
     
     private int getLevelPlayTime() {

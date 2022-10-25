@@ -10,7 +10,7 @@ public interface MenuController {
      *          
      */
     
-    void setWidth(final double width);
+    void setWidth(double width);
     
     /**
      * The height to assign to the gui
@@ -18,7 +18,7 @@ public interface MenuController {
      *           
      */
     
-    void setHeight(final double height);
+    void setHeight(double height);
     
     /**
      * 
@@ -39,7 +39,7 @@ public interface MenuController {
      * @param gameController
      */
     
-    void setSceneController(final GameSceneController gameController);
+    void setSceneController(GameSceneController gameController);
     
     /**
      * This method is called before the scene activation

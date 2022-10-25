@@ -12,10 +12,12 @@ public class SegmentImpl implements Segment{
         this.point2 = point2;
     }
 
+    @Override
     public Point2D getPoint1() {
         return point1;
     }
-
+    
+    @Override
     public Point2D getPoint2() {
         return point2;
     }

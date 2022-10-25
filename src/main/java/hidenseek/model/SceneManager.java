@@ -50,7 +50,7 @@ public interface SceneManager {
      * @return The current scene's root object.
      */
     
-    Pane getSceneRootByScreen(final String name);
+    Pane getSceneRootByScreen(String name);
     
     /**
      * Instantiates the main scene.

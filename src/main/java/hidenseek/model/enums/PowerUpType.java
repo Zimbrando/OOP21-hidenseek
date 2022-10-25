@@ -36,7 +36,7 @@ public enum PowerUpType {
      */
     private Consumer<Entity> effect;
 
-    private PowerUpType(Consumer<Entity> effect) {
+    private PowerUpType(final Consumer<Entity> effect) {
         this.effect = effect;
     }
 

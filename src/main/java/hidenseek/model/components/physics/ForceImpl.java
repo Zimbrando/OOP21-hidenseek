@@ -6,11 +6,11 @@ public final class ForceImpl implements Force{
     private double intensity;
     private double direction;
     
-    public ForceImpl(String identifier) {
+    public ForceImpl(final String identifier) {
         this(identifier, 0, 0);
     }
     
-    public ForceImpl(String identifier, double intensity, double direction) {
+    public ForceImpl(final String identifier, final double intensity, final double direction) {
         this.identifier = identifier;
         setIntensity(intensity);
         setDirection(direction);
@@ -22,7 +22,7 @@ public final class ForceImpl implements Force{
     }
 
     @Override
-    public void setIntensity(double intensity) {
+    public void setIntensity(final double intensity) {
         this.intensity = intensity;
     }
 
@@ -32,7 +32,7 @@ public final class ForceImpl implements Force{
     }
 
     @Override
-    public void setDirection(double direction) {
+    public void setDirection(final double direction) {
         this.direction = direction;
     }
 

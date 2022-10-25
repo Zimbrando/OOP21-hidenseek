@@ -70,7 +70,7 @@ public class GameWorldImpl extends AbstractEntityWorldImpl implements GameWorld 
     }
     
     private void isGameOver() {
-         boolean gameover = !this.world().stream()
+        final boolean gameover = !this.world().stream()
                  .filter(entity -> entity.hasComponent(HeartComponent.class))
                  .anyMatch(entity -> entity.getComponent(HeartComponent.class).get().getHeart() == Heart.GOOD);
          if (gameover) {

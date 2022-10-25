@@ -25,7 +25,7 @@ abstract class AbstractHudController<V extends HudView> implements HudController
     @Override
     public abstract void update();
 
-
+    @Override
     public V getView() {
         return this.view;
     }   
