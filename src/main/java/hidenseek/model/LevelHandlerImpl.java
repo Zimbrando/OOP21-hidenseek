@@ -19,7 +19,11 @@ public class LevelHandlerImpl implements LevelHandler {
         final GameLevel level4 = new GameLevelImpl(4);
         
         this.gameLevels = List.of(level1, level2, level3, level4);
-        this.currentLevel = 0;
+        this.currentLevel = ((NumericStatistic)statisticsManager.getStatistic("curr_level").findFirst().get()).getProperty().getValue();
+
+        if(this.currentLevel <= 0 || this.currentLevel >= 5) {
+            this.currentLevel = 1;
+        }
         
         gameLevels.forEach(gameLevel -> {
             statisticsManager.addStatistic(new ScoreStatistic("actual_score", Integer.toString(gameLevel.getLevelID()), "Current score"));
@@ -35,21 +39,21 @@ public class LevelHandlerImpl implements LevelHandler {
 
     @Override
     public boolean hasNext() {
-        return this.currentLevel < this.gameLevels.size() - 1;
+        return this.currentLevel < this.gameLevels.size();
     }
     
     @Override
     public void reset() {
-        this.currentLevel = 0;
+        this.currentLevel = 1;
     }
 
 
     @Override
     public Optional<GameLevel> getCurrentLevel() {
-        if (this.currentLevel >= this.gameLevels.size()) {
+        if (this.currentLevel > this.gameLevels.size()) {
             return Optional.empty();
         }
-        return Optional.of(this.gameLevels.get(this.currentLevel));
+        return Optional.of(this.gameLevels.get(this.currentLevel - 1));
     }
 
     

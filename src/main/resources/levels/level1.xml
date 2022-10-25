@@ -53,10 +53,10 @@
 	<monster position="50,300">
 	</monster>
 	
-	<powerup type="0" position="500,350">
+	<powerup position="500,350">
 	</powerup>
 	
-	<powerup type="1" position="650,350">
+	<powerup position="650,350">
 	</powerup>
 	
 	<key position="800,350">

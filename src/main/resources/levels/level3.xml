@@ -267,19 +267,19 @@
 	<monster position="100,300">
 	</monster>
 	
-	<powerup type="0" position="325,205">
+	<powerup position="325,205">
 	</powerup>
 	
-	<powerup type="1" position="900,34">
+	<powerup position="900,34">
 	</powerup>
 	
-	<powerup type="0" position="888,525">
+	<powerup position="888,525">
 	</powerup>
 	
-	<powerup type="1" position="680,415">
+	<powerup position="680,415">
 	</powerup>
 	
-	<powerup type="0" position="1100,403">
+	<powerup position="1100,403">
 	</powerup>
 	
 	<key position="289,415">

@@ -391,22 +391,22 @@
 	<monster position="1120,530">
 	</monster>
 	
-	<powerup type="0" position="295,169">
+	<powerup position="295,169">
 	</powerup>
 	
-	<powerup type="1" position="642,183">
+	<powerup position="642,183">
 	</powerup>
 	
-	<powerup type="0" position="752,658">
+	<powerup position="752,658">
 	</powerup>
 	
-	<powerup type="1" position="245,550">
+	<powerup position="245,550">
 	</powerup>
 	
-	<powerup type="0" position="1330,443">
+	<powerup position="1330,443">
 	</powerup>
 	
-	<powerup type="0" position="851,383">
+	<powerup position="851,383">
 	</powerup>
 	
 	<key position="574,255">

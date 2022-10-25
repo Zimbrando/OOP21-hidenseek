@@ -2,9 +2,6 @@ package hidenseek.controller.fxml;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import hidenseek.controller.GameSceneController;
@@ -15,24 +12,13 @@ import hidenseek.model.statistics.time.TimeStatistic;
 import hidenseek.view.statistics.ScoreStatisticViewImpl;
 import hidenseek.view.statistics.TextStatisticViewImpl;
 import javafx.fxml.FXML;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class StatisticsController implements MenuController{
 

@@ -7,7 +7,6 @@ import hidenseek.model.components.physics.Force;
 import hidenseek.model.components.physics.MaterialComponent;
 import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.components.physics.PositionComponent;
-import hidenseek.model.entities.Entity;
 import javafx.geometry.Point2D;
 
 public class DinamicsWorldImpl extends AbstractEntityWorldImpl {

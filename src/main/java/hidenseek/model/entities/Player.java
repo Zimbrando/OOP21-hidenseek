@@ -13,7 +13,6 @@ import hidenseek.model.components.lives.LifeComponent;
 import hidenseek.model.components.lives.LifeComponentImpl;
 import hidenseek.model.components.physics.CollisionComponent;
 import hidenseek.model.components.physics.CollisionComponentImpl;
-import hidenseek.model.components.physics.Force;
 import hidenseek.model.components.physics.ForceImpl;
 import hidenseek.model.components.physics.LightComponent;
 import hidenseek.model.components.physics.LightComponentImpl;

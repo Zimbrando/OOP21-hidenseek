@@ -10,7 +10,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import hidenseek.model.components.AbstractDependencyComponent;
 import hidenseek.model.components.hearts.HeartComponent;
-import hidenseek.model.components.physics.Force;
 import hidenseek.model.components.physics.ForceImpl;
 import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.components.physics.PositionComponent;

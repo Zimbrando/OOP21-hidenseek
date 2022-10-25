@@ -1,10 +1,6 @@
 package hidenseek.components;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Set;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +11,6 @@ import hidenseek.model.components.brains.ExpertBrainComponentImpl;
 import hidenseek.model.components.brains.NaiveBrainComponentImpl;
 import hidenseek.model.components.hearts.EvilHeartComponentImpl;
 import hidenseek.model.components.hearts.GoodHeartComponentImpl;
-import hidenseek.model.components.hearts.HeartComponent;
 import hidenseek.model.components.physics.CollisionComponent;
 import hidenseek.model.components.physics.CollisionComponentImpl;
 import hidenseek.model.components.physics.Force;
@@ -29,7 +24,6 @@ import hidenseek.model.components.senses.SenseComponent;
 import hidenseek.model.components.senses.SightSenseComponentImpl;
 import hidenseek.model.entities.AbstractEntity;
 import hidenseek.model.entities.Entity;
-import hidenseek.model.entities.Wall;
 import javafx.geometry.Point2D;
 
 public class BrainTest {

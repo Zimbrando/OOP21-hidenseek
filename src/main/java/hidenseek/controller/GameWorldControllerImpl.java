@@ -153,7 +153,9 @@ public final class GameWorldControllerImpl implements GameWorldController {
         
         ((ScoreStatistic)statisticsManager.getStatistic("best_score", levelID).findFirst().get()).getProperty().setValue(
                 Math.max(levelScore, ((ScoreStatistic)statisticsManager.getStatistic("best_score", levelID).findFirst().get()).getProperty().getValue())
-        );        
+        );
+		
+        ((NumericStatistic)statisticsManager.getStatistic("curr_level").findFirst().get()).getProperty().setValue(1);
         
         this.setWinPercentage();
         

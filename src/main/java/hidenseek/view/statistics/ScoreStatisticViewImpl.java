@@ -1,6 +1,5 @@
 package hidenseek.view.statistics;
 
-import hidenseek.utils.ViewUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
