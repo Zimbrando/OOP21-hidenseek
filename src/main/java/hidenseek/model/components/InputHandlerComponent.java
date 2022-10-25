@@ -44,11 +44,9 @@ public interface InputHandlerComponent extends Component {
     void mapKeyToOneTimeAction(KeyCode key, Consumer<Entity> action);
 
     /**
-     * Executes the callbacks mapped to the relatives keys
+     * Executes the callbacks mapped to the relatives keys.
      * @param keysPressed
-     *          Set of keys currently pressed
-     * @param delta
-     *          Delta time between current and last frame                  
+     *          Set of keys currently pressed                
      */
     void computeScheme(Set<KeyCode> keysPressed);
 }

@@ -1,5 +1,6 @@
-package hidenseek.controller;
+package hidenseek.controller.fxml;
 
+import hidenseek.controller.GameSceneController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;

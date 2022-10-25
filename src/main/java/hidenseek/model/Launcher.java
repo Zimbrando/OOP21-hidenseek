@@ -4,9 +4,7 @@ import hidenseek.controller.GameSceneController;
 import hidenseek.controller.GameSceneControllerImpl;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class Launcher extends Application {
 

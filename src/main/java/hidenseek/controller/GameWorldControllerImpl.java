@@ -4,13 +4,10 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import hidenseek.controller.entities.EntityController;
-import hidenseek.controller.entities.EntityControllerImpl;
+import hidenseek.controller.huds.HudController;
 import hidenseek.model.GameLevel;
-import hidenseek.model.components.brains.BrainComponent;
-import hidenseek.model.components.physics.CollisionComponent;
-import hidenseek.model.components.physics.PositionComponent;
+import hidenseek.model.LevelHandler;
 import hidenseek.model.entities.Entity;
-import hidenseek.model.entities.Wall;
 import hidenseek.model.enums.GameState;
 import hidenseek.model.statistics.StatisticsManager;
 import hidenseek.model.statistics.numeric.Numeric;
@@ -20,8 +17,6 @@ import hidenseek.model.statistics.time.TimeStatistic;
 import hidenseek.model.worlds.GameWorld;
 import hidenseek.model.worlds.GameWorldImpl;
 import hidenseek.view.Renderer;
-import hidenseek.view.entities.WallView;
-import hidenseek.view.entities.WallViewImpl;
 
 public final class GameWorldControllerImpl implements GameWorldController {
     
@@ -135,13 +130,11 @@ public final class GameWorldControllerImpl implements GameWorldController {
         ((ScoreStatistic)statisticsManager.getStatistic("actual_score", levelID).findFirst().get()).getProperty().setValue(0.0);
         setWinPercentage();
         
-        //No more levels
         this.mainController.goToGameOver();
         this.loop.stop();
     }
     
     private void handleWin() {
-        //Add collected key
         final GameLevel level = this.level.getCurrentLevel().get();
         final int levelKeysCount = level.getKeysNumber();
         final String levelID = Integer.toString(level.getLevelID());

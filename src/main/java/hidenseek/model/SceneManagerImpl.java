@@ -2,7 +2,8 @@ package hidenseek.model;
 
 import java.util.HashMap;
 import java.util.Map;
-import hidenseek.controller.MenuController;
+
+import hidenseek.controller.fxml.MenuController;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 

@@ -6,6 +6,9 @@ import java.util.Optional;
 
 import hidenseek.model.components.Component;
 
+/**
+ * Base class for {@link Entity}
+ */
 public abstract class AbstractEntity implements Entity {
 
     Set<Component> components;

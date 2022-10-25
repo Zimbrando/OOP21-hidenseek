@@ -1,4 +1,6 @@
-package hidenseek.controller;
+package hidenseek.controller.fxml;
+
+import hidenseek.controller.GameSceneController;
 
 public interface MenuController {
     

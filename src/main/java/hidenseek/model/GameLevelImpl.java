@@ -1,8 +1,8 @@
 package hidenseek.model;
 import java.util.Set;
 
-import hidenseek.controller.HudController;
 import hidenseek.controller.entities.EntityController;
+import hidenseek.controller.huds.HudController;
 
 public class GameLevelImpl implements GameLevel {
 

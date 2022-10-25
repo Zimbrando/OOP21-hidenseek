@@ -6,7 +6,7 @@ import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.components.physics.PositionComponentImpl;
 import javafx.geometry.Point2D;
 
-public class Key extends AbstractCollectableEntity {
+public final class Key extends AbstractCollectableEntity {
 
     private static final int HITBOX_SIZE = 30;
     

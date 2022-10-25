@@ -1,10 +1,10 @@
 package hidenseek.model.entities;
 
+import hidenseek.model.Trigger;
+import hidenseek.model.TriggerImpl;
 import hidenseek.model.components.MapComponent;
 import hidenseek.model.components.GPSMapComponentImpl;
 import hidenseek.model.components.ObservableComponent;
-import hidenseek.model.components.Trigger;
-import hidenseek.model.components.TriggerImpl;
 import hidenseek.model.components.brains.BrainComponent;
 import hidenseek.model.components.brains.ExpertBrainComponentImpl;
 import hidenseek.model.components.brains.NaiveBrainComponentImpl;
@@ -25,7 +25,7 @@ import hidenseek.model.components.senses.SightSenseComponentImpl;
 import hidenseek.model.events.CollisionEvent;
 import javafx.geometry.Point2D;
 
-public class Monster extends AbstractEntity {
+public final class Monster extends AbstractEntity {
     
     private static final double MONSTER_SPEED = 150;
     

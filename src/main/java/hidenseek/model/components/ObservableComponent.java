@@ -1,5 +1,6 @@
 package hidenseek.model.components;
 
+import hidenseek.model.Trigger;
 import hidenseek.model.events.Event;
 
 /**

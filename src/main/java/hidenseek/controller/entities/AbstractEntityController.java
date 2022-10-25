@@ -7,6 +7,12 @@ import hidenseek.model.entities.Entity;
 import hidenseek.view.entities.EntityView;
 import javafx.geometry.Point2D;
 
+/**
+ * Base class for all {@link EntityController}
+ * 
+ * @param <V>
+ *       The view
+ */
 public abstract class AbstractEntityController<V extends EntityView> implements EntityController {
     private final Entity model;
     private final V view;

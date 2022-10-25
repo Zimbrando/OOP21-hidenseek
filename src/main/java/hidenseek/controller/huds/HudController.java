@@ -1,4 +1,4 @@
-package hidenseek.controller;
+package hidenseek.controller.huds;
 
 import hidenseek.view.huds.HudView;
 
