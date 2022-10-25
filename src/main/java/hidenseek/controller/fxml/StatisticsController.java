@@ -103,7 +103,7 @@ public class StatisticsController implements MenuController{
         //create a statistic category into view for each level
         for(final String statisticTag : sortedStatisticsGround) {
             
-            final Label statisticGroupLbl = new Label(statisticTag == "" ? "" : "LIVELLO " + statisticTag);
+            final Label statisticGroupLbl = new Label(statisticTag == "" ? "" : "LEVEL " + statisticTag);
             statisticGroupLbl.getStyleClass().add("statsCategory");
             statisticGroupLbl.setTextFill(Color.WHITESMOKE);
             statisticGroupLbl.setMinWidth(450);
