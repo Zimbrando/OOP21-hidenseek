@@ -1,8 +1,9 @@
 package hidenseek.levels;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import hidenseek.controller.LevelHandler;
-import hidenseek.controller.LevelHandlerImpl;
+
+import hidenseek.model.LevelHandler;
+import hidenseek.model.LevelHandlerImpl;
 import hidenseek.model.entities.Key;
 import hidenseek.model.entities.Monster;
 import hidenseek.model.entities.Player;
