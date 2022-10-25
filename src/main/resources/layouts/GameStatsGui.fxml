@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane id="statisticsRoot" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hidenseek.controller.StatisticsController">
+<Pane id="statisticsRoot" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hidenseek.controller.fxml.StatisticsController">
     <AnchorPane fx:id="mainPane" styleClass="rootStyle" prefHeight="900" prefWidth="1600">  
       <children>
          <Text fill="#eca623" styleClass="title" layoutX="600" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statistics" wrappingWidth="500">

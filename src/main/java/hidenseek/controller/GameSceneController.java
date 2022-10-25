@@ -1,5 +1,6 @@
 package hidenseek.controller;
 
+import hidenseek.controller.fxml.GameGuiController;
 import hidenseek.model.statistics.StatisticsManager;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;

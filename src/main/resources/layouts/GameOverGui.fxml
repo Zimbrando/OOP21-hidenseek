@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15" fx:controller="hidenseek.controller.GameOverMenuController">
+<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15" fx:controller="hidenseek.controller.fxml.GameOverMenuController">
    <children>
       <AnchorPane fx:id="gameOverMainPane" styleClass="rootStyle">
          <children>

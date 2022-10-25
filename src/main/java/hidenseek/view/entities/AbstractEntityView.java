@@ -3,6 +3,9 @@ package hidenseek.view.entities;
 import hidenseek.view.GraphicsDevice;
 import javafx.geometry.Point2D;
 
+/**
+ * Base class for {@link EntityView}
+ */
 abstract class AbstractEntityView implements EntityView {
 
     private Point2D position;

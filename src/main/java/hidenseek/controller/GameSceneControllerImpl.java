@@ -4,6 +4,10 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Optional;
 
+import hidenseek.controller.fxml.GameGuiController;
+import hidenseek.controller.fxml.MenuController;
+import hidenseek.model.LevelHandler;
+import hidenseek.model.LevelHandlerImpl;
 import hidenseek.model.SceneManagerImpl;
 import hidenseek.model.enums.GuiPanes;
 import hidenseek.model.statistics.StatisticsManager;

@@ -1,10 +1,8 @@
-package hidenseek.controller;
+package hidenseek.model;
 
 import java.util.List;
 import java.util.Optional;
 
-import hidenseek.model.GameLevel;
-import hidenseek.model.GameLevelImpl;
 import hidenseek.model.statistics.StatisticsManager;
 import hidenseek.model.statistics.numeric.NumericStatistic;
 import hidenseek.model.statistics.score.ScoreStatistic;

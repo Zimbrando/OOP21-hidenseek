@@ -1,4 +1,4 @@
-package hidenseek.controller;
+package hidenseek.controller.fxml;
 
 import java.util.List;
 import java.util.Map;
@@ -7,6 +7,7 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import hidenseek.controller.GameSceneController;
 import hidenseek.model.statistics.Statistic;
 import hidenseek.model.statistics.numeric.NumericStatistic;
 import hidenseek.model.statistics.score.ScoreStatistic;

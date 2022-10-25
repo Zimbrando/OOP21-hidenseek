@@ -68,6 +68,7 @@ public final class Player extends AbstractEntity {
         mapKeyToAction(inputHandlerComponent, KeyCode.D, Direction.RIGHT);
         this.attach(inputHandlerComponent);
         
+        //Light
         final LightComponent lightComponent = new LightComponentImpl(LightRadius.SMALL);
         this.attach(lightComponent);
         

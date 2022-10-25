@@ -10,7 +10,7 @@ import hidenseek.model.components.physics.PositionComponent;
 import hidenseek.model.components.physics.PositionComponentImpl;
 import javafx.geometry.Point2D;
 
-public class Wall extends AbstractEntity {
+public final class Wall extends AbstractEntity {
     
     public Wall(final Point2D position, final Set<Point2D> shape) {
         super();

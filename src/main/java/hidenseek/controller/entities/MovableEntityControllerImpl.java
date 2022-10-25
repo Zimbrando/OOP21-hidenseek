@@ -17,21 +17,19 @@ public class MovableEntityControllerImpl<V extends EntityMovableView>  extends E
         
         // update direction
         this.getModel().getComponent(MoveComponent.class).ifPresent(c -> {
-            // get intensity
             final double intensity = c.getResultantForce().getIntensity();
-            // get direction
             final double direction = c.getResultantForce().getDirection();
             // set view direction
             if(intensity > 0) {
                 this.getView().setDirection(Direction.UP);
             }
-            if(intensity > 0 && direction < 270) {
+            if(intensity > 0 && direction < Direction.UP.getValue()) {
                 this.getView().setDirection(Direction.LEFT);
             }
-            if(intensity > 0 && direction < 180) {
+            if(intensity > 0 && direction < Direction.LEFT.getValue()) {
                 this.getView().setDirection(Direction.DOWN);
             }
-            if(intensity > 0 && direction < 90) {
+            if(intensity > 0 && direction < Direction.DOWN.getValue()) {
                 this.getView().setDirection(Direction.RIGHT);
             }
         });
