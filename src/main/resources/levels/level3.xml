@@ -1,4 +1,4 @@
-<level name="Ruins of War" gravity="1.5" maximumTime="150">
+<level name="Ruins of War" maximumTime="40">
 	
 	<hud position="1400,50">
 	</hud>
@@ -139,7 +139,7 @@
 	<monster position="100,300">
 	</monster>
 	
-	<powerup type="0" position="289,415">
+	<powerup type="0" position="350,205">
 	</powerup>
 	
 	<powerup type="1" position="340,34">
@@ -157,7 +157,7 @@
 	<powerup type="0" position="125,123">
 	</powerup>
 	
-	<key position="350,205">
+	<key position="289,415">
 	</key>
 	
 	<key position="147,30">
