@@ -59,7 +59,7 @@ public class GameSceneControllerImpl implements GameSceneController {
     }
     
     private void init() {
-        Arrays.asList(GuiPanes.values()).stream().forEach(e-> this.loadInterface(RESOURCE_LOCATION+e.getFileName(), STYLING_LOCATION + "MainMenuStyle.css"));
+        Arrays.asList(GuiPanes.values()).stream().forEach(e-> this.loadInterface(RESOURCE_LOCATION+e.getFileName(), STYLING_LOCATION + "MenuStyle.css"));
     }
    
     
