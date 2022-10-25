@@ -6,7 +6,7 @@ public interface BrainComponent extends Component{
     
     /**
      * Use components to retrieve information about the world,
-     * then act according to the heart.
+     * then act according to the heart and other components.
      */
     void neuroImpulse();
 }

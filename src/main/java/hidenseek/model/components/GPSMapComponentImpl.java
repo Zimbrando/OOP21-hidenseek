@@ -1,7 +1,9 @@
 package hidenseek.model.components;
 
-import static hidenseek.utils.Utils.*;
-
+import static hidenseek.utils.Utils.upperLeft;
+import static hidenseek.utils.Utils.bottomRight;
+import static hidenseek.utils.Utils.generateGraph;
+import static hidenseek.utils.Utils.getAllPaths;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,7 +19,7 @@ import hidenseek.model.entities.Wall;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
 
-public class MapComponentImpl extends AbstractComponent implements MapComponent {
+public class GPSMapComponentImpl extends AbstractComponent implements MapComponent {
     
     // entity positions mapped so far
     private Set<Point2D> entityPos;
@@ -30,7 +32,7 @@ public class MapComponentImpl extends AbstractComponent implements MapComponent 
      * Creates game map base on this entities
      * @param entities
      */
-    public MapComponentImpl() {
+    public GPSMapComponentImpl() {
         this.gameMap = Set.of();
         this.gamePaths = Map.of();
         this.entityPos = Set.of();
@@ -54,7 +56,7 @@ public class MapComponentImpl extends AbstractComponent implements MapComponent 
     private void createMap(final Set<Entity> entities) {
 
         // get all materials
-        Set<Entity> materials = entities.stream()
+        final Set<Entity> materials = entities.stream()
         .filter(e -> e.getComponent(PositionComponent.class).isPresent())
         .filter(e -> e.getComponent(MaterialComponent.class).isPresent())
         .filter(e -> e.getComponent(HeartComponent.class).isEmpty()) // no player and so on
@@ -75,7 +77,7 @@ public class MapComponentImpl extends AbstractComponent implements MapComponent 
                 .collect(Collectors.toSet());
 
         // get hitbox of materials
-        Set<Point2D> hitboxes = materials.stream()
+        final Set<Point2D> hitboxes = materials.stream()
                 .flatMap(e -> e.getComponent(CollisionComponent.class).get().getHitbox().stream().map(p -> p.add(e.getComponent(PositionComponent.class).get().getPosition())))
                 .collect(Collectors.toSet());
         
@@ -102,7 +104,7 @@ public class MapComponentImpl extends AbstractComponent implements MapComponent 
         cellPos = removeMaterialsPoints(cellPos, materials, xJump, yJump);
         
         // generate graph from grid
-        Graph<Point2D, DefaultEdge> graph = generateGraph(cellPos, (p) -> Set.of(
+        final Graph<Point2D, DefaultEdge> graph = generateGraph(cellPos, (p) -> Set.of(
                 p.add(new Point2D(xJump, -yJump)), //updx
                 p.add(new Point2D(xJump, 0)), // dx
                 p.add(new Point2D(xJump, yJump)), // downdx

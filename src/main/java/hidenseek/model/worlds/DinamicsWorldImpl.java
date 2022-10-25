@@ -20,33 +20,34 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
     private void handleCollisions(final double delta) {
         this.world().stream().forEach(entity -> {
 
-            Optional<PositionComponent> positionComponent = entity.getComponent(PositionComponent.class);
-            Optional<MoveComponent> moveComponent = entity.getComponent(MoveComponent.class);
-            Optional<CollisionComponent> collisionComponent = entity.getComponent(CollisionComponent.class);
-            Optional<MaterialComponent> materialComponent = entity.getComponent(MaterialComponent.class);
-
+            final Optional<PositionComponent> positionComponent = entity.getComponent(PositionComponent.class);
+            
             if (!positionComponent.isPresent()) {
                 return;
             }
+            final Optional<MoveComponent> moveComponent = entity.getComponent(MoveComponent.class);
             
             if (!moveComponent.isPresent()) {
                 return;
             }
+            final Optional<CollisionComponent> collisionComponent = entity.getComponent(CollisionComponent.class);
+            final Optional<MaterialComponent> materialComponent = entity.getComponent(MaterialComponent.class);
+
 
             //COLLISION DETECT METHOD 2
             //TODO: write it better with no code repetition
 
             Point2D resultantOffset = new Point2D(0, 0);
-            for (Force force : moveComponent.get().getForces().toArray(new Force[0])) {
+            for (final Force force : moveComponent.get().getForces().toArray(new Force[0])) {
                 if (!collisionComponent.isPresent()) {
                     return;
                 }
                 final double speedMultiplier = moveComponent.get().getSpeed();
                 int forceX = (int)Math.abs(force.getXComponent() * speedMultiplier * delta);
-                int forceXSign = force.getXComponent() < 0 ? -1 : 1;
+                final int forceXSign = force.getXComponent() < 0 ? -1 : 1;
                 Boolean forceXAccepted = false;
                 int forceY = (int)Math.abs(force.getYComponent() * speedMultiplier * delta);
-                int forceYSign = force.getYComponent() < 0 ? -1 : 1;
+                final int forceYSign = force.getYComponent() < 0 ? -1 : 1;
                 Boolean forceYAccepted = false;
                 
                 if (!materialComponent.isPresent()) {
@@ -81,13 +82,13 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
         
         
         this.world().stream().forEach(entity -> {
-            Optional<CollisionComponent> collisionComponent = entity.getComponent(CollisionComponent.class);
+            final Optional<CollisionComponent> collisionComponent = entity.getComponent(CollisionComponent.class);
             if(!collisionComponent.isPresent()) {
                 return;
             }
             
             this.world().stream().forEach(entity1 -> {
-                Optional<CollisionComponent> entityCollisionComponent = entity1.getComponent(CollisionComponent.class);
+                final Optional<CollisionComponent> entityCollisionComponent = entity1.getComponent(CollisionComponent.class);
                 if(!entityCollisionComponent.isPresent()) {
                     return;
                 }

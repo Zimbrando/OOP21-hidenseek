@@ -1,7 +1,6 @@
 package hidenseek.model.components.hearts;
 
 import hidenseek.model.components.AbstractComponent;
-import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.Heart;
 
 public abstract class AbstractHeartComponent extends AbstractComponent implements HeartComponent {

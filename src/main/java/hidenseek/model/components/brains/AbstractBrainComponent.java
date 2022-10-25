@@ -18,7 +18,6 @@ import hidenseek.model.entities.Entity;
 import hidenseek.model.enums.Direction;
 import hidenseek.model.enums.Heart;
 import javafx.geometry.Point2D;
-import javafx.util.Pair;
 
 
 /**
@@ -31,7 +30,9 @@ public abstract class AbstractBrainComponent extends AbstractDependencyComponent
     /**
      * Map: HEART -> <Predicate, Bifunction>, BiConsumer
      */
-    Map<Heart, Pair<Pair<Predicate<Entity>, BiFunction<Entity, Entity, Entity>>, BiConsumer<Optional<Entity>, Set<Entity>>>> heartBeahaviours;
+    Map<Heart, Predicate<Entity>> mapIsTargetable;
+    Map<Heart, BiFunction<Entity, Entity, Entity>> mapConfrontTargetables;
+    Map<Heart, BiConsumer<Optional<Entity>, Set<Entity>>> macActionOnTarget;
     
     public AbstractBrainComponent() {
         // define dependencies
@@ -41,8 +42,10 @@ public abstract class AbstractBrainComponent extends AbstractDependencyComponent
                 PositionComponent.class, 
                 MoveComponent.class
                 ));
-        // init map
-        this.heartBeahaviours = new HashMap<>();
+        // init maps
+        this.mapIsTargetable = new HashMap<>();
+        this.mapConfrontTargetables = new HashMap<>();
+        this.macActionOnTarget = new HashMap<>();
     }
 
     @Override
@@ -73,13 +76,13 @@ public abstract class AbstractBrainComponent extends AbstractDependencyComponent
         // get heart
         final Heart heart = this.getOwner().get().getComponent(HeartComponent.class).get().getHeart();
         // check heart in map
-        if(!heartBeahaviours.containsKey(heart)) {
+        if(!mapIsTargetable.containsKey(heart)) {
             return Optional.empty();
         }
         // get predicate to filter entities
-        final Predicate<Entity> isTargetable = heartBeahaviours.get(heart).getKey().getKey();
+        final Predicate<Entity> isTargetable = mapIsTargetable.get(heart);
         // get bifunction to choose between targetables
-        final BiFunction<Entity, Entity, Entity> confrontTargetables = heartBeahaviours.get(heart).getKey().getValue();
+        final BiFunction<Entity, Entity, Entity> confrontTargetables = mapConfrontTargetables.get(heart);
         
         // get target using behavior
         return entities.stream()
@@ -97,11 +100,11 @@ public abstract class AbstractBrainComponent extends AbstractDependencyComponent
         // get heart
         final Heart heart = this.getOwner().get().getComponent(HeartComponent.class).get().getHeart();
         // check heart in map
-        if(!heartBeahaviours.containsKey(heart)) {
+        if(!macActionOnTarget.containsKey(heart)) {
             return;
         }
         // use biconsumer of heart, to consume target and set of sensed entities
-        heartBeahaviours.get(heart).getValue().accept(target, entities);
+        macActionOnTarget.get(heart).accept(target, entities);
     }
     
     
@@ -117,7 +120,9 @@ public abstract class AbstractBrainComponent extends AbstractDependencyComponent
             , final Predicate<Entity> isTargetable
             , final BiFunction<Entity, Entity, Entity> confrontTargetables
             , final BiConsumer<Optional<Entity>, Set<Entity>> actionOnTarget) {
-        this.heartBeahaviours.put(heart, new Pair<>(new Pair<>(isTargetable, confrontTargetables), actionOnTarget));
+        this.mapIsTargetable.put(heart, isTargetable);
+        this.mapConfrontTargetables.put(heart, confrontTargetables);
+        this.macActionOnTarget.put(heart, actionOnTarget);
     }
     
     /**
