@@ -42,10 +42,10 @@ public final class PowerUp extends AbstractEntity {
         
         //HitBox
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
-        collisionComponent.addHitboxPoint(new Point2D(0, 0));
-        collisionComponent.addHitboxPoint(new Point2D(0, HITBOX_SIZE));
-        collisionComponent.addHitboxPoint(new Point2D(HITBOX_SIZE, HITBOX_SIZE));
-        collisionComponent.addHitboxPoint(new Point2D(HITBOX_SIZE, 0));
+        collisionComponent.getHitbox().addPoint(new Point2D(0, 0));
+        collisionComponent.getHitbox().addPoint(new Point2D(0, HITBOX_SIZE));
+        collisionComponent.getHitbox().addPoint(new Point2D(HITBOX_SIZE, HITBOX_SIZE));
+        collisionComponent.getHitbox().addPoint(new Point2D(HITBOX_SIZE, 0));
         
         //Attach listener
         ObservableComponent collisionObserver = (ObservableComponent) collisionComponent;

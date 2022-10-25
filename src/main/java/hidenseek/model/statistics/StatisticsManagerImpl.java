@@ -90,17 +90,16 @@ public class StatisticsManagerImpl implements StatisticsManager, StatisticSaver 
     @Override
     public void saveStatistic() {
         try {
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-            Document doc = docBuilder.newDocument();
-            Element rootElement = doc.createElement("gamedata");
+            final DocumentBuilder docBuilder =  DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            final Document doc = docBuilder.newDocument();
+            final Element rootElement = doc.createElement("gamedata");
             doc.appendChild(rootElement);
             
-            for(Statistic<?> statistic : getStatistics()) {
+            for(final Statistic<?> statistic : getStatistics()) {
                 rootElement.appendChild(statistic.XMLSerialize(doc));
             }
 
-            FileOutputStream output = new FileOutputStream(FILE_PATH + FILE_NAME);
+            final FileOutputStream output = new FileOutputStream(FILE_PATH + FILE_NAME);
             writeXml(doc, output);
         
         } catch (ParserConfigurationException e) {
@@ -117,35 +116,21 @@ public class StatisticsManagerImpl implements StatisticsManager, StatisticSaver 
         if(rootSaverXML == null) {
             return;
         }
-        NodeList chilNodes = rootSaverXML.getChildNodes();
+        
+        final NodeList chilNodes = rootSaverXML.getChildNodes();
         for(int i=0; i<chilNodes.getLength(); i++) {
-            Node childNode = chilNodes.item(i);
+            final Node childNode = chilNodes.item(i);
             if (childNode.getNodeType() == Node.ELEMENT_NODE) {
                 statistic.XMLDeserialize((Element)childNode);
             }
-            
         }
     }
     
     private static void writeXml(Document doc, OutputStream output) throws TransformerException {
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        final Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-        // initialize StreamResult with File object to save to file
-        StreamResult result = new StreamResult(output);
-        DOMSource source = new DOMSource(doc);
-        transformer.transform(source, result);
-        //String xmlString = result.getWriter().toString();
-       // System.out.println(xmlString);
-        
-        
-        
-        //TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        //Transformer transformer = transformerFactory.newTransformer();
-        //DOMSource source = new DOMSource(doc);
-        //StreamResult result = new StreamResult(output);
-        
-        //transformer.transform(source, result);
-        
+        final StreamResult result = new StreamResult(output);
+        transformer.transform(new DOMSource(doc), result);
     }
 }

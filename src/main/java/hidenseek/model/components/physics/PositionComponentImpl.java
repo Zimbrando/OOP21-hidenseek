@@ -3,7 +3,7 @@ package hidenseek.model.components.physics;
 import hidenseek.model.components.AbstractObservableComponent;
 import javafx.geometry.Point2D;
 
-final public class PositionComponentImpl extends AbstractObservableComponent implements PositionComponent {
+public final class PositionComponentImpl extends AbstractObservableComponent implements PositionComponent {
 
     private Point2D position;
 

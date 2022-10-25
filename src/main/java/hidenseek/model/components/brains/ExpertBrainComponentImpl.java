@@ -135,7 +135,7 @@ public class ExpertBrainComponentImpl extends AbstractBrainComponent implements 
         final Set<Point2D> path = map.getPath(myPos, targetPos);
 
         // get hitbox
-        final Set<Point2D> hitbox = owner.getComponent(CollisionComponent.class).get().getHitbox();
+        final Set<Point2D> hitbox = owner.getComponent(CollisionComponent.class).get().getHitbox().getPoints();
         
         // bottom right point
         final Point2D brPoint = bottomRight(hitbox);

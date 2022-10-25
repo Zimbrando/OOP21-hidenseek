@@ -1,46 +1,41 @@
 package hidenseek.model.components.physics;
 
-final public class Force{
+public interface Force {
+    
+    /**
+     * @return the force intensity
+     */
+    public double getIntensity();    
+    
+    /**
+     * Set the force intensity
+     * @param intensity
+     */
+    public void setIntensity(double intensity);
+    
+    /**
+     * @return the force direction
+     */
+    public double getDirection(); 
+    
+    /**
+     * Set the force direction
+     * @param direction
+     */
+    public void setDirection(double direction);
 
-    private final String identifier;
-    private double intensity;
-    private double direction;
+    /**
+     * @return the force x component
+     */
+    public double getXComponent();
     
-    public Force(String identifier) {
-        this(identifier, 0, 0);
-    }
+    /**
+     * @return the force y component
+     */
+    public double getYComponent();
     
-    public Force(String identifier, double intensity, double direction) {
-        this.identifier = identifier;
-        setIntensity(intensity);
-        setDirection(direction);
-    }
-    
-    public double getIntensity() {
-        return intensity;
-    }
-    
-    public void setIntensity(double intensity) {
-        this.intensity = intensity;
-    }
-    
-    public double getDirection() {
-        return direction;
-    }
-    
-    public void setDirection(double direction) {
-        this.direction = direction;
-    }
-
-    public double getXComponent() {
-        return intensity * Math.cos(Math.toRadians(direction));
-    }
-    
-    public double getYComponent() {
-        return intensity * Math.sin(Math.toRadians(direction));
-    }
-    
-    public String getIdentifier() {
-        return identifier;
-    }
+    /**
+     * @return the force identifier
+     */
+    public String getIdentifier();
 }

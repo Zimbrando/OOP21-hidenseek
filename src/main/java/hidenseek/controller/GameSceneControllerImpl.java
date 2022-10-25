@@ -44,8 +44,7 @@ public class GameSceneControllerImpl implements GameSceneController {
         this.statisticsManager.addStatistic(new NumericStatistic("total_win", "", "Victories"));
         this.statisticsManager.addStatistic(new NumericStatistic("total_loose", "", "Losses"));
         this.statisticsManager.addStatistic(new NumericStatistic("win_percentage", "", "Win percentage", "%"));
-        this.statisticsManager.addStatistic(new NumericStatistic("collected_keys", "", "Collected keys"));        
-        
+        this.statisticsManager.addStatistic(new NumericStatistic("collected_keys", "", "Collected keys"));
         new LevelHandlerImpl(this.statisticsManager);
         
         stage.setResizable(false);

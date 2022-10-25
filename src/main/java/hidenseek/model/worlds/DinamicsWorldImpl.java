@@ -7,6 +7,7 @@ import hidenseek.model.components.physics.Force;
 import hidenseek.model.components.physics.MaterialComponent;
 import hidenseek.model.components.physics.MoveComponent;
 import hidenseek.model.components.physics.PositionComponent;
+import hidenseek.model.entities.Entity;
 import javafx.geometry.Point2D;
 
 public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
@@ -18,6 +19,8 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
     
 
     private void handleCollisions(final double delta) {
+        
+        //handle movement of entities
         this.world().stream().forEach(entity -> {
 
             Optional<PositionComponent> positionComponent = entity.getComponent(PositionComponent.class);
@@ -33,18 +36,18 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
                 return;
             }
 
-            //COLLISION DETECT METHOD 2
-            //TODO: write it better with no code repetition
-
             Point2D resultantOffset = new Point2D(0, 0);
             for (Force force : moveComponent.get().getForces().toArray(new Force[0])) {
                 if (!collisionComponent.isPresent()) {
                     return;
                 }
+                
                 final double speedMultiplier = moveComponent.get().getSpeed();
+                
                 int forceX = (int)Math.abs(force.getXComponent() * speedMultiplier * delta);
                 int forceXSign = force.getXComponent() < 0 ? -1 : 1;
                 Boolean forceXAccepted = false;
+                
                 int forceY = (int)Math.abs(force.getYComponent() * speedMultiplier * delta);
                 int forceYSign = force.getYComponent() < 0 ? -1 : 1;
                 Boolean forceYAccepted = false;
@@ -54,9 +57,11 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
                     continue;
                 }
                 
+                //try to move horizontally entity with an offset as the force intensity.
+                //if movement is not allowed for a collision, decrease the offset until it gets accepted by the collision component. 
                 while (forceX > 0 && !forceXAccepted) {
                     final int finalForceX = forceX * forceXSign;
-                    if (this.world().stream().noneMatch(entity1 -> entity1.hasComponent(MaterialComponent.class) && collisionComponent.get().collisionTo(entity1, new Point2D(finalForceX, 0)))) {                        
+                    if (allowMovement(collisionComponent.get(), new Point2D(finalForceX, 0))) {                       
                         resultantOffset = resultantOffset.add(new Point2D(finalForceX, 0));
                         forceXAccepted = true;
                         break;
@@ -64,9 +69,11 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
                     forceX--;
                 }
 
+                //try to move vertically entity with an offset as the force intensity.
+                //if movement is not allowed for a collision, decrease the offset until it gets accepted by the collision component. 
                 while (forceY > 0 && !forceYAccepted) {
                     final int finalForceY = forceY * forceYSign;
-                    if (this.world().stream().noneMatch(entity1 -> entity1.hasComponent(MaterialComponent.class) && collisionComponent.get().collisionTo(entity1, new Point2D(0, finalForceY)))) {                        
+                    if (allowMovement(collisionComponent.get(), new Point2D(0, finalForceY))) {                        
                         resultantOffset = resultantOffset.add(new Point2D(0, finalForceY));
                         forceYAccepted = true;
                         break;
@@ -79,15 +86,15 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
             
         });
         
-        
+        //handle the collisions between entities
         this.world().stream().forEach(entity -> {
-            Optional<CollisionComponent> collisionComponent = entity.getComponent(CollisionComponent.class);
+            final Optional<CollisionComponent> collisionComponent = entity.getComponent(CollisionComponent.class);
             if(!collisionComponent.isPresent()) {
                 return;
             }
             
             this.world().stream().forEach(entity1 -> {
-                Optional<CollisionComponent> entityCollisionComponent = entity1.getComponent(CollisionComponent.class);
+                final Optional<CollisionComponent> entityCollisionComponent = entity1.getComponent(CollisionComponent.class);
                 if(!entityCollisionComponent.isPresent()) {
                     return;
                 }
@@ -104,6 +111,12 @@ public class DinamicsWorldImpl extends AbstractEntityWorldImpl {
             });
         });
         
+    }
+    
+    private Boolean allowMovement(CollisionComponent collisionComponent, Point2D offset) {
+        return (this.world().stream().noneMatch(entity1 -> {
+            return entity1.hasComponent(MaterialComponent.class) && collisionComponent.collisionTo(entity1, offset);
+        }));
     }
 
 }

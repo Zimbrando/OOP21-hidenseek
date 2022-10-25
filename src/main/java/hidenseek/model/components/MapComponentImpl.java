@@ -76,7 +76,7 @@ public class MapComponentImpl extends AbstractComponent implements MapComponent 
 
         // get hitbox of materials
         Set<Point2D> hitboxes = materials.stream()
-                .flatMap(e -> e.getComponent(CollisionComponent.class).get().getHitbox().stream().map(p -> p.add(e.getComponent(PositionComponent.class).get().getPosition())))
+                .flatMap(e -> e.getComponent(CollisionComponent.class).get().getHitbox().getPoints().stream().map(p -> p.add(e.getComponent(PositionComponent.class).get().getPosition())))
                 .collect(Collectors.toSet());
         
         // bottom right point

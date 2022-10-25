@@ -21,10 +21,16 @@ public class NumericStatistic extends AbstractStatistic<Numeric> {
         this(name, tag, title, "", null);
     }
 
+    /**
+     * @return the value of the statistic
+     */
     public String getValue() {
         return getProperty().toString();
     }
     
+    /**
+     * @return the measurement unit of this statistic (e.g. "times", "%", ...)
+     */
     public String getUnits() {
         return units;
     }

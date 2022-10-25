@@ -16,7 +16,7 @@ public class WallControllerImpl extends EntityControllerImpl<WallView>{
         super.update();
         
         if (this.getModel().getComponent(CollisionComponent.class).isPresent()) {
-            this.getView().setHitbox(this.getModel().getComponent(CollisionComponent.class).get().getHitbox());        
+            this.getView().setHitbox(this.getModel().getComponent(CollisionComponent.class).get().getHitbox().getPoints());        
         }
     }
 }

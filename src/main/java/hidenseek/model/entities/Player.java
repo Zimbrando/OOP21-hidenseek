@@ -14,6 +14,7 @@ import hidenseek.model.components.lives.LifeComponentImpl;
 import hidenseek.model.components.physics.CollisionComponent;
 import hidenseek.model.components.physics.CollisionComponentImpl;
 import hidenseek.model.components.physics.Force;
+import hidenseek.model.components.physics.ForceImpl;
 import hidenseek.model.components.physics.LightComponent;
 import hidenseek.model.components.physics.LightComponentImpl;
 import hidenseek.model.components.physics.LinearMovementComponentImpl;
@@ -54,10 +55,10 @@ public final class Player extends AbstractEntity {
         
         //Collision component
         final CollisionComponent collisionComponent = new CollisionComponentImpl();
-        collisionComponent.addHitboxPoint(new Point2D(0, 0));
-        collisionComponent.addHitboxPoint(new Point2D(0, HITBOX_SIZE));
-        collisionComponent.addHitboxPoint(new Point2D(HITBOX_SIZE, HITBOX_SIZE));
-        collisionComponent.addHitboxPoint(new Point2D(HITBOX_SIZE, 0));
+        collisionComponent.getHitbox().addPoint(new Point2D(0, 0));
+        collisionComponent.getHitbox().addPoint(new Point2D(0, HITBOX_SIZE));
+        collisionComponent.getHitbox().addPoint(new Point2D(HITBOX_SIZE, HITBOX_SIZE));
+        collisionComponent.getHitbox().addPoint(new Point2D(HITBOX_SIZE, 0));
         this.attach(collisionComponent);
         
         //InputHandler component
@@ -89,7 +90,7 @@ public final class Player extends AbstractEntity {
                 return;
             }
             moveComponent.get().removeForce(force -> force.getDirection() == direction.getValue() && force.getIdentifier() == "key");
-            moveComponent.get().addForce(new Force("key", 1, direction.getValue()));
+            moveComponent.get().addForce(new ForceImpl("key", 1, direction.getValue()));
         };
         
         Consumer<Entity> releaseAction = (entity) -> {
