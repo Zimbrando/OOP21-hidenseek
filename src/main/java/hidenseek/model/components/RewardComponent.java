@@ -2,8 +2,7 @@ package hidenseek.model.components;
 
 public interface RewardComponent extends Component {
     /**
-     * Return the amount of reward
-     * @return 
+     * @return The amount of reward 
      */
     int getReward();
 }

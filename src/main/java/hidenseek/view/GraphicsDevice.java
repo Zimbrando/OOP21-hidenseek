@@ -19,7 +19,9 @@ public interface GraphicsDevice {
      * @param position
      *          The position in the game area
      * @param h
+     *          Height of the sprite
      * @param w 
+     *          Width of the sprite
      */
     void drawImage(Image sprite, int w, int h, Point2D position);
     
@@ -38,9 +40,11 @@ public interface GraphicsDevice {
     /**
      * Draws a filled circle
      * @param radius
+     *          Size of radius
      * @param position
      *          The center position
      * @param color
+     *          The fill color
      */
     void drawCircle(int radius, Point2D position, Color color);
     
@@ -59,8 +63,11 @@ public interface GraphicsDevice {
     /**
      * Draws a line
      * @param positionStart
+     *          First point
      * @param positionEnd
+     *          End point
      * @param color
+     *          Line color
      */
     void drawLine(Point2D positionStart, Point2D positionEnd, Color color);
 
@@ -74,7 +81,9 @@ public interface GraphicsDevice {
     /**
      * Draws a filled polygon
      * @param points
+     *          The vertices
      * @param color
+     *          Fill color
      */
     void drawPolygon(List<Point2D> points, Color color);
     

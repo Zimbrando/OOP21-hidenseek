@@ -3,7 +3,7 @@ package hidenseek.model.events;
 import hidenseek.model.entities.Entity;
 
 /**
- * Event exchanged between {@link ObservableComponent}s and {@link Trigger}s
+ * Event exchanged between {@link hidenseek.model.components.ObservableComponent}s and {@link hidenseek.model.Trigger}s
  */
 public interface Event {
     

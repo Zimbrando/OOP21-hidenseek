@@ -21,6 +21,8 @@ public interface Entity {
      * Detaches the component of this type
      * @param component
      *          The component type
+     * @param <C>
+     *          The specific component          
      */
     <C extends Component> void detach(Class<C> component);
     
@@ -32,6 +34,8 @@ public interface Entity {
     /**
      * @param component
      *          The component type
+     * @param <C>
+     *          The specific component         
      * @return The actual component instance
      */
     <C extends Component> Optional<C> getComponent(Class<C> component);
@@ -39,6 +43,8 @@ public interface Entity {
     /**
      * @param component
      *          The component type
+     * @param <C>
+     *          The specific component         
      * @return Returns true if component is present
      */
     <C extends Component> Boolean hasComponent(Class<C> component);
