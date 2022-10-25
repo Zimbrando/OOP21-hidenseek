@@ -30,11 +30,17 @@ val supportedPlatforms = listOf("linux", "mac", "win") // All required for OOP
 val jUnitVersion = "5.7.1"
 val javaFxVersion = 15
 
+val jgraphtVersion = "1.5.1"
+
 dependencies {
     // Example library: Guava. Add what you need (and remove Guava if you don't use it)
     // implementation("com.google.guava:guava:28.1-jre")
+    
+    // JGraphT: comment out if you do not need them
+    implementation("org.jgrapht:jgrapht-core:$jgraphtVersion")
+    
+    implementation("net.harawata:appdirs:1.2.1")
 
-    // JavaFX: comment out if you do not need them
     for (platform in supportedPlatforms) {
         for (module in javaFXModules) {
             implementation("org.openjfx:javafx-$module:$javaFxVersion:$platform")

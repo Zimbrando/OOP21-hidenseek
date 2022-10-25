@@ -1,0 +1,68 @@
+<level name="Ruins of War" maximumTime="20">
+
+	<hud position="1400,50">
+	</hud>
+
+	<wall position="0,0">
+		<vertex position="0,0"/>
+		<vertex position="1600,0"/>
+		<vertex position="1600,15"/>
+		<vertex position="0,15"/>
+	</wall>
+
+	<wall position="0,845">
+		<vertex position="0,0"/>
+		<vertex position="1600,0"/>
+		<vertex position="1600,15"/>
+		<vertex position="0,15"/>
+	</wall>
+
+
+	<wall position="0,0">
+		<vertex position="0,0"/>
+		<vertex position="15,0"/>
+		<vertex position="15,900"/>
+		<vertex position="0,900"/>
+	</wall>
+
+	<wall position="1585,0">
+		<vertex position="0,0"/>
+		<vertex position="0,900"/>
+		<vertex position="-15,900"/>
+		<vertex position="-15,0"/>
+	</wall>
+
+
+	|<wall position="340,272">
+		<vertex position="0,0"/>
+		<vertex position="935,0"/>
+		<vertex position="935,34"/>
+		<vertex position="0,34"/>
+	</wall>
+
+	<wall position="340,459">
+		<vertex position="0,0"/>
+		<vertex position="935,0"/>
+		<vertex position="935,34"/>
+		<vertex position="0,34"/>
+	</wall>
+
+	<player position="250,350">
+	</player>
+	
+	<monster position="50,300">
+	</monster>
+	
+	<powerup position="500,350">
+	</powerup>
+	
+	<powerup position="650,350">
+	</powerup>
+	
+	<key position="800,350">
+	</key>
+	
+	<key position="1400,350">
+	</key>
+
+</level>
