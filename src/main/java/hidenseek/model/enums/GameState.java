@@ -1,5 +1,8 @@
 package hidenseek.model.enums;
 
+/**
+ * The possible game states
+ */
 public enum GameState {
     STOPPED,
     RUNNING,

@@ -1,5 +1,8 @@
 package hidenseek.model.enums;
 
+/**
+ * Possible directions to move
+ */
 public enum Direction {
     RIGHT(0),
     LEFT(180), 
@@ -12,6 +15,9 @@ public enum Direction {
         this.direction = direction;
     }
     
+    /**
+     * @return The integer value
+     */
     public int getValue() {
         return direction;
     }
