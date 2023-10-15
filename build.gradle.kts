@@ -12,6 +12,8 @@ plugins {
      * The runnable jar will be found in build/libs/projectname-all.jar
      */
     id("com.github.johnrengelman.shadow") version "7.0.0"
+
+    id("org.panteleyev.jpackageplugin") version "1.5.2"
 }
 
 repositories {
@@ -51,6 +53,29 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
 }
+
+tasks.jpackage {
+    appName = "Hidenseek"
+    appVersion = "1.0"
+    input = "build/libs/"
+    destination = "build/release"
+    mainJar = "OOP-hidenseek-all.jar"
+    
+    jLinkOptions = listOf(
+        "--bind-services"
+    )
+
+    linux {
+        icon = "icons/icon.png"
+    }
+
+    windows {
+        winDirChooser = true
+        winShortcutPrompt = true
+        icon = "icons/icon.ico"
+    }
+}
+
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
